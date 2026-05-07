@@ -5,8 +5,6 @@
   background-image: url('/assets/sfondo_servizi.png');
   background-size: cover;
   background-position: center;
-  border-radius: 40px; /* matching the container shape in screenshot if needed */
-  margin: 0 40px; /* adding some margin as seen in screenshot */
 }
 
 .services-main-title {
