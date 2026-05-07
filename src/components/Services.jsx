@@ -33,7 +33,6 @@ const Services = () => {
 
   return (
     <section className="services-section" id="servizi">
-      <img src="/assets/back.png" alt="" className="services-deco-bg" />
       <div className="container">
         <h2 className="services-main-title">I nostri servizi</h2>
         

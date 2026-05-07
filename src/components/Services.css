@@ -2,22 +2,16 @@
   padding: 100px 0;
   position: relative;
   overflow: hidden;
-}
-
-.services-deco-bg {
-  position: absolute;
-  top: 150px;
-  left: 0;
-  width: 100%;
-  height: auto;
-  z-index: -1;
-  opacity: 0.8;
-  pointer-events: none;
+  background-image: url('/assets/sfondo_servizi.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 40px; /* matching the container shape in screenshot if needed */
+  margin: 0 40px; /* adding some margin as seen in screenshot */
 }
 
 .services-main-title {
   font-size: 2.5rem;
-  color: var(--color-navy);
+  color: var(--color-white);
   font-weight: 300;
   margin-bottom: 40px;
 }
@@ -35,7 +29,7 @@
   gap: 12px;
   cursor: pointer;
   transition: opacity 0.3s ease;
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 .service-nav-item.active {
@@ -46,25 +40,27 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1px solid var(--color-navy);
+  border: 1px solid rgba(142, 190, 247, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.9rem;
-  color: var(--color-navy);
+  color: #8EBEF7;
   font-weight: 500;
   transition: all 0.3s ease;
+  background: rgba(142, 190, 247, 0.1);
 }
 
 .service-nav-item.active .nav-circle {
-  background-color: var(--color-navy);
+  background-color: rgba(142, 190, 247, 0.3);
+  border-color: #8EBEF7;
   color: var(--color-white);
 }
 
 .nav-label {
   font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--color-navy);
+  font-weight: 400;
+  color: #8EBEF7;
 }
 
 /* Main Display Layout */
@@ -76,13 +72,15 @@
 
 .service-card-left {
   flex: 1;
-  background: linear-gradient(135deg, #013167 0%, #001933 100%);
+  background: linear-gradient(135deg, rgba(1, 49, 103, 0.9) 0%, rgba(0, 25, 51, 0.95) 100%);
+  backdrop-filter: blur(10px);
   border-radius: 24px;
   padding: 60px 50px;
   color: var(--color-white);
   display: flex;
   flex-direction: column;
-  box-shadow: 0 15px 40px rgba(0, 25, 51, 0.2);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .service-id-large {
@@ -110,19 +108,19 @@
 .btn-service-action {
   margin-top: auto;
   align-self: flex-start;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(142, 190, 247, 0.1);
+  border: 1px solid rgba(142, 190, 247, 0.5);
   color: var(--color-white);
   padding: 12px 30px;
-  border-radius: var(--br-btn); /* Updated to 8px */
-  font-size: 1rem;
+  border-radius: var(--br-btn);
+  font-size: 1.1rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .btn-service-action:hover {
-  background: var(--color-white);
+  background: #8EBEF7;
   color: var(--color-dark-navy);
 }
 
@@ -131,7 +129,7 @@
   position: relative;
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 15px 40px rgba(0, 25, 51, 0.2);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
 .service-main-img {
@@ -176,6 +174,10 @@
 }
 
 @media (max-width: 992px) {
+  .services-section {
+    margin: 0;
+    border-radius: 0;
+  }
   .service-display {
     flex-direction: column;
   }
