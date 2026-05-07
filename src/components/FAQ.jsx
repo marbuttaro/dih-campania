@@ -8,7 +8,7 @@ const faqData = [
   },
   {
     question: 'Offrite supporto anche nella richiesta di incentivi/bandi?',
-    answer: 'Sì, il Campania DIH offre supporto completo nella ricerca, valutazione e compilazione delle domande per bandi e incentivi a livello regionale, nazionale ed europeo dedicati alla trasformazione digitale delle imprese.'
+    answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt mollis dapibus. Morbi in imperdiet purus, non rutrum sapien.'
   },
   {
     question: 'Supportate anche le piccole imprese?',
@@ -21,7 +21,7 @@ const faqData = [
 ];
 
 const FAQ = () => {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [openIndex, setOpenIndex] = useState(1); // Set second one open by default to match screenshot if desired
 
   const toggleFaq = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -32,26 +32,38 @@ const FAQ = () => {
       <div className="container">
         <div className="faq-layout">
           <div className="faq-left">
-            <h2 className="faq-title">Hai domande?<br />Noi abbiamo le risposte.</h2>
+            <h2 className="faq-main-title">Hai domande?</h2>
+            <p className="faq-sub-title">Noi abbiamo le risposte.</p>
           </div>
           <div className="faq-right">
-            {faqData.map((item, index) => (
-              <div 
-                className={`faq-item ${openIndex === index ? 'open' : ''}`} 
-                key={index}
-              >
-                <button 
-                  className="faq-question" 
-                  onClick={() => toggleFaq(index)}
+            <div className="faq-list">
+              {faqData.map((item, index) => (
+                <div 
+                  className={`faq-item ${openIndex === index ? 'open' : ''}`} 
+                  key={index}
                 >
-                  <span>{item.question}</span>
-                  <span className="faq-icon">{openIndex === index ? '−' : '+'}</span>
-                </button>
-                <div className="faq-answer">
-                  <p>{item.answer}</p>
+                  <button 
+                    className="faq-toggle-btn" 
+                    onClick={() => toggleFaq(index)}
+                  >
+                    <span className="faq-question-text">{item.question}</span>
+                    <div className="faq-icon-circle">
+                      <img 
+                        src={openIndex === index ? "/assets/icon_minus.svg" : "/assets/icon_plus.svg"} 
+                        alt={openIndex === index ? "minus" : "plus"} 
+                        className="faq-toggle-icon"
+                      />
+                    </div>
+                  </button>
+                  <div className="faq-answer-container">
+                    <div className="faq-answer-content">
+                      <p>{item.answer}</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+              <div className="faq-final-line"></div>
+            </div>
           </div>
         </div>
       </div>
