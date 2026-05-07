@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+
+:root {
+  --color-light-blue: #8EBEF7;
+  --color-dark-navy: #001933;
+  --color-navy: #013167;
+  --color-grey-blue: #DEEAEE;
+  --color-pale-blue: #CDE4FF;
+  --color-white: #FFFFFF;
+  --color-text: #333333;
+
+  --font-main: 'Montserrat', sans-serif;
+  
+  --spacing-section: 80px;
+  --max-width: 1280px;
+  --br-btn: 8px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background-image: url('/assets/background_page.png');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Typography Utility */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-dark-navy);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.text-center {
+  text-align: center;
+}
