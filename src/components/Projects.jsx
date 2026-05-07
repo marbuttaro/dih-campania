@@ -1,6 +1,12 @@
 import React from 'react';
 import './Projects.css';
 
+const projectCards = [
+  { front: '/assets/card_1_front.svg', back: '/assets/card_rear.svg' },
+  { front: '/assets/card_2_front.svg', back: '/assets/card_rear.svg' },
+  { front: '/assets/card_3_front.svg', back: '/assets/card_rear.svg' }
+];
+
 const Projects = () => {
   return (
     <section className="projects-section" id="progetti">
@@ -16,7 +22,7 @@ const Projects = () => {
             <h3>Hai un'idea, un progetto<br />o una sfida da affrontare<br />nel mondo digitale?</h3>
             <div className="cta-input-group">
               <input type="email" placeholder="Inserisci la tua email" className="cta-input" />
-              <button className="btn-primary">Contattaci</button>
+              <button className="btn-primary-cta">Contattaci</button>
             </div>
           </div>
         </div>
@@ -27,26 +33,18 @@ const Projects = () => {
         </div>
 
         <div className="projects-grid">
-          <div className="project-card">
-            <img src="/assets/card progetti.png" alt="Card Background" className="card-bg" />
-            <div className="card-overlay">
-              <img src="/assets/logo pride.svg" alt="PRIDE" className="project-logo" />
+          {projectCards.map((card, index) => (
+            <div className="project-card-container" key={index}>
+              <div className="project-card-inner">
+                <div className="project-card-front">
+                  <img src={card.front} alt={`Project ${index + 1} Front`} className="card-svg" />
+                </div>
+                <div className="project-card-back">
+                  <img src={card.back} alt={`Project ${index + 1} Back`} className="card-svg" />
+                </div>
+              </div>
             </div>
-          </div>
-
-          <div className="project-card">
-            <img src="/assets/card progetti.png" alt="Card Background" className="card-bg" />
-            <div className="card-overlay">
-              <img src="/assets/logo hub.svg" alt="Confindustria Innovation Hub" className="project-logo" />
-            </div>
-          </div>
-
-          <div className="project-card">
-            <img src="/assets/card progetti.png" alt="Card Background" className="card-bg" />
-            <div className="card-overlay">
-              <img src="/assets/logo damas.svg" alt="DAMAS" className="project-logo" />
-            </div>
-          </div>
+          ))}
         </div>
 
         <div className="projects-footer text-center">

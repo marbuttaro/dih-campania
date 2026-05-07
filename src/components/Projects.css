@@ -1,6 +1,5 @@
 .projects-section {
   padding: 80px 0 120px;
-  background: linear-gradient(180deg, var(--color-grey-blue) 0%, rgba(205, 228, 255, 0.4) 100%);
   position: relative;
 }
 
@@ -15,7 +14,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 60px;
   box-shadow: 0 20px 40px rgba(0, 25, 51, 0.05);
-  margin-top: -160px; /* Pull up to overlap with previous section */
+  margin-top: -160px;
   margin-bottom: 120px;
   position: relative;
   z-index: 10;
@@ -67,11 +66,22 @@
   font-size: 1rem;
 }
 
-.cta-input:focus {
-  border-color: var(--color-light-blue);
+.btn-primary-cta {
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  border: none;
+  padding: 12px 30px;
+  border-radius: var(--br-btn);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-/* Projects Grid */
+.btn-primary-cta:hover {
+  background-color: var(--color-dark-navy);
+}
+
+/* Projects Grid with Flip Animation */
 .projects-header {
   margin-bottom: 50px;
 }
@@ -89,45 +99,45 @@
   margin-bottom: 60px;
 }
 
-.project-card {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
+.project-card-container {
+  perspective: 1000px;
   aspect-ratio: 3/4;
-  box-shadow: 0 15px 35px rgba(0, 25, 51, 0.15);
-  transition: transform 0.3s ease;
+}
+
+.project-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
   cursor: pointer;
 }
 
-.project-card:hover {
-  transform: translateY(-10px);
+.project-card-container:hover .project-card-inner {
+  transform: rotateY(180deg);
 }
 
-.card-bg {
+.project-card-front, .project-card-back {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 25, 51, 0.15);
 }
 
-.card-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
+.project-card-back {
+  transform: rotateY(180deg);
+}
+
+.card-svg {
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(0,25,51,0.1) 0%, rgba(0,25,51,0.8) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.project-logo {
-  max-width: 60%;
-  max-height: 40%;
-  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+  object-fit: contain;
+  display: block;
 }
 
 .btn-secondary {
