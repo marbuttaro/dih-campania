@@ -73,7 +73,7 @@ const Services = () => {
             <div className="service-id-large">{activeService.id}</div>
             <h3 className="service-card-title">{activeService.title}</h3>
             <p className="service-card-desc">{activeService.desc}</p>
-            <a href="#scopri" className="btn-service-action">Scopri di più</a>
+            <StarBorder as="a" href="#scopri" className="btn-service-action">Scopri di più</StarBorder>
           </GlareHover>
           
           <div className="service-card-right">

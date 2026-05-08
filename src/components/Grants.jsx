@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import './Grants.css';
 
+import StarBorder from './StarBorder';
+
 const Grants = () => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -21,9 +23,9 @@ const Grants = () => {
           <p className="grant-desc">
             Ti aiutiamo a orientarti tra i bandi attivi e a cogliere le migliori opportunità
           </p>
-          <a href="#bandi" className="btn-grant-glass">
+          <StarBorder as="a" href="#bandi" className="btn-grant-glass">
             Scopri le opportunità
-          </a>
+          </StarBorder>
         </div>
       </div>
     </section>

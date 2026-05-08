@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import './Hero.css';
 import BlurText from './BlurText';
 import Threads from './Threads';
+import StarBorder from './StarBorder';
 
 const Hero = () => {
   const { scrollY } = useScroll();
@@ -47,9 +48,9 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.8, duration: 0.6, ease: "easeOut" }}
           >
-            <a href="#scopri" className="btn-outline">
+            <StarBorder as="a" href="#scopri" className="btn-outline">
               Scopri di più
-            </a>
+            </StarBorder>
           </motion.div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import './Community.css';
+import StarBorder from './StarBorder';
 
 const Community = () => {
   const [step, setStep] = useState(0);
@@ -48,9 +49,9 @@ const Community = () => {
               enti si incontrano per crescere insieme, scambiarsi competenze<br />
               e creare soluzioni reali per l'innovazione.
             </p>
-            <button className="btn-community-discovery" onClick={(e) => e.stopPropagation()}>
+            <StarBorder className="btn-community-discovery" onClick={(e) => e.stopPropagation()}>
               Scopri la nostra community
-            </button>
+            </StarBorder>
           </div>
 
         </div>
