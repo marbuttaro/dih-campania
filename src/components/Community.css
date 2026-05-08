@@ -19,7 +19,7 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  min-height: 450px;
+  min-height: 500px;
 }
 
 .community-step {
@@ -38,14 +38,19 @@
   font-size: 64px;
   color: var(--color-navy);
   line-height: 1.1;
-  opacity: 0.9;
+  opacity: 1;
   z-index: 1;
-  transition: opacity 0.5s ease;
+  transition: all 0.8s ease;
 }
 
 .community-bg-title .accent {
   color: #8EBEF7;
   font-weight: 600;
+}
+
+.title-faded {
+  opacity: 0.1; /* Fade out when description appears */
+  transform: scale(0.9);
 }
 
 /* Floating Cards */
@@ -55,22 +60,25 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 10; /* Above title to cover it */
+  z-index: 10;
   pointer-events: none;
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .glass-card {
   position: absolute;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(25px); /* Increased blur for readability */
+  -webkit-backdrop-filter: blur(25px);
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 24px;
   padding: 35px;
-  width: 420px;
+  width: 440px;
   box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
   pointer-events: auto;
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-card p {
@@ -81,38 +89,45 @@
   margin: 0;
 }
 
-/* Overlapping positions for Step 0 */
+/* STEP 0: Centered/Overlapping positions */
 .card-left {
-  top: 10%;
-  left: 15%;
+  left: 10%;
+  top: 5%;
   transform: rotate(-3deg);
 }
 
 .card-right {
-  top: 40%;
-  right: 15%;
+  right: 10%;
+  bottom: 5%;
   transform: rotate(3deg);
 }
 
-/* Animation for Step 1: Fly Out */
+/* STEP 1: Fly Out laterally */
 .cards-flying-out .card-left {
-  transform: translateX(-150%) rotate(-10deg);
-  opacity: 0;
+  transform: translateX(-150vw) rotate(-15deg); /* Far out of screen */
 }
 
 .cards-flying-out .card-right {
-  transform: translateX(150%) rotate(10deg);
+  transform: translateX(150vw) rotate(15deg); /* Far out of screen */
+}
+
+/* STEP 2: Final Content */
+.final-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: 100%;
   opacity: 0;
+  visibility: hidden;
+  transition: all 0.8s ease;
+  z-index: 20;
 }
 
-/* Step 2: Final content */
-.step-final {
-  animation: fadeIn 0.8s ease forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+.final-content.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .community-description {
@@ -140,45 +155,44 @@
   transition: all 0.3s ease;
 }
 
-.btn-community-discovery:hover {
-  transform: scale(1.05);
-  box-shadow: 
-    8px 8px 16px rgba(0, 0, 0, 0.1), 
-    -8px -8px 16px rgba(255, 255, 255, 1);
-}
-
 /* PROGRESS BAR */
 .community-progress-wrapper {
-  margin-top: 80px;
-  width: auto;
+  margin-top: auto;
+  padding-top: 50px;
   display: flex;
   justify-content: center;
 }
 
 .progress-svg-fixed {
-  height: 40px; /* Maintain height, width should be auto for fixed proportions */
+  height: 40px;
   width: auto;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 @media (max-width: 992px) {
   .glass-card {
     position: static;
-    width: 100%;
+    width: 90%;
     margin-bottom: 20px;
     transform: none !important;
   }
   .floating-cards {
-    position: static;
+    position: relative;
     height: auto;
-    display: flex;
     flex-direction: column;
     margin-top: 40px;
+  }
+  .cards-flying-out .card-left, .cards-flying-out .card-right {
+    transform: translateY(-200%) !important;
+    opacity: 0;
   }
   .community-bg-title {
     font-size: 36px;
   }
-  .progress-svg-fixed {
-    height: 30px;
+  .final-content {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
   }
 }
