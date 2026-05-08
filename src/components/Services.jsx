@@ -43,7 +43,7 @@ const Services = () => {
       <div className="services-container">
         <motion.h2 className="services-main-title" style={{ y }}>I nostri servizi</motion.h2>
         
-        <div className="services-nav">
+        <motion.div className="services-nav" style={{ y }}>
           {servicesData.map((service, index) => (
             <div 
               key={service.id} 
@@ -54,7 +54,7 @@ const Services = () => {
               <span className="nav-label">{service.title}</span>
             </div>
           ))}
-        </div>
+        </motion.div>
 
         <div className="service-display">
           <div className="service-card-left">
