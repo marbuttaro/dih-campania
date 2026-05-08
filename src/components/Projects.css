@@ -122,13 +122,17 @@
 
 .project-card-front, .project-card-back {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 15px 35px rgba(0, 25, 51, 0.15);
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .project-card-back {

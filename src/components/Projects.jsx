@@ -47,8 +47,8 @@ const Projects = () => {
           ))}
         </div>
 
-        <div className="projects-footer text-center">
-          <button className="btn-secondary">Vedi tutti i progetti</button>
+        <div className="projects-footer">
+          <button className="btn-all-projects">Vedi tutti i progetti</button>
         </div>
 
       </div>
