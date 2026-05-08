@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import './Services.css';
+import GlareHover from './GlareHover';
 
 const servicesData = [
   {
@@ -36,7 +37,9 @@ const Services = () => {
     target: ref,
     offset: ["start end", "end start"]
   });
-  const y = useTransform(scrollYProgress, [0, 1], [80, -80]);
+  const y = useTransform(scrollYProgress, [0, 1], [40, -40]);
+
+  const activeService = servicesData[activeTab];
 
   return (
     <section className="services-section" id="servizi" ref={ref}>
@@ -57,12 +60,21 @@ const Services = () => {
         </motion.div>
 
         <div className="service-display">
-          <div className="service-card-left">
-            <div className="service-id-large">{servicesData[activeTab].id}</div>
-            <h3 className="service-card-title">{servicesData[activeTab].title}</h3>
-            <p className="service-card-desc">{servicesData[activeTab].desc}</p>
-            <button className="btn-service-action">Scopri di più</button>
-          </div>
+          <GlareHover
+            width="36%"
+            height="100%"
+            background="url('/assets/sfondo_card_servizi.png') center/cover"
+            borderRadius="24px"
+            borderColor="rgba(255, 255, 255, 0.1)"
+            glareColor="#ffffff"
+            glareOpacity={0.2}
+            className="service-card-left"
+          >
+            <div className="service-id-large">{activeService.id}</div>
+            <h3 className="service-card-title">{activeService.title}</h3>
+            <p className="service-card-desc">{activeService.desc}</p>
+            <a href="#scopri" className="btn-service-action">Scopri di più</a>
+          </GlareHover>
           
           <div className="service-card-right">
             <img 
