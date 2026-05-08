@@ -19,11 +19,11 @@ function App() {
       <Hero />
       <About />
       <Services />
+      <Community />
       <Projects />
       <Experience />
       <Grants />
       <Events />
-      <Community />
       <FAQ />
       <Footer />
     </div>
