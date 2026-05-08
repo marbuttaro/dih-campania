@@ -19,7 +19,7 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  min-height: 500px;
+  min-height: 550px; /* Fixed minimum height to keep progress bar stable */
 }
 
 .community-step {
@@ -132,11 +132,11 @@
 
 .community-description {
   font-family: 'Montserrat', sans-serif;
-  font-size: 26px;
+  font-size: 24px; /* Slightly reduced */
   color: #001933;
   line-height: 1.5;
-  margin-bottom: 60px;
-  max-width: 900px;
+  margin-bottom: 40px; /* Reduced padding to keep layout stable */
+  max-width: 850px;
 }
 
 .btn-community-discovery {
@@ -157,10 +157,13 @@
 
 /* PROGRESS BAR */
 .community-progress-wrapper {
-  margin-top: auto;
-  padding-top: 50px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: center;
+  padding-bottom: 20px;
 }
 
 .progress-svg-fixed {
