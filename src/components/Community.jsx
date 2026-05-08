@@ -12,11 +12,27 @@ const Community = () => {
     }
   };
 
+  const prevStep = (e) => {
+    e.stopPropagation(); // Prevent triggering nextStep
+    if (step > 0) {
+      setStep(step - 1);
+    }
+  };
+
   return (
     <section className="community-section" id="community" onClick={nextStep}>
       <div className="community-container container">
         
-        {/* Title and Cards are always rendered but transform based on step */}
+        {/* Back Button - only visible if step > 0 */}
+        {step > 0 && (
+          <button className="btn-back-community" onClick={prevStep}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <span>Indietro</span>
+          </button>
+        )}
+
         <div className={`community-step step-container-${step}`}>
           
           <h2 className={`community-bg-title ${step === 2 ? 'title-faded' : ''}`}>
@@ -33,21 +49,19 @@ const Community = () => {
             </div>
           </div>
 
-          {/* Final Description & CTA: Only shows at step 2 */}
           <div className={`final-content ${step === 2 ? 'show' : ''}`}>
             <p className="community-description">
               Uno spazio aperto dove imprese, professionisti, startup ed<br />
               enti si incontrano per crescere insieme, scambiarsi competenze<br />
               e creare soluzioni reali per l'innovazione.
             </p>
-            <button className="btn-community-discovery">
+            <button className="btn-community-discovery" onClick={(e) => e.stopPropagation()}>
               Scopri la nostra community
             </button>
           </div>
 
         </div>
 
-        {/* Progress Bar (Using barra 1, 2, 3) */}
         <div className="community-progress-wrapper">
           <img 
             src={`/assets/barra${step + 1}.svg`} 

@@ -155,6 +155,30 @@
   transition: all 0.3s ease;
 }
 
+.btn-back-community {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  color: #001933;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  z-index: 50;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+.btn-back-community:hover {
+  opacity: 1;
+  transform: translateX(-5px);
+}
+
 /* PROGRESS BAR */
 .community-progress-wrapper {
   position: absolute;
