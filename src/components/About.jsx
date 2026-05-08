@@ -40,7 +40,7 @@ const About = () => {
             <p className="sectors-desc">Il Campania DIH opera trasversalmente su settori chiave del territorio e dell'economia:</p>
           </div>
           <div className="sectors-pills">
-            <div className="sector-item active">Moda, artigianato e design</div>
+            <div className="sector-item">Moda, artigianato e design</div>
             <div className="sector-item">Industria/manifattura & mobilità</div>
             <div className="sector-item">Agro-alimentare e filiere localizzate</div>
             <div className="sector-item">Salute, servizi alla persona</div>

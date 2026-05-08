@@ -7,7 +7,7 @@
   display: flex;
   justify-content: space-between;
   gap: 40px;
-  margin-bottom: 80px;
+  margin-bottom: 120px; /* Increased from 80px */
   align-items: flex-start;
 }
 
@@ -43,7 +43,7 @@
 .about-middle {
   display: flex;
   gap: 30px;
-  margin-bottom: 80px;
+  margin-bottom: 120px; /* Increased from 80px */
 }
 
 .about-info-card {
@@ -97,11 +97,11 @@
 /* Bottom Section */
 .about-bottom {
   display: flex;
-  gap: 40px;
+  gap: 30px;
 }
 
 .sectors-info {
-  flex: 1;
+  flex: 0 0 40%; /* Align with left card above */
 }
 
 .sectors-title {
@@ -114,11 +114,11 @@
 .sectors-desc {
   font-size: 1rem;
   color: #666;
-  max-width: 300px;
+  max-width: 320px;
 }
 
 .sectors-pills {
-  flex: 2;
+  flex: 0 0 60%; /* Align with right image above */
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
