@@ -14,7 +14,7 @@
   align-items: center;
   justify-content: space-between;
   background: linear-gradient(90deg, var(--color-dark-navy) 0%, var(--color-navy) 100%);
-  border-radius: 40px; /* Pill shape */
+  border-radius: 21px; /* Updated to 21px as requested */
   padding: 12px 24px 12px 32px;
   width: 100%;
   max-width: var(--max-width);
