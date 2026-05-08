@@ -106,11 +106,13 @@
 .btn-service-action {
   margin-top: auto;
   align-self: flex-start;
-  background: rgba(142, 190, 247, 0.1);
-  border: 1px solid rgba(142, 190, 247, 0.5);
+  background: rgba(255, 255, 255, 0.09);
+  border: 1.14px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
   color: var(--color-white);
   padding: 12px 30px;
-  border-radius: var(--br-btn);
+  border-radius: 8.6px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   font-size: 1.1rem;
   font-weight: 500;
   cursor: pointer;
