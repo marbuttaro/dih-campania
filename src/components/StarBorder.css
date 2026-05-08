@@ -2,16 +2,12 @@
   display: inline-block;
   position: relative;
   overflow: hidden;
-  padding: 1px; /* thickness */
+  padding: 2px; /* This is the "stroke" width where the star moves */
   background: transparent;
   border: none;
   cursor: pointer;
   text-decoration: none;
-  transition: transform 0.2s ease;
-}
-
-.star-border-container:active {
-  transform: scale(0.96);
+  border-radius: 12px; /* Default radius, will be inherited if possible */
 }
 
 .border-gradient-bottom {
@@ -22,7 +18,7 @@
   bottom: -20%;
   right: -250%;
   border-radius: 50%;
-  animation: star-movement-bottom linear infinite alternate;
+  animation: star-movement-bottom 6s linear infinite alternate;
   z-index: 0;
 }
 
@@ -34,7 +30,7 @@
   top: -20%;
   left: -250%;
   border-radius: 50%;
-  animation: star-movement-top linear infinite alternate;
+  animation: star-movement-top 6s linear infinite alternate;
   z-index: 0;
 }
 
@@ -46,7 +42,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: inherit; /* Inherit background from the class passed to the container if needed */
+  border-radius: 10px; /* Slightly smaller than container to keep stroke visible */
+  /* The original button background will be applied here via the passed className */
 }
 
 @keyframes star-movement-bottom {

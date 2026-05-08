@@ -62,7 +62,7 @@ const Services = () => {
           <GlareHover
             className="service-card-left-wrapper"
             borderRadius="24px"
-            glareOpacity={0.2}
+            glareOpacity={0.4}
             glareSize={200}
           >
             <div className="service-card-left">

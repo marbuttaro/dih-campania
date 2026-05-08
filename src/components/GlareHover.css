@@ -3,9 +3,9 @@
   height: var(--gh-height);
   background: var(--gh-bg);
   border-radius: var(--gh-br);
-  border: 1px solid var(--gh-border);
   overflow: hidden;
   position: relative;
+  border: none;
 }
 
 .glare-content {
@@ -13,6 +13,7 @@
   z-index: 2;
   width: 100%;
   height: 100%;
+  pointer-events: auto;
 }
 
 .glare-hover::before {
@@ -21,26 +22,20 @@
   inset: 0;
   background: linear-gradient(
     var(--gh-angle),
-    hsla(0, 0%, 0%, 0) 60%,
-    var(--gh-rgba) 75%,
-    hsla(0, 0%, 0%, 0) 100%
+    rgba(255, 255, 255, 0) 0%,
+    var(--gh-rgba) 50%,
+    rgba(255, 255, 255, 0) 100%
   );
   transition: var(--gh-duration) ease;
-  background-size:
-    var(--gh-size) var(--gh-size),
-    100% 100%;
+  background-size: var(--gh-size) var(--gh-size);
   background-repeat: no-repeat;
-  background-position:
-    -100% -100%,
-    0 0;
-  z-index: 1;
+  background-position: -150% -150%;
+  z-index: 5; /* Above content to see the glare */
   pointer-events: none;
 }
 
 .glare-hover:hover::before {
-  background-position:
-    100% 100%,
-    0 0;
+  background-position: 150% 150%;
 }
 
 .glare-hover--play-once::before {
@@ -49,7 +44,5 @@
 
 .glare-hover--play-once:hover::before {
   transition: var(--gh-duration) ease;
-  background-position:
-    100% 100%,
-    0 0;
+  background-position: 150% 150%;
 }
