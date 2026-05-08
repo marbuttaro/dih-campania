@@ -19,7 +19,7 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  min-height: 480px; /* Reduced from 550px to bring bar closer */
+  min-height: 380px; /* Reduced further to bring bar closer to cards/text */
 }
 
 .community-step {
@@ -182,7 +182,7 @@
 /* PROGRESS BAR */
 .community-progress-wrapper {
   position: absolute;
-  bottom: 0;
+  bottom: 10px; /* Moved up slightly */
   left: 0;
   right: 0;
   display: flex;
