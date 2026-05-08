@@ -128,7 +128,7 @@
   background: rgba(255, 255, 255, 0.09) !important;
   border: 1.14px solid rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(10px);
-  color: #8EBEF7 !important;
+  color: var(--color-white) !important; /* White for better default readability */
   padding: 8px 21px;
   border-radius: 8.6px;
   font-family: 'Montserrat', sans-serif;
@@ -141,7 +141,7 @@
 
 .btn-service-action:hover {
   background: #8EBEF7 !important;
-  color: #001933 !important; /* Dark navy for readability on light blue */
+  color: #001933 !important; /* Dark navy for contrast on light blue */
   transform: translateY(-2px);
 }
 
