@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import './Hero.css';
+import BlurText from './BlurText';
 
 const Hero = () => {
   const { scrollY } = useScroll();
@@ -15,10 +16,13 @@ const Hero = () => {
       
       <div className="hero-content container">
         <motion.div className="hero-text-content" style={{ y }}>
-          <h1 className="hero-title">
-            Il punto di riferimento per<br />
-            <span className="hero-title-highlight">la trasformazione digitale.</span>
-          </h1>
+          <BlurText 
+            text="Il punto di riferimento per la trasformazione digitale."
+            delay={100}
+            animateBy="words"
+            direction="top"
+            className="hero-title"
+          />
           <p className="hero-subtitle">
             Accompagniamo imprese e PMI campane nel percorso verso l'innovazione tecnologica, la sostenibilità e la competitività.
           </p>
