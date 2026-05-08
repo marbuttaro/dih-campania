@@ -7,6 +7,7 @@ import Projects from './components/Projects';
 import Experience from './components/Experience';
 import Grants from './components/Grants';
 import Events from './components/Events';
+import Community from './components/Community';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import './App.css';
@@ -22,6 +23,7 @@ function App() {
       <Experience />
       <Grants />
       <Events />
+      <Community />
       <FAQ />
       <Footer />
     </div>
