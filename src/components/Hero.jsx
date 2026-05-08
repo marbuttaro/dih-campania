@@ -1,26 +1,13 @@
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
 import './Hero.css';
 import BlurText from './BlurText';
-import Threads from './Threads';
 import StarBorder from './StarBorder';
 
 const Hero = () => {
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 150]);
-
-  // New Threads configuration
-  const threadsColor = [1, 1, 1]; // White threads on dark blue bg
-
   return (
     <section className="hero-section">
-      <div className="hero-background" style={{ backgroundColor: '#001933' }}>
-        <Threads 
-          color={threadsColor}
-          amplitude={1}
-          distance={0}
-          enableMouseInteraction={true}
-        />
+      <div className="hero-background">
+        <img src="/assets/foto hero.png" alt="Hero Background" className="hero-bg-img" />
         <div className="hero-overlay-multiply"></div>
       </div>
       

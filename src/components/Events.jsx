@@ -25,17 +25,10 @@ const eventsData = [
 ];
 
 const Events = () => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
-
   return (
-    <section className="events-section" id="eventi" ref={ref}>
+    <section className="events-section" id="eventi">
       <div className="events-container-inner">
-        <motion.h2 className="events-title" style={{ y }}>Prossimi appuntamenti</motion.h2>
+        <h2 className="events-title">Prossimi appuntamenti</h2>
         <div className="events-grid">
           {eventsData.map((event, index) => (
             <div className="event-card-new" key={index}>

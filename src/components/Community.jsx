@@ -5,12 +5,6 @@ import StarBorder from './StarBorder';
 
 const Community = () => {
   const [step, setStep] = useState(0);
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-  const yTitle = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   const nextStep = () => {
     if (step < 2) {
@@ -21,14 +15,13 @@ const Community = () => {
   };
 
   return (
-    <section className="community-section" id="community" onClick={nextStep} ref={ref}>
+    <section className="community-section" id="community" onClick={nextStep}>
       <div className="community-container container">
         
         <div className={`community-step step-container-${step}`}>
           
           <motion.h2 
             className={`community-bg-title ${step === 2 ? 'title-faded' : ''}`}
-            style={{ y: yTitle }}
           >
             Entra a far parte della <br />
             <span className="accent">Community</span>

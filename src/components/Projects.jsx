@@ -9,20 +9,13 @@ const projectCards = [
 ];
 
 const Projects = () => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
-
   return (
-    <section className="projects-section" id="progetti" ref={ref}>
+    <section className="projects-section" id="progetti">
       <div className="container">
         
         {/* Projects Grid */}
         <div className="projects-header">
-          <motion.h2 className="projects-title" style={{ y }}>Progetti</motion.h2>
+          <h2 className="projects-title">Progetti</h2>
         </div>
 
         <div className="projects-grid">

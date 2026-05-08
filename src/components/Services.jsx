@@ -32,21 +32,14 @@ const servicesData = [
 
 const Services = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [40, -40]);
-
   const activeService = servicesData[activeTab];
 
   return (
-    <section className="services-section" id="servizi" ref={ref}>
+    <section className="services-section" id="servizi">
       <div className="services-container">
-        <motion.h2 className="services-main-title" style={{ y }}>I nostri servizi</motion.h2>
+        <h2 className="services-main-title">I nostri servizi</h2>
         
-        <motion.div className="services-nav" style={{ y }}>
+        <div className="services-nav">
           {servicesData.map((service, index) => (
             <div 
               key={service.id} 
@@ -57,7 +50,7 @@ const Services = () => {
               <span className="nav-label">{service.title}</span>
             </div>
           ))}
-        </motion.div>
+        </div>
 
         <div className="service-display">
           <GlareHover
