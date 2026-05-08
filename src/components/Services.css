@@ -166,7 +166,8 @@
   border-radius: 20px;
   padding: 20px 25px;
   color: var(--color-white);
-  max-width: none; /* Allow it to be wider for single row */
+  width: auto;
+  max-width: 480px; /* Adjusted to fit 2 tags per row comfortably */
 }
 
 .areas-box-title {
@@ -177,9 +178,10 @@
 }
 
 .areas-grid {
-  display: flex; /* Changed from grid to flex for single line */
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping between tags */
   gap: 10px;
-  flex-wrap: nowrap;
+  justify-content: flex-start;
 }
 
 .area-tag {
@@ -188,10 +190,10 @@
   padding: 6px 12px;
   border-radius: 6px;
   font-family: 'Montserrat', sans-serif;
-  font-weight: 700; /* Bold */
+  font-weight: 700;
   font-size: 14px;
   color: #8EBEF7;
-  white-space: nowrap; /* Force text on one line */
+  white-space: nowrap; /* Each tag's text stays on one line */
   text-align: center;
 }
 
