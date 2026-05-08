@@ -83,8 +83,14 @@
   width: 100%;
 }
 
-.service-card-left {
+.service-card-left-wrapper {
   flex: 0 0 36%;
+  height: 100%;
+}
+
+.service-card-left {
+  width: 100%;
+  height: 100%;
   background-image: url('/assets/sfondo_card_servizi.png');
   background-size: cover;
   background-position: center;

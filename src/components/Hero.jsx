@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import BlurText from './BlurText';
+import StarBorder from './StarBorder';
 import './Hero.css';
 
 const Hero = () => {
@@ -35,9 +36,9 @@ const Hero = () => {
           <p className="hero-subtitle">
             Accompagniamo imprese e PMI campane nel percorso verso l'innovazione tecnologica, la sostenibilità e la competitività.
           </p>
-          <a href="#scopri" className="btn-outline">
+          <StarBorder as="a" href="#scopri" className="btn-outline" color="#8EBEF7">
             Scopri di più
-          </a>
+          </StarBorder>
         </motion.div>
       </div>
 

@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import StarBorder from './StarBorder';
 import './Grants.css';
 
 const Grants = () => {
@@ -21,9 +22,9 @@ const Grants = () => {
           <p className="grant-desc">
             Ti aiutiamo a orientarti tra i bandi attivi e a cogliere le migliori opportunità
           </p>
-          <a href="#bandi" className="btn-grant-glass">
+          <StarBorder as="a" href="#bandi" className="btn-grant-glass" color="#8EBEF7">
             Scopri le opportunità
-          </a>
+          </StarBorder>
         </div>
       </div>
     </section>

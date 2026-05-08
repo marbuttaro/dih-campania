@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import StarBorder from './StarBorder';
 import './Projects.css';
 
 const projectCards = [
@@ -41,7 +42,9 @@ const Projects = () => {
         </div>
 
         <div className="projects-footer">
-          <button className="btn-all-projects">Vedi tutti i progetti</button>
+          <StarBorder className="btn-all-projects" color="#8EBEF7">
+            Vedi tutti i progetti
+          </StarBorder>
         </div>
 
       </div>

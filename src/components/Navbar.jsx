@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import StarBorder from './StarBorder';
 import './Navbar.css';
 
 const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <nav className="navbar-wrapper">
+    <nav className={`navbar-wrapper ${scrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
         <a href="/" className="navbar-logo">
           <img src="/assets/logo DIH.svg" alt="Campania DIH Logo" />
@@ -19,7 +35,9 @@ const Navbar = () => {
         </div>
         
         <div className="navbar-action">
-          <a href="#contatti" className="btn-primary">Contattaci</a>
+          <StarBorder as="a" href="#contatti" className="btn-primary" color="#8EBEF7">
+            Contattaci
+          </StarBorder>
         </div>
       </div>
     </nav>

@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import StarBorder from './StarBorder';
+import GlareHover from './GlareHover';
 import './Services.css';
 
 const servicesData = [
@@ -57,12 +59,21 @@ const Services = () => {
         </div>
 
         <div className="service-display">
-          <div className="service-card-left">
-            <div className="service-id-large">{servicesData[activeTab].id}</div>
-            <h3 className="service-card-title">{servicesData[activeTab].title}</h3>
-            <p className="service-card-desc">{servicesData[activeTab].desc}</p>
-            <button className="btn-service-action">Scopri di più</button>
-          </div>
+          <GlareHover
+            className="service-card-left-wrapper"
+            borderRadius="24px"
+            glareOpacity={0.2}
+            glareSize={200}
+          >
+            <div className="service-card-left">
+              <div className="service-id-large">{servicesData[activeTab].id}</div>
+              <h3 className="service-card-title">{servicesData[activeTab].title}</h3>
+              <p className="service-card-desc">{servicesData[activeTab].desc}</p>
+              <StarBorder className="btn-service-action" color="#8EBEF7">
+                Scopri di più
+              </StarBorder>
+            </div>
+          </GlareHover>
           
           <div className="service-card-right">
             <img 
