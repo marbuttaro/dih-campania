@@ -9,16 +9,16 @@ const Hero = () => {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
 
-  // Color from the URL: 0.09019607843137255, 0.2196078431372549, 0.6823529411764706
-  const threadsColor = [0.09, 0.22, 0.68];
+  // New Threads configuration
+  const threadsColor = [1, 1, 1]; // White threads on dark blue bg
 
   return (
     <section className="hero-section">
-      <div className="hero-background">
+      <div className="hero-background" style={{ backgroundColor: '#001933' }}>
         <Threads 
           color={threadsColor}
-          amplitude={1.9}
-          distance={0.3}
+          amplitude={1}
+          distance={0}
           enableMouseInteraction={true}
         />
         <div className="hero-overlay-multiply"></div>
