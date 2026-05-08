@@ -4,18 +4,18 @@ import './Grants.css';
 const Grants = () => {
   return (
     <section className="grants-section" id="bandi">
-      <div className="grants-background">
-        <img src="/assets/bandi.png" alt="Bandi Background" className="grants-bg-img" />
-        <div className="grants-overlay"></div>
-      </div>
-      
-      <div className="container grants-content">
-        <div className="grants-text">
-          <h2 className="grants-title">Trasforma la tua impresa<br />con i bandi attivi</h2>
-          <p className="grants-subtitle">
-            Ti aiutiamo a orientarti tra i bandi attivi e a<br />cogliere le migliori opportunità
+      <div className="grants-container container">
+        <div className="grant-glass-card">
+          <h2 className="grant-title">
+            Trasforma la tua impresa<br />
+            con i bandi attivi
+          </h2>
+          <p className="grant-desc">
+            Ti aiutiamo a orientarti tra i bandi attivi e a cogliere le migliori opportunità
           </p>
-          <button className="btn-outline-white">Scopri le opportunità</button>
+          <a href="#bandi" className="btn-grant-glass">
+            Scopri le opportunità
+          </a>
         </div>
       </div>
     </section>

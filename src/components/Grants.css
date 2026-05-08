@@ -1,81 +1,79 @@
 .grants-section {
+  padding: 100px 40px;
+  background-image: url('/assets/sfondo_bandi.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 40px;
+  margin: 0 40px;
   position: relative;
-  padding: 100px 0;
   overflow: hidden;
+  min-height: 500px;
   display: flex;
   align-items: center;
-  min-height: 400px;
 }
 
-.grants-background {
-  position: absolute;
-  top: 0;
-  left: 0;
+.grants-container {
   width: 100%;
-  height: 100%;
-  z-index: -1;
-  background-color: var(--color-dark-navy);
 }
 
-.grants-bg-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.6;
-}
-
-.grants-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, rgba(0, 25, 51, 0.9) 0%, rgba(0, 25, 51, 0.4) 100%);
-}
-
-.grants-content {
-  position: relative;
-  z-index: 10;
-}
-
-.grants-text {
-  max-width: 600px;
-}
-
-.grants-title {
+.grant-glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 30px;
+  padding: 60px;
+  max-width: 700px;
   color: var(--color-white);
-  font-size: 2.5rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.grant-title {
+  font-size: 2.8rem;
   font-weight: 300;
-  margin-bottom: 20px;
   line-height: 1.2;
-}
-
-.grants-subtitle {
-  color: var(--color-pale-blue);
-  font-size: 1.2rem;
-  margin-bottom: 40px;
-  line-height: 1.5;
-}
-
-.btn-outline-white {
-  background: transparent;
-  border: 1px solid var(--color-white);
+  margin-bottom: 24px;
   color: var(--color-white);
-  padding: 12px 32px;
-  border-radius: var(--br-btn);
-  font-size: 1rem;
+}
+
+.grant-desc {
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 40px;
+  max-width: 500px;
+}
+
+.btn-grant-glass {
+  display: inline-block;
+  padding: 14px 32px;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1.14px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  color: var(--color-white);
   font-weight: 600;
-  cursor: pointer;
+  border-radius: 8.6px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+  font-size: 1rem;
   transition: all 0.3s ease;
 }
 
-.btn-outline-white:hover {
-  background: var(--color-white);
-  color: var(--color-dark-navy);
+.btn-grant-glass:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
 }
 
-@media (max-width: 768px) {
-  .grants-title {
-    font-size: 2rem;
+@media (max-width: 992px) {
+  .grants-section {
+    margin: 0;
+    border-radius: 0;
+    padding: 60px 20px;
+  }
+  .grant-glass-card {
+    padding: 40px 30px;
+  }
+  .grant-title {
+    font-size: 2.2rem;
   }
 }
