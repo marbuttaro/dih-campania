@@ -1,35 +1,54 @@
 .services-section {
-  padding: 80px 0; /* Reduced height as requested */
+  padding: 80px 0 120px;
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* Allow cards to overflow bg if needed */
+}
+
+/* Background that ends before cards bottom */
+.services-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 85%; /* Ends before the bottom of the cards */
   background-image: url('/assets/sfondo_servizi.png');
   background-size: cover;
   background-position: center;
-  min-height: auto;
+  z-index: 0;
+}
+
+.services-container {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 40px;
 }
 
 .services-main-title {
+  font-family: 'Montserrat', sans-serif;
   font-size: 2.5rem;
   color: var(--color-white);
   font-weight: 300;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
 }
 
-/* Tabs Navigation */
 .services-nav {
   display: flex;
-  gap: 50px; /* Increased spacing between tabs */
-  margin-bottom: 40px;
-  flex-wrap: wrap;
+  justify-content: space-between; /* Align first and last with content below */
+  align-items: center;
+  margin-bottom: 50px;
+  width: 100%;
 }
 
 .service-nav-item {
   display: flex;
   align-items: center;
-  gap: 16px; /* More spacing */
+  gap: 15px;
   cursor: pointer;
   transition: opacity 0.3s ease;
-  opacity: 0.35;
+  opacity: 0.4;
 }
 
 .service-nav-item.active {
@@ -37,76 +56,68 @@
 }
 
 .nav-circle {
-  width: 54px; /* Larger numbers */
-  height: 54px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  border: 1px solid rgba(142, 190, 247, 0.5);
+  background: rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem; /* Larger font */
+  font-size: 1.2rem;
+  font-weight: 400;
   color: #8EBEF7;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  background: rgba(142, 190, 247, 0.1);
-}
-
-.service-nav-item.active .nav-circle {
-  background-color: rgba(142, 190, 247, 0.3);
-  border-color: #8EBEF7;
-  color: var(--color-white);
+  border: 1px solid rgba(142, 190, 247, 0.3);
 }
 
 .nav-label {
-  font-size: 1.3rem; /* Larger label */
-  font-weight: 400;
+  font-size: 1.3rem;
+  font-weight: 500;
   color: #8EBEF7;
 }
 
 /* Main Display Layout */
 .service-display {
   display: flex;
-  gap: 24px;
-  min-height: 500px; /* Reduced overall height */
-  align-items: stretch;
+  gap: 25px;
+  height: 520px; /* Reduced height for horizontal aspect ratio */
+  width: 100%;
 }
 
-/* Left Card - Text Content */
 .service-card-left {
-  flex: 0 0 37%; /* Width reduced to 35-38% */
+  flex: 0 0 36%;
   background-image: url('/assets/sfondo_card_servizi.png');
   background-size: cover;
   background-position: center;
-  border-radius: 30px;
-  padding: 40px; /* Reduced internal padding */
+  border-radius: 24px;
+  padding: 40px; /* Reduced padding */
   color: var(--color-white);
   display: flex;
   flex-direction: column;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  position: relative;
   overflow: hidden;
 }
 
 .service-id-large {
-  font-size: 6rem; /* Increased size to 6rem */
-  font-weight: 300;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 77px;
+  font-weight: 400; /* Regular */
   line-height: 1;
-  margin-bottom: 15px;
-  opacity: 0.9;
+  margin-bottom: 25px;
 }
 
 .service-card-title {
-  font-size: 2.4rem;
-  font-weight: 700; /* Increased font-weight */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 25px;
+  font-weight: 600; /* Semibold */
   margin-bottom: 20px;
   color: var(--color-white);
-  line-height: 1.2;
 }
 
 .service-card-desc {
-  font-size: 1.15rem; /* Slightly larger description */
-  line-height: 1.6;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 400; /* Regular */
+  line-height: 1.4;
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 30px;
 }
@@ -114,11 +125,11 @@
 .btn-service-action {
   margin-top: auto;
   align-self: flex-start;
-  background: transparent; /* Transparent bg */
-  border: 2px solid var(--color-white); /* White border */
-  color: var(--color-white); /* White text */
+  background: transparent;
+  border: 1px solid var(--color-white);
+  color: var(--color-white);
   padding: 14px 40px; /* Generous padding */
-  border-radius: 12px;
+  border-radius: 10px;
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
@@ -130,11 +141,10 @@
   color: var(--color-dark-navy);
 }
 
-/* Right Card - Image Content */
 .service-card-right {
-  flex: 0 0 63%; /* Width increased to 62-65% */
+  flex: 0 0 64%;
   position: relative;
-  border-radius: 30px;
+  border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
@@ -142,65 +152,52 @@
 .service-main-img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Fill all card without padding */
+  object-fit: cover;
   display: block;
 }
 
 .service-areas-box {
   position: absolute;
-  bottom: 30px;
-  right: 30px;
-  background: rgba(0, 25, 51, 0.5); /* Semi-transparent background */
+  bottom: 25px;
+  right: 25px;
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 20px; /* Rounded radius */
-  padding: 24px 30px;
+  border-radius: 20px;
+  padding: 25px 30px;
   color: var(--color-white);
   max-width: 400px;
 }
 
 .areas-box-title {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
+  color: #DEEAEE; /* Specific color requested */
 }
 
 .areas-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
 }
 
 .area-tag {
-  background: transparent; /* Transparent background */
-  border: 1px solid rgba(255, 255, 255, 0.8); /* White thin border */
-  color: var(--color-white);
-  padding: 6px 14px;
-  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--color-white); /* White border requested */
+  padding: 8px 15px;
+  border-radius: 6px;
   font-size: 0.85rem;
+  color: var(--color-white);
+  text-align: center;
 }
 
-@media (max-width: 1200px) {
-  .service-card-left {
-    flex: 0 0 45%;
-  }
-  .service-card-right {
-    flex: 0 0 55%;
-  }
-}
-
-@media (max-width: 992px) {
-  .services-section {
-    padding: 60px 0;
-  }
+@media (max-width: 1100px) {
   .service-display {
     flex-direction: column;
-  }
-  .service-card-left, .service-card-right {
-    flex: 1 1 auto;
-    width: 100%;
+    height: auto;
   }
   .service-card-right {
-    min-height: 350px;
+    min-height: 400px;
   }
 }
