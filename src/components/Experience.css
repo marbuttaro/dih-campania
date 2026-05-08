@@ -1,5 +1,5 @@
 .experience-section {
-  padding: 120px 0;
+  padding: 60px 0; /* Reduced from 120px */
   position: relative;
   /* Removed background-color, using global background */
 }
@@ -29,19 +29,19 @@
   font-size: 44px; /* Slightly reduced from 48px */
   color: var(--color-navy);
   line-height: 1.2;
-  margin-bottom: 35px;
+  margin-bottom: 25px; /* Reduced from 35px */
 }
 
 .experience-desc {
   font-size: 1.1rem; /* Slightly reduced from 1.15rem */
   line-height: 1.6;
   color: var(--color-dark-navy);
-  margin-bottom: 45px;
+  margin-bottom: 35px; /* Reduced from 45px */
   opacity: 0.8;
 }
 
 .btn-experience {
-  background: var(--color-white);
+  background: rgba(227, 234, 236, 0.3); /* #E3EAEC with 30% opacity */
   color: var(--color-dark-navy);
   padding: 14px 36px;
   border-radius: var(--br-btn); /* 8px */

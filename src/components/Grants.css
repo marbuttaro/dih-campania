@@ -1,13 +1,12 @@
 .grants-section {
-  padding: 100px 40px;
+  padding: 60px 0; /* Reduced vertical padding */
   background-image: url('/assets/sfondo_bandi.png');
   background-size: cover;
   background-position: center;
-  border-radius: 40px;
-  margin: 0 40px;
+  margin: 0; /* Full width: removed side margins */
   position: relative;
   overflow: hidden;
-  min-height: 500px;
+  min-height: 400px; /* Reduced from 500px */
   display: flex;
   align-items: center;
 }
