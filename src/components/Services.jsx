@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import StarBorder from './StarBorder';
 import GlareHover from './GlareHover';
 import './Services.css';
 
@@ -38,14 +37,15 @@ const Services = () => {
     target: ref,
     offset: ["start end", "end start"]
   });
-  const y = useTransform(scrollYProgress, [0, 1], [80, -80]);
+  const yTitle = useTransform(scrollYProgress, [0, 1], [80, -80]);
+  const yNav = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
   return (
     <section className="services-section" id="servizi" ref={ref}>
       <div className="services-container">
-        <motion.h2 className="services-main-title" style={{ y }}>I nostri servizi</motion.h2>
+        <motion.h2 className="services-main-title" style={{ y: yTitle }}>I nostri servizi</motion.h2>
         
-        <div className="services-nav">
+        <motion.div className="services-nav" style={{ y: yNav }}>
           {servicesData.map((service, index) => (
             <div 
               key={service.id} 
@@ -56,7 +56,7 @@ const Services = () => {
               <span className="nav-label">{service.title}</span>
             </div>
           ))}
-        </div>
+        </motion.div>
 
         <div className="service-display">
           <GlareHover
@@ -69,9 +69,7 @@ const Services = () => {
               <div className="service-id-large">{servicesData[activeTab].id}</div>
               <h3 className="service-card-title">{servicesData[activeTab].title}</h3>
               <p className="service-card-desc">{servicesData[activeTab].desc}</p>
-              <StarBorder className="btn-service-action" color="#8EBEF7">
-                Scopri di più
-              </StarBorder>
+              <button className="btn-service-action">Scopri di più</button>
             </div>
           </GlareHover>
           

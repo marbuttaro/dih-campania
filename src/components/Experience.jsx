@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import StarBorder from './StarBorder';
 import './Experience.css';
 
 const Experience = () => {
@@ -22,9 +21,9 @@ const Experience = () => {
           <p className="experience-desc">
             Il CampaniaDIH dal 2017 supporta attività di ricerca, orientamento e sviluppo di progetti di DT a favore delle imprese. Guidato da un senior strategic PM, il team è composto da esperti in innovazione tecnologica ed in settori umanistici per sostenere e accompagnare i processi di innovazione, trasformazione tech e digital di imprese e PA ed è coadiuvata da specialisti di settore ed innovation manager
           </p>
-          <StarBorder className="btn-experience" color="#8EBEF7">
+          <button className="btn-experience">
             Scopri il nostro team
-          </StarBorder>
+          </button>
         </div>
       </div>
     </section>

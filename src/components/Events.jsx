@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import StarBorder from './StarBorder';
 import './Events.css';
 
 const eventsData = [
@@ -49,7 +48,7 @@ const Events = () => {
               <div className="event-card-bottom">
                 <h3 className="event-title-text">{event.title}</h3>
                 <div className="event-card-footer">
-                  <StarBorder as="a" href={event.link} className="btn-leggi" color="#8EBEF7">Leggi</StarBorder>
+                  <a href={event.link} className="btn-leggi">Leggi</a>
                 </div>
               </div>
             </div>

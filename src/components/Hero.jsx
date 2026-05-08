@@ -1,14 +1,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import BlurText from './BlurText';
-import StarBorder from './StarBorder';
 import './Hero.css';
 
 const Hero = () => {
   return (
     <section className="hero-section">
       <div className="hero-background">
-        <img src="/assets/foto hero.png" alt="Digital Hand" className="hero-bg-img" />
+        <video 
+          src="/assets/hero-bg.mov" 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="hero-bg-video"
+        ></video>
         <div className="hero-overlay"></div>
       </div>
       
@@ -43,9 +49,9 @@ const Hero = () => {
             <p className="hero-subtitle">
               Accompagniamo imprese e PMI campane nel percorso verso l'innovazione tecnologica, la sostenibilità e la competitività.
             </p>
-            <StarBorder as="a" href="#scopri" className="btn-outline" color="#8EBEF7">
+            <a href="#scopri" className="btn-outline">
               Scopri di più
-            </StarBorder>
+            </a>
           </motion.div>
         </div>
       </div>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import StarBorder from './StarBorder';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -35,9 +34,9 @@ const Navbar = () => {
         </div>
         
         <div className="navbar-action">
-          <StarBorder as="a" href="#contatti" className="btn-primary" color="#8EBEF7">
+          <a href="#contatti" className="btn-primary">
             Contattaci
-          </StarBorder>
+          </a>
         </div>
       </div>
     </nav>
