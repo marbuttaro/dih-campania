@@ -1,8 +1,6 @@
 import React from 'react';
 import './Navbar.css';
 
-import StarBorder from './StarBorder';
-
 const Navbar = () => {
   return (
     <nav className="navbar-wrapper">
@@ -21,9 +19,7 @@ const Navbar = () => {
         </div>
         
         <div className="navbar-action">
-          <StarBorder as="a" href="#contatti" className="btn-primary">
-            Contattaci
-          </StarBorder>
+          <a href="#contatti" className="btn-primary">Contattaci</a>
         </div>
       </div>
     </nav>

@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import './Services.css';
-import GlareHover from './GlareHover';
 
 const servicesData = [
   {
@@ -32,12 +31,17 @@ const servicesData = [
 
 const Services = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const activeService = servicesData[activeTab];
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [80, -80]);
 
   return (
-    <section className="services-section" id="servizi">
+    <section className="services-section" id="servizi" ref={ref}>
       <div className="services-container">
-        <h2 className="services-main-title">I nostri servizi</h2>
+        <motion.h2 className="services-main-title" style={{ y }}>I nostri servizi</motion.h2>
         
         <div className="services-nav">
           {servicesData.map((service, index) => (
@@ -53,21 +57,12 @@ const Services = () => {
         </div>
 
         <div className="service-display">
-          <GlareHover
-            width="36%"
-            height="100%"
-            background="url('/assets/sfondo_card_servizi.png') center/cover"
-            borderRadius="24px"
-            borderColor="rgba(255, 255, 255, 0.1)"
-            glareColor="#ffffff"
-            glareOpacity={0.2}
-            className="service-card-left"
-          >
-            <div className="service-id-large">{activeService.id}</div>
-            <h3 className="service-card-title">{activeService.title}</h3>
-            <p className="service-card-desc">{activeService.desc}</p>
-            <StarBorder as="a" href="#scopri" className="btn-service-action">Scopri di più</StarBorder>
-          </GlareHover>
+          <div className="service-card-left">
+            <div className="service-id-large">{servicesData[activeTab].id}</div>
+            <h3 className="service-card-title">{servicesData[activeTab].title}</h3>
+            <p className="service-card-desc">{servicesData[activeTab].desc}</p>
+            <button className="btn-service-action">Scopri di più</button>
+          </div>
           
           <div className="service-card-right">
             <img 

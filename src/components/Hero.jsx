@@ -1,45 +1,44 @@
 import React from 'react';
-import './Hero.css';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import BlurText from './BlurText';
-import StarBorder from './StarBorder';
+import './Hero.css';
 
 const Hero = () => {
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, 150]);
+
   return (
     <section className="hero-section">
       <div className="hero-background">
-        <img src="/assets/foto hero.png" alt="Hero Background" className="hero-bg-img" />
-        <div className="hero-overlay-multiply"></div>
+        <img src="/assets/foto hero.png" alt="Digital Hand" className="hero-bg-img" />
+        <div className="hero-overlay"></div>
       </div>
       
       <div className="hero-content container">
-        <div className="hero-text-content">
-          <BlurText 
-            text="Il punto di riferimento per la trasformazione digitale."
-            delay={100}
-            animateBy="words"
-            direction="top"
-            className="hero-title"
-          />
-          
-          <motion.p 
-            className="hero-subtitle"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.5, duration: 0.8, ease: "easeOut" }}
-          >
+        <motion.div className="hero-text-content" style={{ y }}>
+          <h1 className="hero-title">
+            <BlurText
+              text="Il punto di riferimento per"
+              delay={50}
+              animateBy="words"
+              direction="top"
+              className="hero-title-blur"
+            />
+            <BlurText
+              text="la trasformazione digitale."
+              delay={50}
+              animateBy="words"
+              direction="top"
+              className="hero-title-highlight-blur"
+            />
+          </h1>
+          <p className="hero-subtitle">
             Accompagniamo imprese e PMI campane nel percorso verso l'innovazione tecnologica, la sostenibilità e la competitività.
-          </motion.p>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.8, duration: 0.6, ease: "easeOut" }}
-          >
-            <StarBorder as="a" href="#scopri" className="btn-outline">
-              Scopri di più
-            </StarBorder>
-          </motion.div>
-        </div>
+          </p>
+          <a href="#scopri" className="btn-outline">
+            Scopri di più
+          </a>
+        </motion.div>
       </div>
 
       <div className="hero-ticker">

@@ -1,10 +1,15 @@
 import React, { useState, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import './Community.css';
-import StarBorder from './StarBorder';
 
 const Community = () => {
   const [step, setStep] = useState(0);
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  const yTitle = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   const nextStep = () => {
     if (step < 2) {
@@ -15,13 +20,14 @@ const Community = () => {
   };
 
   return (
-    <section className="community-section" id="community" onClick={nextStep}>
+    <section className="community-section" id="community" onClick={nextStep} ref={ref}>
       <div className="community-container container">
         
         <div className={`community-step step-container-${step}`}>
           
           <motion.h2 
             className={`community-bg-title ${step === 2 ? 'title-faded' : ''}`}
+            style={{ y: yTitle }}
           >
             Entra a far parte della <br />
             <span className="accent">Community</span>
@@ -42,9 +48,9 @@ const Community = () => {
               enti si incontrano per crescere insieme, scambiarsi competenze<br />
               e creare soluzioni reali per l'innovazione.
             </p>
-            <StarBorder className="btn-community-discovery" onClick={(e) => e.stopPropagation()}>
+            <button className="btn-community-discovery" onClick={(e) => e.stopPropagation()}>
               Scopri la nostra community
-            </StarBorder>
+            </button>
           </div>
 
         </div>

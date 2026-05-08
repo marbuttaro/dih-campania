@@ -2,23 +2,28 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import './Grants.css';
 
-import StarBorder from './StarBorder';
-
 const Grants = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [60, -60]);
+
   return (
-    <section className="grants-section" id="bandi">
+    <section className="grants-section" id="bandi" ref={ref}>
       <div className="grants-container container">
         <div className="grant-glass-card">
-          <h2 className="grant-title">
+          <motion.h2 className="grant-title" style={{ y }}>
             Trasforma la tua impresa<br />
             con i bandi attivi
-          </h2>
+          </motion.h2>
           <p className="grant-desc">
             Ti aiutiamo a orientarti tra i bandi attivi e a cogliere le migliori opportunità
           </p>
-          <StarBorder as="a" href="#bandi" className="btn-grant-glass">
+          <a href="#bandi" className="btn-grant-glass">
             Scopri le opportunità
-          </StarBorder>
+          </a>
         </div>
       </div>
     </section>

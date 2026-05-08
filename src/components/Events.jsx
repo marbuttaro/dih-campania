@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import './Events.css';
-import StarBorder from './StarBorder';
 
 const eventsData = [
   {
@@ -25,10 +24,17 @@ const eventsData = [
 ];
 
 const Events = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+
   return (
-    <section className="events-section" id="eventi">
+    <section className="events-section" id="eventi" ref={ref}>
       <div className="events-container-inner">
-        <h2 className="events-title">Prossimi appuntamenti</h2>
+        <motion.h2 className="events-title" style={{ y }}>Prossimi appuntamenti</motion.h2>
         <div className="events-grid">
           {eventsData.map((event, index) => (
             <div className="event-card-new" key={index}>
@@ -42,7 +48,7 @@ const Events = () => {
               <div className="event-card-bottom">
                 <h3 className="event-title-text">{event.title}</h3>
                 <div className="event-card-footer">
-                  <StarBorder as="a" href={event.link} className="btn-leggi">Leggi</StarBorder>
+                  <a href={event.link} className="btn-leggi">Leggi</a>
                 </div>
               </div>
             </div>
