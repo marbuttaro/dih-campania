@@ -1,5 +1,5 @@
 .services-section {
-  padding: 80px 0 120px;
+  padding: 60px 0 100px;
   position: relative;
   overflow: visible; /* Allow cards to overflow bg if needed */
 }
@@ -31,7 +31,7 @@
   font-size: 2.5rem;
   color: var(--color-white);
   font-weight: 300;
-  margin-bottom: 60px;
+  margin-bottom: 20px; /* Reduced from 60px */
 }
 
 .services-nav {
