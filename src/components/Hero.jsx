@@ -1,13 +1,10 @@
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import BlurText from './BlurText';
 import StarBorder from './StarBorder';
 import './Hero.css';
 
 const Hero = () => {
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 150]);
-
   return (
     <section className="hero-section">
       <div className="hero-background">
@@ -16,30 +13,41 @@ const Hero = () => {
       </div>
       
       <div className="hero-content container">
-        <motion.div className="hero-text-content" style={{ y }}>
+        <div className="hero-text-content">
           <h1 className="hero-title">
             <BlurText
               text="Il punto di riferimento per"
-              delay={50}
+              delay={150}
+              stepDuration={0.6}
               animateBy="words"
               direction="top"
               className="hero-title-blur"
+              startDelay={0}
             />
             <BlurText
               text="la trasformazione digitale."
-              delay={50}
+              delay={150}
+              stepDuration={0.6}
               animateBy="words"
               direction="top"
               className="hero-title-highlight-blur"
+              startDelay={1500}
             />
           </h1>
-          <p className="hero-subtitle">
-            Accompagniamo imprese e PMI campane nel percorso verso l'innovazione tecnologica, la sostenibilità e la competitività.
-          </p>
-          <StarBorder as="a" href="#scopri" className="btn-outline" color="#8EBEF7">
-            Scopri di più
-          </StarBorder>
-        </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 3, duration: 1, ease: "easeOut" }}
+          >
+            <p className="hero-subtitle">
+              Accompagniamo imprese e PMI campane nel percorso verso l'innovazione tecnologica, la sostenibilità e la competitività.
+            </p>
+            <StarBorder as="a" href="#scopri" className="btn-outline" color="#8EBEF7">
+              Scopri di più
+            </StarBorder>
+          </motion.div>
+        </div>
       </div>
 
       <div className="hero-ticker">
