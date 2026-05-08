@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Renderer, Program, Mesh, Triangle, Color } from 'ogl';
+import { Renderer, Program, Mesh, Geometry, Color, Vec3 } from 'ogl';
 
 import './Threads.css';
 
@@ -94,14 +94,15 @@ float lineFn(vec2 st, float width, float perc, float offset, vec2 mouse, float t
 }
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
-    vec2 uv = fragCoord / iResolution.xy;
+    vec2 res = max(iResolution.xy, vec2(1.0));
+    vec2 uv = fragCoord / res;
 
     float line_strength = 1.0;
     for (int i = 0; i < u_line_count; i++) {
         float p = float(i) / float(u_line_count);
         line_strength *= (1.0 - lineFn(
             uv,
-            u_line_width * pixel(1.0, iResolution.xy) * (1.0 - p),
+            u_line_width * pixel(1.0, res) * (1.0 - p),
             p,
             (PI * 1.0) * p,
             uMouse,
@@ -135,14 +136,19 @@ const Threads = ({ color = [1, 1, 1], amplitude = 1, distance = 0, enableMouseIn
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
     container.appendChild(gl.canvas);
 
-    const geometry = new Triangle(gl);
+    // Using a simple fullscreen triangle
+    const geometry = new Geometry(gl, {
+      position: { size: 2, data: new Float32Array([-1, -1, 3, -1, -1, 3]) },
+      uv: { size: 2, data: new Float32Array([0, 0, 2, 0, 0, 2]) },
+    });
+
     const program = new Program(gl, {
       vertex: vertexShader,
       fragment: fragmentShader,
       uniforms: {
         iTime: { value: 0 },
         iResolution: {
-          value: new Color(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height)
+          value: new Vec3(gl.canvas.width || 1, gl.canvas.height || 1, (gl.canvas.width / gl.canvas.height) || 1)
         },
         uColor: { value: new Color(...color) },
         uAmplitude: { value: amplitude },
@@ -155,10 +161,11 @@ const Threads = ({ color = [1, 1, 1], amplitude = 1, distance = 0, enableMouseIn
 
     function resize() {
       const { clientWidth, clientHeight } = container;
+      if (!clientWidth || !clientHeight) return;
       renderer.setSize(clientWidth, clientHeight);
-      program.uniforms.iResolution.value.r = clientWidth;
-      program.uniforms.iResolution.value.g = clientHeight;
-      program.uniforms.iResolution.value.b = clientWidth / clientHeight;
+      program.uniforms.iResolution.value.x = clientWidth;
+      program.uniforms.iResolution.value.y = clientHeight;
+      program.uniforms.iResolution.value.z = clientWidth / clientHeight;
     }
     window.addEventListener('resize', resize);
     resize();
@@ -187,9 +194,6 @@ const Threads = ({ color = [1, 1, 1], amplitude = 1, distance = 0, enableMouseIn
         currentMouse[1] += smoothing * (targetMouse[1] - currentMouse[1]);
         program.uniforms.uMouse.value[0] = currentMouse[0];
         program.uniforms.uMouse.value[1] = currentMouse[1];
-      } else {
-        program.uniforms.uMouse.value[0] = 0.5;
-        program.uniforms.uMouse.value[1] = 0.5;
       }
       program.uniforms.iTime.value = t * 0.001;
 
@@ -215,3 +219,4 @@ const Threads = ({ color = [1, 1, 1], amplitude = 1, distance = 0, enableMouseIn
 };
 
 export default Threads;
+
