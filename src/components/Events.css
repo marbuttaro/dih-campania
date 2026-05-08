@@ -90,11 +90,13 @@
 }
 
 .event-title-text {
-  font-size: 1.3rem;
-  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 26px; /* Increased from 1.3rem */
+  font-weight: 600; /* Semibold */
   color: var(--color-dark-navy);
-  line-height: 1.3;
+  line-height: 1.2;
   margin-bottom: 30px;
+  max-width: 100%;
 }
 
 .event-card-footer {
@@ -104,19 +106,26 @@
 
 .btn-leggi {
   background: #E3EAEC;
-  color: var(--color-dark-navy);
-  padding: 10px 25px;
-  border-radius: 10px;
+  color: #001933;
+  padding: 12px 30px;
+  border-radius: 12px;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 22px; /* Large text like in screenshot */
   text-decoration: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  /* Neomorphic / Glow effect */
+  box-shadow: 
+    6px 6px 12px rgba(0, 0, 0, 0.1), 
+    -6px -6px 12px rgba(255, 255, 255, 0.8),
+    inset 0 1px 1px rgba(255, 255, 255, 0.5);
   transition: all 0.3s ease;
 }
 
 .btn-leggi:hover {
-  background: var(--color-navy);
-  color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow: 
+    8px 8px 16px rgba(0, 0, 0, 0.12), 
+    -8px -8px 16px rgba(255, 255, 255, 1);
 }
 
 @media (max-width: 992px) {
