@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import './Services.css';
 
 const servicesData = [
@@ -30,11 +31,17 @@ const servicesData = [
 
 const Services = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [80, -80]);
 
   return (
-    <section className="services-section" id="servizi">
+    <section className="services-section" id="servizi" ref={ref}>
       <div className="services-container">
-        <h2 className="services-main-title">I nostri servizi</h2>
+        <motion.h2 className="services-main-title" style={{ y }}>I nostri servizi</motion.h2>
         
         <div className="services-nav">
           {servicesData.map((service, index) => (

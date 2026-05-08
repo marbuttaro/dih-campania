@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import './Community.css';
 
 const Community = () => {
   const [step, setStep] = useState(0);
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  const yTitle = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   const nextStep = () => {
     if (step < 2) {
@@ -12,33 +19,19 @@ const Community = () => {
     }
   };
 
-  const prevStep = (e) => {
-    e.stopPropagation(); // Prevent triggering nextStep
-    if (step > 0) {
-      setStep(step - 1);
-    }
-  };
-
   return (
-    <section className="community-section" id="community" onClick={nextStep}>
+    <section className="community-section" id="community" onClick={nextStep} ref={ref}>
       <div className="community-container container">
         
-        {/* Back Button - only visible if step > 0 */}
-        {step > 0 && (
-          <button className="btn-back-community" onClick={prevStep}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            <span>Indietro</span>
-          </button>
-        )}
-
         <div className={`community-step step-container-${step}`}>
           
-          <h2 className={`community-bg-title ${step === 2 ? 'title-faded' : ''}`}>
+          <motion.h2 
+            className={`community-bg-title ${step === 2 ? 'title-faded' : ''}`}
+            style={{ y: yTitle }}
+          >
             Entra a far parte della <br />
             <span className="accent">Community</span>
-          </h2>
+          </motion.h2>
 
           <div className={`floating-cards ${step >= 1 ? 'cards-flying-out' : ''}`}>
             <div className="glass-card card-left">

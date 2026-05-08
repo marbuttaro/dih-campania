@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import './Projects.css';
 
 const projectCards = [
@@ -8,13 +9,20 @@ const projectCards = [
 ];
 
 const Projects = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+
   return (
-    <section className="projects-section" id="progetti">
+    <section className="projects-section" id="progetti" ref={ref}>
       <div className="container">
         
         {/* Projects Grid */}
         <div className="projects-header">
-          <h2 className="projects-title">Progetti</h2>
+          <motion.h2 className="projects-title" style={{ y }}>Progetti</motion.h2>
         </div>
 
         <div className="projects-grid">

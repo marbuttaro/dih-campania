@@ -1,7 +1,11 @@
 import React from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import './Hero.css';
 
 const Hero = () => {
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, 150]);
+
   return (
     <section className="hero-section">
       <div className="hero-background">
@@ -10,7 +14,7 @@ const Hero = () => {
       </div>
       
       <div className="hero-content container">
-        <div className="hero-text-content">
+        <motion.div className="hero-text-content" style={{ y }}>
           <h1 className="hero-title">
             Il punto di riferimento per<br />
             <span className="hero-title-highlight">la trasformazione digitale.</span>
@@ -21,7 +25,7 @@ const Hero = () => {
           <a href="#scopri" className="btn-outline">
             Scopri di più
           </a>
-        </div>
+        </motion.div>
       </div>
 
       <div className="hero-ticker">

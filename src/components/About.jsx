@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import './About.css';
 
 const About = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+
   return (
-    <section className="about-section" id="chisiamo">
+    <section className="about-section" id="chisiamo" ref={ref}>
       <div className="container">
         
         <div className="about-top">
-          <div className="about-title-box">
+          <motion.div className="about-title-box" style={{ y }}>
             <h2 className="about-title">
               Un facilitatore tra il<br />mondo produttivo<br />e le istituzioni
             </h2>
-          </div>
+          </motion.div>
           <div className="about-intro">
             <p>
               <span className="text-highlight">Il Campania Digital Hub</span> agisce come facilitatore tra il mondo produttivo, la ricerca, le startup e le istituzioni, 
