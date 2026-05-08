@@ -5,21 +5,26 @@ const Community = () => {
   const [step, setStep] = useState(0);
 
   const nextStep = () => {
-    setStep((prev) => (prev + 1) % 3);
+    // Only increment if we are not at the final step
+    if (step < 2) {
+      setStep(step + 1);
+    } else {
+      setStep(0); // Optional: restart or stop
+    }
   };
 
   return (
     <section className="community-section" id="community" onClick={nextStep}>
       <div className="community-container container">
         
-        {/* Step 0: Floating Cards */}
-        {step === 0 && (
-          <div className="community-step step-0">
+        {/* Step 0 & 1: Cards and BG Title */}
+        {step < 2 && (
+          <div className={`community-step step-anim-${step}`}>
             <h2 className="community-bg-title">
               Entra a far parte della <br />
               <span className="accent">Community</span>
             </h2>
-            <div className="floating-cards">
+            <div className={`floating-cards ${step === 1 ? 'cards-flying-out' : ''}`}>
               <div className="glass-card card-left">
                 <p>Offri <strong>soluzioni innovative</strong> e vuoi metterle al servizio delle imprese?</p>
               </div>
@@ -30,19 +35,9 @@ const Community = () => {
           </div>
         )}
 
-        {/* Step 1: Specific Title */}
-        {step === 1 && (
-          <div className="community-step step-1">
-            <h2 className="community-main-title">
-              Entra a far parte della <br />
-              <span className="accent-blue">Community INNOVA.CO</span>
-            </h2>
-          </div>
-        )}
-
-        {/* Step 2: Description & CTA */}
+        {/* Step 2: Final Description & CTA */}
         {step === 2 && (
-          <div className="community-step step-2">
+          <div className="community-step step-final">
             <p className="community-description">
               Uno spazio aperto dove imprese, professionisti, startup ed<br />
               enti si incontrano per crescere insieme, scambiarsi competenze<br />
@@ -54,12 +49,13 @@ const Community = () => {
           </div>
         )}
 
-        {/* Progress Bar (barra.svg) */}
+        {/* Progress Bar (Using barra 1, 2, 3) */}
         <div className="community-progress-wrapper">
-          <div className="progress-track">
-            <img src="/assets/barra.svg" alt="progress track" className="progress-svg" />
-            <div className={`progress-thumb step-${step}`}></div>
-          </div>
+          <img 
+            src={`/assets/barra${step + 1}.svg`} 
+            alt={`progress step ${step + 1}`} 
+            className="progress-svg-fixed" 
+          />
         </div>
       </div>
     </section>
