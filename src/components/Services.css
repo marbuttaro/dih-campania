@@ -89,52 +89,54 @@
   background-size: cover;
   background-position: center;
   border-radius: 24px;
-  padding: 40px; /* Reduced padding */
+  padding: 48px 40px;
   color: var(--color-white);
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
   overflow: hidden;
 }
 
 .service-id-large {
   font-family: 'Montserrat', sans-serif;
-  font-size: 77px;
-  font-weight: 400; /* Regular */
+  font-size: 80px;
+  font-weight: 400;
   line-height: 1;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
+  color: var(--color-white);
 }
 
 .service-card-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: 25px;
-  font-weight: 600; /* Semibold */
-  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 24px;
   color: var(--color-white);
 }
 
 .service-card-desc {
   font-family: 'Montserrat', sans-serif;
   font-size: 18px;
-  font-weight: 400; /* Regular */
-  line-height: 1.4;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 30px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 40px;
 }
 
 .btn-service-action {
   margin-top: auto;
   align-self: flex-start;
-  background: rgba(255, 255, 255, 0.09) !important;
-  border: 1.14px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
-  color: var(--color-white) !important; /* White for better default readability */
-  padding: 8px 21px;
-  border-radius: 8.6px;
+  color: var(--color-white) !important;
+  padding: 10px 24px;
+  border-radius: 10px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
-  font-size: 16px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 18px;
   transition: all 0.3s ease;
   text-decoration: none;
 }
