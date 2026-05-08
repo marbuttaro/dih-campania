@@ -1,10 +1,11 @@
 .services-section {
-  padding: 100px 0;
+  padding: 80px 0; /* Reduced height as requested */
   position: relative;
   overflow: hidden;
   background-image: url('/assets/sfondo_servizi.png');
   background-size: cover;
   background-position: center;
+  min-height: auto;
 }
 
 .services-main-title {
@@ -14,20 +15,21 @@
   margin-bottom: 40px;
 }
 
+/* Tabs Navigation */
 .services-nav {
   display: flex;
-  gap: 30px;
-  margin-bottom: 50px;
+  gap: 50px; /* Increased spacing between tabs */
+  margin-bottom: 40px;
   flex-wrap: wrap;
 }
 
 .service-nav-item {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px; /* More spacing */
   cursor: pointer;
   transition: opacity 0.3s ease;
-  opacity: 0.3;
+  opacity: 0.35;
 }
 
 .service-nav-item.active {
@@ -35,16 +37,16 @@
 }
 
 .nav-circle {
-  width: 44px;
-  height: 44px;
+  width: 54px; /* Larger numbers */
+  height: 54px;
   border-radius: 50%;
   border: 1px solid rgba(142, 190, 247, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.9rem;
+  font-size: 1.2rem; /* Larger font */
   color: #8EBEF7;
-  font-weight: 500;
+  font-weight: 600;
   transition: all 0.3s ease;
   background: rgba(142, 190, 247, 0.1);
 }
@@ -56,7 +58,7 @@
 }
 
 .nav-label {
-  font-size: 1.1rem;
+  font-size: 1.3rem; /* Larger label */
   font-weight: 400;
   color: #8EBEF7;
 }
@@ -64,70 +66,75 @@
 /* Main Display Layout */
 .service-display {
   display: flex;
-  gap: 20px;
-  min-height: 550px;
+  gap: 24px;
+  min-height: 500px; /* Reduced overall height */
+  align-items: stretch;
 }
 
+/* Left Card - Text Content */
 .service-card-left {
-  flex: 1;
-  background: linear-gradient(135deg, rgba(1, 49, 103, 0.9) 0%, rgba(0, 25, 51, 0.95) 100%);
-  backdrop-filter: blur(10px);
-  border-radius: 24px;
-  padding: 60px 50px;
+  flex: 0 0 37%; /* Width reduced to 35-38% */
+  background-image: url('/assets/sfondo_card_servizi.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 30px;
+  padding: 40px; /* Reduced internal padding */
   color: var(--color-white);
   display: flex;
   flex-direction: column;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
 }
 
 .service-id-large {
-  font-size: 5rem;
+  font-size: 6rem; /* Increased size to 6rem */
   font-weight: 300;
   line-height: 1;
-  margin-bottom: 20px;
-  opacity: 0.8;
+  margin-bottom: 15px;
+  opacity: 0.9;
 }
 
 .service-card-title {
-  font-size: 2.2rem;
-  font-weight: 600;
-  margin-bottom: 24px;
+  font-size: 2.4rem;
+  font-weight: 700; /* Increased font-weight */
+  margin-bottom: 20px;
   color: var(--color-white);
+  line-height: 1.2;
 }
 
 .service-card-desc {
-  font-size: 1.05rem;
+  font-size: 1.15rem; /* Slightly larger description */
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 40px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 30px;
 }
 
 .btn-service-action {
   margin-top: auto;
   align-self: flex-start;
-  background: rgba(255, 255, 255, 0.09);
-  border: 1.14px solid rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(10px);
-  color: var(--color-white);
-  padding: 12px 30px;
-  border-radius: 8.6px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  background: transparent; /* Transparent bg */
+  border: 2px solid var(--color-white); /* White border */
+  color: var(--color-white); /* White text */
+  padding: 14px 40px; /* Generous padding */
+  border-radius: 12px;
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .btn-service-action:hover {
-  background: #8EBEF7;
+  background: var(--color-white);
   color: var(--color-dark-navy);
 }
 
+/* Right Card - Image Content */
 .service-card-right {
-  flex: 1.5;
+  flex: 0 0 63%; /* Width increased to 62-65% */
   position: relative;
-  border-radius: 24px;
+  border-radius: 30px;
   overflow: hidden;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
@@ -135,7 +142,7 @@
 .service-main-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Fill all card without padding */
   display: block;
 }
 
@@ -143,13 +150,13 @@
   position: absolute;
   bottom: 30px;
   right: 30px;
-  left: 30px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 25, 51, 0.5); /* Semi-transparent background */
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
+  border-radius: 20px; /* Rounded radius */
   padding: 24px 30px;
   color: var(--color-white);
+  max-width: 400px;
 }
 
 .areas-box-title {
@@ -159,29 +166,41 @@
 }
 
 .areas-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .area-tag {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent; /* Transparent background */
+  border: 1px solid rgba(255, 255, 255, 0.8); /* White thin border */
+  color: var(--color-white);
   padding: 6px 14px;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 0.85rem;
-  display: inline-block;
+}
+
+@media (max-width: 1200px) {
+  .service-card-left {
+    flex: 0 0 45%;
+  }
+  .service-card-right {
+    flex: 0 0 55%;
+  }
 }
 
 @media (max-width: 992px) {
   .services-section {
-    margin: 0;
-    border-radius: 0;
+    padding: 60px 0;
   }
   .service-display {
     flex-direction: column;
   }
+  .service-card-left, .service-card-right {
+    flex: 1 1 auto;
+    width: 100%;
+  }
   .service-card-right {
-    min-height: 400px;
+    min-height: 350px;
   }
 }
