@@ -139,11 +139,13 @@
 
 .community-description {
   font-family: 'Montserrat', sans-serif;
-  font-size: 24px; /* Slightly reduced */
+  font-size: 24px;
   color: #001933;
   line-height: 1.5;
-  margin-bottom: 40px; /* Reduced padding to keep layout stable */
-  max-width: 850px;
+  margin-bottom: 40px;
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
 }
 
 .btn-community-discovery {
