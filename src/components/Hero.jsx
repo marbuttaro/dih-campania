@@ -1,20 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import BlurText from './BlurText';
+import Threads from './Threads';
 import './Hero.css';
 
 const Hero = () => {
   return (
     <section className="hero-section">
       <div className="hero-background">
-        <video 
-          src="/assets/hero-bg.mov" 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
-          className="hero-bg-video"
-        ></video>
+        <Threads
+          color={[0.12, 0.45, 0.78]}
+          amplitude={1.2}
+          distance={0.3}
+          enableMouseInteraction={true}
+        />
         <div className="hero-overlay"></div>
       </div>
       
