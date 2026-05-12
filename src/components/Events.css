@@ -105,27 +105,23 @@
 }
 
 .btn-leggi {
-  background: #E3EAEC;
+  background: rgba(227, 234, 236, 0.3);
   color: #001933;
-  padding: 12px 30px;
+  padding: 14px 36px;
   border-radius: 12px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
-  font-size: 22px; /* Large text like in screenshot */
+  font-size: 18px;
   text-decoration: none;
-  /* Neomorphic / Glow effect */
-  box-shadow: 
-    6px 6px 12px rgba(0, 0, 0, 0.1), 
-    -6px -6px 12px rgba(255, 255, 255, 0.8),
-    inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  display: inline-block;
   transition: all 0.3s ease;
 }
 
 .btn-leggi:hover {
   transform: translateY(-2px);
-  box-shadow: 
-    8px 8px 16px rgba(0, 0, 0, 0.12), 
-    -8px -8px 16px rgba(255, 255, 255, 1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 992px) {

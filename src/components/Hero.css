@@ -79,29 +79,24 @@
 
 .btn-outline {
   display: inline-block;
-  padding: 8px 21px;
-  background-color: rgba(227, 234, 236, 0.2) !important; /* #E3EAEC with 20% opacity */
+  background: rgba(255, 255, 255, 0.09) !important;
+  border: 1.14px solid rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(10px);
-  color: #001933 !important; /* Solid dark navy text */
-  opacity: 1 !important;
+  color: var(--color-white) !important;
+  padding: 8px 21px;
+  border-radius: 8.6px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
-  font-size: 26px;
-  border-radius: 8.6px;
-  border: 1.14px solid transparent;
-  background-image: linear-gradient(rgba(227, 234, 236, 0.2), rgba(227, 234, 236, 0.2)), 
-                    linear-gradient(to bottom, #FFFFFF 0%, rgba(255, 255, 255, 0) 50%, #FFFDFD 100%);
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
+  font-size: 16px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   transition: all 0.3s ease;
   text-decoration: none;
-  line-height: 1.2;
 }
 
 .btn-outline:hover {
-  background: var(--color-white);
-  color: var(--color-dark-navy);
+  background: #8EBEF7 !important;
+  color: #001933 !important;
+  transform: translateY(-2px);
 }
 
 /* Ticker */
