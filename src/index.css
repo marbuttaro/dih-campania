@@ -1,68 +1,130 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
-:root {
-  --color-light-blue: #8EBEF7;
-  --color-dark-navy: #001933;
-  --color-navy: #013167;
-  --color-grey-blue: #DEEAEE;
-  --color-pale-blue: #CDE4FF;
-  --color-white: #FFFFFF;
-  --color-text: #333333;
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
-  --font-main: 'Montserrat', sans-serif;
-  
-  --spacing-section: 80px;
-  --max-width: 1280px;
-  --br-btn: 8px;
+@custom-variant dark (&:is(.dark *));
+
+/* -------------------------------------------------------------------------- */
+/* Design tokens — Campania DIH                                               */
+/* -------------------------------------------------------------------------- */
+
+@theme {
+  --font-sans: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand palette */
+  --color-brand-dark-navy: #001933;
+  --color-brand-navy: #013167;
+  --color-brand-light-blue: #8ebef7;
+  --color-brand-grey-blue: #deeaee;
+  --color-brand-pale-blue: #cde4ff;
+  --color-brand-ice: #e3eaec;
+  --color-brand-surface: #f0f4f8;
+
+  /* shadcn-style tokens (light theme) */
+  --color-background: oklch(1 0 0);
+  --color-foreground: #001933;
+
+  --color-card: #ffffff;
+  --color-card-foreground: #001933;
+
+  --color-popover: #ffffff;
+  --color-popover-foreground: #001933;
+
+  --color-primary: #013167;
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: #deeaee;
+  --color-secondary-foreground: #001933;
+
+  --color-muted: #f0f4f8;
+  --color-muted-foreground: #4a5a6a;
+
+  --color-accent: #8ebef7;
+  --color-accent-foreground: #001933;
+
+  --color-destructive: oklch(0.577 0.245 27.325);
+  --color-destructive-foreground: #ffffff;
+
+  --color-border: rgb(1 49 103 / 0.18);
+  --color-input: rgb(1 49 103 / 0.18);
+  --color-ring: #8ebef7;
+
+  --radius: 0.75rem;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* -------------------------------------------------------------------------- */
+/* Base layer                                                                  */
+/* -------------------------------------------------------------------------- */
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background-image: url('/assets/background_page.png');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-brand-dark-navy font-semibold leading-tight;
+  }
+
+  img {
+    @apply max-w-full h-auto block;
+  }
 }
 
-body {
-  font-family: var(--font-main);
-  background-image: url('/assets/background_page.png');
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  color: var(--color-text);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+/* -------------------------------------------------------------------------- */
+/* Component utilities reused across sections                                  */
+/* -------------------------------------------------------------------------- */
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-[1280px] px-5 sm:px-6 lg:px-8;
+  }
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+/* -------------------------------------------------------------------------- */
+/* Keyframes                                                                   */
+/* -------------------------------------------------------------------------- */
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-ul {
-  list-style: none;
+@keyframes star-movement-bottom {
+  0% { transform: translate(0%, 0%); opacity: 1; }
+  100% { transform: translate(-100%, 0%); opacity: 0; }
 }
 
-.container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 24px;
+@keyframes star-movement-top {
+  0% { transform: translate(0%, 0%); opacity: 1; }
+  100% { transform: translate(100%, 0%); opacity: 0; }
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+.animate-ticker {
+  animation: ticker 40s linear infinite;
 }
 
-/* Typography Utility */
-h1, h2, h3, h4, h5, h6 {
-  color: var(--color-dark-navy);
-  font-weight: 600;
-  line-height: 1.2;
+.animate-star-bottom {
+  animation: star-movement-bottom 6s linear infinite alternate;
 }
 
-.text-center {
-  text-align: center;
+.animate-star-top {
+  animation: star-movement-top 6s linear infinite alternate;
 }
