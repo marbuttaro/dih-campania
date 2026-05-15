@@ -21,7 +21,7 @@ export function Hero() {
 
       <div className="container-page relative z-10 w-full">
         <div className="max-w-[850px]">
-          <h1 className="mb-6 text-4xl sm:text-5xl lg:text-[3.5rem] font-medium text-white leading-[1.1]">
+          <h1 className="mb-6 text-[32px] sm:text-5xl lg:text-[3.5rem] font-medium text-white leading-[1.1]">
             <BlurText
               text="Il punto di riferimento per"
               delay={150}
@@ -53,7 +53,7 @@ export function Hero() {
             </p>
             <a
               href="#scopri"
-              className="inline-block px-6 py-2.5 rounded-[8.6px] bg-white/[0.09] border border-white/40 backdrop-blur-md text-white font-semibold text-base shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-brand-light-blue hover:text-brand-dark-navy hover:-translate-y-0.5"
+              className="btn-outline"
             >
               Scopri di più
             </a>

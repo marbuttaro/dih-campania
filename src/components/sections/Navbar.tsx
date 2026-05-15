@@ -66,7 +66,7 @@ export function Navbar() {
         <div className="hidden lg:flex">
           <Button
             asChild
-            className="bg-[#E3EAEC] text-brand-dark-navy hover:bg-white hover:translate-y-0 px-6 rounded-xl"
+            className="bg-[#8EBEF7] text-[#013167] hover:bg-white hover:translate-y-0 px-6 rounded-xl font-bold"
           >
             <a href="#contatti">Contattaci</a>
           </Button>
@@ -107,7 +107,7 @@ export function Navbar() {
             <SheetClose asChild>
               <Button
                 asChild
-                className="mt-6 w-full bg-[#E3EAEC] text-brand-dark-navy hover:bg-white"
+                className="mt-6 w-full bg-[#8EBEF7] text-[#013167] hover:bg-white font-bold"
               >
                 <a href="#contatti">Contattaci</a>
               </Button>

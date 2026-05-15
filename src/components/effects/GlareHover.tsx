@@ -87,17 +87,15 @@ export function GlareHover({
             var(--gh-rgba) 50%,
             rgba(255, 255, 255, 0) 100%
           );
-          transition: var(--gh-duration) ease, opacity var(--gh-duration) ease;
+          transition: var(--gh-duration) ease;
           background-size: var(--gh-size) var(--gh-size);
           background-repeat: no-repeat;
           background-position: -150% -150%;
           z-index: 5;
           pointer-events: none;
-          opacity: 0;
         }
         .glare-hover:hover::before {
           background-position: 150% 150%;
-          opacity: 1;
         }
         .glare-hover-once::before {
           transition: none;
