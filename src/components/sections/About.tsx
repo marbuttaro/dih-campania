@@ -1,13 +1,14 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import { Scissors, Factory, Wheat, HeartPulse, Truck, Palette, type LucideIcon } from 'lucide-react'
 
-const SECTORS = [
-  'Moda, artigianato e design',
-  'Industria/manifattura & mobilità',
-  'Agro-alimentare e filiere localizzate',
-  'Salute, servizi alla persona',
-  'Trasporto, logistica e infrastrutture smart',
-  'Turismo, cultura e creatività',
+const SECTORS: { label: string; icon: LucideIcon }[] = [
+  { label: 'Moda, artigianato e design', icon: Scissors },
+  { label: 'Industria/manifattura & mobilità', icon: Factory },
+  { label: 'Agro-alimentare e filiere localizzate', icon: Wheat },
+  { label: 'Salute, servizi alla persona', icon: HeartPulse },
+  { label: 'Trasporto, logistica e infrastrutture smart', icon: Truck },
+  { label: 'Turismo, cultura e creatività', icon: Palette },
 ]
 
 export function About() {
@@ -86,14 +87,18 @@ export function About() {
             </p>
           </div>
           <div className="basis-full lg:basis-[60%] grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {SECTORS.map((sector) => (
-              <div
-                key={sector}
-                className="px-9 py-3.5 border-2 border-brand-light-blue/30 rounded-xl text-sm font-medium text-brand-dark-navy bg-white/40 flex items-center justify-center text-center transition-all cursor-pointer hover:border-brand-light-blue hover:bg-white/80"
-              >
-                {sector}
-              </div>
-            ))}
+            {SECTORS.map((sector) => {
+              const Icon = sector.icon
+              return (
+                <div
+                  key={sector.label}
+                  className="px-6 py-3.5 border-2 border-brand-light-blue/30 rounded-xl text-sm font-medium text-brand-dark-navy bg-white/40 flex items-center gap-3 text-left transition-all cursor-pointer hover:border-brand-light-blue hover:bg-white/80"
+                >
+                  <Icon className="size-5 text-brand-light-blue shrink-0" strokeWidth={1.8} />
+                  {sector.label}
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>
