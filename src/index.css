@@ -182,3 +182,21 @@
 .reveal-delay-100 { transition-delay: 150ms; }
 .reveal-delay-200 { transition-delay: 300ms; }
 .reveal-delay-300 { transition-delay: 450ms; }
+
+/* -------------------------------------------------------------------------- */
+/* Glass Stroke Effects                                                       */
+/* -------------------------------------------------------------------------- */
+
+.glass-stroke-container {
+  border: 1px solid transparent;
+  background: 
+    linear-gradient(rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.13)) padding-box,
+    linear-gradient(30deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%) border-box;
+}
+
+.glass-stroke-input {
+  border: 1px solid transparent;
+  background: 
+    linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)) padding-box,
+    linear-gradient(30deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%) border-box;
+}

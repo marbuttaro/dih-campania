@@ -176,7 +176,7 @@ export function DigitalTransformationPage() {
         {/* 5. Custom Assessment Form Section (Full Width Background) */}
         <div className="w-full relative bg-cover bg-center py-20 reveal-element" style={{ backgroundImage: "url('/assets/sfondo_form.png')" }}>
           <div className="container-page relative z-10">
-            <div className="max-w-[760px] mx-auto rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/10 relative overflow-hidden bg-brand-dark-navy/60 backdrop-blur-lg">
+            <div className="max-w-[760px] mx-auto rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container">
               
               {/* Ambient inner glow */}
               <div className="absolute -top-40 -right-40 size-80 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
@@ -210,7 +210,7 @@ export function DigitalTransformationPage() {
                         required
                         value={formData.lastName}
                         onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                        className="w-full bg-white/[0.05] border border-white/20 rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm"
+                        className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm"
                       />
                     </div>
                     <div className="flex flex-col">
@@ -220,7 +220,7 @@ export function DigitalTransformationPage() {
                         required
                         value={formData.firstName}
                         onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                        className="w-full bg-white/[0.05] border border-white/20 rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm"
+                        className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm"
                       />
                     </div>
                   </div>
@@ -232,7 +232,7 @@ export function DigitalTransformationPage() {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-white/[0.05] border border-white/20 rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm"
+                      className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm"
                     />
                   </div>
 
@@ -243,7 +243,7 @@ export function DigitalTransformationPage() {
                       required
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full bg-white/[0.05] border border-white/20 rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm"
+                      className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm"
                     />
                   </div>
 
@@ -254,7 +254,7 @@ export function DigitalTransformationPage() {
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full bg-white/[0.05] border border-white/20 rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm resize-none"
+                      className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm resize-none"
                     />
                   </div>
 
