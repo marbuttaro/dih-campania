@@ -41,7 +41,7 @@ export function Navbar() {
     >
       <div
         className={cn(
-          'flex items-center justify-between w-full max-w-[1280px] rounded-[21px] transition-all duration-400 pl-6 pr-3 sm:pl-8 sm:pr-4 lg:pl-8 lg:pr-6 py-2.5',
+          'flex items-center justify-between w-full max-w-[1280px] rounded-[21px] transition-all duration-400 pl-10 pr-10 sm:pl-8 sm:pr-8 lg:pl-8 lg:pr-6 py-2.5',
           scrolled
             ? 'bg-brand-dark-navy/60 backdrop-blur-[15px] border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.2)]'
             : 'bg-[linear-gradient(90deg,#001933_0%,#002D5C_100%)] shadow-[0_10px_30px_rgba(0,0,0,0.15)]',

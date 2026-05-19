@@ -12,13 +12,7 @@ export function Experience() {
   return (
     <section id="esperienza" ref={ref} className="relative py-16">
       <div className="container-page flex justify-center">
-        <div
-          className="w-full max-w-[1200px] rounded-[40px] py-12 sm:py-16 lg:py-[90px] px-6 sm:px-12 lg:px-[110px] bg-no-repeat"
-          style={{
-            backgroundImage: "url('/assets/rettangolo_sfondo.svg')",
-            backgroundSize: '100% 100%',
-          }}
-        >
+        <div className="w-full max-w-[1200px] shadow-box">
           <motion.h2
             className="font-light text-3xl sm:text-4xl lg:text-[44px] text-brand-navy leading-tight mb-6 lg:mb-7"
             style={{ y }}

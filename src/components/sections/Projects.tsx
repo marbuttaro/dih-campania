@@ -32,13 +32,13 @@ export function Projects() {
         </div>
 
         <div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 px-6 sm:px-0"
           style={{ perspective: 1000 }}
         >
           {PROJECT_CARDS.map((card, index) => (
             <div
               key={index}
-              className="h-[520px] group"
+              className="w-full aspect-[3/4] sm:h-[520px] sm:aspect-auto group"
               style={{ perspective: 1000 }}
             >
               <div

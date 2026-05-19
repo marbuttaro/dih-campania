@@ -44,7 +44,7 @@ export function Events() {
           {EVENTS.map((event, index) => (
             <article
               key={index}
-              className="bg-white rounded-[28px] overflow-hidden shadow-[0_15px_40px_rgba(0,25,51,0.08)] flex flex-col w-full max-w-[380px] min-h-[520px] mx-auto transition-transform duration-300 hover:-translate-y-2"
+              className="bg-white rounded-[28px] overflow-hidden shadow-neumorphic flex flex-col w-full max-w-[380px] min-h-[520px] mx-auto transition-transform duration-300 hover:-translate-y-2"
             >
               <div className="relative h-[280px] overflow-hidden">
                 <img
@@ -64,7 +64,7 @@ export function Events() {
                 <div className="flex justify-end">
                   <a
                     href={event.link}
-                    className="bg-brand-ice/30 text-brand-dark-navy px-8 py-3 rounded-xl font-semibold text-base sm:text-lg shadow-[0_4px_15px_rgba(0,0,0,0.05)] inline-block transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)]"
+                    className="bg-[#E3EAEC]/50 border border-white/50 text-brand-dark-navy px-8 py-3 rounded-xl font-semibold text-base sm:text-lg shadow-neumorphic inline-block transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#E3EAEC]/70"
                   >
                     Leggi
                   </a>

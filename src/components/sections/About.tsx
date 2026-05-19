@@ -16,7 +16,12 @@ export function About() {
     target: ref,
     offset: ['start end', 'end start'],
   })
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100])
+  const y = useTransform(scrollYProgress, (value) => {
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+      return 0
+    }
+    return 100 - value * 200
+  })
 
   return (
     <section
@@ -47,12 +52,12 @@ export function About() {
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 mb-20 lg:mb-28">
-          <div className="basis-full lg:basis-[40%] bg-white/70 backdrop-blur-xl p-8 sm:p-10 rounded-[30px] shadow-[0_15px_40px_rgba(0,25,51,0.05)] border border-white/80 flex flex-col justify-center">
-            <h3 className="text-2xl lg:text-[1.6rem] text-brand-dark-navy mb-6 font-medium leading-tight">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 mb-20 lg:mb-28 items-center lg:items-stretch">
+          <div className="basis-full lg:basis-[40%] flex flex-col justify-center shadow-box">
+            <h3 className="text-[28px] lg:text-[30px] text-brand-dark-navy mb-6 font-semibold leading-tight">
               Cosa può fare DIH Campania per le imprese?
             </h3>
-            <p className="text-base text-neutral-600 leading-relaxed">
+            <p className="text-[18px] lg:text-[20px] text-neutral-600 leading-snug font-light">
               Il Campania DIH supporta le aziende in{' '}
               <strong className="text-brand-dark-navy font-semibold">
                 tutte le fasi del percorso di trasformazione digitale
@@ -61,7 +66,7 @@ export function About() {
               all'accesso a incentivi e opportunità di finanziamento.
             </p>
           </div>
-          <div className="basis-full lg:basis-[60%] rounded-[30px] overflow-hidden shadow-[0_15px_40px_rgba(0,25,51,0.1)] flex">
+          <div className="basis-full lg:basis-[60%] h-[400px] rounded-[30px] overflow-hidden shadow-[0_15px_40px_rgba(0,25,51,0.1)] flex">
             <img
               src="/assets/foto_1.png"
               alt="Digital hub working"
@@ -84,7 +89,7 @@ export function About() {
             {SECTORS.map((sector) => (
               <div
                 key={sector}
-                className="px-5 py-3.5 border-2 border-brand-light-blue/30 rounded-xl text-sm font-medium text-brand-dark-navy bg-white/40 flex items-center justify-center text-center transition-all cursor-pointer hover:border-brand-light-blue hover:bg-white/80"
+                className="px-9 py-3.5 border-2 border-brand-light-blue/30 rounded-xl text-sm font-medium text-brand-dark-navy bg-white/40 flex items-center justify-center text-center transition-all cursor-pointer hover:border-brand-light-blue hover:bg-white/80"
               >
                 {sector}
               </div>

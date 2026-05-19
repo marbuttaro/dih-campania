@@ -45,8 +45,18 @@ export function Services() {
     target: ref,
     offset: ['start end', 'end start'],
   })
-  const yTitle = useTransform(scrollYProgress, [0, 1], [80, -80])
-  const yNav = useTransform(scrollYProgress, [0, 1], [50, -50])
+  const yTitle = useTransform(scrollYProgress, (value) => {
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+      return 0
+    }
+    return 80 - value * 160
+  })
+  const yNav = useTransform(scrollYProgress, (value) => {
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+      return 0
+    }
+    return 50 - value * 100
+  })
 
   const active = SERVICES[activeTab]
 
@@ -58,45 +68,44 @@ export function Services() {
     >
       <div
         aria-hidden
-        className="absolute top-0 left-0 w-full h-[85%] z-0 bg-cover bg-center"
+        className="absolute top-0 left-0 w-full h-full z-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/assets/sfondo_servizi.png')" }}
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1280px] px-5 sm:px-6 lg:px-10">
+
+      <div className="container-page relative z-10">
         <motion.h2
-          className="text-3xl sm:text-4xl lg:text-[2.5rem] text-white font-light mb-5"
+          className="text-4xl sm:text-4xl lg:text-[2.5rem] text-white font-light mb-12 sm:mb-5"
           style={{ y: yTitle }}
         >
           I nostri servizi
         </motion.h2>
 
         <motion.div
-          className="mb-10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-2 overflow-x-auto sm:overflow-visible -mx-5 px-5 sm:mx-0 sm:px-0"
+          className="mb-10 flex justify-center sm:block"
           style={{ y: yNav }}
         >
-          <div className="flex sm:flex-1 sm:justify-between gap-4 sm:gap-2 min-w-max sm:min-w-0">
+          <div className="grid grid-cols-2 sm:flex sm:flex-1 sm:justify-between gap-y-6 gap-x-4 sm:gap-2">
             {SERVICES.map((service, index) => (
               <button
                 key={service.id}
                 type="button"
                 onClick={() => setActiveTab(index)}
                 className={cn(
-                  'flex items-center gap-3 cursor-pointer transition-opacity duration-300',
+                  'flex items-center gap-2 sm:gap-3 cursor-pointer transition-opacity duration-300',
                   activeTab === index ? 'opacity-100' : 'opacity-40 hover:opacity-70',
                 )}
               >
-                <div className="size-12 rounded-full bg-white/10 border border-brand-light-blue/30 flex items-center justify-center text-lg text-brand-light-blue shrink-0">
+                <div className="size-10 lg:size-12 rounded-full bg-white/10 border border-brand-light-blue/30 flex items-center justify-center text-base lg:text-lg text-brand-light-blue shrink-0">
                   {service.id}
                 </div>
-                <span className="text-base lg:text-xl font-medium text-brand-light-blue whitespace-nowrap">
+                <span className="text-sm lg:text-xl font-medium text-brand-light-blue whitespace-nowrap">
                   {service.title}
                 </span>
               </button>
             ))}
           </div>
-        </motion.div>
-
-        <div className="flex flex-col xl:flex-row gap-6 xl:h-[520px]">
+        </motion.div>        <div className="flex flex-col xl:flex-row gap-6 xl:h-[520px]">
           <GlareHover
             className="basis-full xl:basis-[36%] xl:h-full"
             borderRadius="24px"
@@ -116,20 +125,29 @@ export function Services() {
               <p className="text-base sm:text-lg font-normal leading-snug text-white/90 mb-7">
                 {active.desc}
               </p>
-              <button
-                type="button"
-                className="mt-auto self-start px-5 py-2 rounded-[8.6px] bg-white/[0.09] border border-white/40 backdrop-blur-md text-white font-semibold shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-brand-light-blue hover:text-brand-dark-navy hover:-translate-y-0.5"
-              >
-                Scopri di più
-              </button>
+              {activeTab === 0 ? (
+                <a
+                  href="/trasformazione-digitale.html"
+                  className="mt-auto self-start px-5 py-2.5 rounded-[8.6px] bg-white/[0.09] border border-white/40 backdrop-blur-md text-white font-semibold shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-brand-light-blue hover:text-brand-dark-navy hover:-translate-y-0.5 inline-block text-center"
+                >
+                  Scopri di più
+                </a>
+              ) : (
+                <button
+                  type="button"
+                  className="mt-auto self-start px-5 py-2.5 rounded-[8.6px] bg-white/[0.09] border border-white/40 backdrop-blur-md text-white font-semibold shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-brand-light-blue hover:text-brand-dark-navy hover:-translate-y-0.5"
+                >
+                  Scopri di più
+                </button>
+              )}
             </div>
           </GlareHover>
 
-          <div className="relative basis-full xl:basis-[64%] xl:h-full rounded-[24px] overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.3)] min-h-[400px]">
+          <div className="relative basis-full xl:basis-[64%] xl:h-full rounded-[24px] overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.3)] min-h-[400px] bg-brand-dark-navy/20 flex items-center justify-center">
             <img
               src={active.image}
               alt={active.title}
-              className="w-full h-full object-cover block"
+              className="w-full h-full object-contain sm:object-cover block"
             />
             <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-[20px] p-5 sm:p-6 text-white max-w-[calc(100%-2rem)] sm:max-w-[480px]">
               <h4 className="text-base sm:text-lg font-semibold mb-3 text-brand-grey-blue">

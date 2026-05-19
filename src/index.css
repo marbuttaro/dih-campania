@@ -94,25 +94,31 @@
 
 @layer components {
   .container-page {
-    @apply mx-auto w-full max-w-[1280px] px-5 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-[1280px] px-10 sm:px-12 lg:px-14;
+  }
+
+  .shadow-box {
+    background-color: rgba(227, 234, 236, 0.3);
+    border-radius: 20px;
+    padding: 36px;
+    box-shadow: -7px -7px 18px rgba(255, 255, 255, 1), 12px 12px 42px #A4B1BC;
+  }
+
+  .shadow-neumorphic {
+    box-shadow: -7px -7px 18px rgba(255, 255, 255, 1), 12px 12px 42px #A4B1BC;
   }
 
   .btn-outline {
     display: inline-block;
-    padding: 8px 21px;
-    background-color: rgba(227, 234, 236, 0.2) !important;
-    backdrop-filter: blur(10px);
-    color: #001933 !important;
-    opacity: 1 !important;
+    padding: 10px 24px;
+    background-color: rgba(255, 255, 255, 0.09) !important;
+    backdrop-filter: blur(12px);
+    color: #ffffff !important;
     font-family: var(--font-sans);
     font-weight: 600;
-    font-size: 26px;
+    font-size: 18px;
     border-radius: 8.6px;
-    border: 1.14px solid transparent;
-    background-image: linear-gradient(rgba(227, 234, 236, 0.2), rgba(227, 234, 236, 0.2)), 
-                      linear-gradient(to bottom, #FFFFFF 0%, rgba(255, 255, 255, 0) 50%, #FFFDFD 100%);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
+    border: 1px solid rgba(255, 255, 255, 0.4);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     transition: all 0.3s ease;
     text-decoration: none;
@@ -120,7 +126,7 @@
   }
 
   .btn-outline:hover {
-    background: #ffffff !important;
+    background: var(--color-brand-light-blue) !important;
     color: var(--color-brand-dark-navy) !important;
     transform: translateY(-2px);
   }
