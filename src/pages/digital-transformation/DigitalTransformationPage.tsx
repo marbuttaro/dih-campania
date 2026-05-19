@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
 
@@ -12,6 +12,28 @@ export function DigitalTransformationPage() {
   })
 
   const [submitted, setSubmitted] = useState(false)
+
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15,
+    };
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    const elements = document.querySelectorAll('.reveal-element');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -48,7 +70,7 @@ export function DigitalTransformationPage() {
           {/* 1. Hero Section Content: Two Columns */}
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center mb-24">
             {/* Left Column: Text & Metrics */}
-            <div className="flex-[1.1] text-left">
+            <div className="flex-[1.1] text-left reveal-element">
               <h1 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-light text-brand-dark-navy leading-[1.2] mb-6 tracking-tight">
                 Accompagnare la<br />
                 trasformazione digitale<br />
@@ -71,7 +93,7 @@ export function DigitalTransformationPage() {
             </div>
 
             {/* Right Column: Hero Graphic/Image with vertical aspect ratio */}
-            <div className="flex-1 w-full flex justify-center lg:justify-end">
+            <div className="flex-1 w-full flex justify-center lg:justify-end reveal-element reveal-delay-200">
               <div className="relative rounded-[20px] overflow-hidden shadow-box max-w-[420px] w-full aspect-[4/5] bg-brand-dark-navy/10" style={{ padding: 0 }}>
                 <img
                   src="/assets/immagine.png"
@@ -84,7 +106,7 @@ export function DigitalTransformationPage() {
           </div>
 
           {/* 2. Horizontal Assessment Detail Bar (Solid White Premium Card with shadow-box) */}
-          <div className="shadow-box mb-12 flex flex-col md:flex-row gap-6 md:gap-12 items-start md:items-center">
+          <div className="shadow-box mb-12 flex flex-col md:flex-row gap-6 md:gap-12 items-start md:items-center reveal-element">
             <div className="md:basis-[38%] shrink-0">
               <h2 className="text-3xl md:text-[42px] font-medium text-[#013167] leading-[1.15] mb-3 tracking-tight">
                 First Digital<br /> Assessment:
@@ -104,7 +126,7 @@ export function DigitalTransformationPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
             
             {/* Card 1: Il Contesto */}
-            <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1">
+            <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1 reveal-element reveal-delay-100">
               <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
                 <img src="/assets/contesto.svg" alt="Il contesto" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
               </div>
@@ -117,7 +139,7 @@ export function DigitalTransformationPage() {
             </div>
 
             {/* Card 2: La Metodologia */}
-            <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1">
+            <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1 reveal-element reveal-delay-200">
               <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
                 <img src="/assets/metodo.svg" alt="La metodologia" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
               </div>
@@ -130,7 +152,7 @@ export function DigitalTransformationPage() {
             </div>
 
             {/* Card 3: I Risultati */}
-            <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1">
+            <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1 reveal-element reveal-delay-300">
               <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
                 <img src="/assets/risultato.svg" alt="I risultati" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
               </div>
@@ -144,7 +166,7 @@ export function DigitalTransformationPage() {
           </div>
 
           {/* 4. Bottom Context Quote */}
-          <div className="max-w-[920px] mx-auto text-center mb-24 px-4">
+          <div className="max-w-[920px] mx-auto text-center mb-24 px-4 reveal-element">
             <p className="text-base sm:text-[1.05rem] text-[#001933]/90 leading-relaxed font-normal">
               In un territorio dove l'innovazione si intreccia con il patrimonio produttivo locale, il First Digital Assessment rappresenta quindi uno strumento di crescita e consapevolezza: un punto di partenza per accompagnare le imprese campane verso un futuro più connesso, sostenibile e intelligente.
             </p>
@@ -153,7 +175,7 @@ export function DigitalTransformationPage() {
         </div> {/* Chiude container-page */}
 
         {/* 5. Custom Assessment Form Section (Full Width Background) */}
-        <div className="w-full relative bg-cover bg-center py-20" style={{ backgroundImage: "url('/assets/sfondo_form.png')" }}>
+        <div className="w-full relative bg-cover bg-center py-20 reveal-element" style={{ backgroundImage: "url('/assets/sfondo_form.png')" }}>
           <div className="container-page relative z-10">
             <div className="max-w-[760px] mx-auto rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/10 relative overflow-hidden bg-brand-dark-navy/60 backdrop-blur-lg">
               
