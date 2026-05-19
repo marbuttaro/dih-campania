@@ -52,9 +52,9 @@ export function Events() {
                   alt=""
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute top-5 right-5 w-[65px] h-[100px] rounded-[18px] flex flex-col items-center justify-center text-brand-light-blue bg-brand-navy/30 backdrop-blur-[8px] border border-white/20">
-                  <span className="text-2xl font-bold leading-none">{event.date}</span>
-                  <span className="text-base font-medium lowercase">{event.month}</span>
+                <div className="absolute top-5 right-5 w-[90px] h-[120px] rounded-[18px] flex flex-col items-center justify-center bg-brand-navy/30 backdrop-blur-[8px] border border-white/20 gap-0.5">
+                  <span style={{ fontSize: '48px', fontWeight: 600, color: '#8EBEF7', lineHeight: 1, fontFamily: 'Montserrat, sans-serif' }}>{event.date}</span>
+                  <span style={{ fontSize: '34px', fontWeight: 600, color: '#DEEAEE', lineHeight: 1, fontFamily: 'Montserrat, sans-serif' }} className="lowercase">{event.month}</span>
                 </div>
               </div>
               <div className="p-7 flex-1 flex flex-col justify-between">
