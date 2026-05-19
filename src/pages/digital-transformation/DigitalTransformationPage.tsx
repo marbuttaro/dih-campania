@@ -34,7 +34,7 @@ export function DigitalTransformationPage() {
 
       {/* Main Page Content */}
       <main
-        className="flex-grow pt-36 pb-20 relative bg-cover bg-center bg-no-repeat bg-brand-surface"
+        className="flex-grow pt-36 relative bg-cover bg-center bg-no-repeat bg-brand-surface"
         style={{
           backgroundImage: "url('/assets/sfondo.svg')",
           backgroundAttachment: 'fixed',
