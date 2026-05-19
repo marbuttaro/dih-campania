@@ -94,7 +94,7 @@ export function About() {
                   key={sector.label}
                   className="px-6 py-3.5 border-2 border-brand-light-blue/30 rounded-xl text-sm font-medium text-brand-dark-navy bg-white/40 flex items-center gap-3 text-left transition-all cursor-pointer hover:border-brand-light-blue hover:bg-white/80"
                 >
-                  <Icon className="size-[22px] text-brand-light-blue shrink-0" strokeWidth={1.4} />
+                  <Icon className="size-10 text-brand-light-blue shrink-0" strokeWidth={1.4} />
                   {sector.label}
                 </div>
               )
