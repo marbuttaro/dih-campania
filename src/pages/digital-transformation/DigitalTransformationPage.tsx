@@ -85,10 +85,10 @@ export function DigitalTransformationPage() {
           {/* 2. Horizontal Assessment Detail Bar (Solid White Premium Card with shadow-box) */}
           <div className="shadow-box mb-12 flex flex-col md:flex-row gap-6 md:gap-12 items-start md:items-center">
             <div className="md:basis-[38%] shrink-0">
-              <h2 className="text-2xl sm:text-[1.95rem] font-bold text-brand-dark-navy leading-[1.25] mb-2 tracking-tight">
+              <h2 className="text-3xl md:text-[42px] font-medium text-[#013167] leading-[1.15] mb-3 tracking-tight">
                 First Digital<br /> Assessment:
               </h2>
-              <p className="text-sm sm:text-base text-brand-navy font-semibold">
+              <p className="text-lg md:text-[22px] font-light text-[#013167] leading-tight">
                 dove inizia la trasformazione
               </p>
             </div>
