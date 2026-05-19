@@ -151,7 +151,10 @@ export function DigitalTransformationPage() {
           </div>
 
           {/* 5. Custom Assessment Form Section */}
-          <div className="max-w-[760px] mx-auto bg-[linear-gradient(135deg,#001933_0%,#002D5C_100%)] rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/10 relative overflow-hidden">
+          <div 
+            className="max-w-[760px] mx-auto rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/10 relative overflow-hidden bg-cover bg-center"
+            style={{ backgroundImage: "url('/assets/sfondo_form.png')" }}
+          >
             
             {/* Ambient inner glow */}
             <div className="absolute -top-40 -right-40 size-80 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
