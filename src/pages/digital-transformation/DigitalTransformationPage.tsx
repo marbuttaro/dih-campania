@@ -105,8 +105,8 @@ export function DigitalTransformationPage() {
             
             {/* Card 1: Il Contesto */}
             <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1">
-              <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)]">
-                <img src="/assets/contesto.svg" alt="Il contesto" className="size-7 block" />
+              <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
+                <img src="/assets/contesto.svg" alt="Il contesto" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
               </div>
               <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
                 Il contesto
@@ -118,8 +118,8 @@ export function DigitalTransformationPage() {
 
             {/* Card 2: La Metodologia */}
             <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1">
-              <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)]">
-                <img src="/assets/metodo.svg" alt="La metodologia" className="size-7 block" />
+              <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
+                <img src="/assets/metodo.svg" alt="La metodologia" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
               </div>
               <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
                 La metodologia
@@ -131,8 +131,8 @@ export function DigitalTransformationPage() {
 
             {/* Card 3: I Risultati */}
             <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1">
-              <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)]">
-                <img src="/assets/risultato.svg" alt="I risultati" className="size-7 block" />
+              <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
+                <img src="/assets/risultato.svg" alt="I risultati" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
               </div>
               <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
                 I risultati
