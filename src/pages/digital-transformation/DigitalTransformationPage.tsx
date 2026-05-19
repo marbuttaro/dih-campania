@@ -107,7 +107,7 @@ export function DigitalTransformationPage() {
               <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)]">
                 <img src="/assets/contesto.svg" alt="Il contesto" className="size-7 block" />
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-brand-dark-navy mb-4 tracking-tight">
+              <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
                 Il contesto
               </h3>
               <p className="text-sm text-brand-dark-navy/80 leading-relaxed font-normal">
@@ -120,7 +120,7 @@ export function DigitalTransformationPage() {
               <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)]">
                 <img src="/assets/metodo.svg" alt="La metodologia" className="size-7 block" />
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-brand-dark-navy mb-4 tracking-tight">
+              <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
                 La metodologia
               </h3>
               <p className="text-sm text-brand-dark-navy/80 leading-relaxed font-normal">
@@ -128,13 +128,13 @@ export function DigitalTransformationPage() {
               </p>
             </div>
 
-            {/* Card 3: Il Risultato */}
+            {/* Card 3: I Risultati */}
             <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1">
               <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)]">
-                <img src="/assets/risultato.svg" alt="Il risultato" className="size-7 block" />
+                <img src="/assets/risultato.svg" alt="I risultati" className="size-7 block" />
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-brand-dark-navy mb-4 tracking-tight">
-                Il risultato
+              <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
+                I risultati
               </h3>
               <p className="text-sm text-brand-dark-navy/80 leading-relaxed font-normal">
                 Il risultato finale è un report personalizzato che offre alle imprese una visione chiara della propria posizione rispetto ai paradigmi dell'Industria 4.0 e della Transizione Digitale, suggerendo azioni concrete per migliorare l'efficienza, la qualità dei processi e la capacità di competere nei mercati digitali.
