@@ -203,58 +203,58 @@ export function DigitalTransformationPage() {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="flex flex-col">
+                    <div className="flex flex-col glass-stroke-input-wrapper">
                       <input
                         type="text"
                         placeholder="Last Name"
                         required
                         value={formData.lastName}
                         onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                        className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm"
+                        className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-1 focus:ring-brand-light-blue transition-colors text-sm"
                       />
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col glass-stroke-input-wrapper">
                       <input
                         type="text"
                         placeholder="First Name"
                         required
                         value={formData.firstName}
                         onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                        className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm"
+                        className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-1 focus:ring-brand-light-blue transition-colors text-sm"
                       />
                     </div>
                   </div>
 
-                  <div>
+                  <div className="glass-stroke-input-wrapper">
                     <input
                       type="email"
                       placeholder="Email"
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm"
+                      className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-1 focus:ring-brand-light-blue transition-colors text-sm"
                     />
                   </div>
 
-                  <div>
+                  <div className="glass-stroke-input-wrapper">
                     <input
                       type="tel"
                       placeholder="Phone Number"
                       required
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm"
+                      className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-1 focus:ring-brand-light-blue transition-colors text-sm"
                     />
                   </div>
 
-                  <div>
+                  <div className="glass-stroke-input-wrapper">
                     <textarea
                       placeholder="Message"
                       rows={4}
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm resize-none"
+                      className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-1 focus:ring-brand-light-blue transition-colors text-sm resize-none"
                     />
                   </div>
 

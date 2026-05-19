@@ -188,15 +188,46 @@
 /* -------------------------------------------------------------------------- */
 
 .glass-stroke-container {
-  border: 1px solid transparent;
-  background: 
-    linear-gradient(rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.13)) padding-box,
-    linear-gradient(30deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%) border-box;
+  background-color: rgba(255, 255, 255, 0.13);
+  position: relative;
+  z-index: 1;
+}
+
+.glass-stroke-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(30deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.glass-stroke-input-wrapper {
+  position: relative;
+  border-radius: 12px;
+  z-index: 1;
+}
+
+.glass-stroke-input-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(30deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
 }
 
 .glass-stroke-input {
-  border: 1px solid transparent;
-  background: 
-    linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)) padding-box,
-    linear-gradient(30deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%) border-box;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: none;
 }
