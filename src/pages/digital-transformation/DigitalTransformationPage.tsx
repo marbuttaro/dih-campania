@@ -76,7 +76,8 @@ export function DigitalTransformationPage() {
                 <img
                   src="/assets/immagine.png"
                   alt="Trasformazione Digitale"
-                  className="w-full h-full object-cover block"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  className="block"
                 />
               </div>
             </div>
