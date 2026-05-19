@@ -150,105 +150,105 @@ export function DigitalTransformationPage() {
             </p>
           </div>
 
-          {/* 5. Custom Assessment Form Section */}
-          <div 
-            className="max-w-[760px] mx-auto rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/10 relative overflow-hidden bg-cover bg-center"
-            style={{ backgroundImage: "url('/assets/sfondo_form.png')" }}
-          >
-            
-            {/* Ambient inner glow */}
-            <div className="absolute -top-40 -right-40 size-80 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
+        </div> {/* Chiude container-page */}
 
-            <div className="relative z-10 text-center mb-8">
-              <h2 className="text-3xl sm:text-[2.1rem] font-light mb-2 text-white tracking-tight">
-                Richiedi il tuo assessment
-              </h2>
-              <p className="text-sm sm:text-base text-brand-light-blue/80 font-normal">
-                Compila il form e prenota il tuo appuntamento
-              </p>
-            </div>
+        {/* 5. Custom Assessment Form Section (Full Width Background) */}
+        <div className="w-full relative bg-cover bg-center py-20" style={{ backgroundImage: "url('/assets/sfondo_form.png')" }}>
+          <div className="container-page relative z-10">
+            <div className="max-w-[760px] mx-auto rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/10 relative overflow-hidden bg-brand-dark-navy/60 backdrop-blur-lg">
+              
+              {/* Ambient inner glow */}
+              <div className="absolute -top-40 -right-40 size-80 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
 
-            {submitted ? (
-              <div className="text-center py-12 flex flex-col items-center justify-center">
-                <div className="size-16 rounded-full bg-brand-light-blue/20 flex items-center justify-center mb-4 border border-brand-light-blue/40">
-                  <svg className="size-8 text-brand-light-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-semibold mb-2">Richiesta Inviata!</h3>
-                <p className="text-brand-light-blue/80">Grazie, ti contatteremo il prima possibile per fissare l'assessment.</p>
+              <div className="relative z-10 text-center mb-8">
+                <h2 className="text-3xl sm:text-[2.1rem] font-light mb-2 text-white tracking-tight">
+                  Richiedi il tuo assessment
+                </h2>
+                <p className="text-sm sm:text-base text-brand-light-blue/80 font-normal">
+                  Compila il form e prenota il tuo appuntamento
+                </p>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="flex flex-col">
+
+              {submitted ? (
+                <div className="text-center py-12 flex flex-col items-center justify-center">
+                  <div className="size-16 rounded-full bg-brand-light-blue/20 flex items-center justify-center mb-4 border border-brand-light-blue/40">
+                    <svg className="size-8 text-brand-light-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-semibold mb-2">Richiesta Inviata!</h3>
+                  <p className="text-brand-light-blue/80">Grazie, ti contatteremo il prima possibile per fissare l'assessment.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="flex flex-col">
+                      <input
+                        type="text"
+                        placeholder="Last Name"
+                        required
+                        value={formData.lastName}
+                        onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                        className="w-full bg-white/[0.05] border border-white/20 rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <input
+                        type="text"
+                        placeholder="First Name"
+                        required
+                        value={formData.firstName}
+                        onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                        className="w-full bg-white/[0.05] border border-white/20 rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
                     <input
-                      type="text"
-                      placeholder="Last Name"
+                      type="email"
+                      placeholder="Email"
                       required
-                      value={formData.lastName}
-                      onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full bg-white/[0.05] border border-white/20 rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm"
                     />
                   </div>
-                  <div className="flex flex-col">
+
+                  <div>
                     <input
-                      type="text"
-                      placeholder="First Name"
+                      type="tel"
+                      placeholder="Phone Number"
                       required
-                      value={formData.firstName}
-                      onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       className="w-full bg-white/[0.05] border border-white/20 rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm"
                     />
                   </div>
-                </div>
 
-                <div>
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-white/[0.05] border border-white/20 rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm"
-                  />
-                </div>
+                  <div>
+                    <textarea
+                      placeholder="Message"
+                      rows={4}
+                      required
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="w-full bg-white/[0.05] border border-white/20 rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm resize-none"
+                    />
+                  </div>
 
-                <div>
-                  <input
-                    type="tel"
-                    placeholder="Phone Number"
-                    required
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-white/[0.05] border border-white/20 rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm"
-                  />
-                </div>
-
-                <div>
-                  <textarea
-                    placeholder="Message"
-                    rows={4}
-                    required
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-white/[0.05] border border-white/20 rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-light-blue transition-colors text-sm resize-none"
-                  />
-                </div>
-
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    className="w-full bg-[#013167] text-white hover:bg-brand-light-blue hover:text-brand-dark-navy transition-all duration-300 font-semibold py-4 rounded-[12px] shadow-[0_4px_15px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 border border-white/10 cursor-pointer"
-                  >
-                    Invia Richiesta
-                  </button>
-                </div>
-              </form>
-            )}
-
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      className="w-full bg-[#013167] text-white hover:bg-brand-light-blue hover:text-brand-dark-navy transition-all duration-300 font-semibold py-4 rounded-[12px] shadow-[0_4px_15px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 border border-white/10 cursor-pointer"
+                    >
+                      Invia Richiesta
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
           </div>
-
         </div>
       </main>
 
