@@ -27,8 +27,9 @@ export function Community() {
     }
   }, [])
 
-  // Map progress to steps
-  const step = progress < 0.33 ? 0 : progress < 0.66 ? 1 : 2
+  // Map progress to steps: 0 is the initial cards view, 2 is the final CTA view.
+  // We skip step 1 to eliminate the empty intermediate state.
+  const step = progress < 0.35 ? 0 : 2
 
   // Progress width goes from 15% to 100%
   const currentWidth = 15 + progress * 85
@@ -44,7 +45,7 @@ export function Community() {
           <div className="relative w-full flex flex-col items-center text-center">
             <h2
               className={cn(
-                'font-light text-[40px] sm:text-5xl lg:text-[64px] text-brand-navy leading-[1.1] z-10 transition-all duration-700',
+                'font-light text-[40px] sm:text-5xl lg:text-[64px] text-brand-navy leading-[1.1] z-10 transition-all duration-500',
                 step === 2 && 'opacity-0 scale-90',
               )}
             >
@@ -61,7 +62,7 @@ export function Community() {
             >
               <div
                 className={cn(
-                  'pointer-events-auto bg-white/95 backdrop-blur-md border border-white/80 rounded-3xl p-7 lg:p-9 w-[90%] sm:w-[420px] lg:w-[440px] shadow-[0_15px_45px_rgba(0,0,0,0.1)] transition-all duration-1000',
+                  'pointer-events-auto bg-white/95 backdrop-blur-md border border-white/80 rounded-3xl p-7 lg:p-9 w-[90%] sm:w-[420px] lg:w-[440px] shadow-[0_15px_45px_rgba(0,0,0,0.1)] transition-all duration-700',
                   'lg:absolute lg:left-[10%] lg:top-[5%] lg:-rotate-3',
                   step >= 1 && 'lg:-translate-x-[150vw] lg:-rotate-[15deg] max-lg:-translate-y-[200%] max-lg:opacity-0',
                 )}
@@ -74,7 +75,7 @@ export function Community() {
               </div>
               <div
                 className={cn(
-                  'pointer-events-auto bg-white/95 backdrop-blur-md border border-white/80 rounded-3xl p-7 lg:p-9 w-[90%] sm:w-[420px] lg:w-[440px] shadow-[0_15px_45px_rgba(0,0,0,0.1)] transition-all duration-1000',
+                  'pointer-events-auto bg-white/95 backdrop-blur-md border border-white/80 rounded-3xl p-7 lg:p-9 w-[90%] sm:w-[420px] lg:w-[440px] shadow-[0_15px_45px_rgba(0,0,0,0.1)] transition-all duration-700',
                   'lg:absolute lg:right-[10%] lg:bottom-[5%] lg:rotate-3',
                   step >= 1 && 'lg:translate-x-[150vw] lg:rotate-[15deg] max-lg:-translate-y-[200%] max-lg:opacity-0',
                 )}
@@ -89,7 +90,7 @@ export function Community() {
 
             <div
               className={cn(
-                'lg:absolute lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 mt-10 lg:mt-0 w-full px-4 lg:px-10 text-center flex flex-col items-center transition-all duration-700 z-30',
+                'lg:absolute lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 mt-10 lg:mt-0 w-full px-4 lg:px-10 text-center flex flex-col items-center transition-all duration-500 z-30',
                 step === 2
                   ? 'opacity-100 lg:scale-100 visible'
                   : 'opacity-0 lg:scale-90 invisible',
