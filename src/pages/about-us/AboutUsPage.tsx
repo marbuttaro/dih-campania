@@ -67,8 +67,11 @@ export function AboutUsPage() {
 
           {/* 3. La nostra mission Card */}
           <div className="w-full max-w-[1200px] mx-auto mb-24 reveal-element reveal-delay-100">
-            <div className="shadow-box bg-white/95">
-              <h2 className="text-[32px] font-semibold text-brand-navy mb-5 tracking-tight">
+            <div
+              className="rounded-[20px] p-9 shadow-neumorphic"
+              style={{ backgroundColor: 'rgba(227, 234, 236, 0.24)' }}
+            >
+              <h2 className="text-[48px] font-light text-[#013167] mb-5 leading-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
                 La nostra mission
               </h2>
               <p className="text-base sm:text-lg text-brand-dark-navy/85 font-normal leading-relaxed">
