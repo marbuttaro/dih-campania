@@ -18,19 +18,31 @@ const NAV_LINKS = [
   { href: '#bandi', label: 'Bandi' },
   { href: '#newsletter', label: 'Newsletter' },
   { href: '#infosfera', label: 'Infosfera' },
-  { href: '#chisiamo', label: 'Chi Siamo' },
+  { href: '/chi-siamo.html', label: 'Chi Siamo' },
 ] as const
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [isHome, setIsHome] = useState(true)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
     window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
+
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname
+      setIsHome(path === '/' || path.endsWith('index.html') || path === '')
+    }
+
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  const getLinkHref = (href: string) => {
+    if (href.startsWith('/')) return href
+    return isHome ? href : `/${href}`
+  }
 
   return (
     <nav
@@ -55,7 +67,7 @@ export function Navbar() {
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
-              href={link.href}
+              href={getLinkHref(link.href)}
               className="text-[15px] font-normal text-[#E3EAEC] hover:text-white transition-colors"
             >
               {link.label}
@@ -68,7 +80,7 @@ export function Navbar() {
             asChild
             className="bg-[#8EBEF7] text-[#013167] hover:bg-white hover:translate-y-0 px-6 rounded-xl font-bold"
           >
-            <a href="#contatti">Contattaci</a>
+            <a href={getLinkHref('#contatti')}>Contattaci</a>
           </Button>
         </div>
 
@@ -96,7 +108,7 @@ export function Navbar() {
               {NAV_LINKS.map((link) => (
                 <SheetClose asChild key={link.href}>
                   <a
-                    href={link.href}
+                    href={getLinkHref(link.href)}
                     className="px-3 py-3 rounded-md text-base text-white/90 hover:bg-white/10 transition-colors"
                   >
                     {link.label}
@@ -109,7 +121,7 @@ export function Navbar() {
                 asChild
                 className="mt-6 w-full bg-[#8EBEF7] text-[#013167] hover:bg-white font-bold"
               >
-                <a href="#contatti">Contattaci</a>
+                <a href={getLinkHref('#contatti')}>Contattaci</a>
               </Button>
             </SheetClose>
           </SheetContent>

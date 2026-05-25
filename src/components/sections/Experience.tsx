@@ -27,12 +27,12 @@ export function Experience() {
             e accompagnare i processi di innovazione, trasformazione tech e digital di imprese e
             PA ed è coadiuvata da specialisti di settore ed innovation manager.
           </p>
-          <button
-            type="button"
-            className="bg-brand-ice/30 text-brand-dark-navy px-9 py-3.5 rounded-lg font-semibold border-0 cursor-pointer shadow-[0_4px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)]"
+          <a
+            href="/chi-siamo.html"
+            className="inline-block bg-brand-ice/30 text-brand-dark-navy px-9 py-3.5 rounded-lg font-semibold border-0 cursor-pointer shadow-[0_4px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)] no-underline"
           >
             Scopri il nostro team
-          </button>
+          </a>
         </div>
       </div>
     </section>

@@ -15,6 +15,7 @@ export default defineConfig({
       input: {
         main: path.resolve(__dirname, 'index.html'),
         trasformazione: path.resolve(__dirname, 'trasformazione-digitale.html'),
+        chisiamo: path.resolve(__dirname, 'chi-siamo.html'),
       },
     },
   },
