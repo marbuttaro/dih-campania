@@ -146,11 +146,16 @@ export function AboutUsPage() {
 
         <div className="container-page relative z-10">
           {/* 6. Le persone Header Section */}
-          <div className="w-full max-w-[1200px] mx-auto mb-20 reveal-element">
-            <h2 className="text-[48px] font-light text-[#013167] mb-8 leading-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-              Le persone
-            </h2>
-            <div className="shadow-box bg-white/95">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-8 lg:gap-16 w-full max-w-[1200px] mx-auto mb-20 items-center reveal-element">
+            <div>
+              <h2 className="text-[48px] font-light text-[#013167] leading-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                Le persone
+              </h2>
+            </div>
+            <div
+              className="rounded-[20px] p-9 shadow-neumorphic"
+              style={{ backgroundColor: '#E3EAEC' }}
+            >
               <p className="text-base sm:text-lg text-brand-dark-navy/85 font-normal leading-relaxed">
                 Il Campania DIH dal 2017 supporta attività di ricerca, orientamento e sviluppo di progetti di DT a favore delle imprese. Guidato da un senior strategic PM, il team è composto da esperti in innovazione tecnologica ed in settori umanistici per sostenere e accompagnare i processi di innovazione, trasformazione tech e digital di imprese e PA ed è coadiuvata da specialisti di settore ed innovation manager.
               </p>
