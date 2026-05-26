@@ -181,6 +181,13 @@ export function AboutUsPage() {
                 </div>
               </div>
 
+              {/* Label: Consiglieri */}
+              <div className="text-center pt-6 pb-2">
+                <span className="text-xs uppercase tracking-widest text-brand-dark-navy/60 font-bold">
+                  Consiglieri
+                </span>
+              </div>
+
               {/* Rows 2 & 3: Board Members Grid (3 columns) */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
