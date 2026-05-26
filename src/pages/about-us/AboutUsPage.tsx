@@ -171,53 +171,46 @@ export function AboutUsPage() {
             <div className="space-y-6">
               {/* Row 1: Executive Cards (2 centered) */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[800px] mx-auto">
-                <div className="shadow-box bg-white/95 p-6 rounded-2xl flex flex-col justify-center items-center text-center">
-                  <span className="text-lg font-bold text-brand-dark-navy">Maurizio Manfellotto</span>
+                <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
+                  <span className="text-lg font-medium text-brand-dark-navy">Maurizio Manfellotto</span>
                   <span className="text-sm font-semibold text-brand-navy mt-1.5">Presidente</span>
                 </div>
-                <div className="shadow-box bg-white/95 p-6 rounded-2xl flex flex-col justify-center items-center text-center">
-                  <span className="text-lg font-bold text-brand-dark-navy">Edoardo Imperiale</span>
+                <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
+                  <span className="text-lg font-medium text-brand-dark-navy">Edoardo Imperiale</span>
                   <span className="text-sm font-semibold text-brand-navy mt-1.5">Amministratore Delegato e Direttore Generale</span>
                 </div>
               </div>
 
               {/* Rows 2 & 3: Board Members Grid (3 columns) */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="shadow-box bg-white/95 p-6 rounded-2xl flex flex-col justify-center items-center text-center">
-                  <span className="text-lg font-bold text-[#001933]">Emilio De Vizia</span>
+                <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
+                  <span className="text-lg font-medium text-[#001933]">Emilio De Vizia</span>
                 </div>
-                <div className="shadow-box bg-white/95 p-6 rounded-2xl flex flex-col justify-center items-center text-center">
-                  <span className="text-lg font-bold text-[#001933]">Maria Luisa Faraone Mennella</span>
+                <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
+                  <span className="text-lg font-medium text-[#001933]">Maria Luisa Faraone Mennella</span>
                 </div>
-                <div className="shadow-box bg-white/95 p-6 rounded-2xl flex flex-col justify-center items-center text-center">
-                  <span className="text-lg font-bold text-[#001933]">Mario Ferraro</span>
+                <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
+                  <span className="text-lg font-medium text-[#001933]">Mario Ferraro</span>
                 </div>
-                <div className="shadow-box bg-white/95 p-6 rounded-2xl flex flex-col justify-center items-center text-center">
-                  <span className="text-lg font-bold text-[#001933]">Michele Lucantonio</span>
+                <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
+                  <span className="text-lg font-medium text-[#001933]">Michele Lucantonio</span>
                 </div>
-                <div className="shadow-box bg-white/95 p-6 rounded-2xl flex flex-col justify-center items-center text-center">
-                  <span className="text-lg font-bold text-[#001933]">Giuseppe Esposito Mocerino</span>
+                <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
+                  <span className="text-lg font-medium text-[#001933]">Giuseppe Esposito Mocerino</span>
                 </div>
-                <div className="shadow-box bg-white/95 p-6 rounded-2xl flex flex-col justify-center items-center text-center">
-                  <span className="text-lg font-bold text-[#001933]">Antonio Palumbo</span>
+                <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
+                  <span className="text-lg font-medium text-[#001933]">Antonio Palumbo</span>
                 </div>
               </div>
 
               {/* Row 4: Bottom Board Members (2 centered) */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[800px] mx-auto">
-                <div className="shadow-box bg-white/95 p-6 rounded-2xl flex flex-col justify-center items-center text-center">
-                  <span className="text-lg font-bold text-[#001933]">Beniamino Schiavone</span>
+                <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
+                  <span className="text-lg font-medium text-[#001933]">Beniamino Schiavone</span>
                 </div>
-                <div className="shadow-box bg-white/95 p-6 rounded-2xl flex flex-col justify-center items-center text-center">
-                  <span className="text-lg font-bold text-[#001933]">Francesco Serravalle</span>
+                <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
+                  <span className="text-lg font-medium text-[#001933]">Francesco Serravalle</span>
                 </div>
-              </div>
-
-              {/* Label: Consiglieri */}
-              <div className="text-center pt-4">
-                <span className="text-xs uppercase tracking-widest text-brand-dark-navy/60 font-bold">
-                  Consiglieri
-                </span>
               </div>
             </div>
           </div>
