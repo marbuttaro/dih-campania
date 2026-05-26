@@ -2,17 +2,7 @@ import { useEffect } from 'react'
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
 
-// Institutional University Crest SVG
-function UniversityCrest() {
-  return (
-    <svg className="size-10 text-white/90 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.2">
-      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeDasharray="3 3" />
-      <path d="M12 5 L15 10 L20 10 L16 14 L18 19 L12 16 L6 19 L8 14 L4 10 L9 10 Z" fill="currentColor" fillOpacity="0.1" />
-      <circle cx="12" cy="12" r="6" stroke="currentColor" />
-      <path d="M12 9 L12 15 M9 12 L15 12" stroke="currentColor" />
-    </svg>
-  )
-}
+
 
 export function AboutUsPage() {
   useEffect(() => {
@@ -96,92 +86,58 @@ export function AboutUsPage() {
 
           {/* 5. Socio & Partner Tecnologici Gradient Container */}
           <div className="w-full max-w-[1200px] mx-auto mb-24 reveal-element reveal-delay-200">
-            <div className="bg-[linear-gradient(135deg,#001933_0%,#01274E_50%,#001933_100%)] rounded-[32px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.25)] border border-white/10 relative overflow-hidden">
+            <div 
+              className="rounded-[32px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.25)] border border-white/10 relative overflow-hidden bg-cover bg-center"
+              style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
+            >
               {/* Inner atmospheric highlights */}
               <div className="absolute -top-32 -right-32 size-64 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
               <div className="absolute -bottom-32 -left-32 size-64 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
 
-              <div className="relative z-10 space-y-12">
+              <div className="relative z-10 space-y-12 sm:space-y-16">
                 {/* A. I Soci Row */}
-                <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-6 lg:gap-10 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-6 lg:gap-10 items-center">
                   <div>
-                    <h3 className="text-2xl font-semibold text-white/90 tracking-tight lg:pt-4">
+                    <h3 className="text-3xl sm:text-[32px] font-light text-white/90 tracking-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
                       I Soci
                     </h3>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                    <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 min-h-[92px] transition-all duration-300 hover:bg-white/15 hover:-translate-y-0.5 shadow-[0_4px_20px_rgba(0,0,0,0.1)]">
-                      <UniversityCrest />
-                      <span className="text-sm font-semibold text-white/90 leading-tight">
-                        Università degli Studi di Napoli Federico II
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 min-h-[92px] transition-all duration-300 hover:bg-white/15 hover:-translate-y-0.5 shadow-[0_4px_20px_rgba(0,0,0,0.1)]">
-                      <UniversityCrest />
-                      <span className="text-sm font-semibold text-white/90 leading-tight">
-                        Università degli Studi di Salerno
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 min-h-[92px] transition-all duration-300 hover:bg-white/15 hover:-translate-y-0.5 shadow-[0_4px_20px_rgba(0,0,0,0.1)]">
-                      <UniversityCrest />
-                      <span className="text-sm font-semibold text-white/90 leading-tight">
-                        Università degli Studi del Sannio
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 min-h-[92px] transition-all duration-300 hover:bg-white/15 hover:-translate-y-0.5 shadow-[0_4px_20px_rgba(0,0,0,0.1)]">
-                      <UniversityCrest />
-                      <span className="text-sm font-semibold text-white/90 leading-tight">
-                        Università degli Studi di Napoli L'Orientale
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 min-h-[92px] transition-all duration-300 hover:bg-white/15 hover:-translate-y-0.5 shadow-[0_4px_20px_rgba(0,0,0,0.1)]">
-                      <UniversityCrest />
-                      <span className="text-sm font-semibold text-white/90 leading-tight">
-                        Università degli Studi di Napoli Parthenope
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 min-h-[92px] transition-all duration-300 hover:bg-white/15 hover:-translate-y-0.5 shadow-[0_4px_20px_rgba(0,0,0,0.1)]">
-                      <UniversityCrest />
-                      <span className="text-sm font-semibold text-white/90 leading-tight">
-                        Università degli Studi della Campania Luigi Vanvitelli
-                      </span>
-                    </div>
+                    {Array.from({ length: 6 }).map((_, i) => (
+                      <div key={`socio-${i}`} className="flex items-center gap-4 bg-white/5 backdrop-blur-md border border-white/30 rounded-xl p-4 min-h-[92px] transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 shadow-sm">
+                        <img
+                          src="/assets/chi-siamo/logo_unione_og_bianco 1.svg"
+                          alt="Unione Industriali Napoli"
+                          className="h-10 w-auto object-contain shrink-0"
+                        />
+                        <span className="text-sm font-light text-white/90 leading-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                          Unione Industriali<br />Napoli
+                        </span>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
-                {/* B. Divider */}
-                <div className="w-full h-px bg-white/10" />
-
-                {/* C. Partner tecnologici Row */}
-                <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-6 lg:gap-10 items-start">
+                {/* B. Partner tecnologici Row */}
+                <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-6 lg:gap-10 items-center">
                   <div>
-                    <h3 className="text-2xl font-semibold text-white/90 tracking-tight lg:pt-4">
+                    <h3 className="text-3xl sm:text-[32px] font-light text-white/90 tracking-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
                       Partner tecnologici
                     </h3>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                    <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 min-h-[92px] transition-all duration-300 hover:bg-white/15 hover:-translate-y-0.5 shadow-[0_4px_20px_rgba(0,0,0,0.1)]">
-                      <UniversityCrest />
-                      <span className="text-sm font-semibold text-white/90 leading-tight">
-                        Università degli Studi di Napoli Federico II
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 min-h-[92px] transition-all duration-300 hover:bg-white/15 hover:-translate-y-0.5 shadow-[0_4px_20px_rgba(0,0,0,0.1)]">
-                      <UniversityCrest />
-                      <span className="text-sm font-semibold text-white/90 leading-tight">
-                        Università degli Studi di Salerno
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 min-h-[92px] transition-all duration-300 hover:bg-white/15 hover:-translate-y-0.5 shadow-[0_4px_20px_rgba(0,0,0,0.1)]">
-                      <img
-                        src="/assets/chi-siamo/logo_unione_og_bianco 1.svg"
-                        alt="Unione Industriali Napoli"
-                        className="h-10 w-auto object-contain shrink-0"
-                      />
-                      <span className="text-sm font-semibold text-white/90 leading-tight">
-                        Unione Industriali Napoli
-                      </span>
-                    </div>
+                    {Array.from({ length: 3 }).map((_, i) => (
+                      <div key={`partner-${i}`} className="flex items-center gap-4 bg-white/5 backdrop-blur-md border border-white/30 rounded-xl p-4 min-h-[92px] transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 shadow-sm">
+                        <img
+                          src="/assets/chi-siamo/logo_unione_og_bianco 1.svg"
+                          alt="Unione Industriali Napoli"
+                          className="h-10 w-auto object-contain shrink-0"
+                        />
+                        <span className="text-sm font-light text-white/90 leading-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                          Unione Industriali<br />Napoli
+                        </span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
