@@ -177,7 +177,7 @@ export function AboutUsPage() {
                 </div>
                 <div className="shadow-box bg-white/95 p-6 rounded-2xl flex flex-col justify-center items-center text-center">
                   <span className="text-lg font-bold text-brand-dark-navy">Edoardo Imperiale</span>
-                  <span className="text-sm font-semibold text-brand-navy mt-1.5">Amministratore Delegato / Direttore Generale</span>
+                  <span className="text-sm font-semibold text-brand-navy mt-1.5">Amministratore Delegato e Direttore Generale</span>
                 </div>
               </div>
 
@@ -187,16 +187,16 @@ export function AboutUsPage() {
                   <span className="text-lg font-bold text-[#001933]">Emilio De Vizia</span>
                 </div>
                 <div className="shadow-box bg-white/95 p-6 rounded-2xl flex flex-col justify-center items-center text-center">
-                  <span className="text-lg font-bold text-[#001933]">Maria Luigia Fornarelli Mennella</span>
+                  <span className="text-lg font-bold text-[#001933]">Maria Luisa Faraone Mennella</span>
                 </div>
                 <div className="shadow-box bg-white/95 p-6 rounded-2xl flex flex-col justify-center items-center text-center">
                   <span className="text-lg font-bold text-[#001933]">Mario Ferraro</span>
                 </div>
                 <div className="shadow-box bg-white/95 p-6 rounded-2xl flex flex-col justify-center items-center text-center">
-                  <span className="text-lg font-bold text-[#001933]">Michele Lignola</span>
+                  <span className="text-lg font-bold text-[#001933]">Michele Lucantonio</span>
                 </div>
                 <div className="shadow-box bg-white/95 p-6 rounded-2xl flex flex-col justify-center items-center text-center">
-                  <span className="text-lg font-bold text-[#001933]">Giuseppe Esposito Nocerino</span>
+                  <span className="text-lg font-bold text-[#001933]">Giuseppe Esposito Mocerino</span>
                 </div>
                 <div className="shadow-box bg-white/95 p-6 rounded-2xl flex flex-col justify-center items-center text-center">
                   <span className="text-lg font-bold text-[#001933]">Antonio Palumbo</span>
@@ -206,7 +206,7 @@ export function AboutUsPage() {
               {/* Row 4: Bottom Board Members (2 centered) */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[800px] mx-auto">
                 <div className="shadow-box bg-white/95 p-6 rounded-2xl flex flex-col justify-center items-center text-center">
-                  <span className="text-lg font-bold text-[#001933]">Bernardino Salvatore</span>
+                  <span className="text-lg font-bold text-[#001933]">Beniamino Schiavone</span>
                 </div>
                 <div className="shadow-box bg-white/95 p-6 rounded-2xl flex flex-col justify-center items-center text-center">
                   <span className="text-lg font-bold text-[#001933]">Francesco Serravalle</span>
@@ -244,10 +244,10 @@ export function AboutUsPage() {
                     />
                   </div>
                   <h3 className="text-xl font-bold text-brand-dark-navy mb-1">
-                    Generoso Cogliano
+                    Gaetano Amatruda
                   </h3>
                   <span className="text-sm font-semibold text-brand-navy/70">
-                    Senior Strategic PM & CEO
+                    amatruda@campaniadih.it
                   </span>
                 </div>
 
@@ -264,10 +264,10 @@ export function AboutUsPage() {
                     />
                   </div>
                   <h3 className="text-xl font-bold text-brand-dark-navy mb-1">
-                    Sandra Cascio
+                    Sandra Castaldo
                   </h3>
                   <span className="text-sm font-semibold text-brand-navy/70">
-                    Staff Digitalisation & R.I.
+                    castaldo@campaniadih.it
                   </span>
                 </div>
 
@@ -284,10 +284,10 @@ export function AboutUsPage() {
                     />
                   </div>
                   <h3 className="text-xl font-bold text-brand-dark-navy mb-1">
-                    Manuela Pascarella
+                    Mariella Ferraro
                   </h3>
                   <span className="text-sm font-semibold text-brand-navy/70">
-                    Project Officer & Admin
+                    ferraro@campaniadih.it
                   </span>
                 </div>
               </div>
@@ -307,10 +307,10 @@ export function AboutUsPage() {
                     />
                   </div>
                   <h3 className="text-xl font-bold text-brand-dark-navy mb-1">
-                    Arianna Mensorio
+                    Arianna Paciolla
                   </h3>
                   <span className="text-sm font-semibold text-brand-navy/70">
-                    Innovation Specialist & PMO
+                    a.paciolla@campaniadih.it
                   </span>
                 </div>
 
@@ -327,10 +327,10 @@ export function AboutUsPage() {
                     />
                   </div>
                   <h3 className="text-xl font-bold text-brand-dark-navy mb-1">
-                    Sveva Marascia
+                    Daniela Paonessa
                   </h3>
                   <span className="text-sm font-semibold text-brand-navy/70">
-                    Junior Communication Specialist
+                    paonessa@campaniadih.it
                   </span>
                 </div>
               </div>
