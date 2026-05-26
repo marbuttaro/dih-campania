@@ -59,7 +59,7 @@ export function AboutUsPage() {
           <div className="w-full max-w-[1200px] mx-auto mb-24 reveal-element reveal-delay-100">
             <div
               className="rounded-[20px] p-9 shadow-neumorphic"
-              style={{ backgroundColor: 'rgba(227, 234, 236, 0.24)' }}
+              style={{ backgroundColor: '#E3EAEC' }}
             >
               <h2 className="text-[48px] font-light text-[#013167] mb-5 leading-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
                 La nostra mission
@@ -74,7 +74,7 @@ export function AboutUsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-8 lg:gap-16 w-full max-w-[1200px] mx-auto mb-24 items-start reveal-element">
             <div>
               <h2 className="text-[48px] font-light text-[#013167] leading-[1.15]" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                Approccio Data-<br />Driven e Partnership
+                Approccio Data-<br />Driven e<br />Partnership
               </h2>
             </div>
             <div>
@@ -84,17 +84,18 @@ export function AboutUsPage() {
             </div>
           </div>
 
-          {/* 5. Socio & Partner Tecnologici Gradient Container */}
-          <div className="w-full max-w-[1200px] mx-auto mb-24 reveal-element reveal-delay-200">
-            <div 
-              className="rounded-[32px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.25)] border border-white/10 relative overflow-hidden bg-cover bg-center"
-              style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
-            >
-              {/* Inner atmospheric highlights */}
-              <div className="absolute -top-32 -right-32 size-64 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
-              <div className="absolute -bottom-32 -left-32 size-64 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
+        </div>
 
-              <div className="relative z-10 space-y-12 sm:space-y-16">
+        {/* 5. Socio & Partner Tecnologici Full Width Section */}
+        <div 
+          className="w-full relative overflow-hidden bg-cover bg-center mb-24 reveal-element reveal-delay-200"
+          style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
+        >
+          {/* Inner atmospheric highlights */}
+          <div className="absolute -top-32 -right-32 size-64 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
+          <div className="absolute -bottom-32 -left-32 size-64 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
+
+          <div className="container-page relative z-10 py-16 sm:py-24 space-y-12 sm:space-y-16">
                 {/* A. I Soci Row */}
                 <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-6 lg:gap-10 items-center">
                   <div>
@@ -141,12 +142,12 @@ export function AboutUsPage() {
                   </div>
                 </div>
               </div>
-            </div>
           </div>
 
+        <div className="container-page relative z-10">
           {/* 6. Le persone Header Section */}
           <div className="w-full max-w-[1200px] mx-auto mb-20 reveal-element">
-            <h2 className="text-4xl sm:text-[42px] font-semibold text-brand-navy mb-8 tracking-tight">
+            <h2 className="text-[48px] font-light text-[#013167] mb-8 leading-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
               Le persone
             </h2>
             <div className="shadow-box bg-white/95">
@@ -158,7 +159,7 @@ export function AboutUsPage() {
 
           {/* 7. CdA Section */}
           <div className="w-full max-w-[1200px] mx-auto mb-24 reveal-element reveal-delay-100">
-            <h2 className="text-3xl sm:text-[36px] font-semibold text-brand-navy mb-8 tracking-tight">
+            <h2 className="text-[48px] font-light text-[#013167] mb-8 leading-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
               CdA
             </h2>
             
