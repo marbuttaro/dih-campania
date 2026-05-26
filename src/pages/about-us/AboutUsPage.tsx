@@ -55,13 +55,13 @@ export function AboutUsPage() {
         <div className="container-page relative z-10">
 
           {/* 2. Hero Section */}
-          <div className="text-center max-w-[840px] mx-auto mb-20 reveal-element">
+          <div className="text-center max-w-[840px] mx-auto mt-16 mb-32 reveal-element">
             <h1 className="text-4xl sm:text-5xl lg:text-[4rem] font-light text-brand-dark-navy leading-[1.2] mb-6 tracking-tight">
               Costruiamo insieme<br />
               il Futuro Digitale.
             </h1>
-            <p className="text-lg sm:text-[22px] text-brand-navy font-light leading-relaxed max-w-[700px] mx-auto">
-              Un team di esperti al servizio dell'innovazione, dell'imprenditoria e delle PA.
+            <p className="text-[20px] text-brand-navy font-medium leading-relaxed max-w-[700px] mx-auto" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              Un ecosistema che abilita innovazione, ricerca e sviluppo per imprese e PA.
             </p>
           </div>
 
@@ -75,7 +75,7 @@ export function AboutUsPage() {
                 La nostra mission
               </h2>
               <p className="text-base sm:text-lg text-brand-dark-navy/85 font-normal leading-relaxed">
-                Il Campania DIH opera come rete di soggetti qualificati per supportare la transizione digitale e di sostenibilità delle imprese e della PA. Offriamo servizi di orientamento, assessment e formazione, facilitando la collaborazione tra le aziende, il sistema della ricerca e dell'innovazione, e supportandole per partecipare ai bandi di finanziamento nazionali ed europei.
+                Il Campania DIH riunisce una rete di soggetti operanti a supporto della doppia transizione (digitale e sostenibile) delle imprese e della PA. Tra le tech di maggior interesse: cybersecurity, AI e HPC. Attraverso la propria attività analizza le esigenze (raccogliendo dati) che emergono dal campo favorendo attività di innovazione, R&D e sviluppo delle competenze necessarie a sostenere la twin transition.
               </p>
             </div>
           </div>
@@ -83,13 +83,13 @@ export function AboutUsPage() {
           {/* 4. Approccio Data-Driven Section */}
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-8 lg:gap-16 w-full max-w-[1200px] mx-auto mb-24 items-start reveal-element">
             <div>
-              <h2 className="text-3xl sm:text-[40px] font-semibold text-brand-navy leading-[1.15] tracking-tight">
+              <h2 className="text-[48px] font-light text-[#013167] leading-[1.15]" style={{ fontFamily: 'Montserrat, sans-serif' }}>
                 Approccio Data-<br />Driven e Partnership
               </h2>
             </div>
             <div>
               <p className="text-base sm:text-lg text-brand-dark-navy/85 leading-relaxed font-normal">
-                Il Campania DIH adotta un approccio data-driven per favorire la **creazione di massa critica a livello nazionale ed europeo**. Promuove sinergie territoriali sane, partnership strategiche e connessioni di massima fiducia tra attori dell'innovazione a supporto della **twin transition**.
+                Campania DIH adotta un approccio data-driven per favorire la creazione di massa critica a livello nazionale ed europeo. Promuove progettualità condivise, partnership strategiche e occasioni di incontro tra gli attori dell’innovazione a supporto della twin transition.
               </p>
             </div>
           </div>
