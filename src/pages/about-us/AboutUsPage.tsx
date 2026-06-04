@@ -237,14 +237,17 @@ export function AboutUsPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                 {/* Gaetano Amatruda */}
                 <div className="flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
-                  <div
-                    className="relative w-full aspect-[4/5] rounded-[24px] overflow-hidden bg-cover bg-center mb-5 flex items-end justify-center"
-                    style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
-                  >
+                  <div className="relative w-full aspect-[4/5] mb-5">
+                    {/* Background Card */}
+                    <div
+                      className="absolute inset-x-0 bottom-0 top-[8%] rounded-[24px] bg-cover bg-center"
+                      style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
+                    />
+                    {/* Person Image */}
                     <img
                       src="/assets/chi-siamo/man.png"
                       alt="Gaetano Amatruda"
-                      className="h-[96%] w-auto object-contain block select-none"
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain block select-none z-10"
                     />
                   </div>
                   <h3 
@@ -260,14 +263,17 @@ export function AboutUsPage() {
 
                 {/* Sandra Castaldo */}
                 <div className="flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
-                  <div
-                    className="relative w-full aspect-[4/5] rounded-[24px] overflow-hidden bg-cover bg-center mb-5 flex items-end justify-center"
-                    style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
-                  >
+                  <div className="relative w-full aspect-[4/5] mb-5">
+                    {/* Background Card */}
+                    <div
+                      className="absolute inset-x-0 bottom-0 top-[8%] rounded-[24px] bg-cover bg-center"
+                      style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
+                    />
+                    {/* Person Image */}
                     <img
                       src="/assets/chi-siamo/woman.png"
                       alt="Sandra Castaldo"
-                      className="h-[96%] w-auto object-contain block select-none"
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain block select-none z-10"
                     />
                   </div>
                   <h3 
@@ -283,14 +289,17 @@ export function AboutUsPage() {
 
                 {/* Mariella Ferraro */}
                 <div className="flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
-                  <div
-                    className="relative w-full aspect-[4/5] rounded-[24px] overflow-hidden bg-cover bg-center mb-5 flex items-end justify-center"
-                    style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
-                  >
+                  <div className="relative w-full aspect-[4/5] mb-5">
+                    {/* Background Card */}
+                    <div
+                      className="absolute inset-x-0 bottom-0 top-[8%] rounded-[24px] bg-cover bg-center"
+                      style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
+                    />
+                    {/* Person Image */}
                     <img
                       src="/assets/chi-siamo/woman.png"
                       alt="Mariella Ferraro"
-                      className="h-[96%] w-auto object-contain block select-none"
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain block select-none z-10"
                     />
                   </div>
                   <h3 
@@ -309,14 +318,17 @@ export function AboutUsPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[800px] mx-auto">
                 {/* Arianna Paciolla */}
                 <div className="flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
-                  <div
-                    className="relative w-full aspect-[4/5] rounded-[24px] overflow-hidden bg-cover bg-center mb-5 flex items-end justify-center"
-                    style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
-                  >
+                  <div className="relative w-full aspect-[4/5] mb-5">
+                    {/* Background Card */}
+                    <div
+                      className="absolute inset-x-0 bottom-0 top-[8%] rounded-[24px] bg-cover bg-center"
+                      style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
+                    />
+                    {/* Person Image */}
                     <img
                       src="/assets/chi-siamo/woman.png"
                       alt="Arianna Paciolla"
-                      className="h-[96%] w-auto object-contain block select-none"
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain block select-none z-10"
                     />
                   </div>
                   <h3 
@@ -332,14 +344,17 @@ export function AboutUsPage() {
 
                 {/* Daniela Paonessa */}
                 <div className="flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
-                  <div
-                    className="relative w-full aspect-[4/5] rounded-[24px] overflow-hidden bg-cover bg-center mb-5 flex items-end justify-center"
-                    style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
-                  >
+                  <div className="relative w-full aspect-[4/5] mb-5">
+                    {/* Background Card */}
+                    <div
+                      className="absolute inset-x-0 bottom-0 top-[8%] rounded-[24px] bg-cover bg-center"
+                      style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
+                    />
+                    {/* Person Image */}
                     <img
                       src="/assets/chi-siamo/woman.png"
                       alt="Daniela Paonessa"
-                      className="h-[96%] w-auto object-contain block select-none"
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain block select-none z-10"
                     />
                   </div>
                   <h3 
