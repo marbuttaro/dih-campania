@@ -182,10 +182,14 @@ export function AboutUsPage() {
               </div>
 
               {/* Label: Consiglieri */}
-              <div className="text-center pt-6 pb-2">
-                <span className="text-xs uppercase tracking-widest text-brand-dark-navy/60 font-bold">
+              <div className="text-center pt-16 pb-6">
+                <h3 
+                  className="text-lg sm:text-xl font-medium text-[#013167] uppercase tracking-widest"
+                  style={{ fontFamily: 'Montserrat, sans-serif' }}
+                >
                   Consiglieri
-                </span>
+                </h3>
+                <div className="w-12 h-0.5 bg-[#013167]/20 mx-auto mt-3" />
               </div>
 
               {/* Rows 2 & 3: Board Members Grid (3 columns) */}
