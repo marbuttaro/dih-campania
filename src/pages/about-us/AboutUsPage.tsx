@@ -236,18 +236,18 @@ export function AboutUsPage() {
               {/* Row 1: 3 cards */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                 {/* Gaetano Amatruda */}
-                <div className="flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
+                <div className="group flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
                   <div className="relative w-full aspect-[4/5] mb-5">
                     {/* Background Card */}
                     <div
-                      className="absolute inset-x-0 bottom-0 top-[12%] rounded-[24px] bg-cover bg-center"
+                      className="absolute inset-x-0 bottom-0 top-[12%] rounded-[24px] bg-cover bg-center transition-all duration-300 group-hover:scale-[1.02]"
                       style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
                     />
                     {/* Person Image */}
                     <img
                       src="/assets/chi-siamo/man.png"
                       alt="Gaetano Amatruda"
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain block select-none z-10"
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain block select-none z-10 transition-all duration-300 origin-bottom group-hover:scale-[1.06]"
                     />
                   </div>
                   <h3 
@@ -262,18 +262,18 @@ export function AboutUsPage() {
                 </div>
 
                 {/* Sandra Castaldo */}
-                <div className="flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
+                <div className="group flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
                   <div className="relative w-full aspect-[4/5] mb-5">
                     {/* Background Card */}
                     <div
-                      className="absolute inset-x-0 bottom-0 top-[12%] rounded-[24px] bg-cover bg-center"
+                      className="absolute inset-x-0 bottom-0 top-[12%] rounded-[24px] bg-cover bg-center transition-all duration-300 group-hover:scale-[1.02]"
                       style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
                     />
                     {/* Person Image */}
                     <img
                       src="/assets/chi-siamo/woman.png"
                       alt="Sandra Castaldo"
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain block select-none z-10"
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain block select-none z-10 transition-all duration-300 origin-bottom group-hover:scale-[1.06]"
                     />
                   </div>
                   <h3 
@@ -288,18 +288,18 @@ export function AboutUsPage() {
                 </div>
 
                 {/* Mariella Ferraro */}
-                <div className="flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
+                <div className="group flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
                   <div className="relative w-full aspect-[4/5] mb-5">
                     {/* Background Card */}
                     <div
-                      className="absolute inset-x-0 bottom-0 top-[12%] rounded-[24px] bg-cover bg-center"
+                      className="absolute inset-x-0 bottom-0 top-[12%] rounded-[24px] bg-cover bg-center transition-all duration-300 group-hover:scale-[1.02]"
                       style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
                     />
                     {/* Person Image */}
                     <img
                       src="/assets/chi-siamo/woman.png"
                       alt="Mariella Ferraro"
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain block select-none z-10"
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain block select-none z-10 transition-all duration-300 origin-bottom group-hover:scale-[1.06]"
                     />
                   </div>
                   <h3 
@@ -317,18 +317,18 @@ export function AboutUsPage() {
               {/* Row 2: 2 cards centered */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[800px] mx-auto">
                 {/* Arianna Paciolla */}
-                <div className="flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
+                <div className="group flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
                   <div className="relative w-full aspect-[4/5] mb-5">
                     {/* Background Card */}
                     <div
-                      className="absolute inset-x-0 bottom-0 top-[12%] rounded-[24px] bg-cover bg-center"
+                      className="absolute inset-x-0 bottom-0 top-[12%] rounded-[24px] bg-cover bg-center transition-all duration-300 group-hover:scale-[1.02]"
                       style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
                     />
                     {/* Person Image */}
                     <img
                       src="/assets/chi-siamo/woman.png"
                       alt="Arianna Paciolla"
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain block select-none z-10"
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain block select-none z-10 transition-all duration-300 origin-bottom group-hover:scale-[1.06]"
                     />
                   </div>
                   <h3 
@@ -343,18 +343,18 @@ export function AboutUsPage() {
                 </div>
 
                 {/* Daniela Paonessa */}
-                <div className="flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
+                <div className="group flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
                   <div className="relative w-full aspect-[4/5] mb-5">
                     {/* Background Card */}
                     <div
-                      className="absolute inset-x-0 bottom-0 top-[12%] rounded-[24px] bg-cover bg-center"
+                      className="absolute inset-x-0 bottom-0 top-[12%] rounded-[24px] bg-cover bg-center transition-all duration-300 group-hover:scale-[1.02]"
                       style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
                     />
                     {/* Person Image */}
                     <img
                       src="/assets/chi-siamo/woman.png"
                       alt="Daniela Paonessa"
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain block select-none z-10"
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain block select-none z-10 transition-all duration-300 origin-bottom group-hover:scale-[1.06]"
                     />
                   </div>
                   <h3 
