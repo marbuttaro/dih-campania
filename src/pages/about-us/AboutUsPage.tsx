@@ -232,108 +232,123 @@ export function AboutUsPage() {
               La struttura organizzativa
             </h2>
 
-            <div className="space-y-10">
+            <div className="space-y-12">
               {/* Row 1: 3 cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* Generoso Cogliano */}
-                <div className="shadow-box bg-white/95 p-5 rounded-[24px] flex flex-col items-center text-center">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                {/* Gaetano Amatruda */}
+                <div className="flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
                   <div
-                    className="relative w-full aspect-[4/5] sm:max-w-[240px] rounded-2xl overflow-hidden bg-cover bg-center mb-5 flex items-end justify-center shadow-[inset_0_4px_20px_rgba(0,0,0,0.12)]"
+                    className="relative w-full aspect-[4/5] rounded-[24px] overflow-hidden bg-cover bg-center mb-5 flex items-end justify-center"
                     style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
                   >
                     <img
                       src="/assets/chi-siamo/man.png"
-                      alt="Generoso Cogliano"
-                      className="h-[90%] w-auto object-contain block select-none"
+                      alt="Gaetano Amatruda"
+                      className="h-[96%] w-auto object-contain block select-none"
                     />
                   </div>
-                  <h3 className="text-xl font-bold text-brand-dark-navy mb-1">
+                  <h3 
+                    className="w-full text-lg sm:text-[19px] font-normal italic text-[#013167] pb-2.5 border-b border-[#013167]/30 mb-2.5"
+                    style={{ fontFamily: 'Montserrat, sans-serif' }}
+                  >
                     Gaetano Amatruda
                   </h3>
-                  <span className="text-sm font-semibold text-brand-navy/70">
+                  <span className="text-sm font-normal text-[#013167]/80">
                     amatruda@campaniadih.it
                   </span>
                 </div>
 
-                {/* Sandra Cascio */}
-                <div className="shadow-box bg-white/95 p-5 rounded-[24px] flex flex-col items-center text-center">
+                {/* Sandra Castaldo */}
+                <div className="flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
                   <div
-                    className="relative w-full aspect-[4/5] sm:max-w-[240px] rounded-2xl overflow-hidden bg-cover bg-center mb-5 flex items-end justify-center shadow-[inset_0_4px_20px_rgba(0,0,0,0.12)]"
+                    className="relative w-full aspect-[4/5] rounded-[24px] overflow-hidden bg-cover bg-center mb-5 flex items-end justify-center"
                     style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
                   >
                     <img
                       src="/assets/chi-siamo/woman.png"
-                      alt="Sandra Cascio"
-                      className="h-[90%] w-auto object-contain block select-none"
+                      alt="Sandra Castaldo"
+                      className="h-[96%] w-auto object-contain block select-none"
                     />
                   </div>
-                  <h3 className="text-xl font-bold text-brand-dark-navy mb-1">
+                  <h3 
+                    className="w-full text-lg sm:text-[19px] font-normal italic text-[#013167] pb-2.5 border-b border-[#013167]/30 mb-2.5"
+                    style={{ fontFamily: 'Montserrat, sans-serif' }}
+                  >
                     Sandra Castaldo
                   </h3>
-                  <span className="text-sm font-semibold text-brand-navy/70">
+                  <span className="text-sm font-normal text-[#013167]/80">
                     castaldo@campaniadih.it
                   </span>
                 </div>
 
-                {/* Manuela Pascarella */}
-                <div className="shadow-box bg-white/95 p-5 rounded-[24px] flex flex-col items-center text-center">
+                {/* Mariella Ferraro */}
+                <div className="flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
                   <div
-                    className="relative w-full aspect-[4/5] sm:max-w-[240px] rounded-2xl overflow-hidden bg-cover bg-center mb-5 flex items-end justify-center shadow-[inset_0_4px_20px_rgba(0,0,0,0.12)]"
+                    className="relative w-full aspect-[4/5] rounded-[24px] overflow-hidden bg-cover bg-center mb-5 flex items-end justify-center"
                     style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
                   >
                     <img
                       src="/assets/chi-siamo/woman.png"
-                      alt="Manuela Pascarella"
-                      className="h-[90%] w-auto object-contain block select-none"
+                      alt="Mariella Ferraro"
+                      className="h-[96%] w-auto object-contain block select-none"
                     />
                   </div>
-                  <h3 className="text-xl font-bold text-brand-dark-navy mb-1">
+                  <h3 
+                    className="w-full text-lg sm:text-[19px] font-normal italic text-[#013167] pb-2.5 border-b border-[#013167]/30 mb-2.5"
+                    style={{ fontFamily: 'Montserrat, sans-serif' }}
+                  >
                     Mariella Ferraro
                   </h3>
-                  <span className="text-sm font-semibold text-brand-navy/70">
+                  <span className="text-sm font-normal text-[#013167]/80">
                     ferraro@campaniadih.it
                   </span>
                 </div>
               </div>
 
               {/* Row 2: 2 cards centered */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[800px] mx-auto">
-                {/* Arianna Mensorio */}
-                <div className="shadow-box bg-white/95 p-5 rounded-[24px] flex flex-col items-center text-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[800px] mx-auto">
+                {/* Arianna Paciolla */}
+                <div className="flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
                   <div
-                    className="relative w-full aspect-[4/5] sm:max-w-[240px] rounded-2xl overflow-hidden bg-cover bg-center mb-5 flex items-end justify-center shadow-[inset_0_4px_20px_rgba(0,0,0,0.12)]"
+                    className="relative w-full aspect-[4/5] rounded-[24px] overflow-hidden bg-cover bg-center mb-5 flex items-end justify-center"
                     style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
                   >
                     <img
                       src="/assets/chi-siamo/woman.png"
-                      alt="Arianna Mensorio"
-                      className="h-[90%] w-auto object-contain block select-none"
+                      alt="Arianna Paciolla"
+                      className="h-[96%] w-auto object-contain block select-none"
                     />
                   </div>
-                  <h3 className="text-xl font-bold text-brand-dark-navy mb-1">
+                  <h3 
+                    className="w-full text-lg sm:text-[19px] font-normal italic text-[#013167] pb-2.5 border-b border-[#013167]/30 mb-2.5"
+                    style={{ fontFamily: 'Montserrat, sans-serif' }}
+                  >
                     Arianna Paciolla
                   </h3>
-                  <span className="text-sm font-semibold text-brand-navy/70">
+                  <span className="text-sm font-normal text-[#013167]/80">
                     a.paciolla@campaniadih.it
                   </span>
                 </div>
 
-                {/* Sveva Marascia */}
-                <div className="shadow-box bg-white/95 p-5 rounded-[24px] flex flex-col items-center text-center">
+                {/* Daniela Paonessa */}
+                <div className="flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
                   <div
-                    className="relative w-full aspect-[4/5] sm:max-w-[240px] rounded-2xl overflow-hidden bg-cover bg-center mb-5 flex items-end justify-center shadow-[inset_0_4px_20px_rgba(0,0,0,0.12)]"
+                    className="relative w-full aspect-[4/5] rounded-[24px] overflow-hidden bg-cover bg-center mb-5 flex items-end justify-center"
                     style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
                   >
                     <img
                       src="/assets/chi-siamo/woman.png"
-                      alt="Sveva Marascia"
-                      className="h-[90%] w-auto object-contain block select-none"
+                      alt="Daniela Paonessa"
+                      className="h-[96%] w-auto object-contain block select-none"
                     />
                   </div>
-                  <h3 className="text-xl font-bold text-brand-dark-navy mb-1">
+                  <h3 
+                    className="w-full text-lg sm:text-[19px] font-normal italic text-[#013167] pb-2.5 border-b border-[#013167]/30 mb-2.5"
+                    style={{ fontFamily: 'Montserrat, sans-serif' }}
+                  >
                     Daniela Paonessa
                   </h3>
-                  <span className="text-sm font-semibold text-brand-navy/70">
+                  <span className="text-sm font-normal text-[#013167]/80">
                     paonessa@campaniadih.it
                   </span>
                 </div>
