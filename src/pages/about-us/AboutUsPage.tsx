@@ -240,7 +240,7 @@ export function AboutUsPage() {
                   <div className="relative w-full aspect-[4/5] mb-5">
                     {/* Background Card */}
                     <div
-                      className="absolute inset-x-0 bottom-0 top-[8%] rounded-[24px] bg-cover bg-center"
+                      className="absolute inset-x-0 bottom-0 top-[12%] rounded-[24px] bg-cover bg-center"
                       style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
                     />
                     {/* Person Image */}
@@ -266,7 +266,7 @@ export function AboutUsPage() {
                   <div className="relative w-full aspect-[4/5] mb-5">
                     {/* Background Card */}
                     <div
-                      className="absolute inset-x-0 bottom-0 top-[8%] rounded-[24px] bg-cover bg-center"
+                      className="absolute inset-x-0 bottom-0 top-[12%] rounded-[24px] bg-cover bg-center"
                       style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
                     />
                     {/* Person Image */}
@@ -292,7 +292,7 @@ export function AboutUsPage() {
                   <div className="relative w-full aspect-[4/5] mb-5">
                     {/* Background Card */}
                     <div
-                      className="absolute inset-x-0 bottom-0 top-[8%] rounded-[24px] bg-cover bg-center"
+                      className="absolute inset-x-0 bottom-0 top-[12%] rounded-[24px] bg-cover bg-center"
                       style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
                     />
                     {/* Person Image */}
@@ -321,7 +321,7 @@ export function AboutUsPage() {
                   <div className="relative w-full aspect-[4/5] mb-5">
                     {/* Background Card */}
                     <div
-                      className="absolute inset-x-0 bottom-0 top-[8%] rounded-[24px] bg-cover bg-center"
+                      className="absolute inset-x-0 bottom-0 top-[12%] rounded-[24px] bg-cover bg-center"
                       style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
                     />
                     {/* Person Image */}
@@ -347,7 +347,7 @@ export function AboutUsPage() {
                   <div className="relative w-full aspect-[4/5] mb-5">
                     {/* Background Card */}
                     <div
-                      className="absolute inset-x-0 bottom-0 top-[8%] rounded-[24px] bg-cover bg-center"
+                      className="absolute inset-x-0 bottom-0 top-[12%] rounded-[24px] bg-cover bg-center"
                       style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
                     />
                     {/* Person Image */}
