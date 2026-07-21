@@ -180,7 +180,7 @@ export function InnovaCoPage() {
                   ref={q1WrapRef}
                   className="lg:absolute inset-0 flex items-center justify-center px-4"
                 >
-                  <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-light text-brand-navy max-w-[900px] leading-snug">
+                  <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-light text-brand-navy max-w-[900px] lg:max-w-[1080px] leading-snug text-balance">
                     <TextType
                       text="Cerchi una soluzione o hai un'idea o un progetto da affrontare nel mondo digitale?"
                       typingSpeed={32}

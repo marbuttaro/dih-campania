@@ -1,7 +1,25 @@
 import { useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
-import { ArrowLeft, ArrowRight, Check, X } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Check, ChevronDown, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
+
+const TIPOLOGIA_PARTNER_OPTIONS = [
+  'Grandi Imprese',
+  'Medie Imprese',
+  'Piccole Imprese',
+  'Micro, Start-up innovative',
+  'Incubatori',
+  'Distretti/poli/cluster',
+  'Università/enti di formazione',
+  'Organismi di Ricerca pubblici e privati',
+  'Istituzioni nazionali ed internazionali operanti nel campo della ricerca e sperimentazione',
+  'Centri di competenza, European Digital Innovation Hub, Digital Innovation Hub, Poli di innovazione',
+  'Enti istituzionali',
+  'Associazioni, Ordini Professionali, Fondazioni ed altri Enti di diritto privato',
+  'Banche, investitori e fondi (ovvero Fondazioni bancarie e Istituti di credito)',
+  'Assicurazioni',
+  "Altri soggetti di diritto pubblico o privato, che condividano gli scopi e l'oggetto della Società",
+]
 
 type Step = 1 | 2 | 3
 
@@ -71,22 +89,51 @@ function Field({
   onChange,
   className,
   type = 'text',
+  options,
 }: {
   label: string
   value: string
   onChange: (v: string) => void
   className?: string
   type?: string
+  options?: string[]
 }) {
+  const fieldClassName =
+    'w-full bg-[#E7EDF0] rounded-lg px-4 py-3 text-brand-dark-navy placeholder:text-brand-navy/30 border-0 shadow-[inset_2px_2px_5px_rgba(164,177,188,0.35),inset_-2px_-2px_5px_rgba(255,255,255,0.7)] focus:outline-none focus:ring-2 focus:ring-brand-light-blue/50 transition-shadow'
+
   return (
     <label className={cn('block', className)}>
       <span className="block text-sm font-semibold text-brand-navy mb-2">{label}</span>
-      <input
-        type={type}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-full bg-[#E7EDF0] rounded-lg px-4 py-3 text-brand-dark-navy placeholder:text-brand-navy/30 border-0 shadow-[inset_2px_2px_5px_rgba(164,177,188,0.35),inset_-2px_-2px_5px_rgba(255,255,255,0.7)] focus:outline-none focus:ring-2 focus:ring-brand-light-blue/50 transition-shadow"
-      />
+      {options ? (
+        <div className="relative">
+          <select
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            className={cn(
+              fieldClassName,
+              'appearance-none pr-10 cursor-pointer',
+              !value && 'text-brand-navy/30',
+            )}
+          >
+            <option value="" disabled>
+              Seleziona...
+            </option>
+            {options.map((opt) => (
+              <option key={opt} value={opt} className="text-brand-dark-navy">
+                {opt}
+              </option>
+            ))}
+          </select>
+          <ChevronDown className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 size-4 text-brand-navy/50" />
+        </div>
+      ) : (
+        <input
+          type={type}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className={fieldClassName}
+        />
+      )}
     </label>
   )
 }
@@ -299,6 +346,7 @@ export function PartnerFormModal({
                       label="Tipologia Partner"
                       value={form.tipologiaPartner}
                       onChange={(v) => set('tipologiaPartner', v)}
+                      options={TIPOLOGIA_PARTNER_OPTIONS}
                       className="pt-2"
                     />
                   </div>
