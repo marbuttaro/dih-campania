@@ -27,7 +27,7 @@ export function GlowCursor() {
       if (now - lastCacheTime.current > 600) {
         buttonsCache.current = Array.from(
           document.querySelectorAll('button, a[href], [role="button"]')
-        ).filter(el => !el.closest('[data-no-glow]'))
+        ).filter(el => !el.closest('[data-no-glow]') && !el.closest('[aria-hidden="true"]'))
         lastCacheTime.current = now
       }
 
