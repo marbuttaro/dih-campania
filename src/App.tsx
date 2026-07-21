@@ -1,3 +1,4 @@
+import { GlowCursor } from '@/components/effects/GlowCursor'
 import { About } from '@/components/sections/About'
 import { Community } from '@/components/sections/Community'
 import { Events } from '@/components/sections/Events'
@@ -13,6 +14,7 @@ import { Services } from '@/components/sections/Services'
 function App() {
   return (
     <div className="flex flex-col min-h-screen">
+      <GlowCursor />
       <Navbar />
       <main>
         <Hero />

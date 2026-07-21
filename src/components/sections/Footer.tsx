@@ -43,7 +43,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-brand-dark-navy text-white pt-20 pb-10">
+    <footer data-no-glow className="bg-brand-dark-navy text-white pt-20 pb-10">
       <div className="container-page">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-10 lg:gap-16 mb-16">
           <div>

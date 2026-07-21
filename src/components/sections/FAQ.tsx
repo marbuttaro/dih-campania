@@ -30,7 +30,7 @@ const FAQ_ITEMS = [
 
 export function FAQ() {
   return (
-    <section id="faq" className="py-20 lg:py-28">
+    <section id="faq" data-no-glow className="py-20 lg:py-28">
       <div className="container-page">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-24 items-start">
           <div className="flex-1 lg:sticky lg:top-36">

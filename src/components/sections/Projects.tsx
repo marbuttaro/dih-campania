@@ -19,7 +19,7 @@ export function Projects() {
     <section
       id="progetti"
       ref={ref}
-      className="relative py-16 lg:py-28"
+      className="relative pt-6 pb-16 lg:pt-10 lg:pb-28"
     >
       <div className="container-page">
         <div className="mb-12">

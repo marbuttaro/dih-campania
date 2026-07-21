@@ -1,10 +1,16 @@
-import { useState, useEffect, useRef } from 'react'
+import { useRef, useEffect, useState } from 'react'
 
-import { cn } from '@/lib/utils'
+function remap(v: number, inLo: number, inHi: number, outLo: number, outHi: number) {
+  return outLo + Math.max(0, Math.min(1, (v - inLo) / (inHi - inLo))) * (outHi - outLo)
+}
 
 export function Community() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const [progress, setProgress] = useState(0)
+  const cardLeftRef = useRef<HTMLDivElement>(null)
+  const cardRightRef = useRef<HTMLDivElement>(null)
+  const titleRef = useRef<HTMLHeadingElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+  const [step, setStep] = useState(0)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -12,61 +18,88 @@ export function Community() {
       const rect = containerRef.current.getBoundingClientRect()
       const totalHeight = rect.height - window.innerHeight
       if (totalHeight <= 0) return
+      const p = Math.max(0, Math.min(1, -rect.top / totalHeight))
 
-      // progress goes from 0 to 1
-      const p = -rect.top / totalHeight
-      const clampedP = Math.max(0, Math.min(1, p))
-      setProgress(clampedP)
+      setStep(p < 0.33 ? 0 : p < 0.66 ? 1 : 2)
+
+      // Scroll 1: cards exit + title fades IN simultaneously (0.05 → 0.45)
+      const cardExit    = remap(p, 0.05, 0.45, 0, 1)
+      const titleFadeIn = remap(p, 0.05, 0.45, 0, 1)
+
+      // Scroll 2: title fades OUT (0.45 → 0.65, no pause), then content fades IN (0.68 → 0.84)
+      const titleFadeOut   = remap(p, 0.45, 0.65, 0, 1)
+      const contentOpacity = remap(p, 0.68, 0.84, 0, 1)
+
+      // Title: grows in during scroll 1, then shrinks out during scroll 2 — never both at once
+      const titleOpacity = Math.min(titleFadeIn, 1 - titleFadeOut)
+
+      const isDesktop = window.innerWidth >= 1024
+
+      if (cardLeftRef.current) {
+        cardLeftRef.current.style.transform = isDesktop
+          ? `translateX(${-cardExit * 150}vw) rotate(${-3 - cardExit * 12}deg)`
+          : `translateY(${-cardExit * 200}%)`
+        cardLeftRef.current.style.opacity = String(1 - cardExit)
+      }
+      if (cardRightRef.current) {
+        cardRightRef.current.style.transform = isDesktop
+          ? `translateX(${cardExit * 150}vw) rotate(${3 + cardExit * 12}deg)`
+          : `translateY(${-cardExit * 200}%)`
+        cardRightRef.current.style.opacity = String(1 - cardExit)
+      }
+      if (titleRef.current) {
+        titleRef.current.style.opacity = String(titleOpacity)
+      }
+      if (contentRef.current) {
+        contentRef.current.style.opacity = String(contentOpacity)
+        contentRef.current.style.pointerEvents = contentOpacity > 0.1 ? 'auto' : 'none'
+      }
+      // Enable glow cursor only when the button is visible
+      if (containerRef.current) {
+        if (contentOpacity > 0.1) {
+          containerRef.current.removeAttribute('data-no-glow')
+        } else {
+          containerRef.current.setAttribute('data-no-glow', '')
+        }
+      }
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll() // Run once initially
-
+    window.addEventListener('resize', handleScroll, { passive: true })
+    handleScroll()
     return () => {
       window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
     }
   }, [])
-
-  // Map progress to steps: 0 is the initial cards view, 2 is the final CTA view.
-  // We skip step 1 to eliminate the empty intermediate state.
-  const step = progress < 0.35 ? 0 : 2
-
-  // Progress width goes from 15% to 100%
-  const currentWidth = 15 + progress * 85
 
   return (
     <section
       id="community"
+      data-no-glow
       ref={containerRef}
-      className="relative bg-[#F0F4F8] h-[250vh] select-none"
+      className="relative h-[270vh] select-none"
     >
       <div className="sticky top-0 h-screen min-h-[600px] lg:min-h-[700px] flex items-center justify-center overflow-hidden w-full">
         <div className="container-page w-full flex flex-col items-center relative min-h-[380px] py-10">
           <div className="relative w-full flex flex-col items-center text-center">
+
+            {/* Title — starts invisible, appears during scroll 1, exits during scroll 2 */}
             <h2
-              className={cn(
-                'font-light text-[40px] sm:text-5xl lg:text-[64px] text-brand-navy leading-[1.1] z-10 transition-all duration-500',
-                step === 2 && 'opacity-0 scale-90',
-              )}
+              ref={titleRef}
+              className="font-light text-[40px] sm:text-5xl lg:text-[64px] text-brand-navy leading-[1.1] z-10"
+              style={{ opacity: 0 }}
             >
               Entra a far parte della <br />
               <span className="text-brand-light-blue font-semibold">Community</span>
             </h2>
 
-            {/* Floating glass cards: positioned absolutely on lg+, stacked on small */}
-            <div
-              className={cn(
-                'pointer-events-none lg:absolute inset-0 z-20 flex flex-col lg:flex-row gap-4 lg:gap-0 items-center justify-center mt-8 lg:mt-0',
-                step >= 1 && 'lg:pointer-events-none',
-              )}
-            >
+            {/* Cards — exit during scroll 1 */}
+            <div className="pointer-events-none lg:absolute inset-0 z-20 flex flex-col lg:flex-row gap-4 lg:gap-0 items-center justify-center mt-8 lg:mt-0">
               <div
-                className={cn(
-                  'pointer-events-auto bg-white/95 backdrop-blur-md border border-white/80 rounded-3xl p-7 lg:p-9 w-[90%] sm:w-[420px] lg:w-[440px] shadow-[0_15px_45px_rgba(0,0,0,0.1)] transition-all duration-700',
-                  'lg:absolute lg:left-[10%] lg:top-[5%] lg:-rotate-3',
-                  step >= 1 && 'lg:-translate-x-[150vw] lg:-rotate-[15deg] max-lg:-translate-y-[200%] max-lg:opacity-0',
-                )}
-                style={{ transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)' }}
+                ref={cardLeftRef}
+                className="pointer-events-auto bg-white/95 backdrop-blur-md border border-white/80 rounded-3xl p-7 lg:p-9 w-[90%] sm:w-[420px] lg:w-[440px] shadow-[0_15px_45px_rgba(0,0,0,0.1)] lg:absolute lg:left-[10%] lg:top-[5%]"
+                style={{ willChange: 'transform, opacity' }}
               >
                 <p className="text-lg lg:text-[26px] text-brand-dark-navy leading-snug m-0">
                   Offri <strong>soluzioni innovative</strong> e vuoi metterle al servizio delle
@@ -74,12 +107,9 @@ export function Community() {
                 </p>
               </div>
               <div
-                className={cn(
-                  'pointer-events-auto bg-white/95 backdrop-blur-md border border-white/80 rounded-3xl p-7 lg:p-9 w-[90%] sm:w-[420px] lg:w-[440px] shadow-[0_15px_45px_rgba(0,0,0,0.1)] transition-all duration-700',
-                  'lg:absolute lg:right-[10%] lg:bottom-[5%] lg:rotate-3',
-                  step >= 1 && 'lg:translate-x-[150vw] lg:rotate-[15deg] max-lg:-translate-y-[200%] max-lg:opacity-0',
-                )}
-                style={{ transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)' }}
+                ref={cardRightRef}
+                className="pointer-events-auto bg-white/95 backdrop-blur-md border border-white/80 rounded-3xl p-7 lg:p-9 w-[90%] sm:w-[420px] lg:w-[440px] shadow-[0_15px_45px_rgba(0,0,0,0.1)] lg:absolute lg:right-[10%] lg:bottom-[5%]"
+                style={{ willChange: 'transform, opacity' }}
               >
                 <p className="text-lg lg:text-[26px] text-brand-dark-navy leading-snug m-0">
                   Hai un'<strong>idea, un progetto o una sfida</strong> da affrontare nel mondo
@@ -88,42 +118,37 @@ export function Community() {
               </div>
             </div>
 
+            {/* Content — enters during scroll 2, only after title is fully gone */}
             <div
-              className={cn(
-                'lg:absolute lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 mt-10 lg:mt-0 w-full px-4 lg:px-10 text-center flex flex-col items-center transition-all duration-500 z-30',
-                step === 2
-                  ? 'opacity-100 lg:scale-100 visible'
-                  : 'opacity-0 lg:scale-90 invisible',
-              )}
+              ref={contentRef}
+              className="lg:absolute lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 mt-10 lg:mt-0 w-full px-4 lg:px-10 text-center flex flex-col items-center z-30"
+              style={{ opacity: 0, pointerEvents: 'none' }}
             >
               <p className="text-lg sm:text-xl lg:text-2xl text-brand-dark-navy leading-relaxed mb-8 lg:mb-10 max-w-[800px]">
-                Uno spazio aperto dove imprese, professionisti, startup ed enti si incontrano per
-                crescere insieme, scambiarsi competenze e creare soluzioni reali per l'innovazione.
+                Un ecosistema dell'innovazione che unisce imprese, università, enti di ricerca e
+                professionisti che propongono soluzioni, condividono know-how e sviluppano progetti
               </p>
-              <button
-                type="button"
-                className="bg-[#E3EAEC] text-brand-dark-navy px-10 sm:px-12 py-4 sm:py-[18px] rounded-xl font-semibold text-lg sm:text-2xl border-0 cursor-pointer transition-all duration-300 hover:-translate-y-0.5"
+              <a
+                href="/innova-co.html"
+                className="text-white px-10 sm:px-12 py-4 sm:py-[18px] rounded-xl font-semibold text-lg sm:text-2xl border-0 cursor-pointer transition-all duration-300 hover:-translate-y-0.5 inline-block"
                 style={{
-                  boxShadow:
-                    '6px 6px 12px rgba(0, 0, 0, 0.08), -6px -6px 12px rgba(255, 255, 255, 0.8)',
+                  backgroundColor: '#013167',
+                  boxShadow: '6px 6px 12px rgba(0, 0, 0, 0.08), -6px -6px 12px rgba(255, 255, 255, 0.8)',
                 }}
               >
                 Scopri la nostra community
-              </button>
+              </a>
             </div>
           </div>
 
-          {/* Dynamic glassmorphic progress bar */}
+          {/* Step progress indicator */}
           <div className="absolute bottom-2 left-0 right-0 flex justify-center pb-5 z-40">
-            <div 
-              className="relative w-[90%] max-w-[600px] h-5 rounded-full bg-white/35 backdrop-blur-sm border-2 border-white/70 shadow-[inset_0_2px_4px_rgba(0,0,0,0.1),0_4px_24px_rgba(0,0,0,0.05)] flex items-center p-[2px] overflow-hidden"
-              aria-label="Community step progress"
-            >
-              <div
-                className="h-full rounded-full bg-white/95 border border-white shadow-[0_0_12px_rgba(255,255,255,0.8),0_4px_16px_rgba(114,138,183,0.5)] transition-[width] duration-300 ease-out"
-                style={{ width: `${currentWidth}%` }}
-              />
-            </div>
+            <img
+              src={`/assets/barra${step + 1}.svg`}
+              alt=""
+              aria-hidden="true"
+              className="w-[90%] max-w-[600px]"
+            />
           </div>
         </div>
       </div>

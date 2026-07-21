@@ -10,7 +10,7 @@ export function Experience() {
   const y = useTransform(scrollYProgress, [0, 1], [40, -40])
 
   return (
-    <section id="esperienza" ref={ref} className="relative py-16">
+    <section id="esperienza" ref={ref} className="relative pt-6 pb-16">
       <div className="container-page flex justify-center">
         <div className="w-full max-w-[1200px] shadow-box">
           <motion.h2

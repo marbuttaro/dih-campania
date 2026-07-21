@@ -85,7 +85,7 @@ export function Services() {
           className="mb-10 flex justify-center sm:block"
           style={{ y: yNav }}
         >
-          <div className="grid grid-cols-2 sm:flex sm:flex-1 sm:justify-between gap-y-6 gap-x-4 sm:gap-2">
+          <div data-no-glow className="grid grid-cols-2 sm:flex sm:flex-1 sm:justify-between gap-y-6 gap-x-4 sm:gap-2">
             {SERVICES.map((service, index) => (
               <button
                 key={service.id}
