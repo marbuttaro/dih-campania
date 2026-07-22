@@ -104,15 +104,25 @@ export function AboutUsPage() {
                     </h3>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                    {Array.from({ length: 6 }).map((_, i) => (
-                      <div key={`socio-${i}`} className="flex items-center gap-4 bg-white/5 backdrop-blur-md border border-white/30 rounded-xl p-4 min-h-[92px] transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 shadow-sm">
-                        <img
-                          src="/assets/chi-siamo/logo_unione_og_bianco 1.svg"
-                          alt="Unione Industriali Napoli"
-                          className="h-10 w-auto object-contain shrink-0"
-                        />
-                        <span className="text-sm font-light text-white/90 leading-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                          Unione Industriali<br />Napoli
+                    {[
+                      { src: '/assets/chi-siamo/soci/confindustria-avellino.png', alt: 'Confindustria Avellino', name: 'Confindustria\nAvellino' },
+                      { src: '/assets/chi-siamo/soci/confindustria-benevento.png', alt: 'Confindustria Benevento', name: 'Confindustria\nBenevento' },
+                      { src: '/assets/chi-siamo/soci/confindustria-caserta.png', alt: 'Confindustria Caserta', name: 'Confindustria\nCaserta' },
+                      { src: '/assets/chi-siamo/soci/confindustria-salerno.png', alt: 'Confindustria Salerno', name: 'Confindustria\nSalerno' },
+                      { src: '/assets/chi-siamo/soci/ance.png', alt: 'Ance Campania', name: 'Ance\nCampania' },
+                    ].map((socio) => (
+                      <div key={socio.alt} className="flex items-center gap-4 bg-white/5 backdrop-blur-md border border-white/30 rounded-xl p-4 min-h-[92px] transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 shadow-sm">
+                        {socio.src && (
+                          <div className="h-12 w-20 flex items-center justify-center shrink-0">
+                            <img
+                              src={socio.src}
+                              alt={socio.alt}
+                              className="max-h-full max-w-full object-contain"
+                            />
+                          </div>
+                        )}
+                        <span className="text-sm font-light text-white/90 leading-tight whitespace-pre-line" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                          {socio.name}
                         </span>
                       </div>
                     ))}
@@ -127,15 +137,23 @@ export function AboutUsPage() {
                     </h3>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                    {Array.from({ length: 3 }).map((_, i) => (
-                      <div key={`partner-${i}`} className="flex items-center gap-4 bg-white/5 backdrop-blur-md border border-white/30 rounded-xl p-4 min-h-[92px] transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 shadow-sm">
-                        <img
-                          src="/assets/chi-siamo/logo_unione_og_bianco 1.svg"
-                          alt="Unione Industriali Napoli"
-                          className="h-10 w-auto object-contain shrink-0"
-                        />
-                        <span className="text-sm font-light text-white/90 leading-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                          Unione Industriali<br />Napoli
+                    {[
+                      { src: null, alt: 'TIM', name: 'TIM' },
+                      { src: '/assets/chi-siamo/partner/windtre.png', alt: 'WindTre', name: 'WindTre' },
+                      { src: '/assets/chi-siamo/partner/netgroup.png', alt: 'Netgroup', name: 'Netgroup' },
+                    ].map((partner) => (
+                      <div key={partner.alt} className="flex items-center gap-4 bg-white/5 backdrop-blur-md border border-white/30 rounded-xl p-4 min-h-[92px] transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 shadow-sm">
+                        {partner.src && (
+                          <div className="h-12 w-20 flex items-center justify-center shrink-0">
+                            <img
+                              src={partner.src}
+                              alt={partner.alt}
+                              className="max-h-full max-w-full object-contain"
+                            />
+                          </div>
+                        )}
+                        <span className="text-sm font-light text-white/90 leading-tight whitespace-pre-line" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                          {partner.name}
                         </span>
                       </div>
                     ))}
