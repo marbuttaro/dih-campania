@@ -130,11 +130,7 @@ export function Community() {
               </p>
               <a
                 href="/innova-co.html"
-                className="text-white px-10 sm:px-12 py-4 sm:py-[18px] rounded-xl font-semibold text-lg sm:text-2xl border-0 cursor-pointer transition-all duration-300 hover:-translate-y-0.5 inline-block"
-                style={{
-                  backgroundColor: '#013167',
-                  boxShadow: '6px 6px 12px rgba(0, 0, 0, 0.08), -6px -6px 12px rgba(255, 255, 255, 0.8)',
-                }}
+                className="inline-block bg-brand-ice/30 text-brand-dark-navy px-9 py-3.5 rounded-lg font-semibold border-0 cursor-pointer shadow-[0_4px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)] no-underline"
               >
                 Scopri la nostra community
               </a>

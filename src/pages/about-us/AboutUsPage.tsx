@@ -138,23 +138,18 @@ export function AboutUsPage() {
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                     {[
-                      { src: null, alt: 'TIM', name: 'TIM' },
-                      { src: '/assets/chi-siamo/partner/windtre.png', alt: 'WindTre', name: 'WindTre' },
-                      { src: '/assets/chi-siamo/partner/netgroup.png', alt: 'Netgroup', name: 'Netgroup' },
+                      { src: null, alt: 'TIM' },
+                      { src: '/assets/chi-siamo/partner/windtre.png', alt: 'WindTre' },
+                      { src: '/assets/chi-siamo/partner/netgroup.png', alt: 'Netgroup' },
                     ].map((partner) => (
-                      <div key={partner.alt} className="flex items-center gap-4 bg-white/5 backdrop-blur-md border border-white/30 rounded-xl p-4 min-h-[92px] transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 shadow-sm">
+                      <div key={partner.alt} className="flex items-center justify-center bg-white/5 backdrop-blur-md border border-white/30 rounded-xl p-4 min-h-[92px] transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 shadow-sm">
                         {partner.src && (
-                          <div className="h-12 w-20 flex items-center justify-center shrink-0">
-                            <img
-                              src={partner.src}
-                              alt={partner.alt}
-                              className="max-h-full max-w-full object-contain"
-                            />
-                          </div>
+                          <img
+                            src={partner.src}
+                            alt={partner.alt}
+                            className="max-h-12 max-w-[80%] object-contain"
+                          />
                         )}
-                        <span className="text-sm font-light text-white/90 leading-tight whitespace-pre-line" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                          {partner.name}
-                        </span>
                       </div>
                     ))}
                   </div>
@@ -210,10 +205,16 @@ export function AboutUsPage() {
                 <div className="w-12 h-0.5 bg-[#013167]/20 mx-auto mt-3" />
               </div>
 
-              {/* Rows 2 & 3: Board Members Grid (3 columns) */}
+              {/* Board Members Grid (3 columns), alphabetical by surname */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
+                  <span className="text-lg font-medium text-[#001933]">Francesco Benucci</span>
+                </div>
+                <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
                   <span className="text-lg font-medium text-[#001933]">Emilio De Vizia</span>
+                </div>
+                <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
+                  <span className="text-lg font-medium text-[#001933]">Giuseppe Esposito Mocerino</span>
                 </div>
                 <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
                   <span className="text-lg font-medium text-[#001933]">Maria Luisa Faraone Mennella</span>
@@ -225,15 +226,8 @@ export function AboutUsPage() {
                   <span className="text-lg font-medium text-[#001933]">Michele Lucantonio</span>
                 </div>
                 <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
-                  <span className="text-lg font-medium text-[#001933]">Giuseppe Esposito Mocerino</span>
-                </div>
-                <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
                   <span className="text-lg font-medium text-[#001933]">Antonio Palumbo</span>
                 </div>
-              </div>
-
-              {/* Row 4: Bottom Board Members (2 centered) */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[800px] mx-auto">
                 <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
                   <span className="text-lg font-medium text-[#001933]">Beniamino Schiavone</span>
                 </div>
@@ -253,6 +247,32 @@ export function AboutUsPage() {
             <div className="space-y-12">
               {/* Row 1: 3 cards */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                {/* Edoardo Imperiale */}
+                <div className="group flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
+                  <div className="relative w-full aspect-[4/5] mb-5">
+                    {/* Background Card */}
+                    <div
+                      className="absolute inset-x-0 bottom-0 top-[12%] rounded-[24px] bg-cover bg-center transition-all duration-300 origin-bottom group-hover:scale-[1.02]"
+                      style={{ backgroundImage: "url('/assets/chi-siamo/gradient.svg')" }}
+                    />
+                    {/* Person Image */}
+                    <img
+                      src="/assets/chi-siamo/man.png"
+                      alt="Edoardo Imperiale"
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain block select-none z-10 transition-all duration-300 origin-bottom group-hover:scale-[1.06]"
+                    />
+                  </div>
+                  <h3
+                    className="w-full text-lg sm:text-[19px] font-normal italic text-[#013167] pb-2.5 border-b border-[#013167]/30 mb-2.5"
+                    style={{ fontFamily: 'Montserrat, sans-serif' }}
+                  >
+                    Edoardo Imperiale
+                  </h3>
+                  <span className="text-sm font-normal text-[#013167]/80">
+                    direzione@campaniadih.it
+                  </span>
+                </div>
+
                 {/* Gaetano Amatruda */}
                 <div className="group flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
                   <div className="relative w-full aspect-[4/5] mb-5">
@@ -305,6 +325,10 @@ export function AboutUsPage() {
                   </span>
                 </div>
 
+              </div>
+
+              {/* Row 2: 3 cards */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                 {/* Mariella Ferraro */}
                 <div className="group flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
                   <div className="relative w-full aspect-[4/5] mb-5">
@@ -320,7 +344,7 @@ export function AboutUsPage() {
                       className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-auto object-contain block select-none z-10 transition-all duration-300 origin-bottom group-hover:scale-[1.06]"
                     />
                   </div>
-                  <h3 
+                  <h3
                     className="w-full text-lg sm:text-[19px] font-normal italic text-[#013167] pb-2.5 border-b border-[#013167]/30 mb-2.5"
                     style={{ fontFamily: 'Montserrat, sans-serif' }}
                   >
@@ -330,10 +354,7 @@ export function AboutUsPage() {
                     ferraro@campaniadih.it
                   </span>
                 </div>
-              </div>
 
-              {/* Row 2: 2 cards centered */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[800px] mx-auto">
                 {/* Arianna Paciolla */}
                 <div className="group flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
                   <div className="relative w-full aspect-[4/5] mb-5">

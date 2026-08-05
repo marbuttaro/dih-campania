@@ -4,19 +4,20 @@ import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
 import { TextType } from '@/components/effects/TextType'
 import { PartnerFormModal } from './PartnerFormModal'
+import { SolutionRequestModal } from './SolutionRequestModal'
+import { NetworkHotspots } from '@/components/effects/NetworkHotspots'
 
 function remap(v: number, inLo: number, inHi: number, outLo: number, outHi: number) {
   return outLo + Math.max(0, Math.min(1, (v - inLo) / (inHi - inLo))) * (outHi - outLo)
 }
 
-// Positions/sizes lifted straight from the source artwork's viewBox (widened to
-// 1415x703 so a ring that bled past the original 1361 edge is no longer clipped),
-// converted to percentages so the hotspots stay locked onto their node
-// regardless of how large the network graphic is rendered.
+// Order must match the three "filled-center" nodes baked into NetworkHotspots
+// (indices 8, 9, 10 of its NODES array): Un primo orientamento, La rete dei
+// partner, L'elenco dei servizi attivi.
 const NETWORK_HOTSPOTS = [
-  { label: 'Un primo orientamento', xPct: 28.09, yPct: 10.85, wPct: 7.99, hPct: 16.07, align: 'right' as const },
-  { label: 'La rete dei partner', xPct: 29.93, yPct: 55.38, wPct: 9.05, hPct: 18.21, align: 'right' as const },
-  { label: "L'elenco dei servizi attivi", xPct: 55.51, yPct: 41.86, wPct: 4.73, hPct: 9.53, align: 'left' as const },
+  { label: 'Un primo orientamento', align: 'right' as const },
+  { label: 'La rete dei partner', align: 'right' as const },
+  { label: "L'elenco dei servizi attivi", align: 'left' as const },
 ]
 
 type ParticipationTab = 'offro' | 'cerco'
@@ -36,22 +37,127 @@ const PARTICIPATION_CONTENT: Record<
 }
 
 const COMMUNITY_MEMBERS = [
-  { name: 'WARIAN SRL', location: 'Mercato San Severino', url: '#' },
-  { name: 'WARIAN SRL', location: 'Mercato San Severino', url: '#' },
-  { name: 'WARIAN SRL', location: 'Mercato San Severino', url: '#' },
-  { name: 'WARIAN SRL', location: 'Mercato San Severino', url: '#' },
-  { name: 'WARIAN SRL', location: 'Mercato San Severino', url: '#' },
-  { name: 'WARIAN SRL', location: 'Mercato San Severino', url: '#' },
+  {
+    name: 'Infosfera srls',
+    logo: '/assets/innova-co/partner-logos/infosfera.png',
+    description:
+      'Infosfera S.r.l.s. è una PMI innovativa che sviluppa piattaforme software e soluzioni di intelligenza artificiale per trasformare dati, documenti e processi in conoscenza condivisa. Aiutiamo imprese ed enti a valorizzare il proprio patrimonio informativo e a prendere decisioni più consapevoli.',
+    url: 'https://memoria.infosfera.win/',
+  },
+  {
+    name: "TIME VISION SOCIETA' COOPERATIVA A R.L.",
+    logo: '/assets/innova-co/partner-logos/timevision.png',
+    description:
+      "Time Vision è un'Agenzia per il Lavoro e Ente di Formazione che supporta le imprese nell'innovazione. Offriamo soluzioni su misura di recruiting, upskilling e consulenza HR per trasformare l'evoluzione delle competenze e delle risorse umane in crescita aziendale.",
+    url: 'https://www.timevision.it',
+  },
+  {
+    name: 'WARIAN SRL',
+    logo: '/assets/innova-co/partner-logos/warian.png',
+    description:
+      'Warian SRL supporta imprese e PA nei percorsi di trasformazione digitale attraverso soluzioni di cloud, connettività, cybersecurity e infrastrutture ICT evolute, contribuendo alla Community INNOVA.CO con competenze tecniche e capacità progettuale.',
+    url: 'https://www.warian.net',
+  },
+  {
+    name: 'Strategic Management Partners srl',
+    logo: '/assets/innova-co/partner-logos/strategic-management-partners.png',
+    description:
+      'Società di Management Consulting, a matrice Italiana, fondata nel 2000 e specializzata in attività di Digital Transformation e Governance.',
+    url: 'https://www.strategicmp.it',
+  },
+  {
+    name: 'SMARTFAB SOLUTIONS S.R.L.',
+    logo: '/assets/innova-co/partner-logos/smartfab.svg',
+    description:
+      'Smartfab Solutions è il partner per la Smart Factory. Offriamo consulenza, implementazione e sviluppo di soluzioni Industry 4.0 e 5.0, integrando macchine, sistemi e dati per trasformare le informazioni in valore e rendere i processi più efficienti e sostenibili.',
+    url: 'https://www.smartfabsolutions.it/',
+  },
+  {
+    name: 'VJLAB SRL',
+    logo: '/assets/innova-co/partner-logos/vjlab.png',
+    description:
+      'VJLAB S.r.l. è una società multidisciplinare che offre consulenza strategica, compliance, certificazioni ISO, cybersecurity, informatica forense, sviluppo software, marketing, formazione e innovazione, supportando imprese ed enti nella crescita, digitalizzazione e gestione dei processi aziendali.',
+    url: 'https://vjdigital.it',
+  },
+  {
+    name: 'Flugantia Lab s.r.l.',
+    logo: null,
+    description:
+      "Forniamo tecnologie innovative per il monitoraggio e la movimentazione ottimale dei contenitori industriali fissi o scarrabili. Sfruttiamo l'Intelligenza Artificiale, l'IoT e il cloud per creare un gemello digitale dell'intera raccolta rifiuti e supportare le decisioni operative in tempo reale.",
+    url: 'https://www.flugantia.it/',
+  },
+  {
+    name: 'ENJOIP Srl',
+    logo: '/assets/innova-co/partner-logos/enjoip.png',
+    description:
+      'Azienda di telecomunicazioni e servizi IT, parte del Gruppo Planetel. Affianchiamo le imprese del Centro-Sud Italia con soluzioni su misura in ambito connettività, cybersecurity, cloud e Microsoft 365 — con un approccio consulenziale e un unico interlocutore dedicato.',
+    url: 'https://enjoip.it/',
+  },
+  {
+    name: 'Qualitas Spa',
+    logo: null,
+    description:
+      'Qualitas Spa è una software house consolidata nel settore industriale che offre soluzioni per ottimizzare i processi produttivi, la produzione, la pianificazione e la logistica migliorandone i risultati grazie ai software proprietari: la suite NET@PRO e il software Movisped.',
+    url: 'https://www.qualitas.it/',
+  },
+  {
+    name: 'Data Felix SRL',
+    logo: '/assets/innova-co/partner-logos/datafelix.png',
+    description: 'Regional Data Center della Campania.',
+    url: 'https://www.datafelix.it/',
+  },
+  {
+    name: 'CC START 4.0',
+    logo: '/assets/innova-co/partner-logos/ccstart.png',
+    description:
+      "Centro di Competenza nazionale ad alta specializzazione START4.0 del Ministero delle Imprese e del Made in Italy sulla sicurezza e l'ottimizzazione delle infrastrutture strategiche.",
+    url: 'https://www.start4-0.it',
+  },
+  {
+    name: 'MEDITERRANEO LAB 4.0 SRL',
+    logo: '/assets/innova-co/partner-logos/mediterraneo-lab.png',
+    description:
+      'PMI innovativa specializzata in Digital Transformation, Data Governance, AI e Blockchain. Supporta PMI, PA e organismi formativi nello sviluppo di strategie data-driven, competenze digitali e soluzioni innovative per la Twin Transition, in linea con le priorità europee.',
+    url: 'https://www.mediterraneolab.it',
+  },
+  {
+    name: 'FORM RETAIL S.R.L.',
+    logo: '/assets/innova-co/partner-logos/form-retail.png',
+    description:
+      'Form Retail s.r.l. realizza attività di formazione e consulenza, e servizi di politiche attive del lavoro. Quattro i suoi principi ispiratori: attenzione alle esigenze del cliente, ricerca e sperimentazione continua, implementazione di strumenti innovativi, attenzione ai temi della sostenibilità.',
+    url: 'https://www.formretail.it',
+  },
+  {
+    name: 'Kynetic S.r.l.',
+    logo: '/assets/innova-co/partner-logos/kynetic.png',
+    description:
+      'Kynetic supporta imprese e PA nei percorsi di innovazione digitale, AI e trasformazione tecnologica, sviluppando soluzioni software, piattaforme cloud, strategie digitali e servizi di comunicazione evoluta per migliorare processi, competitività e crescita.',
+    url: 'https://www.kynetic.it',
+  },
+  {
+    name: 'Logogramma S.r.l.',
+    logo: '/assets/innova-co/partner-logos/logogramma.png',
+    description:
+      "Logogramma sviluppa soluzioni AI e NLP per l'ottimizzazione dei processi aziendali, sulla base della piattaforma proprietaria AI.CODIUM®. Dal trattamento automatico del linguaggio naturale ai sistemi di dialogo, fornisce soluzioni per aziende, PA ed Enti culturali.",
+    url: 'https://www.logogramma.com/',
+  },
+  {
+    name: 'Progressive Systems Srl',
+    logo: '/assets/innova-co/partner-logos/progressive-systems.png',
+    description:
+      "Progressive Systems è specializzata nella progettazione e gestione di architetture digitali avanzate e nell'orchestrazione di grandi moli di dati (Big Data). Gestiamo ecosistemi di dati su larga scala fornendo soluzioni pronte all'uso per il settore privato, la ricerca e la Pubblica Amministrazione.",
+    url: 'https://progressivesystems.it/',
+  },
 ]
 
 export function InnovaCoPage() {
   const [tab, setTab] = useState<ParticipationTab>('offro')
   const [formOpen, setFormOpen] = useState(false)
+  const [solutionFormOpen, setSolutionFormOpen] = useState(false)
   const [communityOpen, setCommunityOpen] = useState(false)
   const [q1Active, setQ1Active] = useState(false)
   const [q2Active, setQ2Active] = useState(false)
   const [q3Active, setQ3Active] = useState(false)
-  const [hoveredNode, setHoveredNode] = useState<number | null>(null)
 
   const questionsSectionRef = useRef<HTMLDivElement>(null)
   const q1WrapRef = useRef<HTMLDivElement>(null)
@@ -130,7 +236,7 @@ export function InnovaCoPage() {
       <GlowCursor />
       <Navbar />
 
-      <main className="flex-grow relative bg-cover bg-top bg-no-repeat bg-brand-surface">
+      <main className="flex-grow relative bg-brand-surface">
         {/* 1. Hero — full viewport, dark gradient, rounded bottom corners */}
         <section
           className="relative z-10 w-full min-h-dvh flex items-center pt-28 sm:pt-32 pb-16 rounded-b-[40px] sm:rounded-b-[56px] overflow-hidden"
@@ -144,7 +250,9 @@ export function InnovaCoPage() {
               <span className="font-light text-white/90">Benvenuto in Innova.CO:</span>
               <br />
               <span className="font-bold text-brand-light-blue">
-                la community del Campania DIH
+                la community del
+                <br />
+                Campania DIH
               </span>
             </h1>
             <p className="text-sm sm:text-base text-white/75 leading-relaxed">
@@ -158,8 +266,12 @@ export function InnovaCoPage() {
         {/* Everything below the hero shares the same light atmosphere background */}
         <div className="relative">
           <div
-            className="absolute inset-0 bg-white/20 pointer-events-none"
-            style={{ backgroundImage: "url('/assets/sfondo.svg')", backgroundSize: 'cover' }}
+            className="absolute -top-16 sm:-top-20 inset-x-0 bottom-0 bg-white/70 pointer-events-none"
+            style={{
+              backgroundImage: "url('/assets/sfondo.svg')",
+              backgroundSize: 'cover',
+              backgroundAttachment: 'fixed',
+            }}
           />
 
           {/* 2. Scroll-triggered questions, typed in one at a time.
@@ -221,9 +333,9 @@ export function InnovaCoPage() {
             </div>
           </section>
 
-          {/* 3. Cosa troverai — full-bleed dark card with the interactive network artwork.
-                 The three dotted nodes are real buttons, so the site-wide glow cursor
-                 already lights up near them; hovering also reveals their label. */}
+          {/* 3. Cosa troverai — full-bleed dark card with a live floating network,
+                 matching the homepage hero's particle graphic. Three of its nodes
+                 are anchored hotspots: hovering them reveals their label. */}
           <section
             className="relative z-10 w-full overflow-hidden reveal-element"
             style={{
@@ -233,60 +345,9 @@ export function InnovaCoPage() {
               backgroundPosition: 'center',
             }}
           >
-            <div className="p-6 sm:p-10 lg:p-14 pt-24 sm:pt-28 lg:pt-32">
+            <div className="p-4 sm:p-6 lg:p-8 pt-24 sm:pt-28 lg:pt-32">
               <div className="relative w-full aspect-[1415/703]">
-                {/* 3% inset so nodes/lines that bleed to the edge of the source
-                    artwork's own viewBox get breathing room instead of being
-                    cut off by the section boundary. */}
-                <div className="absolute inset-[3%]">
-                  {/* Static backdrop — lines and decorative nodes never move,
-                      so hovering one sphere never drags the rest along with it. */}
-                  <img
-                    src="/assets/innova-co/cosa-troverai.svg"
-                    alt=""
-                    aria-hidden="true"
-                    className="absolute inset-0 w-full h-full"
-                  />
-                  {NETWORK_HOTSPOTS.map((node, i) => (
-                    <div
-                      key={node.label}
-                      className="absolute"
-                      style={{
-                        left: `${node.xPct}%`,
-                        top: `${node.yPct}%`,
-                        width: `${node.wPct}%`,
-                        height: `${node.hPct}%`,
-                        transform: 'translate(-50%, -50%)',
-                      }}
-                    >
-                      {/* Independent overlay: only this one sphere scales up on hover/focus. */}
-                      <img
-                        src="/assets/innova-co/element.svg"
-                        alt=""
-                        aria-hidden="true"
-                        className={`absolute inset-0 w-full h-full transition-transform duration-300 ease-out ${
-                          hoveredNode === i ? 'scale-115' : 'scale-100'
-                        }`}
-                      />
-                      <button
-                        type="button"
-                        aria-label={node.label}
-                        className="absolute inset-0 rounded-full"
-                        onMouseEnter={() => setHoveredNode(i)}
-                        onMouseLeave={() => setHoveredNode((v) => (v === i ? null : v))}
-                        onFocus={() => setHoveredNode(i)}
-                        onBlur={() => setHoveredNode((v) => (v === i ? null : v))}
-                      />
-                      <span
-                        className={`pointer-events-none absolute top-1/2 -translate-y-1/2 z-10 w-44 sm:w-60 text-sm sm:text-lg font-light text-white leading-snug rounded-xl bg-brand-dark-navy/70 backdrop-blur-sm px-4 py-2.5 shadow-lg transition-opacity duration-300 ${
-                          hoveredNode === i ? 'opacity-100 delay-150' : 'opacity-0'
-                        } ${node.align === 'right' ? 'left-full ml-6 sm:ml-8' : 'right-full mr-6 sm:mr-8 text-right'}`}
-                      >
-                        {node.label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+                <NetworkHotspots hotspots={NETWORK_HOTSPOTS} />
               </div>
             </div>
             <h2 className="absolute inset-x-0 top-6 sm:top-8 lg:top-10 z-10 text-center text-2xl sm:text-3xl font-light text-white/90 px-6 pointer-events-none">
@@ -350,6 +411,7 @@ export function InnovaCoPage() {
                   type="button"
                   onClick={() => {
                     if (tab === 'offro') setFormOpen(true)
+                    else setSolutionFormOpen(true)
                   }}
                   className="inline-flex items-center gap-2 bg-[#E3EAEC] text-brand-dark-navy font-semibold px-7 py-3.5 rounded-2xl shadow-[-4px_-4px_10px_rgba(255,255,255,0.9),6px_6px_16px_rgba(164,177,188,0.6)] hover:-translate-y-0.5 transition-all duration-300"
                 >
@@ -388,27 +450,49 @@ export function InnovaCoPage() {
             >
               <div className="overflow-hidden">
                 <div className="overflow-x-auto">
-                  <table className="w-full min-w-[560px] border-collapse">
+                  <table className="w-full min-w-[720px] border-collapse">
                     <thead>
                       <tr className="border-b border-brand-navy/15 text-left">
                         <th className="pb-4 pr-4 font-semibold text-brand-navy text-sm w-16">&nbsp;</th>
-                        <th className="pb-4 pr-4 font-semibold text-brand-navy text-sm">Nome</th>
-                        <th className="pb-4 pr-4 font-semibold text-brand-navy text-sm">Località</th>
-                        <th className="pb-4 font-semibold text-brand-navy text-sm">&nbsp;</th>
+                        <th className="pb-4 pr-4 font-semibold text-brand-navy text-sm w-32">Logo</th>
+                        <th className="pb-4 pr-4 font-semibold text-brand-navy text-sm">Descrizione</th>
+                        <th className="pb-4 font-semibold text-brand-navy text-sm whitespace-nowrap">&nbsp;</th>
                       </tr>
                     </thead>
                     <tbody>
                       {COMMUNITY_MEMBERS.map((member, i) => (
                         <tr key={i} className="border-b border-brand-navy/10">
-                          <td className="py-5 pr-4 text-brand-navy/30 text-sm tabular-nums">
-                            {String(i + 1).padStart(2, '0')}
+                          <td className="py-5 pr-8 align-top">
+                            <div className="h-14 w-16 flex items-center justify-center">
+                              <span className="text-brand-navy/30 text-sm tabular-nums">
+                                {String(i + 1).padStart(2, '0')}
+                              </span>
+                            </div>
                           </td>
-                          <td className="py-5 pr-4 text-brand-navy font-medium">{member.name}</td>
-                          <td className="py-5 pr-4 text-brand-dark-navy/80">{member.location}</td>
-                          <td className="py-5 text-right">
+                          <td className="py-5 pr-8 align-top">
+                            <div className="h-14 w-24 flex items-center justify-center">
+                              {member.logo ? (
+                                <img
+                                  src={member.logo}
+                                  alt={member.name}
+                                  className="max-h-full max-w-full object-contain"
+                                />
+                              ) : (
+                                <span className="text-xs font-semibold text-brand-navy text-center leading-tight">
+                                  {member.name}
+                                </span>
+                              )}
+                            </div>
+                          </td>
+                          <td className="py-5 pr-8 max-w-[320px] text-brand-dark-navy/80 text-xs leading-snug">
+                            {member.description}
+                          </td>
+                          <td className="py-5 text-right align-top whitespace-nowrap">
                             <a
                               href={member.url}
-                              className="inline-flex items-center bg-[#E3EAEC] text-brand-dark-navy font-semibold text-sm px-5 py-2.5 rounded-lg shadow-[0_4px_10px_rgba(1,49,103,0.18)] hover:shadow-[0_6px_16px_rgba(1,49,103,0.25)] hover:-translate-y-0.5 transition-all duration-300"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center whitespace-nowrap bg-[#E3EAEC] text-brand-dark-navy font-semibold text-sm px-5 py-2.5 rounded-lg shadow-[0_4px_10px_rgba(1,49,103,0.18)] hover:shadow-[0_6px_16px_rgba(1,49,103,0.25)] hover:-translate-y-0.5 transition-all duration-300"
                             >
                               Visita il sito
                             </a>
@@ -471,6 +555,7 @@ export function InnovaCoPage() {
       <Footer />
 
       <PartnerFormModal open={formOpen} onOpenChange={setFormOpen} />
+      <SolutionRequestModal open={solutionFormOpen} onOpenChange={setSolutionFormOpen} />
     </>
   )
 }

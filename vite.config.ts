@@ -17,6 +17,8 @@ export default defineConfig({
         trasformazione: path.resolve(__dirname, 'trasformazione-digitale.html'),
         chisiamo: path.resolve(__dirname, 'chi-siamo.html'),
         innovaco: path.resolve(__dirname, 'innova-co.html'),
+        progetti: path.resolve(__dirname, 'progetti.html'),
+        servizi: path.resolve(__dirname, 'servizi.html'),
       },
     },
   },

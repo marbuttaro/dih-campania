@@ -13,11 +13,12 @@ import {
 import { cn } from '@/lib/utils'
 
 const NAV_LINKS = [
-  { href: '#servizi', label: 'Servizi' },
+  { href: '/servizi.html', label: 'Servizi' },
   { href: '#progetti', label: 'Progetti' },
   { href: '#bandi', label: 'Bandi' },
   { href: '#newsletter', label: 'Newsletter' },
   { href: '#infosfera', label: 'Infosfera' },
+  { href: '/innova-co.html', label: 'Innova.Co' },
   { href: '/chi-siamo.html', label: 'Chi Siamo' },
 ] as const
 

@@ -53,7 +53,7 @@ export function Hero() {
               l'innovazione tecnologica, la sostenibilità e la competitività.
             </p>
             <a
-              href="#scopri"
+              href="/servizi.html"
               className="btn-outline px-8 py-3.5 text-base sm:text-lg"
             >
               Scopri di più

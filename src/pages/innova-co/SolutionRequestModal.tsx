@@ -2,36 +2,14 @@ import { useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { ArrowLeft, ArrowRight, Check, ChevronDown, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { TIPOLOGIA_PARTNER_OPTIONS } from './PartnerFormModal'
 
-export const TIPOLOGIA_PARTNER_OPTIONS = [
-  'Grandi Imprese',
-  'Medie Imprese',
-  'Piccole Imprese',
-  'Micro, Start-up innovative',
-  'Incubatori',
-  'Distretti/poli/cluster',
-  'Università/enti di formazione',
-  'Organismi di Ricerca pubblici e privati',
-  'Istituzioni nazionali ed internazionali operanti nel campo della ricerca e sperimentazione',
-  'Centri di competenza, European Digital Innovation Hub, Digital Innovation Hub, Poli di innovazione',
-  'Enti istituzionali',
-  'Associazioni, Ordini Professionali, Fondazioni ed altri Enti di diritto privato',
-  'Banche, investitori e fondi (ovvero Fondazioni bancarie e Istituti di credito)',
-  'Assicurazioni',
-  "Altri soggetti di diritto pubblico o privato, che condividano gli scopi e l'oggetto della Società",
-]
-
-type Step = 0 | 1 | 2 | 3
-
-const MANIFESTAZIONE_INTERESSE_URL =
-  '/assets/innova-co/docs/Manifestazione_Interesse_Community_Innova.CO.docx'
-
-type Adesione = 'Quota Finanziaria' | 'Beni' | 'Attività Finanziarie/Servizi'
+type Step = 1 | 2 | 3
 
 interface FormState {
-  denominazionePartner: string
+  denominazione: string
   legaleRappresentante: string
-  piva: string
+  cf: string
   sedeLegaleVia: string
   sedeLegaleCitta: string
   sedeLegaleProvincia: string
@@ -40,11 +18,12 @@ interface FormState {
   sedeOperativaCitta: string
   sedeOperativaProvincia: string
   sedeOperativaCap: string
-  tipologiaPartner: string
-  descrizionePartner: string
-  motivazioneAdesione: string
-  modalitaAdesione: Adesione[]
-  tipologiaBeniServizi: string
+  tipologia: string
+  presentazioneAziendale: string
+  sitoWeb: string
+  descrizioneEsigenza: string
+  tecnologiaRichiesta: string
+  attivitaSvolte: string
   altreInformazioni: string
   nome: string
   cognome: string
@@ -55,13 +34,12 @@ interface FormState {
   associazioneTerritoriale: string
   consensoDati: boolean
   consensoPrivacy: boolean
-  consensoManifestazione: boolean
 }
 
 const INITIAL_STATE: FormState = {
-  denominazionePartner: '',
+  denominazione: '',
   legaleRappresentante: '',
-  piva: '',
+  cf: '',
   sedeLegaleVia: '',
   sedeLegaleCitta: '',
   sedeLegaleProvincia: '',
@@ -70,11 +48,12 @@ const INITIAL_STATE: FormState = {
   sedeOperativaCitta: '',
   sedeOperativaProvincia: '',
   sedeOperativaCap: '',
-  tipologiaPartner: '',
-  descrizionePartner: '',
-  motivazioneAdesione: '',
-  modalitaAdesione: [],
-  tipologiaBeniServizi: '',
+  tipologia: '',
+  presentazioneAziendale: '',
+  sitoWeb: '',
+  descrizioneEsigenza: '',
+  tecnologiaRichiesta: '',
+  attivitaSvolte: '',
   altreInformazioni: '',
   nome: '',
   cognome: '',
@@ -85,7 +64,6 @@ const INITIAL_STATE: FormState = {
   associazioneTerritoriale: '',
   consensoDati: false,
   consensoPrivacy: false,
-  consensoManifestazione: false,
 }
 
 function Field({
@@ -222,27 +200,19 @@ function NavButton({
   )
 }
 
-export function PartnerFormModal({
+export function SolutionRequestModal({
   open,
   onOpenChange,
 }: {
   open: boolean
   onOpenChange: (open: boolean) => void
 }) {
-  const [step, setStep] = useState<Step>(0)
+  const [step, setStep] = useState<Step>(1)
   const [form, setForm] = useState<FormState>(INITIAL_STATE)
   const [submitted, setSubmitted] = useState(false)
 
   const set = <K extends keyof FormState>(key: K, value: FormState[K]) =>
     setForm((f) => ({ ...f, [key]: value }))
-
-  const toggleAdesione = (value: Adesione) =>
-    setForm((f) => ({
-      ...f,
-      modalitaAdesione: f.modalitaAdesione.includes(value)
-        ? f.modalitaAdesione.filter((v) => v !== value)
-        : [...f.modalitaAdesione, value],
-    }))
 
   const toggleIscrizione = (value: 'iscritto' | 'non_iscritto') =>
     setForm((f) => ({
@@ -253,7 +223,7 @@ export function PartnerFormModal({
   const resetAndClose = () => {
     onOpenChange(false)
     setTimeout(() => {
-      setStep(0)
+      setStep(1)
       setForm(INITIAL_STATE)
       setSubmitted(false)
     }, 300)
@@ -285,9 +255,9 @@ export function PartnerFormModal({
             <span className="sr-only">Chiudi</span>
           </Dialog.Close>
 
-          <Dialog.Title className="sr-only">Richiesta di adesione a Innova.CO</Dialog.Title>
+          <Dialog.Title className="sr-only">Richiesta di supporto della Community Innova.CO</Dialog.Title>
           <Dialog.Description className="sr-only">
-            Form in più passaggi per proporre il tuo servizio alla community Innova.CO
+            Form in più passaggi per richiedere supporto o una soluzione alla community Innova.CO
           </Dialog.Description>
 
           {submitted ? (
@@ -299,69 +269,29 @@ export function PartnerFormModal({
                 Richiesta Inviata!
               </h3>
               <p className="text-brand-dark-navy/70">
-                Grazie per la tua proposta, ti ricontatteremo il prima possibile.
+                Grazie per la tua richiesta, ti ricontatteremo il prima possibile.
               </p>
             </div>
           ) : (
             <>
-              {step === 0 && (
-                <div>
-                  <h2 className="text-3xl sm:text-4xl font-light text-brand-navy text-center mb-10">
-                    Manifestazione d'interesse
-                  </h2>
-
-                  <p className="text-base sm:text-lg text-brand-dark-navy/85 leading-relaxed text-center">
-                    Prima di procedere con la richiesta scarica qui
-                    <br />
-                    <a
-                      href={MANIFESTAZIONE_INTERESSE_URL}
-                      download
-                      className="font-bold text-brand-navy underline underline-offset-2 hover:text-brand-light-blue transition-colors"
-                    >
-                      la manifestazione d'interesse
-                    </a>
-                    .
-                  </p>
-
-                  <div className="mt-10">
-                    <Checkbox
-                      checked={form.consensoManifestazione}
-                      onChange={() => set('consensoManifestazione', !form.consensoManifestazione)}
-                    >
-                      Dichiaro di aver visionato la manifestazione d'interesse
-                    </Checkbox>
-                  </div>
-
-                  <div className="flex items-center justify-end mt-12">
-                    <NavButton
-                      direction="forward"
-                      onClick={() => setStep(1)}
-                      disabled={!form.consensoManifestazione}
-                    >
-                      Avanti
-                    </NavButton>
-                  </div>
-                </div>
-              )}
-
               {step === 1 && (
                 <div>
                   <h2 className="text-3xl sm:text-4xl font-light text-brand-navy text-center mb-10">
-                    Anagrafica Partner
+                    Anagrafica
                   </h2>
 
                   <div className="space-y-5">
                     <Field
-                      label="Denominazione Partner"
-                      value={form.denominazionePartner}
-                      onChange={(v) => set('denominazionePartner', v)}
+                      label="Denominazione"
+                      value={form.denominazione}
+                      onChange={(v) => set('denominazione', v)}
                     />
                     <Field
                       label="Legale Rappresentante"
                       value={form.legaleRappresentante}
                       onChange={(v) => set('legaleRappresentante', v)}
                     />
-                    <Field label="P.IVA o C.F." value={form.piva} onChange={(v) => set('piva', v)} />
+                    <Field label="C.F." value={form.cf} onChange={(v) => set('cf', v)} />
 
                     <div className="pt-2">
                       <h3 className="text-sm font-semibold text-brand-navy mb-4">Sede Legale</h3>
@@ -388,16 +318,28 @@ export function PartnerFormModal({
                     </div>
 
                     <Field
-                      label="Tipologia Partner"
-                      value={form.tipologiaPartner}
-                      onChange={(v) => set('tipologiaPartner', v)}
+                      label="Tipologia"
+                      value={form.tipologia}
+                      onChange={(v) => set('tipologia', v)}
                       options={TIPOLOGIA_PARTNER_OPTIONS}
                       className="pt-2"
+                    />
+
+                    <Field
+                      label="Breve presentazione aziendale"
+                      value={form.presentazioneAziendale}
+                      onChange={(v) => set('presentazioneAziendale', v)}
+                    />
+
+                    <Field
+                      label="Sito web"
+                      value={form.sitoWeb}
+                      onChange={(v) => set('sitoWeb', v)}
                     />
                   </div>
 
                   <div className="flex items-center justify-between mt-12">
-                    <NavButton direction="back" onClick={() => setStep(0)}>
+                    <NavButton direction="back" onClick={resetAndClose}>
                       Indietro
                     </NavButton>
                     <NavButton direction="forward" onClick={() => setStep(2)}>
@@ -413,46 +355,25 @@ export function PartnerFormModal({
                     Informazioni Generali
                   </h2>
                   <p className="text-center text-brand-dark-navy/60 mb-10">
-                    del partner e della sua attività
+                    del richiedente e della sua attività
                   </p>
 
                   <div className="space-y-5">
                     <Field
-                      label="Descrizione Partner e attività"
-                      value={form.descrizionePartner}
-                      onChange={(v) => set('descrizionePartner', v)}
+                      label="Breve descrizione dell'esigenza o dell'idea da condividere"
+                      value={form.descrizioneEsigenza}
+                      onChange={(v) => set('descrizioneEsigenza', v)}
                     />
                     <Field
-                      label="Motivazione di adesione alla Community"
-                      value={form.motivazioneAdesione}
-                      onChange={(v) => set('motivazioneAdesione', v)}
+                      label="Tecnologia per cui si richiedono informazioni o per cui si ricercano partner"
+                      value={form.tecnologiaRichiesta}
+                      onChange={(v) => set('tecnologiaRichiesta', v)}
                     />
-
-                    <div className="pt-2">
-                      <h3 className="text-sm font-semibold text-brand-navy mb-4">
-                        Modalità di Adesione
-                      </h3>
-                      <div className="space-y-3">
-                        {(['Quota Finanziaria', 'Beni', 'Attività Finanziarie/Servizi'] as Adesione[]).map(
-                          (option) => (
-                            <Checkbox
-                              key={option}
-                              checked={form.modalitaAdesione.includes(option)}
-                              onChange={() => toggleAdesione(option)}
-                            >
-                              {option}
-                            </Checkbox>
-                          ),
-                        )}
-                      </div>
-                    </div>
-
                     <Field
-                      label="In caso di Beni o Attività Finanziarie/Servizi esplicitare la tipologia:"
-                      value={form.tipologiaBeniServizi}
-                      onChange={(v) => set('tipologiaBeniServizi', v)}
+                      label="Attività già svolte e tecnologie in uso"
+                      value={form.attivitaSvolte}
+                      onChange={(v) => set('attivitaSvolte', v)}
                     />
-
                     <Field
                       label="Altre informazioni"
                       value={form.altreInformazioni}
@@ -476,7 +397,7 @@ export function PartnerFormModal({
                   <h2 className="text-3xl sm:text-4xl font-light text-brand-navy text-center mb-2">
                     Riferimenti
                   </h2>
-                  <p className="text-center text-brand-dark-navy/60 mb-10">Referente</p>
+                  <p className="text-center text-brand-dark-navy/60 mb-10">Referente operativo</p>
 
                   <div className="space-y-5">
                     <Field label="Nome" value={form.nome} onChange={(v) => set('nome', v)} />
@@ -491,7 +412,7 @@ export function PartnerFormModal({
                     <Field label="Mail" value={form.email} onChange={(v) => set('email', v)} type="email" />
 
                     <div className="pt-2">
-                      <h3 className="text-sm font-semibold text-brand-navy mb-4">Il Partner è:</h3>
+                      <h3 className="text-sm font-semibold text-brand-navy mb-4">Il richiedente è:</h3>
                       <div className="space-y-4">
                         <div className="flex flex-wrap items-center gap-3">
                           <Checkbox
@@ -526,7 +447,7 @@ export function PartnerFormModal({
                         className="italic"
                       >
                         Dichiaro di essere autorizzato a fornire i dati dell'azienda e i propri
-                        dati di contatto per le finalità connesse alla richiesta di adesione alla
+                        dati di contatto per le finalità connesse alla richiesta di supporto alla
                         Community.
                       </Checkbox>
                       <Checkbox
@@ -537,7 +458,7 @@ export function PartnerFormModal({
                         Dichiaro di aver letto e compreso l'Informativa sul trattamento dei dati
                         personali ai sensi del Regolamento (UE) 2016/679 (GDPR) e acconsento al
                         trattamento dei dati per le finalità connesse alla gestione della
-                        richiesta di iscrizione alla Community.{' '}
+                        richiesta di supporto alla Community.{' '}
                         <span className="font-bold not-italic">Visualizza informativa Privacy.</span>
                       </Checkbox>
                     </div>
@@ -548,7 +469,7 @@ export function PartnerFormModal({
                       Indietro
                     </NavButton>
                     <NavButton direction="forward" onClick={handleSubmit} disabled={!canSubmit}>
-                      Invia la tua proposta
+                      Invia la tua richiesta
                     </NavButton>
                   </div>
                 </div>
