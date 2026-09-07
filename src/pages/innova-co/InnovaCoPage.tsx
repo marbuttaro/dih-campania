@@ -453,8 +453,7 @@ export function InnovaCoPage() {
                   <table className="w-full min-w-[720px] border-collapse">
                     <thead>
                       <tr className="border-b border-brand-navy/15 text-left">
-                        <th className="pb-4 pr-4 font-semibold text-brand-navy text-sm w-16">&nbsp;</th>
-                        <th className="pb-4 pr-4 font-semibold text-brand-navy text-sm w-32">Logo</th>
+                        <th className="pb-4 pr-4 font-semibold text-brand-navy text-sm w-48">Azienda</th>
                         <th className="pb-4 pr-4 font-semibold text-brand-navy text-sm">Descrizione</th>
                         <th className="pb-4 font-semibold text-brand-navy text-sm whitespace-nowrap">&nbsp;</th>
                       </tr>
@@ -463,14 +462,7 @@ export function InnovaCoPage() {
                       {COMMUNITY_MEMBERS.map((member, i) => (
                         <tr key={i} className="border-b border-brand-navy/10">
                           <td className="py-5 pr-8 align-top">
-                            <div className="h-14 w-16 flex items-center justify-center">
-                              <span className="text-brand-navy/30 text-sm tabular-nums">
-                                {String(i + 1).padStart(2, '0')}
-                              </span>
-                            </div>
-                          </td>
-                          <td className="py-5 pr-8 align-top">
-                            <div className="h-14 w-24 flex items-center justify-center">
+                            <div className="h-24 w-40 flex items-center justify-center">
                               {member.logo ? (
                                 <img
                                   src={member.logo}
@@ -487,7 +479,7 @@ export function InnovaCoPage() {
                           <td className="py-5 pr-8 max-w-[320px] text-brand-dark-navy/80 text-xs leading-snug">
                             {member.description}
                           </td>
-                          <td className="py-5 text-right align-top whitespace-nowrap">
+                          <td className="py-5 text-right align-middle whitespace-nowrap">
                             <a
                               href={member.url}
                               target="_blank"

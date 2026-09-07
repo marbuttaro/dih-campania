@@ -39,24 +39,88 @@ const SECTORS = [
   'Turismo, cultura e creatività',
 ]
 
-// TODO: contenuti reali in arrivo per gli step 2-6 (Accompagnamento, Incentivi e
-// opportunità, Formazione, Networking, Sicurezza e sostenibilità)
 const JOURNEY_STEPS = [
   {
     title: '1. Analisi e orientamento',
+    intro:
+      "Supporto alle imprese nella definizione e implementazione di strategie di trasformazione digitale, inclusi assessment di maturità, reingegnerizzazione dei processi, identificazione di casi d'uso innovativi e adozione di tecnologie avanzate.",
     bullets: [
       "Assessment della maturità digitale: analizziamo processi, tecnologie e competenze per identificare il livello di digitalizzazione dell'impresa e individuare i principali gap da colmare.",
       "Roadmap di trasformazione: traduciamo i risultati dell'assessment in un piano operativo, con priorità, investimenti e azioni concrete per ogni area aziendale.",
-      'Check-up mirati: cybersecurity, efficienza energetica, sostenibilità, gestione dati e competenze.',
+      'Check-up di sicurezza informatica e piani di miglioramento per proteggere dati, infrastrutture e processi.',
+      "Supporto nella transizione verde e digitale, integrando innovazione tecnologica e sostenibilità ambientale.",
     ],
     objective:
-      'fornire una fotografia chiara della situazione aziendale e una direzione concreta di sviluppo digitale.',
+      "fornire una fotografia chiara della situazione aziendale e una direzione concreta di sviluppo digitale, garantendo un percorso di innovazione graduale, sicuro, resiliente e responsabile.",
   },
-  { title: '2. Accompagnamento', bullets: [], objective: '' },
-  { title: '3. Incentivi e opportunità', bullets: [], objective: '' },
-  { title: '4. Formazione', bullets: [], objective: '' },
-  { title: '5. Networking', bullets: [], objective: '' },
-  { title: '6. Sicurezza e sostenibilità', bullets: [], objective: '' },
+  {
+    title: '2. Innovation Advisory',
+    intro:
+      'Supportiamo le imprese nella guida al cambiamento dalla fase strategica ai piani di implementazione operativi, controllando e monitorando gli stati avanzamento lavoro.',
+    bullets: [
+      "Progettazione e consulenza tecnica: affianchiamo l'impresa nella definizione dei progetti di digitalizzazione (es. automazione, IoT, AI, e-commerce, gestione dati).",
+      'Sperimentazione e test: con il supporto dei Competence Center, delle università e di tutti i partner, permettiamo alle imprese di testare nuove tecnologie in ambienti sicuri prima dell\'investimento.',
+      'Sviluppo di progetti pilota (Proof of Concept): con il supporto della nostra rete partenariale realizziamo prototipi e sperimentazioni su processi o prodotti digitali.',
+    ],
+    objective: 'trasformare le idee in soluzioni concrete e sostenibili, con risultati misurabili.',
+  },
+  {
+    title: '3. Incentivi e opportunità',
+    intro: 'Supportiamo le imprese che vogliono sviluppare nuovi progetti aziendali nella:',
+    bullets: [
+      'Ricerca di finanziamenti e bandi (regionali, nazionali, europei, PNRR).',
+      'Assistenza nella candidatura e predisposizione della documentazione tecnica necessaria.',
+      'Scouting tra i progetti della rete Confindustria e le opportunità di accesso ad agevolazioni attive rese disponibili da parte di partner finanziari per agevolare investimenti in innovazione.',
+    ],
+    objective: "facilitare l'accesso a risorse economiche per rendere realizzabili i progetti di digitalizzazione.",
+  },
+  {
+    title: '4. Awareness & Training',
+    intro:
+      "Attività di informazione, sensibilizzazione e diffusione dei temi legati all'innovazione tecnologica. Attività di formazione finalizzate ad accrescere la cultura digitale, sviluppare competenze tecniche e manageriali e favorire l'adozione consapevole dell'innovazione tecnologica. Il Campania DIH è in grado di pianificare e programmare sulla base delle esigenze delle imprese:",
+    bullets: [
+      'Corsi e workshop tematici su tecnologie abilitanti (AI, Cloud, Big Data, Additive Manufacturing, Cybersecurity).',
+      'Percorsi di upskilling e reskilling per imprenditori, manager e dipendenti.',
+      'Laboratori esperienziali e visite dimostrative presso aziende e centri tecnologici.',
+      "L'attività di awareness si sostanzia anche attraverso «sportelli tematici» (es. NIS2).",
+    ],
+    objective: 'accrescere la cultura digitale e preparare imprenditori, dirigenti e dipendenti al cambiamento digitale.',
+  },
+  {
+    title: '5. Networking & Community',
+    intro:
+      "Sviluppo e gestione della Community digitale Innova.CO che aggrega soci e technology solution provider, volta a favorire la collaborazione tra gli attori dell'ecosistema e a facilitare la generazione di valore e le opportunità commerciali attraverso business matching. L'innovazione collaborativa viene agevolata attraverso:",
+    bullets: [
+      "Connessione con l'ecosistema dell'innovazione: università, startup, centri di ricerca, fornitori tecnologici.",
+      'Creazione di partenariati per progetti di ricerca e sviluppo.',
+      'Organizzazione di seminari, webinar o meeting tematici per favorire lo scambio di esperienze e buone pratiche.',
+    ],
+    objective: "far crescere l'impresa all'interno di un ecosistema innovativo, aperto e competitivo.",
+  },
+  {
+    title: '6. Open Innovation',
+    intro:
+      'Sviluppo e gestione di iniziative di Open Innovation, mentoring, matchmaking tra imprese, PMI innovative, startup o spinoff innovativi, centri di ricerca e grandi player industriali.',
+    bullets: [
+      'Attività di scouting tecnologico per individuare soluzioni innovative coerenti con le esigenze delle imprese.',
+      "Percorsi di mentoring che mettono in contatto imprese consolidate e realtà innovative per favorire lo scambio di competenze.",
+      "Iniziative di matchmaking tra imprese, startup, PMI innovative, centri di ricerca e grandi player industriali per generare nuove collaborazioni.",
+    ],
+    objective:
+      'stimolare la contaminazione tra imprese consolidate e realtà innovative, accelerando lo sviluppo di nuove soluzioni e modelli di business.',
+  },
+  {
+    title: '7. Start up & Acceleratore',
+    intro:
+      'Supporto allo sviluppo della nuova imprenditoria e delle idee innovative, attraverso percorsi di accompagnamento e valorizzazione delle iniziative imprenditoriali, sviluppo e gestione di programmi di accelerazione per le startup, con particolare attenzione al contesto regionale.',
+    bullets: [
+      "Accompagnamento delle idee imprenditoriali nelle fasi iniziali, dalla validazione del modello di business alla definizione del piano di sviluppo.",
+      'Programmi di accelerazione dedicati alle startup, con mentorship, formazione mirata e accesso alla rete di partner del Campania DIH.',
+      "Valorizzazione delle iniziative imprenditoriali attraverso il collegamento con investitori, corporate e opportunità di finanziamento.",
+    ],
+    objective:
+      "favorire la nascita e la crescita di nuove imprese innovative sul territorio regionale, rafforzando l'ecosistema startup della Campania.",
+  },
 ]
 
 export function ServiziPage() {
@@ -82,7 +146,8 @@ export function ServiziPage() {
   }, [])
 
   const step = JOURNEY_STEPS[activeStep]
-  const hasContent = step.bullets.length > 0
+  const hasBullets = step.bullets.length > 0
+  const hasContent = Boolean(step.intro) || hasBullets
 
   return (
     <>
@@ -159,17 +224,26 @@ export function ServiziPage() {
 
               {hasContent ? (
                 <>
-                  <ul className="flex flex-col gap-3 mb-6 list-none p-0 m-0">
-                    {step.bullets.map((bullet, i) => (
-                      <li key={i} className="flex gap-2 text-sm sm:text-base text-brand-dark-navy/85 leading-relaxed">
-                        <span aria-hidden="true">•</span>
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="text-sm sm:text-base text-brand-dark-navy/85 leading-relaxed mb-8">
-                    <strong>Obiettivo:</strong> {step.objective}
-                  </p>
+                  {step.intro && (
+                    <p className="text-sm sm:text-base text-brand-dark-navy/85 leading-relaxed mb-6">
+                      {step.intro}
+                    </p>
+                  )}
+                  {hasBullets && (
+                    <ul className="flex flex-col gap-3 mb-6 list-none p-0 m-0">
+                      {step.bullets.map((bullet, i) => (
+                        <li key={i} className="flex gap-2 text-sm sm:text-base text-brand-dark-navy/85 leading-relaxed">
+                          <span aria-hidden="true">•</span>
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {step.objective && (
+                    <p className="text-sm sm:text-base text-brand-dark-navy/85 leading-relaxed mb-8">
+                      <strong>Obiettivo:</strong> {step.objective}
+                    </p>
+                  )}
                 </>
               ) : (
                 <p className="text-sm sm:text-base text-brand-dark-navy/50 italic leading-relaxed mb-8">

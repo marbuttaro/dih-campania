@@ -23,12 +23,13 @@ const SERVICES = [
     desc: "Campania DIH supporta le imprese nell'introduzione dell'intelligenza artificiale, fornendo strumenti pratici, formazione e consulenza per integrare l'AI in modo sicuro, etico e utile al business.",
     image: '/assets/slider_servizi_3.png',
   },
-  {
-    id: '04',
-    title: 'ESG',
-    desc: "Supporto per integrare criteri ambientali, sociali e di buona governance nei processi aziendali, nelle strategie digitali, nei modelli di produzione e nella sostenibilità delle imprese, con l'obiettivo di migliorare impatto, reputazione, compliance e competitività.",
-    image: '/assets/slider_servizi_4.png',
-  },
+  // ESG temporaneamente nascosto: servizio non ancora attivo
+  // {
+  //   id: '04',
+  //   title: 'ESG',
+  //   desc: "Supporto per integrare criteri ambientali, sociali e di buona governance nei processi aziendali, nelle strategie digitali, nei modelli di produzione e nella sostenibilità delle imprese, con l'obiettivo di migliorare impatto, reputazione, compliance e competitività.",
+  //   image: '/assets/slider_servizi_4.png',
+  // },
 ] as const
 
 const AREAS = [
@@ -85,7 +86,7 @@ export function Services() {
           className="mb-10 flex justify-center sm:block"
           style={{ y: yNav }}
         >
-          <div data-no-glow className="grid grid-cols-2 sm:flex sm:flex-1 sm:justify-between gap-y-6 gap-x-4 sm:gap-2">
+          <div data-no-glow className="flex flex-wrap justify-center gap-y-6 gap-x-6 sm:gap-x-10">
             {SERVICES.map((service, index) => (
               <button
                 key={service.id}

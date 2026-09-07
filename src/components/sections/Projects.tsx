@@ -80,7 +80,7 @@ export function Projects() {
                   />
                   <div className="absolute inset-x-0 top-[22%] bottom-[26%] px-[13%] text-left overflow-hidden">
                     <p className="text-xs sm:text-sm font-semibold text-brand-navy/70 mb-0.5">
-                      Ruolo:
+                      Ruolo del Campania DIH:
                     </p>
                     <p className="text-sm sm:text-base font-bold text-brand-navy mb-4 leading-snug">
                       {card.role}

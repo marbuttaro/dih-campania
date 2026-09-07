@@ -105,6 +105,7 @@ export function AboutUsPage() {
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                     {[
+                      { src: '/assets/chi-siamo/soci/unione-industriali-napoli.png', alt: 'Unione Industriali Napoli', name: 'Unione Industriali\nNapoli' },
                       { src: '/assets/chi-siamo/soci/confindustria-avellino.png', alt: 'Confindustria Avellino', name: 'Confindustria\nAvellino' },
                       { src: '/assets/chi-siamo/soci/confindustria-benevento.png', alt: 'Confindustria Benevento', name: 'Confindustria\nBenevento' },
                       { src: '/assets/chi-siamo/soci/confindustria-caserta.png', alt: 'Confindustria Caserta', name: 'Confindustria\nCaserta' },
