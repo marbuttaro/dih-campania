@@ -7,24 +7,29 @@ import {
 
 const FAQ_ITEMS = [
   {
-    question: 'Cosa si intende per transizione digitale?',
+    question: 'Che cos\'è il Campania DIH?',
     answer:
-      'La transizione digitale è il processo attraverso cui le imprese adottano tecnologie digitali per trasformare i propri processi, prodotti e modelli di business, migliorando efficienza, competitività e capacità di innovazione.',
+      'Il Campania Digital Innovation Hub è il punto di riferimento regionale per accompagnare imprese e Pubblica Amministrazione nei percorsi di trasformazione digitale e sostenibile. Fa parte della rete nazionale dei Digital Innovation Hub di Confindustria e mette in relazione imprese, competenze, tecnologie, università, centri di ricerca, startup e istituzioni.',
   },
   {
-    question: 'Offrite supporto anche nella richiesta di incentivi/bandi?',
+    question: 'A chi si rivolgono i servizi del Campania DIH?',
     answer:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt mollis dapibus. Morbi in imperdiet purus, non rutrum sapien.',
+      'I servizi del Campania DIH sono rivolti principalmente alle imprese, con particolare attenzione alle PMI, e alla Pubblica Amministrazione. Il supporto può riguardare diversi livelli del percorso di innovazione: dalla comprensione dei fabbisogni e della maturità digitale fino alla sperimentazione di tecnologie, alla formazione e alla definizione di percorsi di trasformazione.',
   },
   {
-    question: 'Supportate anche le piccole imprese?',
+    question: 'Come può aiutare il Campania DIH la mia impresa?',
     answer:
-      'Assolutamente sì. Il nostro obiettivo principale è proprio accompagnare le PMI campane nel percorso di digitalizzazione, con servizi pensati su misura per le esigenze e le risorse delle piccole e medie imprese.',
+      'Il Campania DIH parte dalle esigenze dell\'impresa e la accompagna nell\'individuazione delle soluzioni più adatte. Attraverso assessment, consulenza, formazione, sperimentazione e attività di networking, aiuta a orientare le scelte tecnologiche, sviluppare nuove competenze e costruire collaborazioni e progetti di innovazione.',
   },
   {
-    question: 'Quali sono gli step della digitalizzazione?',
+    question: 'Devo avere già un progetto di innovazione per rivolgermi al Campania DIH?',
     answer:
-      'Il percorso prevede: assessment della maturità digitale, definizione della roadmap strategica, identificazione delle tecnologie abilitanti, implementazione delle soluzioni e monitoraggio continuo dei risultati.',
+      'No. Il percorso può partire anche da un\'esigenza, una criticità o un\'opportunità che l\'impresa vuole approfondire. Il Campania DIH aiuta a inquadrare il fabbisogno, individuare le possibili soluzioni e orientare l\'impresa verso competenze, tecnologie e opportunità coerenti. Questo approccio riprende la funzione originaria del DIH di colmare il divario tra bisogni di innovazione e soluzioni disponibili.',
+  },
+  {
+    question: 'Il Campania DIH offre solo servizi legati alla tecnologia?',
+    answer:
+      'No. La trasformazione digitale coinvolge tecnologie, persone, competenze e organizzazione. Per questo il Campania DIH affianca ai servizi tecnologici attività di formazione, orientamento, ricerca, networking e sviluppo di progetti, mettendo in relazione imprese e soggetti dell\'ecosistema dell\'innovazione.',
   },
 ]
 

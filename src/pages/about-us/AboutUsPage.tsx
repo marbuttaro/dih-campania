@@ -139,7 +139,7 @@ export function AboutUsPage() {
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                     {[
-                      { src: null, alt: 'TIM' },
+                      { src: '/assets/chi-siamo/partner/tim.png', alt: 'TIM' },
                       { src: '/assets/chi-siamo/partner/windtre.png', alt: 'WindTre' },
                       { src: '/assets/chi-siamo/partner/netgroup.png', alt: 'Netgroup' },
                     ].map((partner) => (

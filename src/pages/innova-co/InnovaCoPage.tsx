@@ -370,7 +370,7 @@ export function InnovaCoPage() {
                   className={`flex flex-col items-center justify-center gap-2 rounded-2xl py-4 px-6 transition-all duration-300 ${
                     tab === 'offro'
                       ? 'bg-[#E3EAEC] shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.55)]'
-                      : 'bg-[#E3EAEC]/40 shadow-[-3px_-3px_10px_rgba(255,255,255,0.5),4px_4px_12px_rgba(164,177,188,0.25)] opacity-60 hover:opacity-80'
+                      : 'bg-[#E3EAEC]/85 shadow-[-3px_-3px_10px_rgba(255,255,255,0.5),4px_4px_12px_rgba(164,177,188,0.25)] hover:bg-[#E3EAEC]'
                   }`}
                 >
                   <img src="/assets/innova-co/servizio.svg" alt="" aria-hidden="true" className="size-7" />
@@ -389,7 +389,7 @@ export function InnovaCoPage() {
                   className={`flex flex-col items-center justify-center gap-2 rounded-2xl py-4 px-6 transition-all duration-300 ${
                     tab === 'cerco'
                       ? 'bg-[#E3EAEC] shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.55)]'
-                      : 'bg-[#E3EAEC]/40 shadow-[-3px_-3px_10px_rgba(255,255,255,0.5),4px_4px_12px_rgba(164,177,188,0.25)] opacity-60 hover:opacity-80'
+                      : 'bg-[#E3EAEC]/85 shadow-[-3px_-3px_10px_rgba(255,255,255,0.5),4px_4px_12px_rgba(164,177,188,0.25)] hover:bg-[#E3EAEC]'
                   }`}
                 >
                   <img src="/assets/innova-co/discovery.svg" alt="" aria-hidden="true" className="size-7" />
@@ -403,7 +403,7 @@ export function InnovaCoPage() {
                 </button>
               </div>
 
-              <div className="shadow-box">
+              <div className="shadow-box !bg-[#E3EAEC]/90">
                 <p className="text-base sm:text-lg text-brand-dark-navy/85 leading-relaxed mb-8 max-w-[640px]">
                   {active.text}
                 </p>

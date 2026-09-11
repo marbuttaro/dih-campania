@@ -101,25 +101,15 @@ const JOURNEY_STEPS = [
     title: '6. Open Innovation',
     intro:
       'Sviluppo e gestione di iniziative di Open Innovation, mentoring, matchmaking tra imprese, PMI innovative, startup o spinoff innovativi, centri di ricerca e grandi player industriali.',
-    bullets: [
-      'Attività di scouting tecnologico per individuare soluzioni innovative coerenti con le esigenze delle imprese.',
-      "Percorsi di mentoring che mettono in contatto imprese consolidate e realtà innovative per favorire lo scambio di competenze.",
-      "Iniziative di matchmaking tra imprese, startup, PMI innovative, centri di ricerca e grandi player industriali per generare nuove collaborazioni.",
-    ],
-    objective:
-      'stimolare la contaminazione tra imprese consolidate e realtà innovative, accelerando lo sviluppo di nuove soluzioni e modelli di business.',
+    bullets: [],
+    objective: '',
   },
   {
     title: '7. Start up & Acceleratore',
     intro:
       'Supporto allo sviluppo della nuova imprenditoria e delle idee innovative, attraverso percorsi di accompagnamento e valorizzazione delle iniziative imprenditoriali, sviluppo e gestione di programmi di accelerazione per le startup, con particolare attenzione al contesto regionale.',
-    bullets: [
-      "Accompagnamento delle idee imprenditoriali nelle fasi iniziali, dalla validazione del modello di business alla definizione del piano di sviluppo.",
-      'Programmi di accelerazione dedicati alle startup, con mentorship, formazione mirata e accesso alla rete di partner del Campania DIH.',
-      "Valorizzazione delle iniziative imprenditoriali attraverso il collegamento con investitori, corporate e opportunità di finanziamento.",
-    ],
-    objective:
-      "favorire la nascita e la crescita di nuove imprese innovative sul territorio regionale, rafforzando l'ecosistema startup della Campania.",
+    bullets: [],
+    objective: '',
   },
 ]
 
@@ -154,11 +144,11 @@ export function ServiziPage() {
       <Navbar />
 
       <main
-        className="flex-grow pt-32 sm:pt-36 relative bg-cover bg-top bg-no-repeat bg-brand-surface"
+        className="flex-grow relative bg-cover bg-top bg-no-repeat bg-brand-surface"
         style={{ backgroundImage: "url('/assets/sfondo.svg')" }}
       >
         {/* 1. Hero */}
-        <div className="relative mb-20 sm:mb-28">
+        <div className="relative pt-32 sm:pt-36 pb-20 sm:pb-28">
           <div className="absolute inset-0 bg-white/20 pointer-events-none" />
           <div className="container-page relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center reveal-element">

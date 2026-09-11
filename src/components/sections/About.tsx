@@ -56,7 +56,7 @@ export function About() {
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 mb-20 lg:mb-28 items-center lg:items-stretch">
           <div className="basis-full lg:basis-[40%] flex flex-col justify-center shadow-box">
             <h3 className="text-[28px] lg:text-[30px] text-brand-dark-navy mb-6 font-semibold leading-tight">
-              Cosa può fare DIH Campania per le imprese?
+              Cosa può fare Campania DIH per le imprese?
             </h3>
             <p className="text-[18px] lg:text-[20px] text-neutral-600 leading-snug font-light">
               Il Campania DIH supporta le aziende in{' '}

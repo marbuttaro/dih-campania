@@ -8,20 +8,23 @@ const SERVICES = [
   {
     id: '01',
     title: 'Trasformazione Digitale',
-    desc: 'Campania DIH supporta le imprese nella loro evoluzione digitale e sostenibile attraverso interventi concreti che partono dalla valutazione dei digital needs aziendali sulla base dei quali costruire una roadmap di implementazione.',
+    desc: "Supporto alle imprese nei percorsi di trasformazione digitale end-to-end, dalla valutazione della maturità digitale alla definizione di roadmap tecnologiche, favorendo l'adozione di soluzioni innovative e sostenibili lungo l'intera catena del valore.",
     image: '/assets/slider_servizi_1.png',
+    link: '/trasformazione-digitale.html',
   },
   {
     id: '02',
     title: 'Cybersecurity',
-    desc: 'Attività volte a rafforzare la sicurezza digitale delle imprese e delle pubbliche amministrazioni, promuovendo conformità normativa, formazione, prevenzione dei rischi e gestione operativa delle minacce informatiche.',
+    desc: "Supporto alle imprese nel rafforzamento della sicurezza informatica e della resilienza digitale, attraverso la valutazione dei rischi cyber, l'analisi della maturità in ambito cybersecurity e la definizione di azioni di remediation in linea con i principali standard e requisiti normativi.",
     image: '/assets/slider_servizi_2.png',
+    link: '/cybersecurity.html',
   },
   {
     id: '03',
     title: 'Intelligenza Artificiale',
-    desc: "Campania DIH supporta le imprese nell'introduzione dell'intelligenza artificiale, fornendo strumenti pratici, formazione e consulenza per integrare l'AI in modo sicuro, etico e utile al business.",
+    desc: "Supporto alle imprese nell'adozione consapevole dell'Intelligenza Artificiale, valutando il livello di data readiness, individuando i casi d'uso a maggiore valore e supportando l'integrazione delle soluzioni AI nei processi aziendali per incrementare efficienza e competitività.",
     image: '/assets/slider_servizi_3.png',
+    link: '/intelligenza-artificiale.html',
   },
   // ESG temporaneamente nascosto: servizio non ancora attivo
   // {
@@ -126,21 +129,12 @@ export function Services() {
               <p className="text-base sm:text-lg font-normal leading-snug text-white/90 mb-7">
                 {active.desc}
               </p>
-              {activeTab === 0 ? (
-                <a
-                  href="/trasformazione-digitale.html"
-                  className="mt-auto self-start px-5 py-2.5 rounded-[8.6px] bg-white/[0.09] border border-white/40 backdrop-blur-md text-white font-semibold shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-brand-light-blue hover:text-brand-dark-navy hover:-translate-y-0.5 inline-block text-center"
-                >
-                  Scopri di più
-                </a>
-              ) : (
-                <button
-                  type="button"
-                  className="mt-auto self-start px-5 py-2.5 rounded-[8.6px] bg-white/[0.09] border border-white/40 backdrop-blur-md text-white font-semibold shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-brand-light-blue hover:text-brand-dark-navy hover:-translate-y-0.5"
-                >
-                  Scopri di più
-                </button>
-              )}
+              <a
+                href={active.link}
+                className="mt-auto self-start px-5 py-2.5 rounded-[8.6px] bg-white/[0.09] border border-white/40 backdrop-blur-md text-white font-semibold shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-brand-light-blue hover:text-brand-dark-navy hover:-translate-y-0.5 inline-block text-center"
+              >
+                Scopri di più
+              </a>
             </div>
           </GlareHover>
 

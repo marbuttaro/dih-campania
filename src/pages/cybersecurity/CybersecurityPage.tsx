@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
 
-export function DigitalTransformationPage() {
+export function CybersecurityPage() {
   const [formData, setFormData] = useState({
     lastName: '',
     firstName: '',
@@ -71,22 +71,22 @@ export function DigitalTransformationPage() {
             {/* Left Column: Text & Metrics */}
             <div className="flex-[1.1] text-left reveal-element">
               <h1 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-light text-brand-dark-navy leading-[1.2] mb-6 tracking-tight">
-                Accompagnare la<br />
-                trasformazione digitale<br />
-                delle imprese campane
+                Rafforzare la sicurezza<br />
+                digitale e la resilienza<br />
+                dell'impresa
               </h1>
               <p className="text-sm sm:text-base text-brand-dark-navy/85 font-normal leading-relaxed mb-10 max-w-[540px]">
-                Campania DIH supporta le imprese nella loro evoluzione digitale e sostenibile attraverso interventi concreti che partono dalla valutazione dei digital needs aziendali sulla base dei quali costruire una roadmap di implementazione.
+                Il Campania DIH supporta le imprese nel rafforzamento della sicurezza informatica attraverso Cyber Assessment, formazione e orientamento alla compliance. Un percorso per prevenire le minacce, proteggere dati e sistemi e affrontare con maggiore consapevolezza i rischi della trasformazione digitale.
               </p>
 
               {/* Clean White Metric Card matching mockup */}
               <div className="inline-flex items-center gap-6 shadow-box py-4 px-7">
                 <span className="text-5xl sm:text-[54px] font-semibold text-brand-light-blue leading-none tracking-tight">
-                  +230
+                  60+
                 </span>
                 <span className="text-sm sm:text-base font-semibold text-brand-dark-navy leading-snug">
                   Servizi Erogati<br />
-                  dal 2018
+                  dal 2024
                 </span>
               </div>
             </div>
@@ -96,7 +96,7 @@ export function DigitalTransformationPage() {
               <div className="relative rounded-[20px] overflow-hidden shadow-box max-w-[420px] w-full aspect-[4/5] bg-brand-dark-navy/10" style={{ padding: 0 }}>
                 <img
                   src="/assets/immagine.png"
-                  alt="Trasformazione Digitale"
+                  alt="Cybersicurezza"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   className="block"
                 />
@@ -104,71 +104,47 @@ export function DigitalTransformationPage() {
             </div>
           </div>
 
-          {/* 2. Horizontal Assessment Detail Bar (Solid White Premium Card with shadow-box) */}
-          <div className="shadow-box mb-12 flex flex-col md:flex-row gap-6 md:gap-12 items-start md:items-center reveal-element">
-            <div className="md:basis-[38%] shrink-0">
-              <h2 className="text-3xl md:text-[42px] font-medium text-[#013167] leading-[1.15] mb-3 tracking-tight">
-                First Digital<br /> Assessment
-              </h2>
-              <p className="text-lg md:text-[22px] font-light text-[#013167] leading-tight">
-                Misurare la maturità digitale per guidare la trasformazione
-              </p>
-            </div>
-            <div className="md:basis-[62%]">
-              <p className="text-sm sm:text-base text-brand-dark-navy/80 leading-relaxed font-normal">
-                Il Campania DIH accompagna le imprese nella trasformazione digitale attraverso un assessment strutturato che analizza processi, tecnologie, competenze e organizzazione. Dalla diagnosi dei digital needs alla definizione di una roadmap personalizzata, per innovare in modo consapevole e sostenibile.
-              </p>
-            </div>
-          </div>
-
-          {/* 3. Three-Column Cards Grid (using shadow-box) */}
+          {/* 2. Three-Column Cards Grid (using shadow-box) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            
-            {/* Card 1: Perché partire dall'assessment */}
+
+            {/* Card 1: Conoscere i rischi */}
             <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1 reveal-element reveal-delay-100">
               <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
-                <img src="/assets/contesto.svg" alt="Perché partire dall'assessment" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
+                <img src="/assets/contesto.svg" alt="Conoscere i rischi" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
               </div>
               <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
-                Perché partire<br />dall'assessment
+                Conoscere<br />i rischi
               </h3>
               <p className="text-sm text-brand-dark-navy/80 leading-relaxed font-normal">
-                La trasformazione digitale richiede prima di tutto una conoscenza chiara del punto di partenza. Il First Digital Assessment misura il livello di maturità digitale dell'impresa, evidenzia punti di forza e criticità e individua i principali gap tecnologici, organizzativi e di competenze.
+                Cyber attacchi, furti di dati e interruzioni operative possono compromettere continuità e reputazione aziendale. Il Cyber Assessment aiuta l'impresa a riconoscere vulnerabilità e criticità legate a sistemi, processi e organizzazione, individuando le aree che richiedono maggiore attenzione.
               </p>
             </div>
 
-            {/* Card 2: Come si sviluppa l'analisi */}
+            {/* Card 2: Sicurezza e compliance */}
             <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1 reveal-element reveal-delay-200">
               <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
-                <img src="/assets/metodo.svg" alt="Come si sviluppa l'analisi" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
+                <img src="/assets/metodo.svg" alt="Sicurezza e compliance" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
               </div>
               <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
-                Come si sviluppa<br />l'analisi
+                Sicurezza<br />e compliance
               </h3>
               <p className="text-sm text-brand-dark-navy/80 leading-relaxed font-normal">
-                L'assessment combina interviste strutturate e analisi dei principali processi aziendali: produzione, logistica, marketing, amministrazione, risorse umane e sostenibilità. La valutazione considera tecnologie, organizzazione e competenze per restituire una lettura integrata della capacità dell'impresa di affrontare la transizione digitale.
+                La cybersecurity riguarda anche procedure, competenze e responsabilità interne. Il servizio accompagna le imprese nella comprensione degli adempimenti applicabili e delle principali normative europee, tra cui la Direttiva NIS2, favorendo l'adozione di policy e pratiche coerenti con i requisiti di sicurezza.
               </p>
             </div>
 
-            {/* Card 3: Dalla diagnosi alla roadmap */}
+            {/* Card 3: Dalla consapevolezza all'azione */}
             <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1 reveal-element reveal-delay-300">
               <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
-                <img src="/assets/risultato.svg" alt="Dalla diagnosi alla roadmap" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
+                <img src="/assets/risultato.svg" alt="Dalla consapevolezza all'azione" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
               </div>
               <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
-                Dalla diagnosi<br />alla roadmap
+                Dalla consapevolezza<br />all'azione
               </h3>
               <p className="text-sm text-brand-dark-navy/80 leading-relaxed font-normal">
-                Il percorso si conclude con un report personalizzato che individua priorità e opportunità di intervento e definisce una roadmap di innovazione. L'obiettivo è orientare gli investimenti verso soluzioni realmente coerenti con le esigenze dell'impresa, migliorando efficienza, competitività e sostenibilità.
+                L'analisi produce indicazioni operative sulle priorità da affrontare per migliorare la protezione di reti, dati e infrastrutture. A queste attività si affiancano iniziative di formazione, workshop e sensibilizzazione, per diffondere una cultura della sicurezza capace di coinvolgere l'intera organizzazione.
               </p>
             </div>
-          </div>
-
-          {/* 4. Bottom Context Quote */}
-          <div className="max-w-[920px] mx-auto text-center mb-24 px-4 reveal-element">
-            <p className="text-base sm:text-[1.05rem] text-[#001933]/90 leading-relaxed font-normal">
-              In un territorio dove l'innovazione si intreccia con il patrimonio produttivo locale, il First Digital Assessment rappresenta quindi uno strumento di crescita e consapevolezza: un punto di partenza per accompagnare le imprese campane verso un futuro più connesso, sostenibile e intelligente.
-            </p>
           </div>
 
         </div> {/* Chiude container-page */}
@@ -183,7 +159,7 @@ export function DigitalTransformationPage() {
 
               <div className="relative z-10 text-center mb-8">
                 <h2 className="text-3xl sm:text-[2.1rem] font-light mb-2 text-white tracking-tight">
-                  Richiedi il tuo assessment
+                  Richiedi il tuo Cyber Assessment
                 </h2>
                 <p className="text-sm sm:text-base text-brand-light-blue/80 font-normal">
                   Compila il form e prenota il tuo appuntamento
@@ -198,7 +174,7 @@ export function DigitalTransformationPage() {
                     </svg>
                   </div>
                   <h3 className="text-2xl font-semibold mb-2">Richiesta Inviata!</h3>
-                  <p className="text-brand-light-blue/80">Grazie, ti contatteremo il prima possibile per fissare l'assessment.</p>
+                  <p className="text-brand-light-blue/80">Grazie, ti contatteremo il prima possibile per fissare il tuo Cyber Assessment.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4 relative z-10">

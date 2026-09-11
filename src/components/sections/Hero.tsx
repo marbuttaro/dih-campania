@@ -4,13 +4,12 @@ import { BlurText } from '@/components/effects/BlurText'
 import { ParticleNetwork } from '@/components/effects/ParticleNetwork'
 
 const TICKER_ITEMS = [
-  "L'AI accelera nelle imprese italiane, ma resta il nodo delle competenze",
-  "Aggiornato l'albo dei certificatori: i nuovi requisiti",
-  "Evento annuale: prenota il tuo posto",
+  'Investimenti Sostenibili 4.0: 448 milioni per le PMI del Mezzogiorno',
+  'Sviluppo competenze specialistiche: dal 10 settembre nuovi incentivi per le PMI del Mezzogiorno',
 ]
 
 export function Hero() {
-  const tickerText = TICKER_ITEMS.join(' | ') + ' | '
+  const tickerText = TICKER_ITEMS.join('    |    ') + '    |    '
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-24 sm:pt-28 bg-[linear-gradient(135deg,#001933_0%,#002D5C_50%,#001933_100%)]">

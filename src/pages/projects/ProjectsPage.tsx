@@ -4,17 +4,30 @@ import { Footer } from '@/components/sections/Footer'
 
 const MAIN_PROJECTS = [
   {
-    logo: '/assets/progetti/terranext.png',
-    alt: 'TerraNext',
-    link: 'https://www.terranextaccelerator.com/',
+    logo: '/assets/progetti/confin-hub.png',
+    alt: 'ConfIN-Hub — Confindustria',
+    link: 'https://innovationhub.confindustria.it/',
     description: (
       <>
-        Campania DIH è <strong>partner tecnico scientifico</strong> di TERRANEXT. L'acceleratore
-        BioEconomy della Rete Nazionale CDP e Intesa Sanpaolo Innovation Center con la
-        partecipazione di partner come Fondazione con il Sud, con il supporto di Cariplo Factory,
-        l'Università Federico II di Napoli, dedicato alle startup e PMI innovative che offrono
-        soluzioni nei settori della Bio-Economy con attenzione ai segmenti Food &amp; Nutraceutica,
-        Bio-materiali e Agricoltura rigenerativa.
+        ConfIN‑Hub è il polo nazionale di innovazione digitale promosso da Confindustria e
+        finanziato dal MIMIT – PNRR, al quale il Campania DIH partecipa come spoke del network
+        nazionale dei DIH. Il progetto consente l'erogazione su scala nazionale di servizi
+        standardizzati di assessment digitale, cybersecurity e data readiness, valorizzando un
+        metodo di lavoro comune e rafforzando il coordinamento tra territori, filiere e imprese.
+      </>
+    ),
+  },
+  {
+    logo: '/assets/progetti/damas.png',
+    alt: 'DAMAS',
+    link: 'https://edih-damas.it/',
+    description: (
+      <>
+        Progetto focalizzato sulla digitalizzazione delle filiere Automotive e Aerospace
+        attraverso l'adozione delle tecnologie High Perfomance Computing e Intelligenza
+        Artificiale. L'iniziativa supporta le imprese attraverso assessment di maturità digitale
+        e definizione di roadmap tecnologiche, favorendo l'adozione di soluzioni avanzate e il
+        trasferimento tecnologico in settori industriali ad alta complessità.
       </>
     ),
   },
@@ -32,15 +45,14 @@ const MAIN_PROJECTS = [
     ),
   },
   {
-    logo: '/assets/progetti/infosfera.svg',
-    alt: 'Infosfera',
-    link: 'https://www.campaniadih.it/2024/02/12/infosfera-ecco-il-nuovo-numero/',
+    logo: '/assets/progetti/pride.svg',
+    logoStyle: { maxHeight: '55%' },
+    alt: 'eDIH P.R.I.D.E.',
+    link: 'https://www.edih-pride.eu/',
     description: (
       <>
-        Infosfera rappresenta il{' '}
-        <strong>magazine di approfondimento e divulgazione sui temi dell'innovazione e della trasformazione digitale</strong>
-        , utilizzato per diffondere contenuti specialistici e aggiornamenti sulle principali
-        evoluzioni tecnologiche.
+        P.R.I.D.E., Polo Regionale per l'Innovazione Digitale Evoluta, rientra tra i primi
+        tredici European Digital Innovation Hub italiani finanziati dalla Commissione Europea.
       </>
     ),
   },
@@ -55,6 +67,34 @@ const MAIN_PROJECTS = [
         l'Istituto Tecnico Superiore per le Tecnologie dell'Informazione e della Comunicazione che
         realizza percorsi biennali post diploma nell'Area "Tecnologie dell'informazione e della
         comunicazione".
+      </>
+    ),
+  },
+  {
+    logo: '/assets/progetti/infosfera.svg',
+    alt: 'Infosfera',
+    link: 'https://www.campaniadih.it/2024/02/12/infosfera-ecco-il-nuovo-numero/',
+    description: (
+      <>
+        Infosfera rappresenta il{' '}
+        <strong>magazine di approfondimento e divulgazione sui temi dell'innovazione e della trasformazione digitale</strong>
+        , utilizzato per diffondere contenuti specialistici e aggiornamenti sulle principali
+        evoluzioni tecnologiche.
+      </>
+    ),
+  },
+  {
+    logo: '/assets/progetti/terranext.png',
+    alt: 'TerraNext',
+    link: 'https://www.terranextaccelerator.com/',
+    description: (
+      <>
+        Campania DIH è <strong>partner tecnico scientifico</strong> di TERRANEXT. L'acceleratore
+        BioEconomy della Rete Nazionale CDP e Intesa Sanpaolo Innovation Center con la
+        partecipazione di partner come Fondazione con il Sud, con il supporto di Cariplo Factory,
+        l'Università Federico II di Napoli, dedicato alle startup e PMI innovative che offrono
+        soluzioni nei settori della Bio-Economy con attenzione ai segmenti Food &amp; Nutraceutica,
+        Bio-materiali e Agricoltura rigenerativa.
       </>
     ),
   },
@@ -134,6 +174,7 @@ export function ProjectsPage() {
                   <img
                     src={project.logo}
                     alt={project.alt}
+                    style={project.logoStyle}
                     className="max-h-full max-w-full object-contain"
                   />
                 </div>
