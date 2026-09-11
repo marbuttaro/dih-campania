@@ -95,7 +95,7 @@ export function IntelligenzaArtificialePage() {
             <div className="flex-1 w-full flex justify-center lg:justify-end reveal-element reveal-delay-200">
               <div className="relative rounded-[20px] overflow-hidden shadow-box max-w-[420px] w-full aspect-[4/5] bg-brand-dark-navy/10" style={{ padding: 0 }}>
                 <img
-                  src="/assets/immagine.png"
+                  src="/assets/slider_servizi_3.png"
                   alt="Intelligenza Artificiale"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   className="block"
