@@ -1,8 +1,20 @@
-import { useEffect } from 'react'
+import { useEffect, type CSSProperties, type ReactNode } from 'react'
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
 
 const MAIN_PROJECTS = [
+  {
+    logo: '/assets/progetti/pride.svg',
+    logoStyle: { maxHeight: '55%' },
+    alt: 'eDIH P.R.I.D.E.',
+    link: 'https://www.edih-pride.eu/',
+    description: (
+      <>
+        P.R.I.D.E., Polo Regionale per l'Innovazione Digitale Evoluta, rientra tra i primi
+        tredici European Digital Innovation Hub italiani finanziati dalla Commissione Europea.
+      </>
+    ),
+  },
   {
     logo: '/assets/progetti/confin-hub.png',
     alt: 'ConfIN-Hub — Confindustria',
@@ -32,6 +44,18 @@ const MAIN_PROJECTS = [
     ),
   },
   {
+    logo: '/assets/progetti/amadih.png',
+    alt: 'AMa-DIH',
+    description: (
+      <>
+        Il progetto AMa-DIH "Affiancamento Manageriale per i Digital Innovation Hub" ha avuto
+        l'obiettivo di rafforzare il network dei Digital Innovation Hub di Confindustria grazie
+        all'inserimento nei DIH di figure manageriali qualificate individuate in collaborazione
+        con 4.Manager e Federmanager.
+      </>
+    ),
+  },
+  {
     logo: '/assets/progetti/digiset-challenge.svg',
     alt: 'Digiset Challenge',
     link: 'https://digisetchallenge.it/',
@@ -41,45 +65,6 @@ const MAIN_PROJECTS = [
         di capofila del progetto, ha <strong>promosso percorsi di upskilling e reskilling</strong>,
         contribuendo al rafforzamento delle competenze digitali dei lavoratori e al miglioramento
         della capacità di adattamento ai cambiamenti tecnologici.
-      </>
-    ),
-  },
-  {
-    logo: '/assets/progetti/pride.svg',
-    logoStyle: { maxHeight: '55%' },
-    alt: 'eDIH P.R.I.D.E.',
-    link: 'https://www.edih-pride.eu/',
-    description: (
-      <>
-        P.R.I.D.E., Polo Regionale per l'Innovazione Digitale Evoluta, rientra tra i primi
-        tredici European Digital Innovation Hub italiani finanziati dalla Commissione Europea.
-      </>
-    ),
-  },
-  {
-    logo: '/assets/progetti/ict-campus.png',
-    alt: 'ICT Campus',
-    link: 'https://its-ictcampus.com/',
-    description: (
-      <>
-        Il Campania DIH è{' '}
-        <strong>socio fondatore della Fondazione "ICT CAMPUS – ITS ACADEMY"</strong> ovvero
-        l'Istituto Tecnico Superiore per le Tecnologie dell'Informazione e della Comunicazione che
-        realizza percorsi biennali post diploma nell'Area "Tecnologie dell'informazione e della
-        comunicazione".
-      </>
-    ),
-  },
-  {
-    logo: '/assets/progetti/infosfera.svg',
-    alt: 'Infosfera',
-    link: 'https://www.campaniadih.it/2024/02/12/infosfera-ecco-il-nuovo-numero/',
-    description: (
-      <>
-        Infosfera rappresenta il{' '}
-        <strong>magazine di approfondimento e divulgazione sui temi dell'innovazione e della trasformazione digitale</strong>
-        , utilizzato per diffondere contenuti specialistici e aggiornamenti sulle principali
-        evoluzioni tecnologiche.
       </>
     ),
   },
@@ -100,10 +85,50 @@ const MAIN_PROJECTS = [
   },
 ]
 
-const OTHER_PROJECTS = Array.from({ length: 6 }, () => ({
-  logo: '/assets/progetti/amadih.png',
-  alt: 'AMa DIH — Affiancamento manageriale per i Digital Innovation Hub',
-}))
+const OTHER_COLLABORATIONS: {
+  logo?: string
+  logoStyle?: CSSProperties
+  alt?: string
+  title?: string
+  link?: string
+  description: ReactNode
+}[] = [
+  {
+    logo: '/assets/progetti/ict-campus.png',
+    logoStyle: { maxHeight: '65%' },
+    alt: 'ICT Campus',
+    link: 'https://its-ictcampus.com/',
+    description: (
+      <>
+        Il Campania DIH è socio fondatore della Fondazione "ICT CAMPUS – ITS ACADEMY", ovvero
+        l'Istituto Tecnico Superiore per le Tecnologie dell'Informazione e della Comunicazione,
+        che realizza percorsi biennali post diploma nell'Area "Tecnologie dell'informazione e
+        della comunicazione".
+      </>
+    ),
+  },
+  {
+    title: 'SyMan',
+    description: (
+      <>
+        Il Campania DIH ha partecipato al progetto SyMan – Sustainability Manager Network
+        promosso da SFC Confindustria e Federmanager, sviluppando strumenti di supporto alle PMI
+        campane nel percorso di transizione digitale e sostenibile, tra cui guide informative, un
+        manuale normativo e un tool di assessment della sostenibilità.
+      </>
+    ),
+  },
+  {
+    logo: '/assets/progetti/parthenope-full.png',
+    alt: 'Università degli Studi di Napoli "Parthenope"',
+    description: (
+      <>
+        Il Campania DIH ha attivato con l'Università degli Studi di Napoli "Parthenope" due
+        corsi del Dottorato di ricerca "Economia, Statistica e Sostenibilità".
+      </>
+    ),
+  },
+]
 
 export function ProjectsPage() {
   useEffect(() => {
@@ -186,23 +211,42 @@ export function ProjectsPage() {
           </div>
 
           <div className="reveal-element">
-            <h2 className="text-3xl sm:text-4xl font-light text-brand-navy mb-8 tracking-tight">
-              Altri progetti
+            <h2 className="text-xl sm:text-2xl font-light text-brand-navy mb-6 tracking-tight">
+              Altre collaborazioni o partecipazioni
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border border-brand-navy/15 rounded-[16px] overflow-hidden bg-white/40">
-              {OTHER_PROJECTS.map((project, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-center p-8 h-32 sm:h-36 border border-brand-navy/15"
-                >
-                  <img
-                    src={project.logo}
-                    alt={project.alt}
-                    className="max-h-full max-w-full object-contain"
-                  />
-                </div>
-              ))}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {OTHER_COLLABORATIONS.map((item) => {
+                const Wrapper: 'a' | 'div' = item.link ? 'a' : 'div'
+                return (
+                  <Wrapper
+                    key={item.alt ?? item.title}
+                    {...(item.link
+                      ? { href: item.link, target: '_blank', rel: 'noopener noreferrer' }
+                      : {})}
+                    style={{ backgroundColor: 'rgba(227, 234, 236, 0.95)' }}
+                    className="flex flex-col items-center gap-3 rounded-[20px] p-6 shadow-neumorphic no-underline text-center transition-all duration-300 hover:-translate-y-1"
+                  >
+                    <div className="flex items-center justify-center h-20 w-full">
+                      {item.logo ? (
+                        <img
+                          src={item.logo}
+                          alt={item.alt}
+                          style={item.logoStyle}
+                          className="max-h-full max-w-full object-contain"
+                        />
+                      ) : (
+                        <span className="text-3xl font-bold text-brand-navy tracking-tight">
+                          {item.title}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-[12px] leading-[1.2] text-brand-dark-navy/80 font-normal">
+                      {item.description}
+                    </p>
+                  </Wrapper>
+                )
+              })}
             </div>
           </div>
         </div>
