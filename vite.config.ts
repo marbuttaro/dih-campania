@@ -21,6 +21,7 @@ export default defineConfig({
         innovaco: path.resolve(__dirname, 'innova-co.html'),
         progetti: path.resolve(__dirname, 'progetti.html'),
         servizi: path.resolve(__dirname, 'servizi.html'),
+        trasparenza: path.resolve(__dirname, 'trasparenza.html'),
       },
     },
   },
