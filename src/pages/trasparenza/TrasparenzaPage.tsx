@@ -37,6 +37,10 @@ const ALBO_DOCUMENTS = [
     label: 'Modello domanda di iscrizione Albo Operatori Economici',
     href: '/assets/trasparenza/modello-domanda-albo-operatori-economici.pdf',
   },
+  {
+    label: 'Albo degli operatori economici aggiornato al 07/01/2025',
+    href: '/assets/trasparenza/albo-operatori-economici-aggiornato.pdf',
+  },
 ]
 
 function DocumentLink({ label, href }: { label: string; href: string }) {
