@@ -140,7 +140,7 @@ export function DigitalTransformationPage() {
             {/* Card 2: Come si sviluppa l'analisi */}
             <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1 reveal-element reveal-delay-200">
               <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
-                <img src="/assets/metodo.svg" alt="Come si sviluppa l'analisi" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
+                <img src="/assets/analisi.svg" alt="Come si sviluppa l'analisi" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
               </div>
               <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
                 Come si sviluppa<br />l'analisi
@@ -153,7 +153,7 @@ export function DigitalTransformationPage() {
             {/* Card 3: Dalla diagnosi alla roadmap */}
             <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1 reveal-element reveal-delay-300">
               <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
-                <img src="/assets/risultato.svg" alt="Dalla diagnosi alla roadmap" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
+                <img src="/assets/metodo.svg" alt="Dalla diagnosi alla roadmap" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
               </div>
               <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
                 Dalla diagnosi<br />alla roadmap

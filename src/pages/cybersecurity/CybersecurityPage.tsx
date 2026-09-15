@@ -110,7 +110,7 @@ export function CybersecurityPage() {
             {/* Card 1: Conoscere i rischi */}
             <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1 reveal-element reveal-delay-100">
               <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
-                <img src="/assets/contesto.svg" alt="Conoscere i rischi" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
+                <img src="/assets/rischi.svg" alt="Conoscere i rischi" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
               </div>
               <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
                 Conoscere<br />i rischi
@@ -123,7 +123,7 @@ export function CybersecurityPage() {
             {/* Card 2: Sicurezza e compliance */}
             <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1 reveal-element reveal-delay-200">
               <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
-                <img src="/assets/metodo.svg" alt="Sicurezza e compliance" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
+                <img src="/assets/sicurezza.svg" alt="Sicurezza e compliance" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
               </div>
               <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
                 Sicurezza<br />e compliance
@@ -136,7 +136,7 @@ export function CybersecurityPage() {
             {/* Card 3: Dalla consapevolezza all'azione */}
             <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1 reveal-element reveal-delay-300">
               <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
-                <img src="/assets/risultato.svg" alt="Dalla consapevolezza all'azione" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
+                <img src="/assets/azione.svg" alt="Dalla consapevolezza all'azione" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
               </div>
               <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
                 Dalla consapevolezza<br />all'azione
