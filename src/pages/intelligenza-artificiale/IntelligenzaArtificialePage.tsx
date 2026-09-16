@@ -110,7 +110,7 @@ export function IntelligenzaArtificialePage() {
             {/* Card 1: Preparare i dati */}
             <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1 reveal-element reveal-delay-100">
               <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
-                <img src="/assets/contesto.svg" alt="Preparare i dati" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
+                <img src="/assets/analisi.svg" alt="Preparare i dati" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
               </div>
               <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
                 Preparare<br />i dati
@@ -123,7 +123,7 @@ export function IntelligenzaArtificialePage() {
             {/* Card 2: Dall'idea al caso d'uso */}
             <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1 reveal-element reveal-delay-200">
               <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
-                <img src="/assets/metodo.svg" alt="Dall'idea al caso d'uso" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
+                <img src="/assets/idea.svg" alt="Dall'idea al caso d'uso" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
               </div>
               <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
                 Dall'idea<br />al caso d'uso
@@ -136,7 +136,7 @@ export function IntelligenzaArtificialePage() {
             {/* Card 3: Testare prima di investire */}
             <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1 reveal-element reveal-delay-300">
               <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
-                <img src="/assets/risultato.svg" alt="Testare prima di investire" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
+                <img src="/assets/test.svg" alt="Testare prima di investire" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
               </div>
               <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
                 Testare prima<br />di investire
