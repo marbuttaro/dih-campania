@@ -61,7 +61,7 @@ export function AboutUsPage() {
               className="rounded-[20px] p-9 shadow-neumorphic"
               style={{ backgroundColor: '#E3EAEC' }}
             >
-              <h2 className="text-[48px] font-light text-[#013167] mb-5 leading-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              <h2 className="text-[34px] sm:text-[40px] lg:text-[48px] font-light text-[#013167] mb-5 leading-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
                 La nostra mission
               </h2>
               <p className="text-base sm:text-lg text-brand-dark-navy/85 font-normal leading-relaxed">
@@ -73,7 +73,7 @@ export function AboutUsPage() {
           {/* 4. Approccio Data-Driven Section */}
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-8 lg:gap-16 w-full max-w-[1200px] mx-auto mb-24 items-start reveal-element">
             <div>
-              <h2 className="text-[48px] font-light text-[#013167] leading-[1.15]" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              <h2 className="text-[34px] sm:text-[40px] lg:text-[48px] font-light text-[#013167] leading-[1.15]" style={{ fontFamily: 'Montserrat, sans-serif' }}>
                 Approccio Data-<br />Driven e<br />Partnership
               </h2>
             </div>
@@ -162,7 +162,7 @@ export function AboutUsPage() {
           {/* 6. Le persone Header Section */}
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-8 lg:gap-16 w-full max-w-[1200px] mx-auto mb-20 items-center reveal-element">
             <div>
-              <h2 className="text-[48px] font-light text-[#013167] leading-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              <h2 className="text-[34px] sm:text-[40px] lg:text-[48px] font-light text-[#013167] leading-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
                 Le persone
               </h2>
             </div>
@@ -178,7 +178,7 @@ export function AboutUsPage() {
 
           {/* 7. CdA Section */}
           <div className="w-full max-w-[1200px] mx-auto mb-24 reveal-element reveal-delay-100">
-            <h2 className="text-[48px] font-light text-[#013167] mb-8 leading-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+            <h2 className="text-[34px] sm:text-[40px] lg:text-[48px] font-light text-[#013167] mb-8 leading-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
               CdA
             </h2>
             

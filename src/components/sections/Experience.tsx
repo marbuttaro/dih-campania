@@ -29,7 +29,7 @@ export function Experience() {
           </p>
           <a
             href="/chi-siamo.html"
-            className="inline-block bg-brand-ice/30 text-brand-dark-navy px-9 py-3.5 rounded-lg font-semibold border-0 cursor-pointer shadow-[0_4px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)] no-underline"
+            className="inline-block whitespace-nowrap bg-brand-ice/30 text-brand-dark-navy px-5 sm:px-9 py-3.5 rounded-lg font-semibold border-0 cursor-pointer shadow-[0_4px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)] no-underline"
           >
             Scopri il nostro team
           </a>

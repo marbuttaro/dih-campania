@@ -23,8 +23,8 @@ export function Hero() {
           <h1 className="mb-8 text-[2.15rem] sm:text-6xl lg:text-[4.2rem] font-medium text-white leading-[1.1] flex flex-col items-center">
             <BlurText
               text="Il punto di riferimento per"
-              delay={150}
-              stepDuration={0.6}
+              delay={100}
+              stepDuration={0.45}
               animateBy="words"
               direction="top"
               className="font-light text-white/85 mb-2 block"
@@ -32,19 +32,19 @@ export function Hero() {
             />
             <BlurText
               text={'la trasformazione digitale.'}
-              delay={150}
-              stepDuration={0.6}
+              delay={100}
+              stepDuration={0.45}
               animateBy="words"
               direction="top"
               className="font-bold text-brand-light-blue block"
-              startDelay={1500}
+              startDelay={650}
             />
           </h1>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 3, duration: 1, ease: 'easeOut' }}
+            transition={{ delay: 1.9, duration: 1, ease: 'easeOut' }}
             className="flex flex-col items-center"
           >
             <p className="mb-10 max-w-[720px] text-base sm:text-lg lg:text-xl text-white/80 leading-relaxed text-center">

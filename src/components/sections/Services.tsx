@@ -107,9 +107,9 @@ export function Services() {
             type="button"
             onClick={goToPrev}
             aria-label="Servizio precedente"
-            className="flex size-10 items-center justify-center rounded-full bg-white shadow-[0_4px_15px_rgba(0,25,51,0.08)] shrink-0 text-brand-navy"
+            className="flex size-10 items-center justify-center shrink-0 text-brand-light-blue"
           >
-            <ChevronLeft className="size-5" />
+            <ChevronLeft className="size-8" strokeWidth={1.5} />
           </button>
           <span className="text-lg font-medium text-brand-light-blue text-center">
             {active.title}
@@ -118,9 +118,9 @@ export function Services() {
             type="button"
             onClick={goToNext}
             aria-label="Servizio successivo"
-            className="flex size-10 items-center justify-center rounded-full bg-white shadow-[0_4px_15px_rgba(0,25,51,0.08)] shrink-0 text-brand-navy"
+            className="flex size-10 items-center justify-center shrink-0 text-brand-light-blue"
           >
-            <ChevronRight className="size-5" />
+            <ChevronRight className="size-8" strokeWidth={1.5} />
           </button>
         </div>
 
@@ -192,7 +192,8 @@ export function Services() {
               alt={active.title}
               className="w-full h-full object-cover block"
             />
-            <div className="absolute top-[9%] right-[5%] w-[62%] sm:top-auto sm:w-auto sm:right-6 sm:bottom-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-[20px] p-3 sm:p-6 text-white sm:max-w-[480px]">
+            <div className="absolute inset-0 bg-gradient-to-bl from-black/50 via-black/10 to-transparent pointer-events-none" />
+            <div className="absolute top-[9%] right-[5%] w-[62%] sm:top-auto sm:w-auto sm:right-6 sm:bottom-6 bg-black/40 backdrop-blur-md border border-white/20 rounded-[20px] p-3 sm:p-6 text-white sm:max-w-[480px]">
               <h4 className="text-xs sm:text-lg font-semibold mb-2 sm:mb-3 text-brand-grey-blue">
                 Aree principali:
               </h4>

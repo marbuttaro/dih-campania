@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Scissors, Factory, Wheat, HeartPulse, Truck, Palette, type LucideIcon } from 'lucide-react'
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
@@ -114,8 +114,26 @@ const JOURNEY_STEPS = [
   },
 ]
 
+const STEP_COLLAPSED_HEIGHT = 210
+
 export function ServiziPage() {
   const [activeStep, setActiveStep] = useState(0)
+  const [stepExpanded, setStepExpanded] = useState(false)
+  const [stepTruncated, setStepTruncated] = useState(false)
+  const stepContentRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    setStepExpanded(false)
+  }, [activeStep])
+
+  useEffect(() => {
+    const el = stepContentRef.current
+    if (!el) return
+    const raf = requestAnimationFrame(() => {
+      setStepTruncated(el.scrollHeight > STEP_COLLAPSED_HEIGHT + 4)
+    })
+    return () => cancelAnimationFrame(raf)
+  }, [activeStep])
 
   const [formData, setFormData] = useState({
     lastName: '',
@@ -199,10 +217,10 @@ export function ServiziPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center reveal-element">
               <div>
                 <h1 className="text-4xl sm:text-5xl lg:text-[2.75rem] font-light text-brand-navy leading-[1.2] tracking-tight mb-6">
-                  Un facilitatore tra il
+                  Un facilitatore tra{' '}il
                   <br />
                   mondo produttivo
-                  <br />e le istituzioni
+                  <br />e{' '}le istituzioni
                 </h1>
                 <p className="text-sm sm:text-base text-brand-dark-navy/80 leading-relaxed font-normal">
                   Il Campania DIH supporta le aziende <strong>in tutte le fasi del percorso
@@ -233,8 +251,106 @@ export function ServiziPage() {
             innovazione digitale
           </h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-6 lg:gap-8 items-stretch reveal-element">
-            <div className="hidden lg:flex shadow-box !p-6 flex-col gap-1">
+          {/* Mobile: single collapsible card + nav buttons outside */}
+          <div className="lg:hidden reveal-element">
+            {(() => {
+              const step = JOURNEY_STEPS[activeStep]
+              const stepHasBullets = step.bullets.length > 0
+              const stepHasContent = Boolean(step.intro) || stepHasBullets
+              return (
+                <div className="shadow-box flex flex-col">
+                  <h3 className="text-3xl font-light text-brand-navy mb-6 tracking-tight">
+                    {step.title}
+                  </h3>
+
+                  <div
+                    ref={stepContentRef}
+                    className="overflow-hidden"
+                    style={{ maxHeight: stepExpanded ? undefined : STEP_COLLAPSED_HEIGHT }}
+                  >
+                    {stepHasContent ? (
+                      <>
+                        {step.intro && (
+                          <p className="text-sm text-brand-dark-navy/85 leading-relaxed mb-6">
+                            {step.intro}
+                          </p>
+                        )}
+                        {stepHasBullets && (
+                          <ul className="flex flex-col gap-3 mb-6 list-none p-0 m-0">
+                            {step.bullets.map((bullet, i) => (
+                              <li key={i} className="flex gap-2 text-sm text-brand-dark-navy/85 leading-relaxed">
+                                <span aria-hidden="true">•</span>
+                                <span>{bullet}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        {step.objective && (
+                          <p className="text-sm text-brand-dark-navy/85 leading-relaxed mb-8">
+                            <strong>Obiettivo:</strong> {step.objective}
+                          </p>
+                        )}
+                      </>
+                    ) : (
+                      <p className="text-sm text-brand-dark-navy/50 italic leading-relaxed mb-8">
+                        Contenuti in arrivo.
+                      </p>
+                    )}
+                  </div>
+
+                  {stepTruncated && (
+                    <button
+                      type="button"
+                      onClick={() => setStepExpanded((v) => !v)}
+                      className="mt-3 self-end inline-flex items-center gap-2 text-brand-navy font-semibold text-sm"
+                    >
+                      {!stepExpanded && <span>...</span>}
+                      <span className="flex items-center justify-center size-6 rounded-full bg-white shadow-[0_4px_15px_rgba(0,25,51,0.08)]">
+                        <img
+                          src={stepExpanded ? '/assets/icon_minus.svg' : '/assets/icon_plus.svg'}
+                          alt=""
+                          className="size-3"
+                        />
+                      </span>
+                    </button>
+                  )}
+                </div>
+              )
+            })()}
+
+            <div className="mt-4 flex items-center gap-4">
+              <button
+                type="button"
+                onClick={() => setActiveStep((s) => Math.max(0, s - 1))}
+                disabled={activeStep === 0}
+                className={`font-semibold text-brand-navy px-7 py-3.5 rounded-2xl transition-all duration-300 ${
+                  activeStep === 0
+                    ? 'bg-[#E3EAEC]/40 shadow-[-3px_-3px_10px_rgba(255,255,255,0.5),4px_4px_12px_rgba(164,177,188,0.25)] opacity-40 cursor-not-allowed'
+                    : 'bg-[#E3EAEC] shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.55)] hover:-translate-y-0.5'
+                }`}
+              >
+                ← Indietro
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  setActiveStep((s) => Math.min(JOURNEY_STEPS.length - 1, s + 1))
+                }
+                disabled={activeStep === JOURNEY_STEPS.length - 1}
+                className={`font-semibold text-brand-navy px-7 py-3.5 rounded-2xl transition-all duration-300 ${
+                  activeStep === JOURNEY_STEPS.length - 1
+                    ? 'bg-[#E3EAEC]/40 shadow-[-3px_-3px_10px_rgba(255,255,255,0.5),4px_4px_12px_rgba(164,177,188,0.25)] opacity-40 cursor-not-allowed'
+                    : 'bg-[#E3EAEC] shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.55)] hover:-translate-y-0.5'
+                }`}
+              >
+                Avanti →
+              </button>
+            </div>
+          </div>
+
+          {/* Desktop/tablet: step list + fixed-height content, unchanged */}
+          <div className="hidden lg:grid grid-cols-[320px_1fr] gap-8 items-stretch reveal-element">
+            <div className="flex shadow-box !p-6 flex-col gap-1">
               {JOURNEY_STEPS.map((s, index) => (
                 <button
                   key={s.title}
@@ -253,7 +369,7 @@ export function ServiziPage() {
             </div>
 
             <div className="shadow-box flex flex-col">
-              <div className="lg:grid">
+              <div className="grid">
                 {JOURNEY_STEPS.map((s, index) => {
                   const stepHasBullets = s.bullets.length > 0
                   const stepHasContent = Boolean(s.intro) || stepHasBullets
@@ -262,25 +378,25 @@ export function ServiziPage() {
                     <div
                       key={s.title}
                       aria-hidden={!isActiveStep}
-                      className={`${isActiveStep ? 'block' : 'hidden'} lg:col-start-1 lg:row-start-1 lg:block ${
-                        isActiveStep ? 'lg:opacity-100' : 'lg:opacity-0 lg:pointer-events-none lg:select-none'
+                      className={`col-start-1 row-start-1 ${
+                        isActiveStep ? 'opacity-100' : 'opacity-0 pointer-events-none select-none'
                       }`}
                     >
-                      <h3 className="text-3xl lg:text-[28px] font-light text-brand-navy mb-6 tracking-tight">
+                      <h3 className="text-[28px] font-light text-brand-navy mb-6 tracking-tight">
                         {s.title}
                       </h3>
 
                       {stepHasContent ? (
                         <>
                           {s.intro && (
-                            <p className="text-sm sm:text-base text-brand-dark-navy/85 leading-relaxed mb-6">
+                            <p className="text-base text-brand-dark-navy/85 leading-relaxed mb-6">
                               {s.intro}
                             </p>
                           )}
                           {stepHasBullets && (
                             <ul className="flex flex-col gap-3 mb-6 list-none p-0 m-0">
                               {s.bullets.map((bullet, i) => (
-                                <li key={i} className="flex gap-2 text-sm sm:text-base text-brand-dark-navy/85 leading-relaxed">
+                                <li key={i} className="flex gap-2 text-base text-brand-dark-navy/85 leading-relaxed">
                                   <span aria-hidden="true">•</span>
                                   <span>{bullet}</span>
                                 </li>
@@ -288,13 +404,13 @@ export function ServiziPage() {
                             </ul>
                           )}
                           {s.objective && (
-                            <p className="text-sm sm:text-base text-brand-dark-navy/85 leading-relaxed mb-8">
+                            <p className="text-base text-brand-dark-navy/85 leading-relaxed mb-8">
                               <strong>Obiettivo:</strong> {s.objective}
                             </p>
                           )}
                         </>
                       ) : (
-                        <p className="text-sm sm:text-base text-brand-dark-navy/50 italic leading-relaxed mb-8">
+                        <p className="text-base text-brand-dark-navy/50 italic leading-relaxed mb-8">
                           Contenuti in arrivo.
                         </p>
                       )}
@@ -400,7 +516,7 @@ export function ServiziPage() {
         {/* 6. Pronto per iniziare */}
         <div id="contatti" className="w-full relative bg-cover bg-center py-20 reveal-element scroll-mt-28" style={{ backgroundImage: "url('/assets/sfondo_form.png')" }}>
           <div className="container-page relative z-10">
-            <div className="max-w-[760px] mx-auto rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container">
+            <div className="max-w-[920px] mx-auto rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container">
 
               {/* Ambient inner glow */}
               <div className="absolute -top-40 -right-40 size-80 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
@@ -474,7 +590,7 @@ export function ServiziPage() {
                   <div className="glass-stroke-input-wrapper">
                     <textarea
                       placeholder="Message"
-                      rows={4}
+                      rows={6}
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}

@@ -152,7 +152,7 @@ export function CybersecurityPage() {
         {/* 5. Custom Assessment Form Section (Full Width Background) */}
         <div className="w-full relative bg-cover bg-center py-20 reveal-element" style={{ backgroundImage: "url('/assets/sfondo_form.png')" }}>
           <div className="container-page relative z-10">
-            <div className="max-w-[760px] mx-auto rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container">
+            <div className="max-w-[920px] mx-auto rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container">
               
               {/* Ambient inner glow */}
               <div className="absolute -top-40 -right-40 size-80 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
@@ -226,7 +226,7 @@ export function CybersecurityPage() {
                   <div className="glass-stroke-input-wrapper">
                     <textarea
                       placeholder="Message"
-                      rows={4}
+                      rows={6}
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}

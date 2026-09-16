@@ -91,10 +91,10 @@ export function Navbar() {
           <SheetTrigger asChild>
             <button
               type="button"
-              className="lg:hidden inline-flex items-center justify-center size-10 text-white hover:text-white/80 transition-colors"
+              className="lg:hidden -mr-3 inline-flex items-center justify-center size-10 text-white hover:text-white/80 transition-colors"
               aria-label="Apri menu"
             >
-              <MenuIcon className="size-5" />
+              <MenuIcon className="size-7" />
             </button>
           </SheetTrigger>
           <SheetContent side="right" className="w-[85%] sm:w-80">
