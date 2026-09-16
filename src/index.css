@@ -94,7 +94,7 @@
 
 @layer components {
   .container-page {
-    @apply mx-auto w-full max-w-[1280px] px-10 sm:px-12 lg:px-14;
+    @apply mx-auto w-full max-w-[1280px] px-8 sm:px-12 lg:px-14;
   }
 
   .shadow-box {

@@ -114,8 +114,6 @@ const JOURNEY_STEPS = [
   },
 ]
 
-const STEP_COLLAPSED_HEIGHT = 210
-
 export function ServiziPage() {
   const [activeStep, setActiveStep] = useState(0)
   const [stepExpanded, setStepExpanded] = useState(false)
@@ -130,7 +128,7 @@ export function ServiziPage() {
     const el = stepContentRef.current
     if (!el) return
     const raf = requestAnimationFrame(() => {
-      setStepTruncated(el.scrollHeight > STEP_COLLAPSED_HEIGHT + 4)
+      setStepTruncated(el.scrollHeight > el.clientHeight + 2)
     })
     return () => cancelAnimationFrame(raf)
   }, [activeStep])
@@ -216,11 +214,8 @@ export function ServiziPage() {
           <div className="container-page relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center reveal-element">
               <div>
-                <h1 className="text-4xl sm:text-5xl lg:text-[2.75rem] font-light text-brand-navy leading-[1.2] tracking-tight mb-6">
-                  Un facilitatore tra{' '}il
-                  <br />
-                  mondo produttivo
-                  <br />e{' '}le istituzioni
+                <h1 className="text-balance text-4xl sm:text-5xl lg:text-[2.75rem] font-light text-brand-navy leading-[1.2] tracking-tight mb-6">
+                  Un facilitatore tra{' '}il mondo produttivo e{' '}le{' '}istituzioni
                 </h1>
                 <p className="text-sm sm:text-base text-brand-dark-navy/80 leading-relaxed font-normal">
                   Il Campania DIH supporta le aziende <strong>in tutte le fasi del percorso
@@ -257,19 +252,23 @@ export function ServiziPage() {
               const step = JOURNEY_STEPS[activeStep]
               const stepHasBullets = step.bullets.length > 0
               const stepHasContent = Boolean(step.intro) || stepHasBullets
+              const previewText = [
+                step.intro,
+                ...step.bullets,
+                step.objective && `Obiettivo: ${step.objective}`,
+              ]
+                .filter(Boolean)
+                .join(' ')
+
               return (
                 <div className="shadow-box flex flex-col">
                   <h3 className="text-3xl font-light text-brand-navy mb-6 tracking-tight">
                     {step.title}
                   </h3>
 
-                  <div
-                    ref={stepContentRef}
-                    className="overflow-hidden"
-                    style={{ maxHeight: stepExpanded ? undefined : STEP_COLLAPSED_HEIGHT }}
-                  >
-                    {stepHasContent ? (
-                      <>
+                  {stepHasContent ? (
+                    stepExpanded ? (
+                      <div>
                         {step.intro && (
                           <p className="text-sm text-brand-dark-navy/85 leading-relaxed mb-6">
                             {step.intro}
@@ -290,26 +289,30 @@ export function ServiziPage() {
                             <strong>Obiettivo:</strong> {step.objective}
                           </p>
                         )}
-                      </>
+                      </div>
                     ) : (
-                      <p className="text-sm text-brand-dark-navy/50 italic leading-relaxed mb-8">
-                        Contenuti in arrivo.
+                      <p ref={stepContentRef} className="line-clamp-[9] text-sm text-brand-dark-navy/85 leading-relaxed mb-2">
+                        {previewText}
                       </p>
-                    )}
-                  </div>
+                    )
+                  ) : (
+                    <p className="text-sm text-brand-dark-navy/50 italic leading-relaxed mb-8">
+                      Contenuti in arrivo.
+                    </p>
+                  )}
 
                   {stepTruncated && (
                     <button
                       type="button"
                       onClick={() => setStepExpanded((v) => !v)}
-                      className="mt-3 self-end inline-flex items-center gap-2 text-brand-navy font-semibold text-sm"
+                      className="mt-2 self-end inline-flex items-center gap-2 rounded-full bg-white pl-4 pr-2 py-2 shadow-[0_4px_15px_rgba(0,25,51,0.08)] text-brand-navy font-semibold text-sm"
                     >
-                      {!stepExpanded && <span>...</span>}
-                      <span className="flex items-center justify-center size-6 rounded-full bg-white shadow-[0_4px_15px_rgba(0,25,51,0.08)]">
+                      {stepExpanded ? 'Mostra meno' : 'Leggi tutto'}
+                      <span className="flex items-center justify-center size-8 rounded-full bg-[#E3EAEC] shrink-0">
                         <img
                           src={stepExpanded ? '/assets/icon_minus.svg' : '/assets/icon_plus.svg'}
                           alt=""
-                          className="size-3"
+                          className="size-4"
                         />
                       </span>
                     </button>
@@ -516,13 +519,13 @@ export function ServiziPage() {
         {/* 6. Pronto per iniziare */}
         <div id="contatti" className="w-full relative bg-cover bg-center py-20 reveal-element scroll-mt-28" style={{ backgroundImage: "url('/assets/sfondo_form.png')" }}>
           <div className="container-page relative z-10">
-            <div className="max-w-[920px] mx-auto rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container">
+            <div className="-mx-8 sm:mx-auto sm:max-w-[920px] rounded-none sm:rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container">
 
               {/* Ambient inner glow */}
               <div className="absolute -top-40 -right-40 size-80 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
 
               <div className="relative z-10 text-center mb-8">
-                <h2 className="text-3xl sm:text-[2.1rem] font-light mb-2 text-white tracking-tight">
+                <h2 className="text-[34px] sm:text-[2.1rem] font-light mb-2 text-white tracking-tight">
                   Pronto per iniziare?
                 </h2>
                 <p className="text-sm sm:text-base text-brand-light-blue/80 font-normal">

@@ -48,21 +48,21 @@ function CardBack({
           alt={`Project ${index + 1} back`}
           className="w-full h-full object-cover block"
         />
-        <div className="absolute inset-0 flex flex-col p-5 pt-14 text-left">
-          <p className="text-[11px] font-semibold text-brand-navy/70 mb-0.5">
+        <div className="absolute inset-0 flex flex-col p-5 pt-16 text-left">
+          <p className="text-xs font-semibold text-brand-navy/70 mb-0.5">
             Ruolo del Campania DIH:
           </p>
           <p className="text-sm font-bold text-brand-navy mb-2 leading-snug">
             {card.role}
           </p>
-          <p className="text-[11px] font-light text-brand-dark-navy/80 leading-snug flex-1 min-h-0 overflow-y-auto">
+          <p className="text-xs font-light text-brand-dark-navy/80 leading-snug flex-1 min-h-0 overflow-y-auto">
             {card.description}
           </p>
           <a
             href={card.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-3 self-center inline-block whitespace-nowrap bg-brand-ice/30 text-brand-dark-navy px-8 py-2 rounded-lg text-sm font-semibold border-0 cursor-pointer shadow-[0_8px_22px_rgba(0,0,0,0.22)] no-underline"
+            className="mt-3 self-center inline-block whitespace-nowrap bg-brand-ice/30 text-brand-dark-navy px-9 py-2.5 rounded-lg text-sm font-semibold border-0 cursor-pointer shadow-[0_8px_22px_rgba(0,0,0,0.22)] no-underline"
           >
             Scopri di più
           </a>
@@ -153,7 +153,7 @@ export function Projects() {
         </div>
 
         {/* Mobile: swipeable carousel with center focus + flip button */}
-        <div className="sm:hidden -mx-10 mb-12">
+        <div className="sm:hidden -mx-8 mb-12">
           <div
             ref={scrollRef}
             onScroll={handleScroll}
@@ -171,7 +171,7 @@ export function Projects() {
                     cardRefs.current[index] = el
                   }}
                   className={cn(
-                    'snap-center shrink-0 w-[78%] aspect-[3/4] transition-opacity duration-300',
+                    'snap-center shrink-0 w-[83%] aspect-[3/4] transition-opacity duration-300',
                     isActive ? 'opacity-100' : 'opacity-40',
                   )}
                 >
@@ -189,9 +189,9 @@ export function Projects() {
                         <button
                           type="button"
                           onClick={() => setFlippedIndex(index)}
-                          className="absolute top-4 right-4 inline-flex items-center gap-1.5 bg-white/70 text-brand-dark-navy px-3 py-1.5 rounded-lg text-xs font-semibold shadow-[0_4px_12px_rgba(0,0,0,0.15)]"
+                          className="absolute top-4 right-4 inline-flex items-center gap-1.5 bg-white/70 text-brand-dark-navy px-3.5 py-2 rounded-lg text-[13px] font-semibold shadow-[0_4px_12px_rgba(0,0,0,0.15)]"
                         >
-                          <FlipHorizontal className="size-3.5" />
+                          <FlipHorizontal className="size-4" />
                           Gira
                         </button>
                       )}
@@ -202,9 +202,9 @@ export function Projects() {
                         <button
                           type="button"
                           onClick={() => setFlippedIndex(null)}
-                          className="absolute top-4 right-4 inline-flex items-center gap-1.5 bg-white/70 text-brand-dark-navy px-3 py-1.5 rounded-lg text-xs font-semibold shadow-[0_4px_12px_rgba(0,0,0,0.15)]"
+                          className="absolute top-4 right-4 inline-flex items-center gap-1.5 bg-white/70 text-brand-dark-navy px-3.5 py-2 rounded-lg text-[13px] font-semibold shadow-[0_4px_12px_rgba(0,0,0,0.15)]"
                         >
-                          <FlipHorizontal className="size-3.5" />
+                          <FlipHorizontal className="size-4" />
                           Gira
                         </button>
                       )}

@@ -156,7 +156,7 @@ export function Services() {
           onTouchEnd={handleTouchEnd}
         >
           <GlareHover
-            className="order-2 sm:order-none z-10 -mx-10 sm:mx-0 -mt-8 sm:mt-0 basis-full xl:basis-[36%] xl:h-full"
+            className="order-2 sm:order-none z-10 -mx-8 sm:mx-0 -mt-8 sm:mt-0 basis-full xl:basis-[36%] xl:h-full"
             width="auto"
             borderRadius="0px"
             glareOpacity={0.4}
@@ -186,7 +186,7 @@ export function Services() {
             </div>
           </GlareHover>
 
-          <div className="order-1 sm:order-none relative -mx-10 sm:mx-0 aspect-[4/3] sm:aspect-auto basis-full xl:basis-[64%] xl:h-full rounded-t-[24px] rounded-b-none sm:rounded-[24px] overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.3)] sm:min-h-[400px] bg-brand-dark-navy/20 flex items-center justify-center">
+          <div className="order-1 sm:order-none relative -mx-8 sm:mx-0 aspect-[4/3] sm:aspect-auto basis-full xl:basis-[64%] xl:h-full rounded-t-[24px] rounded-b-none sm:rounded-[24px] overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.3)] sm:min-h-[400px] bg-brand-dark-navy/20 flex items-center justify-center">
             <img
               src={active.image}
               alt={active.title}

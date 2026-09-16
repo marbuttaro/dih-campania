@@ -37,7 +37,7 @@ export function Events() {
     <section id="eventi" ref={ref} className="bg-[#F0F4F8] py-20 lg:py-24">
       <div className="container-page">
         <motion.h2
-          className="text-3xl sm:text-4xl lg:text-[2.5rem] text-brand-navy font-light mb-10 lg:mb-12"
+          className="text-3xl sm:text-4xl lg:text-[2.5rem] text-brand-navy font-light mb-16 lg:mb-12"
           style={{ y }}
         >
           Appuntamenti
