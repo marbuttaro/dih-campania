@@ -3,22 +3,25 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 
 const EVENTS = [
   {
-    date: '25',
-    month: 'lug',
-    title: "Nasce l'Innovation Hub di Polo Strategico Nazionale",
+    date: '30',
+    month: 'apr',
+    title: 'I numeri di EDIH PRIDE, oltre 2000 imprese coinvolte, 5 milioni di euro in servizi alle Pmi',
     link: '#',
+    image: '/assets/events_1.jpg',
   },
   {
-    date: '25',
-    month: 'lug',
-    title: "Nasce l'Innovation Hub di Polo Strategico Nazionale",
+    date: '10',
+    month: 'apr',
+    title: "Presentata Infosfera: uno strumento capace di collegare innovazione, impresa e cultura.\nSfida sull'AI",
     link: '#',
+    image: '/assets/events_2.jpg',
   },
   {
-    date: '25',
-    month: 'lug',
-    title: "Nasce l'Innovation Hub di Polo Strategico Nazionale",
+    date: '2',
+    month: 'apr',
+    title: '"L\'informazione nell\'era digitale: tra innovazione, nuovi linguaggi e intelligenza artificiale"',
     link: '#',
+    image: '/assets/events_bg.jpg',
   },
 ]
 
@@ -37,7 +40,7 @@ export function Events() {
           className="text-3xl sm:text-4xl lg:text-[2.5rem] text-brand-navy font-light mb-10 lg:mb-12"
           style={{ y }}
         >
-          Prossimi appuntamenti
+          Appuntamenti
         </motion.h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -48,7 +51,7 @@ export function Events() {
             >
               <div className="relative h-[280px] overflow-hidden">
                 <img
-                  src="/assets/events_bg.jpg"
+                  src={event.image}
                   alt=""
                   className="w-full h-full object-cover"
                 />
@@ -58,16 +61,16 @@ export function Events() {
                 </div>
               </div>
               <div className="p-7 flex-1 flex flex-col justify-between">
-                <h3 className="font-semibold text-[22px] sm:text-[26px] text-brand-dark-navy leading-tight mb-7">
+                <h3 className="font-medium text-[19px] sm:text-[22px] text-[#013167] leading-tight mb-7 whitespace-pre-line">
                   {event.title}
                 </h3>
                 <div className="flex justify-end">
-                  <a
-                    href={event.link}
-                    className="bg-[#E3EAEC]/50 border border-white/50 text-brand-dark-navy px-8 py-3 rounded-xl font-semibold text-base sm:text-lg shadow-neumorphic inline-block transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#E3EAEC]/70"
+                  <span
+                    aria-disabled="true"
+                    className="bg-[#E3EAEC]/50 border border-white/50 text-brand-dark-navy px-8 py-3 rounded-xl font-semibold text-base sm:text-lg shadow-neumorphic inline-block cursor-default select-none"
                   >
                     Leggi
-                  </a>
+                  </span>
                 </div>
               </div>
             </article>
