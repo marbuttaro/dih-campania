@@ -78,14 +78,14 @@ export function Projects() {
                     alt={`Project ${index + 1} back`}
                     className="w-full h-full object-cover block"
                   />
-                  <div className="absolute inset-x-0 top-[22%] bottom-[26%] px-[13%] text-left overflow-hidden">
-                    <p className="text-xs sm:text-sm font-semibold text-brand-navy/70 mb-0.5">
+                  <div className="absolute inset-x-0 top-[14%] bottom-[23%] px-[13%] text-left overflow-hidden flex flex-col justify-center">
+                    <p className="text-xs sm:text-[13px] font-semibold text-brand-navy/70 mb-0.5">
                       Ruolo del Campania DIH:
                     </p>
-                    <p className="text-sm sm:text-base font-bold text-brand-navy mb-4 leading-snug">
+                    <p className="text-sm sm:text-base font-bold text-brand-navy mb-3 leading-snug">
                       {card.role}
                     </p>
-                    <p className="text-xs sm:text-sm font-light text-brand-dark-navy/80 leading-relaxed">
+                    <p className="text-xs sm:text-[13px] font-light text-brand-dark-navy/80 leading-snug">
                       {card.description}
                     </p>
                   </div>

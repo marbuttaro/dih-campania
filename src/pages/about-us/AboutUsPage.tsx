@@ -108,13 +108,13 @@ export function AboutUsPage() {
                       { src: '/assets/chi-siamo/soci/unione-industriali-napoli.png', alt: 'Unione Industriali Napoli', name: 'Unione Industriali\nNapoli' },
                       { src: '/assets/chi-siamo/soci/confindustria-avellino.png', alt: 'Confindustria Avellino', name: 'Confindustria\nAvellino' },
                       { src: '/assets/chi-siamo/soci/confindustria-benevento.png', alt: 'Confindustria Benevento', name: 'Confindustria\nBenevento' },
-                      { src: '/assets/chi-siamo/soci/confindustria-caserta.png', alt: 'Confindustria Caserta', name: 'Confindustria\nCaserta' },
+                      { src: '/assets/chi-siamo/soci/confindustria-caserta.png', alt: 'Confindustria Caserta', name: 'Confindustria\nCaserta', wide: true },
                       { src: '/assets/chi-siamo/soci/confindustria-salerno.png', alt: 'Confindustria Salerno', name: 'Confindustria\nSalerno' },
                       { src: '/assets/chi-siamo/soci/ance.png', alt: 'Ance Campania', name: 'Ance\nCampania' },
                     ].map((socio) => (
                       <div key={socio.alt} className="flex items-center gap-4 bg-white/5 backdrop-blur-md border border-white/30 rounded-xl p-4 min-h-[92px] transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 shadow-sm">
                         {socio.src && (
-                          <div className="h-12 w-20 flex items-center justify-center shrink-0">
+                          <div className={`h-12 ${socio.wide ? 'w-28' : 'w-20'} flex items-center justify-center shrink-0`}>
                             <img
                               src={socio.src}
                               alt={socio.alt}
@@ -139,7 +139,7 @@ export function AboutUsPage() {
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                     {[
-                      { src: '/assets/chi-siamo/partner/tim.png', alt: 'TIM' },
+                      { src: '/assets/chi-siamo/partner/tim.png', alt: 'TIM', small: true },
                       { src: '/assets/chi-siamo/partner/windtre.png', alt: 'WindTre' },
                       { src: '/assets/chi-siamo/partner/netgroup.png', alt: 'Netgroup' },
                     ].map((partner) => (
@@ -148,7 +148,7 @@ export function AboutUsPage() {
                           <img
                             src={partner.src}
                             alt={partner.alt}
-                            className="max-h-12 max-w-[80%] object-contain"
+                            className={`${partner.small ? 'max-h-8' : 'max-h-12'} max-w-[80%] object-contain`}
                           />
                         )}
                       </div>

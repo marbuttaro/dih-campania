@@ -128,7 +128,7 @@ export function IntelligenzaArtificialePage() {
               <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
                 Dall'idea<br />al caso d'uso
               </h3>
-              <p className="text-sm text-brand-dark-navy/80 leading-relaxed font-normal">
+              <p className="text-sm text-brand-dark-navy/80 leading-relaxed font-normal text-pretty">
                 L'IA diventa realmente utile quando risponde a esigenze concrete dell'impresa. Il Campania DIH supporta l'individuazione dei casi d'uso a maggiore valore, dall'analisi dei dati all'automazione intelligente, dall'IA generativa ai sistemi di supporto alle decisioni, anche attraverso percorsi di formazione e accompagnamento.
               </p>
             </div>

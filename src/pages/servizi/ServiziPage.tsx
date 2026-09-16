@@ -116,6 +116,31 @@ const JOURNEY_STEPS = [
 export function ServiziPage() {
   const [activeStep, setActiveStep] = useState(0)
 
+  const [formData, setFormData] = useState({
+    lastName: '',
+    firstName: '',
+    email: '',
+    phone: '',
+    message: '',
+  })
+
+  const [submitted, setSubmitted] = useState(false)
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setSubmitted(true)
+    setTimeout(() => {
+      setSubmitted(false)
+      setFormData({
+        lastName: '',
+        firstName: '',
+        email: '',
+        phone: '',
+        message: '',
+      })
+    }, 3000)
+  }
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries, obs) => {
@@ -135,9 +160,22 @@ export function ServiziPage() {
     return () => observer.disconnect()
   }, [])
 
-  const step = JOURNEY_STEPS[activeStep]
-  const hasBullets = step.bullets.length > 0
-  const hasContent = Boolean(step.intro) || hasBullets
+  useEffect(() => {
+    if (typeof window === 'undefined' || window.location.hash !== '#contatti') return
+
+    const scrollToContact = () => {
+      document.getElementById('contatti')?.scrollIntoView({ block: 'start' })
+    }
+
+    scrollToContact()
+    window.addEventListener('load', scrollToContact)
+    const timeout = window.setTimeout(scrollToContact, 600)
+
+    return () => {
+      window.removeEventListener('load', scrollToContact)
+      window.clearTimeout(timeout)
+    }
+  }, [])
 
   return (
     <>
@@ -149,7 +187,13 @@ export function ServiziPage() {
       >
         {/* 1. Hero */}
         <div className="relative pt-32 sm:pt-36 pb-20 sm:pb-28">
-          <div className="absolute inset-0 bg-white/20 pointer-events-none" />
+          <div
+            className="absolute inset-0 bg-white/20 pointer-events-none"
+            style={{
+              WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 85%, transparent 100%)',
+              maskImage: 'linear-gradient(to bottom, black 0%, black 85%, transparent 100%)',
+            }}
+          />
           <div className="container-page relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center reveal-element">
               <div>
@@ -160,13 +204,13 @@ export function ServiziPage() {
                   <br />e le istituzioni
                 </h1>
                 <p className="text-sm sm:text-base text-brand-dark-navy/80 leading-relaxed font-normal">
-                  Il Campania DIH supporta le aziende in <strong>tutte</strong> le fasi del percorso
-                  di trasformazione digitale.
+                  Il Campania DIH supporta le aziende <strong>in tutte le fasi del percorso
+                  di trasformazione digitale.</strong>
                 </p>
               </div>
               <div className="rounded-[24px] overflow-hidden shadow-neumorphic aspect-[4/3]">
                 <img
-                  src="/assets/foto_1.png"
+                  src="/assets/foto_1.jpg"
                   alt="Trasformazione digitale"
                   className="w-full h-full object-cover block"
                 />
@@ -208,38 +252,54 @@ export function ServiziPage() {
             </div>
 
             <div className="shadow-box flex flex-col">
-              <h3 className="text-2xl sm:text-[28px] font-light text-brand-navy mb-6 tracking-tight">
-                {step.title}
-              </h3>
+              <div className="grid">
+                {JOURNEY_STEPS.map((s, index) => {
+                  const stepHasBullets = s.bullets.length > 0
+                  const stepHasContent = Boolean(s.intro) || stepHasBullets
+                  return (
+                    <div
+                      key={s.title}
+                      aria-hidden={index !== activeStep}
+                      className={`col-start-1 row-start-1 ${
+                        index === activeStep ? 'opacity-100' : 'opacity-0 pointer-events-none select-none'
+                      }`}
+                    >
+                      <h3 className="text-2xl sm:text-[28px] font-light text-brand-navy mb-6 tracking-tight">
+                        {s.title}
+                      </h3>
 
-              {hasContent ? (
-                <>
-                  {step.intro && (
-                    <p className="text-sm sm:text-base text-brand-dark-navy/85 leading-relaxed mb-6">
-                      {step.intro}
-                    </p>
-                  )}
-                  {hasBullets && (
-                    <ul className="flex flex-col gap-3 mb-6 list-none p-0 m-0">
-                      {step.bullets.map((bullet, i) => (
-                        <li key={i} className="flex gap-2 text-sm sm:text-base text-brand-dark-navy/85 leading-relaxed">
-                          <span aria-hidden="true">•</span>
-                          <span>{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                  {step.objective && (
-                    <p className="text-sm sm:text-base text-brand-dark-navy/85 leading-relaxed mb-8">
-                      <strong>Obiettivo:</strong> {step.objective}
-                    </p>
-                  )}
-                </>
-              ) : (
-                <p className="text-sm sm:text-base text-brand-dark-navy/50 italic leading-relaxed mb-8">
-                  Contenuti in arrivo.
-                </p>
-              )}
+                      {stepHasContent ? (
+                        <>
+                          {s.intro && (
+                            <p className="text-sm sm:text-base text-brand-dark-navy/85 leading-relaxed mb-6">
+                              {s.intro}
+                            </p>
+                          )}
+                          {stepHasBullets && (
+                            <ul className="flex flex-col gap-3 mb-6 list-none p-0 m-0">
+                              {s.bullets.map((bullet, i) => (
+                                <li key={i} className="flex gap-2 text-sm sm:text-base text-brand-dark-navy/85 leading-relaxed">
+                                  <span aria-hidden="true">•</span>
+                                  <span>{bullet}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                          {s.objective && (
+                            <p className="text-sm sm:text-base text-brand-dark-navy/85 leading-relaxed mb-8">
+                              <strong>Obiettivo:</strong> {s.objective}
+                            </p>
+                          )}
+                        </>
+                      ) : (
+                        <p className="text-sm sm:text-base text-brand-dark-navy/50 italic leading-relaxed mb-8">
+                          Contenuti in arrivo.
+                        </p>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
 
               <div className="mt-auto flex items-center gap-4">
                 <button
@@ -326,15 +386,102 @@ export function ServiziPage() {
           </div>
         </div>
 
-        {/* 6. Pronto per iniziare? */}
-        <div className="container-page relative z-10 pb-24 sm:pb-28">
-          <div className="reveal-element">
-            <h2 className="text-3xl sm:text-4xl font-light text-brand-navy mb-3 tracking-tight">
-              Pronto per iniziare?
-            </h2>
-            <p className="text-sm sm:text-base text-brand-dark-navy/70">
-              Contattaci a questi indirizzi:
-            </p>
+        {/* 6. Pronto per iniziare */}
+        <div id="contatti" className="w-full relative bg-cover bg-center py-20 reveal-element scroll-mt-28" style={{ backgroundImage: "url('/assets/sfondo_form.png')" }}>
+          <div className="container-page relative z-10">
+            <div className="max-w-[760px] mx-auto rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container">
+
+              {/* Ambient inner glow */}
+              <div className="absolute -top-40 -right-40 size-80 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
+
+              <div className="relative z-10 text-center mb-8">
+                <h2 className="text-3xl sm:text-[2.1rem] font-light mb-2 text-white tracking-tight">
+                  Pronto per iniziare?
+                </h2>
+                <p className="text-sm sm:text-base text-brand-light-blue/80 font-normal">
+                  Compila il form per richiedere informazioni
+                </p>
+              </div>
+
+              {submitted ? (
+                <div className="text-center py-12 flex flex-col items-center justify-center">
+                  <div className="size-16 rounded-full bg-brand-light-blue/20 flex items-center justify-center mb-4 border border-brand-light-blue/40">
+                    <svg className="size-8 text-brand-light-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-semibold mb-2">Richiesta Inviata!</h3>
+                  <p className="text-brand-light-blue/80">Grazie, ti contatteremo il prima possibile per fissare l'assessment.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="flex flex-col glass-stroke-input-wrapper">
+                      <input
+                        type="text"
+                        placeholder="Last Name"
+                        required
+                        value={formData.lastName}
+                        onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                        className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-1 focus:ring-brand-light-blue transition-colors text-sm"
+                      />
+                    </div>
+                    <div className="flex flex-col glass-stroke-input-wrapper">
+                      <input
+                        type="text"
+                        placeholder="First Name"
+                        required
+                        value={formData.firstName}
+                        onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                        className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-1 focus:ring-brand-light-blue transition-colors text-sm"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="glass-stroke-input-wrapper">
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-1 focus:ring-brand-light-blue transition-colors text-sm"
+                    />
+                  </div>
+
+                  <div className="glass-stroke-input-wrapper">
+                    <input
+                      type="tel"
+                      placeholder="Phone Number"
+                      required
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-1 focus:ring-brand-light-blue transition-colors text-sm"
+                    />
+                  </div>
+
+                  <div className="glass-stroke-input-wrapper">
+                    <textarea
+                      placeholder="Message"
+                      rows={4}
+                      required
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="w-full block glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-1 focus:ring-brand-light-blue transition-colors text-sm resize-none"
+                    />
+                  </div>
+
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      className="w-full bg-[#013167] text-white hover:bg-brand-light-blue hover:text-brand-dark-navy transition-all duration-300 font-semibold py-4 rounded-[12px] shadow-[0_4px_15px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 border border-white/10 cursor-pointer"
+                    >
+                      Invia Richiesta
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
           </div>
         </div>
       </main>

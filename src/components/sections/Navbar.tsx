@@ -82,7 +82,7 @@ export function Navbar() {
             asChild
             className="bg-[#8EBEF7] text-[#013167] hover:bg-white hover:translate-y-0 px-6 rounded-xl font-bold"
           >
-            <a href={getLinkHref('#contatti')}>Contattaci</a>
+            <a href="/servizi.html#contatti">Contattaci</a>
           </Button>
         </div>
 
@@ -123,7 +123,7 @@ export function Navbar() {
                 asChild
                 className="mt-6 w-full bg-[#8EBEF7] text-[#013167] hover:bg-white font-bold"
               >
-                <a href={getLinkHref('#contatti')}>Contattaci</a>
+                <a href="/servizi.html#contatti">Contattaci</a>
               </Button>
             </SheetClose>
           </SheetContent>

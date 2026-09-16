@@ -67,7 +67,7 @@ export function Footer() {
               <h4 className="text-white text-[15px] font-semibold mb-5">{column.title}</h4>
               <ul className="flex flex-col gap-3 list-none p-0 m-0">
                 {column.links.map((link) => (
-                  <li key={link.label}>
+                  <li key={link.label} className={link.label === 'Trasparenza' ? 'mt-4' : undefined}>
                     <a
                       href={getLinkHref(link.href)}
                       className="text-white/60 text-sm hover:text-brand-light-blue transition-colors"
