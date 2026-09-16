@@ -20,7 +20,7 @@ export function Hero() {
 
       <div className="container-page relative z-10 w-full flex justify-center text-center">
         <div className="max-w-[950px] flex flex-col items-center">
-          <h1 className="mb-8 text-[2.15rem] sm:text-6xl lg:text-[4.2rem] font-medium text-white leading-[1.2] flex flex-col items-center">
+          <h1 className="mb-8 text-[2.15rem] sm:text-6xl lg:text-[4.2rem] font-medium text-white leading-[1.1] flex flex-col items-center">
             <BlurText
               text="Il punto di riferimento per"
               delay={150}
@@ -31,7 +31,7 @@ export function Hero() {
               startDelay={0}
             />
             <BlurText
-              text="la trasformazione digitale."
+              text={'la trasformazione digitale.'}
               delay={150}
               stepDuration={0.6}
               animateBy="words"

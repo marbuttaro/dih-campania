@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Scissors, Factory, Wheat, HeartPulse, Truck, Palette, type LucideIcon } from 'lucide-react'
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
 import { Services } from '@/components/sections/Services'
@@ -30,13 +31,13 @@ const VALUE_ITEMS = [
   },
 ]
 
-const SECTORS = [
-  'Moda, artigianato e design',
-  'Industria/manifattura & mobilità',
-  'Agro-alimentare e filiere localizzate',
-  'Salute, servizi alla persona',
-  'Trasporto, logistica e infrastrutture smart',
-  'Turismo, cultura e creatività',
+const SECTORS: { label: string; icon: LucideIcon }[] = [
+  { label: 'Moda, artigianato e design', icon: Scissors },
+  { label: 'Industria/manifattura & mobilità', icon: Factory },
+  { label: 'Agro-alimentare e filiere localizzate', icon: Wheat },
+  { label: 'Salute, servizi alla persona', icon: HeartPulse },
+  { label: 'Trasporto, logistica e infrastrutture smart', icon: Truck },
+  { label: 'Turismo, cultura e creatività', icon: Palette },
 ]
 
 const JOURNEY_STEPS = [
@@ -233,7 +234,7 @@ export function ServiziPage() {
           </h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-6 lg:gap-8 items-stretch reveal-element">
-            <div className="shadow-box !p-6 flex flex-col gap-1">
+            <div className="hidden lg:flex shadow-box !p-6 flex-col gap-1">
               {JOURNEY_STEPS.map((s, index) => (
                 <button
                   key={s.title}
@@ -252,19 +253,20 @@ export function ServiziPage() {
             </div>
 
             <div className="shadow-box flex flex-col">
-              <div className="grid">
+              <div className="lg:grid">
                 {JOURNEY_STEPS.map((s, index) => {
                   const stepHasBullets = s.bullets.length > 0
                   const stepHasContent = Boolean(s.intro) || stepHasBullets
+                  const isActiveStep = index === activeStep
                   return (
                     <div
                       key={s.title}
-                      aria-hidden={index !== activeStep}
-                      className={`col-start-1 row-start-1 ${
-                        index === activeStep ? 'opacity-100' : 'opacity-0 pointer-events-none select-none'
+                      aria-hidden={!isActiveStep}
+                      className={`${isActiveStep ? 'block' : 'hidden'} lg:col-start-1 lg:row-start-1 lg:block ${
+                        isActiveStep ? 'lg:opacity-100' : 'lg:opacity-0 lg:pointer-events-none lg:select-none'
                       }`}
                     >
-                      <h3 className="text-2xl sm:text-[28px] font-light text-brand-navy mb-6 tracking-tight">
+                      <h3 className="text-3xl lg:text-[28px] font-light text-brand-navy mb-6 tracking-tight">
                         {s.title}
                       </h3>
 
@@ -374,14 +376,23 @@ export function ServiziPage() {
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {SECTORS.map((sector) => (
-                <div
-                  key={sector}
-                  className="flex items-center justify-center text-center border border-brand-navy/15 bg-white/40 rounded-xl px-6 py-5 font-semibold text-brand-navy"
-                >
-                  {sector}
-                </div>
-              ))}
+              {SECTORS.map((sector) => {
+                const Icon = sector.icon
+                return (
+                  <div
+                    key={sector.label}
+                    className="flex items-center gap-3 text-left border border-brand-navy/15 bg-white/40 rounded-xl px-6 py-5 font-semibold text-brand-navy"
+                  >
+                    <Icon
+                      className="size-8 text-brand-light-blue shrink-0"
+                      strokeWidth={1.25}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    {sector.label}
+                  </div>
+                )
+              })}
             </div>
           </div>
         </div>

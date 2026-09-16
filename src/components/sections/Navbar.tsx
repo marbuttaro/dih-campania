@@ -62,7 +62,8 @@ export function Navbar() {
         )}
       >
         <a href="/" className="flex items-center shrink-0">
-          <img src="/assets/logo DIH.svg" alt="Campania DIH" className="h-8 sm:h-10 block" />
+          <img src="/assets/logo-dih-icon.png" alt="Campania DIH" className="h-9 lg:hidden block" />
+          <img src="/assets/logo DIH.svg" alt="Campania DIH" className="h-10 hidden lg:block" />
         </a>
 
         <div className="hidden lg:flex items-center gap-6 xl:gap-8">
@@ -90,7 +91,7 @@ export function Navbar() {
           <SheetTrigger asChild>
             <button
               type="button"
-              className="lg:hidden inline-flex items-center justify-center size-10 rounded-lg bg-[#E3EAEC] text-brand-dark-navy hover:bg-white transition-colors"
+              className="lg:hidden inline-flex items-center justify-center size-10 text-white hover:text-white/80 transition-colors"
               aria-label="Apri menu"
             >
               <MenuIcon className="size-5" />
@@ -102,7 +103,7 @@ export function Navbar() {
                 <img
                   src="/assets/logo DIH.svg"
                   alt="Campania DIH"
-                  className="h-10 brightness-[10]"
+                  className="h-10"
                 />
               </SheetTitle>
             </SheetHeader>

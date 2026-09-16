@@ -160,8 +160,23 @@
   animation: blink-cursor 1s step-end infinite;
 }
 
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .animate-ticker {
   animation: ticker 40s linear infinite;
+}
+
+@media (max-width: 640px) {
+  .animate-ticker {
+    animation-duration: 20s;
+  }
 }
 
 .animate-star-bottom {

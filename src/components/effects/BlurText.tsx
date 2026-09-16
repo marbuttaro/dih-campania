@@ -95,7 +95,7 @@ export function BlurText({
   )
 
   return (
-    <div ref={ref} className={className} style={{ display: 'flex', flexWrap: 'wrap' }}>
+    <div ref={ref} className={className} style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
       {elements.map((segment, index) => {
         const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots)
         const transition: Transition = {

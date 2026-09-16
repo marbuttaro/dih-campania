@@ -16,7 +16,7 @@ export function ParticleNetwork() {
     let height = (canvas.height = window.innerHeight)
 
     const particles: Particle[] = []
-    const particleCount = Math.min(Math.floor((width * height) / 12500), 90)
+    const particleCount = Math.max(Math.min(Math.floor((width * height) / 10500), 90), 36)
     const repulsionRadius = 190
     const accentColor = '#8ebef7' // brand-light-blue
 

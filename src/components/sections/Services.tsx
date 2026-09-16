@@ -1,5 +1,6 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, type TouchEvent } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 import { GlareHover } from '@/components/effects/GlareHover'
 import { cn } from '@/lib/utils'
@@ -44,7 +45,23 @@ const AREAS = [
 
 export function Services() {
   const [activeTab, setActiveTab] = useState(0)
+  const touchStartX = useRef<number | null>(null)
   const ref = useRef<HTMLElement | null>(null)
+
+  const goToPrev = () => setActiveTab((i) => (i - 1 + SERVICES.length) % SERVICES.length)
+  const goToNext = () => setActiveTab((i) => (i + 1) % SERVICES.length)
+
+  const handleTouchStart = (e: TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+  }
+  const handleTouchEnd = (e: TouchEvent) => {
+    if (touchStartX.current === null) return
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current
+    const threshold = 50
+    if (deltaX > threshold) goToPrev()
+    else if (deltaX < -threshold) goToNext()
+    touchStartX.current = null
+  }
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
@@ -68,7 +85,7 @@ export function Services() {
     <section
       id="servizi"
       ref={ref}
-      className="relative py-16 lg:py-24"
+      className="relative pt-16 lg:pt-24 sm:pb-16 lg:pb-24"
     >
       <div
         aria-hidden
@@ -79,14 +96,36 @@ export function Services() {
 
       <div className="container-page relative z-10">
         <motion.h2
-          className="text-4xl sm:text-4xl lg:text-[2.5rem] text-white font-light mb-12 sm:mb-5"
+          className="text-4xl sm:text-4xl lg:text-[2.5rem] text-white font-light mb-12 sm:mb-5 text-center sm:text-left"
           style={{ y: yTitle }}
         >
           I nostri servizi
         </motion.h2>
 
+        <div className="sm:hidden mb-10 flex items-center justify-center gap-4">
+          <button
+            type="button"
+            onClick={goToPrev}
+            aria-label="Servizio precedente"
+            className="flex size-10 items-center justify-center rounded-full bg-white shadow-[0_4px_15px_rgba(0,25,51,0.08)] shrink-0 text-brand-navy"
+          >
+            <ChevronLeft className="size-5" />
+          </button>
+          <span className="text-lg font-medium text-brand-light-blue text-center">
+            {active.title}
+          </span>
+          <button
+            type="button"
+            onClick={goToNext}
+            aria-label="Servizio successivo"
+            className="flex size-10 items-center justify-center rounded-full bg-white shadow-[0_4px_15px_rgba(0,25,51,0.08)] shrink-0 text-brand-navy"
+          >
+            <ChevronRight className="size-5" />
+          </button>
+        </div>
+
         <motion.div
-          className="mb-10 flex justify-center sm:block"
+          className="mb-10 hidden sm:block"
           style={{ y: yNav }}
         >
           <div data-no-glow className="flex flex-wrap justify-center gap-y-6 gap-x-6 sm:gap-x-10">
@@ -109,50 +148,59 @@ export function Services() {
               </button>
             ))}
           </div>
-        </motion.div>        <div className="flex flex-col xl:flex-row gap-6 xl:h-[520px]">
+        </motion.div>
+
+        <div
+          className="flex flex-col gap-0 sm:gap-6 xl:flex-row xl:h-[520px]"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
           <GlareHover
-            className="basis-full xl:basis-[36%] xl:h-full"
-            borderRadius="24px"
+            className="order-2 sm:order-none z-10 -mx-10 sm:mx-0 -mt-8 sm:mt-0 basis-full xl:basis-[36%] xl:h-full"
+            width="auto"
+            borderRadius="0px"
             glareOpacity={0.4}
             glareSize={200}
           >
             <div
-              className="w-full h-full rounded-[24px] p-8 sm:p-10 text-white flex flex-col bg-cover bg-center shadow-[0_15px_40px_rgba(0,0,0,0.3)] overflow-hidden"
+              className="w-full h-full rounded-t-none rounded-b-[24px] sm:rounded-[24px] p-8 sm:p-10 text-white flex flex-col items-center text-center sm:items-start sm:text-left bg-cover bg-center shadow-[0_15px_40px_rgba(0,0,0,0.3)] overflow-hidden"
               style={{ backgroundImage: "url('/assets/sfondo_card_servizi.png')" }}
             >
-              <div className="text-6xl sm:text-[77px] font-normal leading-none mb-6">
-                {active.id}
+              <div className="flex items-center gap-3 mb-5 sm:block sm:mb-0">
+                <div className="text-[67px] sm:text-[77px] font-normal leading-none sm:mb-6">
+                  {active.id}
+                </div>
+                <h3 className="text-2xl max-w-[15rem] sm:max-w-none sm:text-[25px] font-semibold sm:mb-5 text-white text-left leading-tight">
+                  {active.title}
+                </h3>
               </div>
-              <h3 className="text-2xl sm:text-[25px] font-semibold mb-5 text-white">
-                {active.title}
-              </h3>
               <p className="text-base sm:text-lg font-normal leading-snug text-white/90 mb-7">
                 {active.desc}
               </p>
               <a
                 href={active.link}
-                className="mt-auto self-start px-5 py-2.5 rounded-[8.6px] bg-white/[0.09] border border-white/40 backdrop-blur-md text-white font-semibold shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-brand-light-blue hover:text-brand-dark-navy hover:-translate-y-0.5 inline-block text-center"
+                className="mt-auto self-center sm:self-start px-5 py-2.5 rounded-[8.6px] bg-white/[0.09] border border-white/40 backdrop-blur-md text-white font-semibold shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-brand-light-blue hover:text-brand-dark-navy hover:-translate-y-0.5 inline-block text-center"
               >
                 Scopri di più
               </a>
             </div>
           </GlareHover>
 
-          <div className="relative basis-full xl:basis-[64%] xl:h-full rounded-[24px] overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.3)] min-h-[400px] bg-brand-dark-navy/20 flex items-center justify-center">
+          <div className="order-1 sm:order-none relative -mx-10 sm:mx-0 aspect-[4/3] sm:aspect-auto basis-full xl:basis-[64%] xl:h-full rounded-t-[24px] rounded-b-none sm:rounded-[24px] overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.3)] sm:min-h-[400px] bg-brand-dark-navy/20 flex items-center justify-center">
             <img
               src={active.image}
               alt={active.title}
-              className="w-full h-full object-contain sm:object-cover block"
+              className="w-full h-full object-cover block"
             />
-            <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-[20px] p-5 sm:p-6 text-white max-w-[calc(100%-2rem)] sm:max-w-[480px]">
-              <h4 className="text-base sm:text-lg font-semibold mb-3 text-brand-grey-blue">
+            <div className="absolute top-[9%] right-[5%] w-[62%] sm:top-auto sm:w-auto sm:right-6 sm:bottom-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-[20px] p-3 sm:p-6 text-white sm:max-w-[480px]">
+              <h4 className="text-xs sm:text-lg font-semibold mb-2 sm:mb-3 text-brand-grey-blue">
                 Aree principali:
               </h4>
-              <div className="flex flex-wrap gap-2.5">
+              <div className="grid grid-cols-2 gap-1.5 sm:flex sm:flex-wrap sm:gap-2.5">
                 {AREAS.map((area) => (
                   <span
                     key={area}
-                    className="bg-transparent border border-white/40 px-3 py-1.5 rounded-md text-sm font-bold text-brand-light-blue whitespace-nowrap text-center"
+                    className="bg-transparent border border-white/40 px-1.5 py-1.5 sm:px-3 rounded-md text-[9.5px] leading-tight sm:text-sm font-bold text-brand-light-blue whitespace-normal sm:whitespace-nowrap text-center"
                   >
                     {area}
                   </span>
