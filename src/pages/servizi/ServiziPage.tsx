@@ -525,7 +525,7 @@ export function ServiziPage() {
               <div className="absolute -top-40 -right-40 size-80 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
 
               <div className="relative z-10 text-center mb-8">
-                <h2 className="text-[48px] sm:text-[2.1rem] font-light mb-2 text-white tracking-tight">
+                <h2 className="text-[48px] sm:text-[2.1rem] leading-[1.1] sm:leading-normal font-light mb-2 text-white tracking-tight">
                   Pronto per iniziare?
                 </h2>
                 <p className="text-sm sm:text-base text-brand-light-blue/80 font-normal">
@@ -549,20 +549,20 @@ export function ServiziPage() {
                     <div className="flex flex-col glass-stroke-input-wrapper">
                       <input
                         type="text"
-                        placeholder="Last Name"
+                        placeholder="First Name"
                         required
-                        value={formData.lastName}
-                        onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                        value={formData.firstName}
+                        onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                         className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-1 focus:ring-brand-light-blue transition-colors text-sm"
                       />
                     </div>
                     <div className="flex flex-col glass-stroke-input-wrapper">
                       <input
                         type="text"
-                        placeholder="First Name"
+                        placeholder="Last Name"
                         required
-                        value={formData.firstName}
-                        onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                        value={formData.lastName}
+                        onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                         className="w-full glass-stroke-input rounded-[12px] px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-1 focus:ring-brand-light-blue transition-colors text-sm"
                       />
                     </div>
