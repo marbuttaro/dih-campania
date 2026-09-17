@@ -422,7 +422,7 @@ export function InnovaCoPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {(showAllMembers ? COMMUNITY_MEMBERS : COMMUNITY_MEMBERS.slice(0, 4)).map((member, i) => (
+                  {(showAllMembers ? COMMUNITY_MEMBERS : COMMUNITY_MEMBERS.slice(0, 3)).map((member, i) => (
                     <tr key={i} className="border-b border-brand-navy/10">
                       <td className="py-5 pr-8 align-top">
                         <div className="h-24 w-40 flex items-center justify-center">
@@ -458,7 +458,7 @@ export function InnovaCoPage() {
               </table>
             </div>
 
-            {COMMUNITY_MEMBERS.length > 4 && (
+            {COMMUNITY_MEMBERS.length > 3 && (
               <div className="flex justify-center mt-8">
                 <button
                   type="button"
@@ -472,25 +472,39 @@ export function InnovaCoPage() {
           </div>
 
           {/* 6. Un ecosistema che cresce con te */}
-          <div className="pt-16 sm:pt-20 pb-20 sm:pb-24 max-w-[900px] mx-auto reveal-element">
-            <div className="text-center shadow-box p-10 sm:p-12 lg:p-16">
-              <h2 className="text-5xl sm:text-6xl font-semibold text-brand-navy mb-6 leading-tight">
-                Un ecosistema
-                <br />
-                che cresce con te
-              </h2>
-              <p className="text-xl sm:text-2xl text-brand-dark-navy/90 leading-relaxed">
-                Ogni nuova azienda, ogni nuova competenza rende questa community più forte.
-                Siamo ancora all'inizio, ma il valore è già tutto qui: connessioni vere, idee
-                concrete, voglia di fare.
-              </p>
+          <div className="pt-16 sm:pt-20 pb-12 reveal-element">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+              <div
+                className="rounded-[24px] p-10 sm:p-12 flex flex-col justify-center text-white"
+                style={{
+                  background: 'linear-gradient(120deg, #001933 0%, #013a6b 35%, #0e568b 65%, #3a82b8 100%)',
+                }}
+              >
+                <h2 className="text-4xl sm:text-5xl font-semibold mb-6 leading-tight">
+                  Un ecosistema
+                  <br />
+                  che cresce con te
+                </h2>
+                <p className="text-base sm:text-lg text-white/85 leading-relaxed">
+                  Ogni nuova azienda, ogni nuova competenza rende questa community più forte.
+                  Siamo ancora all'inizio, ma il valore è già tutto qui: connessioni vere, idee
+                  concrete, voglia di fare.
+                </p>
+              </div>
+              <div className="rounded-[24px] overflow-hidden min-h-[280px]">
+                <img
+                  src="/assets/innova-co/ecosistema-meeting.jpg"
+                  alt=""
+                  className="w-full h-full object-cover block"
+                />
+              </div>
             </div>
           </div>
 
           {/* 7. Hai domande */}
           <div className="pb-24 reveal-element">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              <h2 className="text-3xl sm:text-4xl font-light text-brand-navy">Hai domande?</h2>
+            <div className="shadow-box grid grid-cols-1 lg:grid-cols-2 gap-8 items-center !p-10 sm:!p-14">
+              <h2 className="text-4xl sm:text-5xl font-light text-brand-navy">Hai domande?</h2>
               <div>
                 <p className="text-base sm:text-lg text-brand-dark-navy/80 leading-relaxed mb-4">
                   Scrivici, chiamaci o vieni a trovarci: la trasformazione digitale non è un
