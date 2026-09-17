@@ -11,6 +11,7 @@ import {
   SheetClose,
 } from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
+import { ContactModal } from './ContactModal'
 
 const SERVIZI_SUBLINKS = [
   { href: '/trasformazione-digitale', label: 'Trasformazione Digitale' },
@@ -53,6 +54,7 @@ function scrollToContact(e: MouseEvent<HTMLAnchorElement>) {
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [contactModalOpen, setContactModalOpen] = useState(false)
   const [isHome, setIsHome] = useState(true)
 
   useEffect(() => {
@@ -192,12 +194,16 @@ export function Navbar() {
                 asChild
                 className="mt-6 w-full bg-[#8EBEF7] text-[#013167] hover:bg-white font-bold"
               >
-                <a href="#contatti" onClick={scrollToContact}>Contattaci</a>
+                <button type="button" onClick={() => setContactModalOpen(true)}>
+                  Contattaci
+                </button>
               </Button>
             </SheetClose>
           </SheetContent>
         </Sheet>
       </div>
+
+      <ContactModal open={contactModalOpen} onClose={() => setContactModalOpen(false)} />
     </nav>
   )
 }
