@@ -76,6 +76,7 @@ export function Navbar() {
   }
 
   return (
+    <>
     <nav
       className={cn(
         'fixed top-0 left-0 w-full z-50 flex justify-center px-4 sm:px-6 transition-all duration-400',
@@ -202,8 +203,9 @@ export function Navbar() {
           </SheetContent>
         </Sheet>
       </div>
-
-      <ContactModal open={contactModalOpen} onClose={() => setContactModalOpen(false)} />
     </nav>
+
+    <ContactModal open={contactModalOpen} onClose={() => setContactModalOpen(false)} />
+    </>
   )
 }
