@@ -473,14 +473,14 @@ export function InnovaCoPage() {
 
           {/* 6. Un ecosistema che cresce con te */}
           <div className="pt-16 sm:pt-20 pb-12 reveal-element">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+            <div className="grid grid-cols-1 lg:grid-cols-[36%_64%] gap-6 lg:gap-8 items-stretch">
               <div
                 className="rounded-[24px] p-10 sm:p-12 flex flex-col justify-center text-white"
                 style={{
                   background: 'linear-gradient(120deg, #001933 0%, #013a6b 35%, #0e568b 65%, #3a82b8 100%)',
                 }}
               >
-                <h2 className="text-4xl sm:text-5xl font-semibold mb-6 leading-tight">
+                <h2 className="text-4xl sm:text-5xl font-semibold mb-6 leading-tight" style={{ color: '#CDE4FF' }}>
                   Un ecosistema
                   <br />
                   che cresce con te
