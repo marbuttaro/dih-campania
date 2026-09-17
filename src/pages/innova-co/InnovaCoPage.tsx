@@ -480,7 +480,7 @@ export function InnovaCoPage() {
                   background: 'linear-gradient(120deg, #001933 0%, #013a6b 35%, #0e568b 65%, #3a82b8 100%)',
                 }}
               >
-                <h2 className="text-4xl sm:text-5xl font-normal mb-6 leading-tight" style={{ color: '#CDE4FF' }}>
+                <h2 className="text-4xl sm:text-5xl font-normal mb-6 leading-[1.05]" style={{ color: '#CDE4FF' }}>
                   Un ecosistema
                   <br />
                   che cresce con te
