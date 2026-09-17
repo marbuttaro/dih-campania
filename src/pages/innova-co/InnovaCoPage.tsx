@@ -165,7 +165,6 @@ export function InnovaCoPage() {
   const q3ActiveRef = useRef(false)
 
   const stackSectionRef = useRef<HTMLDivElement>(null)
-  const stackHeadingRef = useRef<HTMLHeadingElement>(null)
   const stackCardRefs = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
@@ -234,13 +233,14 @@ export function InnovaCoPage() {
     }
   }, [])
 
-  // "Cosa troverai" — heading fades in, then the three cards stack on top of
+  // "Cosa troverai" — the heading is already visible the moment the blue
+  // screen is reached (no fade-in gap), then the three cards stack on top of
   // each other as the user keeps scrolling, each new arrival pushing the
   // previous ones slightly back (smaller scale, shifted up).
   useEffect(() => {
     const STACK_WINDOWS: [number, number][] = [
-      [0.12, 0.24],
-      [0.42, 0.54],
+      [0.08, 0.2],
+      [0.4, 0.52],
       [0.72, 0.84],
     ]
     const RECEDE_SCALE_STEP = 0.06
@@ -252,10 +252,6 @@ export function InnovaCoPage() {
       const totalHeight = rect.height - window.innerHeight
       if (totalHeight <= 0) return
       const p = Math.max(0, Math.min(1, -rect.top / totalHeight))
-
-      if (stackHeadingRef.current) {
-        stackHeadingRef.current.style.opacity = String(remap(p, 0, 0.08, 0, 1))
-      }
 
       stackCardRefs.current.forEach((el, i) => {
         if (!el) return
@@ -394,9 +390,7 @@ export function InnovaCoPage() {
               }}
             >
               <h2
-                ref={stackHeadingRef}
                 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-light text-white/90 px-6 text-center mb-10 sm:mb-14"
-                style={{ opacity: 0 }}
               >
                 Cosa troverai in Innova.CO
               </h2>
@@ -408,10 +402,10 @@ export function InnovaCoPage() {
                     ref={(el) => {
                       stackCardRefs.current[i] = el
                     }}
-                    className="absolute inset-0 rounded-[24px] bg-white/95 backdrop-blur-md border border-white/80 shadow-[0_15px_45px_rgba(0,0,0,0.25)] flex items-center justify-center p-8 text-center"
+                    className="absolute inset-0 rounded-xl bg-white/5 backdrop-blur-md border border-white/30 shadow-[0_15px_45px_rgba(0,0,0,0.25)] flex items-center justify-center p-8 text-center"
                     style={{ opacity: 0, transform: 'translateY(60px) scale(1)', zIndex: i, willChange: 'transform, opacity' }}
                   >
-                    <p className="text-2xl sm:text-3xl font-light text-brand-navy">
+                    <p className="text-2xl sm:text-3xl font-light text-white">
                       {card.label}
                     </p>
                   </div>
