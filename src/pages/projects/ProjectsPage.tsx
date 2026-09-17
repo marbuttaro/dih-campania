@@ -145,17 +145,11 @@ export function ProjectsPage() {
       { root: null, rootMargin: '0px', threshold: 0.1 },
     )
 
-    const elements = document.querySelectorAll('.reveal-element:not(.reveal-timed)')
+    const elements = document.querySelectorAll('.reveal-element')
     elements.forEach((el) => observer.observe(el))
-
-    const timedElements = document.querySelectorAll('.reveal-timed')
-    const timers = Array.from(timedElements).map((el, i) =>
-      setTimeout(() => el.classList.add('reveal-visible'), 1200 + i * 500),
-    )
 
     return () => {
       observer.disconnect()
-      timers.forEach(clearTimeout)
     }
   }, [])
 
@@ -193,7 +187,7 @@ export function ProjectsPage() {
                 rel="noopener noreferrer"
                 style={{ backgroundColor: 'rgba(227, 234, 236, 0.95)' }}
                 className={`relative z-10 rounded-[20px] p-9 shadow-neumorphic grid grid-cols-1 sm:grid-cols-[220px_1fr] gap-8 sm:gap-20 items-center no-underline transition-all duration-300 hover:-translate-y-1 reveal-element ${
-                  index < 2 ? 'reveal-timed' : `reveal-delay-${Math.min(index, 3) * 100}`
+                  index === 0 ? '' : `reveal-delay-${Math.min(index, 3) * 100}`
                 }`}
               >
                 <div className="flex items-center justify-center h-24 sm:h-28">
