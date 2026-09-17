@@ -95,37 +95,25 @@ export function Community() {
       ref={containerRef}
       className="relative select-none lg:h-[270vh]"
     >
-      <div className="lg:sticky lg:top-0 lg:h-screen min-h-[600px] lg:min-h-[700px] flex items-center justify-center lg:overflow-hidden w-full">
-        <div className="container-page w-full flex flex-col items-center relative min-h-[380px] py-16 lg:py-10">
+      <div className="lg:sticky lg:top-0 lg:h-screen lg:min-h-[700px] flex items-center justify-center lg:overflow-hidden w-full">
+        <div className="container-page w-full flex flex-col items-center relative py-8 lg:py-10 lg:min-h-[380px]">
 
           {/* Mobile/tablet: swipeable steps, one screen at a time */}
-          <div className="lg:hidden relative w-full min-h-[420px] flex items-center">
+          <div className="lg:hidden relative w-full min-h-[320px] flex items-center gap-1">
             <button
               type="button"
               onClick={goPrev}
               disabled={activeStep === 0}
               aria-label="Indietro"
-              className={`absolute left-2 top-1/2 -translate-y-1/2 z-40 p-2 transition-colors ${
+              className={`shrink-0 z-40 p-1 transition-colors ${
                 activeStep === 0 ? 'text-brand-navy/25' : 'text-brand-dark-navy'
               }`}
             >
               <ChevronLeft className="size-8" strokeWidth={2} />
             </button>
 
-            <button
-              type="button"
-              onClick={goNext}
-              disabled={activeStep === MOBILE_STEPS - 1}
-              aria-label="Avanti"
-              className={`absolute right-2 top-1/2 -translate-y-1/2 z-40 p-2 transition-colors ${
-                activeStep === MOBILE_STEPS - 1 ? 'text-brand-navy/25' : 'text-brand-dark-navy'
-              }`}
-            >
-              <ChevronRight className="size-8" strokeWidth={2} />
-            </button>
-
             <div
-              className="overflow-hidden w-full"
+              className="overflow-hidden flex-1 min-w-0"
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
@@ -133,8 +121,8 @@ export function Community() {
                 className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
                 style={{ transform: `translateX(-${activeStep * 100}%)` }}
               >
-                <div className="w-full shrink-0 flex items-center justify-center px-11">
-                  <div className="shadow-box w-full text-center !p-8">
+                <div className="w-full shrink-0 flex items-center justify-center px-2">
+                  <div className="shadow-box w-full text-center !p-7">
                     <p className="text-lg text-brand-navy leading-snug m-0">
                       Offri <strong>soluzioni innovative</strong> e vuoi metterle al servizio delle
                       imprese?
@@ -142,8 +130,8 @@ export function Community() {
                   </div>
                 </div>
 
-                <div className="w-full shrink-0 flex items-center justify-center px-11">
-                  <div className="shadow-box w-full text-center !p-8">
+                <div className="w-full shrink-0 flex items-center justify-center px-2">
+                  <div className="shadow-box w-full text-center !p-7">
                     <p className="text-lg text-brand-navy leading-snug m-0">
                       Hai un'<strong>idea, un progetto o una sfida</strong> da affrontare nel mondo
                       digitale?
@@ -151,7 +139,7 @@ export function Community() {
                   </div>
                 </div>
 
-                <div className="w-full shrink-0 flex items-center justify-center px-11 text-center">
+                <div className="w-full shrink-0 flex items-center justify-center px-4 text-center">
                   <h2 className="font-bold text-[32px] text-brand-dark-navy leading-[1.2]">
                     Entra a far parte della{' '}
                     <span className="text-brand-light-blue">
@@ -162,20 +150,32 @@ export function Community() {
                   </h2>
                 </div>
 
-                <div className="w-full shrink-0 flex flex-col items-center px-6 text-center gap-8">
+                <div className="w-full shrink-0 flex flex-col items-center px-3 text-center gap-8">
                   <p className="text-lg text-brand-navy leading-relaxed">
                     Uno spazio aperto dove imprese, professionisti, startup ed enti si incontrano
                     per crescere insieme, scambiarsi competenze e creare soluzioni reali per
                     l'innovazione.
                   </p>
                   <a href="/innova-co" className="shadow-box !py-4 !px-8 inline-block no-underline">
-                    <span className="font-bold text-brand-dark-navy underline decoration-brand-light-blue decoration-2 underline-offset-4">
+                    <span className="font-bold text-brand-dark-navy">
                       Scopri la nostra community
                     </span>
                   </a>
                 </div>
               </div>
             </div>
+
+            <button
+              type="button"
+              onClick={goNext}
+              disabled={activeStep === MOBILE_STEPS - 1}
+              aria-label="Avanti"
+              className={`shrink-0 z-40 p-1 transition-colors ${
+                activeStep === MOBILE_STEPS - 1 ? 'text-brand-navy/25' : 'text-brand-dark-navy'
+              }`}
+            >
+              <ChevronRight className="size-8" strokeWidth={2} />
+            </button>
           </div>
 
           {/* Desktop: title in flow, cards fly off to the sides, content fades in centered */}
