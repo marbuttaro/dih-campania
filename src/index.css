@@ -206,6 +206,10 @@
 .reveal-delay-100 { transition-delay: 150ms; }
 .reveal-delay-200 { transition-delay: 300ms; }
 .reveal-delay-300 { transition-delay: 450ms; }
+.reveal-delay-400 { transition-delay: 600ms; }
+.reveal-delay-500 { transition-delay: 750ms; }
+.reveal-delay-600 { transition-delay: 900ms; }
+.reveal-delay-700 { transition-delay: 1050ms; }
 
 /* -------------------------------------------------------------------------- */
 /* Glass Stroke Effects                                                       */

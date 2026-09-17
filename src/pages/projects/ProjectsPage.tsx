@@ -187,7 +187,7 @@ export function ProjectsPage() {
                 rel="noopener noreferrer"
                 style={{ backgroundColor: 'rgba(227, 234, 236, 0.95)' }}
                 className={`relative z-10 rounded-[20px] p-9 shadow-neumorphic grid grid-cols-1 sm:grid-cols-[220px_1fr] gap-8 sm:gap-20 items-center no-underline transition-all duration-300 hover:-translate-y-1 reveal-element ${
-                  index === 0 ? '' : `reveal-delay-${Math.min(index, 3) * 100}`
+                  index === 0 ? '' : `reveal-delay-${Math.min(index, 7) * 100}`
                 }`}
               >
                 <div className="flex items-center justify-center h-24 sm:h-28">
