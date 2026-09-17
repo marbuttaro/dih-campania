@@ -105,26 +105,21 @@ export function AboutUsPage() {
                   </div>
                   <div className="grid grid-cols-2 xl:grid-cols-3 gap-4">
                     {[
-                      { src: '/assets/chi-siamo/soci/unione-industriali-napoli.png', alt: 'Unione Industriali Napoli', name: 'Unione Industriali Napoli' },
-                      { src: '/assets/chi-siamo/soci/confindustria-avellino.png', alt: 'Confindustria Avellino', name: 'Confindustria Avellino' },
-                      { src: '/assets/chi-siamo/soci/confindustria-benevento.png', alt: 'Confindustria Benevento', name: 'Confindustria Benevento' },
-                      { src: '/assets/chi-siamo/soci/confindustria-caserta.png', alt: 'Confindustria Caserta', name: 'Confindustria Caserta' },
-                      { src: '/assets/chi-siamo/soci/confindustria-salerno.png', alt: 'Confindustria Salerno', name: 'Confindustria Salerno' },
-                      { src: '/assets/chi-siamo/soci/ance.png', alt: 'Ance Campania', name: 'Ance Campania' },
+                      { src: '/assets/chi-siamo/soci/unione-industriali-napoli.png', alt: 'Unione Industriali Napoli' },
+                      { src: '/assets/chi-siamo/soci/confindustria-avellino.png', alt: 'Confindustria Avellino' },
+                      { src: '/assets/chi-siamo/soci/confindustria-benevento.png', alt: 'Confindustria Benevento' },
+                      { src: '/assets/chi-siamo/soci/confindustria-caserta.png', alt: 'Confindustria Caserta' },
+                      { src: '/assets/chi-siamo/soci/confindustria-salerno.png', alt: 'Confindustria Salerno' },
+                      { src: '/assets/chi-siamo/soci/ance.png', alt: 'Ance Campania' },
                     ].map((socio) => (
-                      <div key={socio.alt} className="flex flex-col items-center justify-center text-center gap-3 bg-white/5 backdrop-blur-md border border-white/30 rounded-xl p-4 min-h-[110px] transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 shadow-sm">
+                      <div key={socio.alt} className="flex items-center justify-center bg-white/5 backdrop-blur-md border border-white/30 rounded-xl p-4 min-h-[100px] transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 shadow-sm">
                         {socio.src && (
-                          <div className="h-12 sm:h-14 w-full flex items-center justify-center">
-                            <img
-                              src={socio.src}
-                              alt={socio.alt}
-                              className="max-h-full max-w-full object-contain"
-                            />
-                          </div>
+                          <img
+                            src={socio.src}
+                            alt={socio.alt}
+                            className="max-h-16 sm:max-h-20 max-w-full object-contain"
+                          />
                         )}
-                        <span className="text-[11px] sm:text-xs font-light text-white/70 leading-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                          {socio.name}
-                        </span>
                       </div>
                     ))}
                   </div>
