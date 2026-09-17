@@ -198,12 +198,14 @@ export function InnovaCoPage() {
       if (totalHeight <= 0) return
       const p = Math.max(0, Math.min(1, -rect.top / totalHeight))
 
-      // Wider windows give the typing animation time to finish before each
-      // question starts fading out, even when the user scrolls quickly.
-      const q1Opacity = 1 - remap(p, 0.32, 0.4, 0, 1)
+      // Wide solid windows give the typing animation time to finish before each
+      // question starts fading out, even when the user scrolls quickly. A small
+      // gap (both at opacity 0) is kept between questions so the outgoing and
+      // incoming text never overlap on screen at the same time.
+      const q1Opacity = 1 - remap(p, 0.3, 0.36, 0, 1)
       const q2Opacity =
-        remap(p, 0.32, 0.4, 0, 1) * (1 - remap(p, 0.62, 0.7, 0, 1))
-      const q3Opacity = remap(p, 0.62, 0.7, 0, 1)
+        remap(p, 0.38, 0.44, 0, 1) * (1 - remap(p, 0.6, 0.66, 0, 1))
+      const q3Opacity = remap(p, 0.68, 0.74, 0, 1)
 
       if (q1WrapRef.current) q1WrapRef.current.style.opacity = String(q1Opacity)
       if (q2WrapRef.current) q2WrapRef.current.style.opacity = String(q2Opacity)
@@ -213,11 +215,11 @@ export function InnovaCoPage() {
         q1ActiveRef.current = true
         setQ1Active(true)
       }
-      if (p > 0.32 && !q2ActiveRef.current) {
+      if (p > 0.38 && !q2ActiveRef.current) {
         q2ActiveRef.current = true
         setQ2Active(true)
       }
-      if (p > 0.62 && !q3ActiveRef.current) {
+      if (p > 0.68 && !q3ActiveRef.current) {
         q3ActiveRef.current = true
         setQ3Active(true)
       }
@@ -314,7 +316,7 @@ export function InnovaCoPage() {
                   className="lg:absolute inset-0 flex items-center justify-center px-4"
                   style={{ opacity: 0 }}
                 >
-                  <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-light text-brand-navy max-w-[900px] leading-snug">
+                  <h2 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-snug">
                     <TextType
                       text="Allora sei nel posto giusto."
                       typingSpeed={32}
