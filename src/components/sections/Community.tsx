@@ -113,7 +113,7 @@ export function Community() {
             </button>
 
             <div
-              className="overflow-hidden flex-1 min-w-0"
+              className="overflow-x-hidden overflow-y-visible flex-1 min-w-0"
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
