@@ -63,7 +63,7 @@ export function TrasparenzaPage() {
       <Navbar />
 
       <main
-        className="flex-grow pt-36 pb-24 relative bg-cover bg-top bg-no-repeat bg-brand-surface"
+        className="flex-grow pt-36 relative bg-cover bg-top bg-no-repeat bg-brand-surface"
         style={{ backgroundImage: "url('/assets/sfondo.svg')" }}
       >
         <div className="absolute inset-0 bg-white/15 pointer-events-none" />

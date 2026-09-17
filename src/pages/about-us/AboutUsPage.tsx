@@ -35,7 +35,7 @@ export function AboutUsPage() {
 
       {/* Main Page Layout */}
       <main
-        className="flex-grow pt-32 sm:pt-36 pb-20 relative bg-cover bg-top bg-no-repeat bg-brand-surface"
+        className="flex-grow pt-32 sm:pt-36 relative bg-cover bg-top bg-no-repeat bg-brand-surface"
         style={{
           backgroundImage: "url('/assets/sfondo.svg')",
         }}

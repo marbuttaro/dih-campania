@@ -158,7 +158,7 @@ export function ProjectsPage() {
       <Navbar />
 
       <main
-        className="flex-grow pt-44 sm:pt-52 pb-20 relative bg-cover bg-top bg-no-repeat bg-brand-surface"
+        className="flex-grow pt-44 sm:pt-52 relative bg-cover bg-top bg-no-repeat bg-brand-surface"
         style={{ backgroundImage: "url('/assets/sfondo.svg')" }}
       >
         <div className="absolute inset-0 bg-white/20 pointer-events-none" />

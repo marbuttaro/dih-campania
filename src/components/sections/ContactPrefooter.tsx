@@ -22,7 +22,7 @@ export function ContactPrefooter() {
   return (
     <div
       id="contatti"
-      className="w-full relative sm:bg-[url('/assets/sfondo_form.png')] sm:bg-cover sm:bg-center pt-20 pb-0 sm:pb-20 scroll-mt-28"
+      className="w-full relative sm:bg-[url('/assets/sfondo_form.png')] sm:bg-cover sm:bg-center pt-24 sm:pt-28 pb-0 scroll-mt-28"
     >
       <div className="container-page relative z-10">
         <div className="-mx-8 sm:mx-auto sm:max-w-[920px] rounded-none sm:rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container bg-[url('/assets/sfondo_contatti_mobile.png')] bg-cover bg-center sm:bg-none">
