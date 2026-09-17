@@ -6,19 +6,15 @@ import { ContactPrefooter } from '@/components/sections/ContactPrefooter'
 import { TextType } from '@/components/effects/TextType'
 import { PartnerFormModal } from './PartnerFormModal'
 import { SolutionRequestModal } from './SolutionRequestModal'
-import { NetworkHotspots } from '@/components/effects/NetworkHotspots'
 
 function remap(v: number, inLo: number, inHi: number, outLo: number, outHi: number) {
   return outLo + Math.max(0, Math.min(1, (v - inLo) / (inHi - inLo))) * (outHi - outLo)
 }
 
-// Order must match the three "filled-center" nodes baked into NetworkHotspots
-// (indices 8, 9, 10 of its NODES array): Un primo orientamento, La rete dei
-// partner, L'elenco dei servizi attivi.
-const NETWORK_HOTSPOTS = [
-  { label: 'Un primo orientamento', align: 'right' as const },
-  { label: 'La rete dei partner', align: 'right' as const },
-  { label: "L'elenco dei servizi attivi", align: 'left' as const },
+const STACK_CARDS = [
+  { label: 'Un primo orientamento' },
+  { label: 'La rete dei partner' },
+  { label: "L'elenco dei servizi attivi" },
 ]
 
 type ParticipationTab = 'offro' | 'cerco'
@@ -168,6 +164,10 @@ export function InnovaCoPage() {
   const q2ActiveRef = useRef(false)
   const q3ActiveRef = useRef(false)
 
+  const stackSectionRef = useRef<HTMLDivElement>(null)
+  const stackHeadingRef = useRef<HTMLHeadingElement>(null)
+  const stackCardRefs = useRef<(HTMLDivElement | null)[]>([])
+
   useEffect(() => {
     const observerOptions = {
       root: null,
@@ -223,6 +223,57 @@ export function InnovaCoPage() {
         q3ActiveRef.current = true
         setQ3Active(true)
       }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll, { passive: true })
+    handleScroll()
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+    }
+  }, [])
+
+  // "Cosa troverai" — heading fades in, then the three cards stack on top of
+  // each other as the user keeps scrolling, each new arrival pushing the
+  // previous ones slightly back (smaller scale, shifted up).
+  useEffect(() => {
+    const STACK_WINDOWS: [number, number][] = [
+      [0.12, 0.24],
+      [0.42, 0.54],
+      [0.72, 0.84],
+    ]
+    const RECEDE_SCALE_STEP = 0.06
+    const RECEDE_Y_STEP = 18
+
+    const handleScroll = () => {
+      if (!stackSectionRef.current) return
+      const rect = stackSectionRef.current.getBoundingClientRect()
+      const totalHeight = rect.height - window.innerHeight
+      if (totalHeight <= 0) return
+      const p = Math.max(0, Math.min(1, -rect.top / totalHeight))
+
+      if (stackHeadingRef.current) {
+        stackHeadingRef.current.style.opacity = String(remap(p, 0, 0.08, 0, 1))
+      }
+
+      stackCardRefs.current.forEach((el, i) => {
+        if (!el) return
+        const [start, end] = STACK_WINDOWS[i]
+        const enter = remap(p, start, end, 0, 1)
+
+        let recede = 0
+        for (let j = i + 1; j < STACK_WINDOWS.length; j++) {
+          recede += remap(p, STACK_WINDOWS[j][0], STACK_WINDOWS[j][1], 0, 1)
+        }
+
+        const slideY = 60 * (1 - enter)
+        const recedeY = -RECEDE_Y_STEP * recede
+        const scale = 1 - RECEDE_SCALE_STEP * recede
+
+        el.style.opacity = String(enter)
+        el.style.transform = `translateY(${slideY + recedeY}px) scale(${scale})`
+      })
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -329,26 +380,44 @@ export function InnovaCoPage() {
             </div>
           </section>
 
-          {/* 3. Cosa troverai — full-bleed dark card with a live floating network,
-                 matching the homepage hero's particle graphic. Three of its nodes
-                 are anchored hotspots: hovering them reveals their label. */}
+          {/* 3. Cosa troverai — heading fades in, then the three cards stack on
+                 top of each other while scrolling, reusing the same
+                 scroll-linked opacity/transform approach as the questions above. */}
           <section
-            className="relative z-10 w-full overflow-hidden reveal-element"
-            style={{
-              backgroundColor: '#001933',
-              backgroundImage: "url('/assets/innova-co/sfondo-cosa-troverai.svg')",
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
+            ref={stackSectionRef}
+            className="relative z-10 w-full h-[380vh] select-none"
           >
-            <div className="p-4 sm:p-6 lg:p-8 pt-24 sm:pt-28 lg:pt-32">
-              <div className="relative w-full aspect-[1415/703]">
-                <NetworkHotspots hotspots={NETWORK_HOTSPOTS} />
+            <div
+              className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden w-full"
+              style={{
+                background: 'linear-gradient(120deg, #001933 0%, #013a6b 35%, #0e568b 65%, #3a82b8 100%)',
+              }}
+            >
+              <h2
+                ref={stackHeadingRef}
+                className="text-3xl sm:text-4xl lg:text-[2.75rem] font-light text-white/90 px-6 text-center mb-10 sm:mb-14"
+                style={{ opacity: 0 }}
+              >
+                Cosa troverai in Innova.CO
+              </h2>
+
+              <div className="relative w-[88%] sm:w-full max-w-[520px] h-[220px] sm:h-[260px]">
+                {STACK_CARDS.map((card, i) => (
+                  <div
+                    key={card.label}
+                    ref={(el) => {
+                      stackCardRefs.current[i] = el
+                    }}
+                    className="absolute inset-0 rounded-[24px] bg-white/95 backdrop-blur-md border border-white/80 shadow-[0_15px_45px_rgba(0,0,0,0.25)] flex items-center justify-center p-8 text-center"
+                    style={{ opacity: 0, transform: 'translateY(60px) scale(1)', zIndex: i, willChange: 'transform, opacity' }}
+                  >
+                    <p className="text-2xl sm:text-3xl font-light text-brand-navy">
+                      {card.label}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
-            <h2 className="absolute inset-x-0 top-6 sm:top-8 lg:top-10 z-10 text-center text-2xl sm:text-3xl font-light text-white/90 px-6 pointer-events-none">
-              Cosa troverai in Innova.CO
-            </h2>
           </section>
 
         <div className="container-page relative z-10">
