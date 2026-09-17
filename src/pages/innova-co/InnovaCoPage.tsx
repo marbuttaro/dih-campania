@@ -342,7 +342,7 @@ export function InnovaCoPage() {
         <div className="container-page relative z-10">
           {/* 4. Come puoi partecipare */}
           <div className="pt-20 sm:pt-28 pb-20 reveal-element">
-            <h2 className="text-2xl sm:text-3xl font-light text-brand-navy mb-10">
+            <h2 className="text-4xl sm:text-5xl font-light text-brand-navy mb-10">
               Come puoi partecipare?
             </h2>
 
@@ -387,7 +387,7 @@ export function InnovaCoPage() {
                 </button>
               </div>
 
-              <div className="shadow-box !bg-[#E3EAEC]/90">
+              <div className="shadow-box !bg-[#E3EAEC]/90 flex flex-col items-center text-center">
                 <p className="text-base sm:text-lg text-brand-dark-navy/85 leading-relaxed mb-8 max-w-[640px]">
                   {active.text}
                 </p>
