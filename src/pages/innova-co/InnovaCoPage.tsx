@@ -198,10 +198,12 @@ export function InnovaCoPage() {
       if (totalHeight <= 0) return
       const p = Math.max(0, Math.min(1, -rect.top / totalHeight))
 
-      const q1Opacity = 1 - remap(p, 0.18, 0.26, 0, 1)
+      // Wider windows give the typing animation time to finish before each
+      // question starts fading out, even when the user scrolls quickly.
+      const q1Opacity = 1 - remap(p, 0.32, 0.4, 0, 1)
       const q2Opacity =
-        remap(p, 0.26, 0.34, 0, 1) * (1 - remap(p, 0.58, 0.66, 0, 1))
-      const q3Opacity = remap(p, 0.66, 0.74, 0, 1)
+        remap(p, 0.32, 0.4, 0, 1) * (1 - remap(p, 0.62, 0.7, 0, 1))
+      const q3Opacity = remap(p, 0.62, 0.7, 0, 1)
 
       if (q1WrapRef.current) q1WrapRef.current.style.opacity = String(q1Opacity)
       if (q2WrapRef.current) q2WrapRef.current.style.opacity = String(q2Opacity)
@@ -211,11 +213,11 @@ export function InnovaCoPage() {
         q1ActiveRef.current = true
         setQ1Active(true)
       }
-      if (p > 0.26 && !q2ActiveRef.current) {
+      if (p > 0.32 && !q2ActiveRef.current) {
         q2ActiveRef.current = true
         setQ2Active(true)
       }
-      if (p > 0.66 && !q3ActiveRef.current) {
+      if (p > 0.62 && !q3ActiveRef.current) {
         q3ActiveRef.current = true
         setQ3Active(true)
       }
@@ -271,12 +273,20 @@ export function InnovaCoPage() {
                  the section is stuck, instead of scrolling underneath the text. */}
           <section ref={questionsSectionRef} className="relative z-10 h-[300vh] select-none">
             <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden w-full">
+              <div
+                className="absolute top-10 right-0 sm:right-10 size-80 sm:size-96 bg-brand-light-blue/25 rounded-full blur-[100px] pointer-events-none"
+                aria-hidden="true"
+              />
+              <div
+                className="absolute bottom-10 left-0 sm:left-10 size-72 bg-brand-light-blue/15 rounded-full blur-[100px] pointer-events-none"
+                aria-hidden="true"
+              />
               <div className="container-page relative w-full text-center">
                 <div
                   ref={q1WrapRef}
                   className="lg:absolute inset-0 flex items-center justify-center px-4"
                 >
-                  <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-light text-brand-navy max-w-[900px] lg:max-w-[1080px] leading-snug text-balance">
+                  <h2 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-snug text-balance">
                     <TextType
                       text="Cerchi una soluzione o hai un'idea o un progetto da affrontare nel mondo digitale?"
                       typingSpeed={32}
@@ -290,7 +300,7 @@ export function InnovaCoPage() {
                   className="lg:absolute inset-0 flex items-center justify-center px-4"
                   style={{ opacity: 0 }}
                 >
-                  <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-light text-brand-navy max-w-[900px] leading-snug">
+                  <h2 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-snug">
                     <TextType
                       text="Offri soluzioni innovative e vuoi metterle al servizio delle imprese?"
                       typingSpeed={32}
