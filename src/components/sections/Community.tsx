@@ -1,8 +1,11 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState, type TouchEvent } from 'react'
+import { ChevronRight } from 'lucide-react'
 
 function remap(v: number, inLo: number, inHi: number, outLo: number, outHi: number) {
   return outLo + Math.max(0, Math.min(1, (v - inLo) / (inHi - inLo))) * (outHi - outLo)
 }
+
+const MOBILE_STEPS = 4
 
 export function Community() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -10,14 +13,14 @@ export function Community() {
   const cardRightRef = useRef<HTMLDivElement>(null)
   const titleRef = useRef<HTMLHeadingElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
-  const cardLeftMobileRef = useRef<HTMLDivElement>(null)
-  const cardRightMobileRef = useRef<HTMLDivElement>(null)
-  const titleMobileRef = useRef<HTMLHeadingElement>(null)
-  const contentMobileRef = useRef<HTMLDivElement>(null)
   const [step, setStep] = useState(0)
+  const [activeStep, setActiveStep] = useState(0)
+  const touchStartX = useRef<number | null>(null)
 
+  // Desktop only: scroll-jacked animation (cards fly off, title/content cross-fade)
   useEffect(() => {
     const handleScroll = () => {
+      if (window.innerWidth < 1024) return
       if (!containerRef.current) return
       const rect = containerRef.current.getBoundingClientRect()
       const totalHeight = rect.height - window.innerHeight
@@ -26,69 +29,37 @@ export function Community() {
 
       setStep(p < 0.45 ? 0 : p < 0.68 ? 1 : 2)
 
-      const isDesktop = window.innerWidth >= 1024
+      // Scroll 1: cards exit + title fades IN simultaneously (0.05 → 0.45)
+      const cardExit = remap(p, 0.05, 0.45, 0, 1)
+      const titleFadeIn = remap(p, 0.05, 0.45, 0, 1)
 
-      if (isDesktop) {
-        // Scroll 1: cards exit + title fades IN simultaneously (0.05 → 0.45)
-        const cardExit = remap(p, 0.05, 0.45, 0, 1)
-        const titleFadeIn = remap(p, 0.05, 0.45, 0, 1)
+      // Scroll 2: title fades OUT (0.45 → 0.65, no pause), then content fades IN (0.68 → 0.84)
+      const titleFadeOut = remap(p, 0.45, 0.65, 0, 1)
+      const contentOpacity = remap(p, 0.68, 0.84, 0, 1)
 
-        // Scroll 2: title fades OUT (0.45 → 0.65, no pause), then content fades IN (0.68 → 0.84)
-        const titleFadeOut = remap(p, 0.45, 0.65, 0, 1)
-        const contentOpacity = remap(p, 0.68, 0.84, 0, 1)
+      // Title: grows in during scroll 1, then shrinks out during scroll 2 — never both at once
+      const titleOpacity = Math.min(titleFadeIn, 1 - titleFadeOut)
 
-        // Title: grows in during scroll 1, then shrinks out during scroll 2 — never both at once
-        const titleOpacity = Math.min(titleFadeIn, 1 - titleFadeOut)
-
-        if (cardLeftRef.current) {
-          cardLeftRef.current.style.transform = `translateX(${-cardExit * 150}vw) rotate(${-3 - cardExit * 12}deg)`
-          cardLeftRef.current.style.opacity = String(1 - cardExit)
-        }
-        if (cardRightRef.current) {
-          cardRightRef.current.style.transform = `translateX(${cardExit * 150}vw) rotate(${3 + cardExit * 12}deg)`
-          cardRightRef.current.style.opacity = String(1 - cardExit)
-        }
-        if (titleRef.current) {
-          titleRef.current.style.opacity = String(titleOpacity)
-        }
-        if (contentRef.current) {
-          contentRef.current.style.opacity = String(contentOpacity)
-          contentRef.current.style.pointerEvents = contentOpacity > 0.1 ? 'auto' : 'none'
-        }
-        if (containerRef.current) {
-          if (contentOpacity > 0.1) {
-            containerRef.current.removeAttribute('data-no-glow')
-          } else {
-            containerRef.current.setAttribute('data-no-glow', '')
-          }
-        }
-      } else {
-        // Mobile/tablet: one element at a time, fixed in place — pure crossfade, no movement.
-        // Card 1 → Card 2 → Title → Content, each reached by scrolling, screen never shifts.
-        const card1Opacity = 1 - remap(p, 0.18, 0.23, 0, 1)
-        const card2Opacity = Math.min(remap(p, 0.18, 0.23, 0, 1), 1 - remap(p, 0.43, 0.48, 0, 1))
-        const titleOpacity = Math.min(remap(p, 0.43, 0.48, 0, 1), 1 - remap(p, 0.68, 0.73, 0, 1))
-        const contentOpacity = remap(p, 0.68, 0.73, 0, 1)
-
-        if (cardLeftMobileRef.current) {
-          cardLeftMobileRef.current.style.opacity = String(card1Opacity)
-        }
-        if (cardRightMobileRef.current) {
-          cardRightMobileRef.current.style.opacity = String(card2Opacity)
-        }
-        if (titleMobileRef.current) {
-          titleMobileRef.current.style.opacity = String(titleOpacity)
-        }
-        if (contentMobileRef.current) {
-          contentMobileRef.current.style.opacity = String(contentOpacity)
-          contentMobileRef.current.style.pointerEvents = contentOpacity > 0.1 ? 'auto' : 'none'
-        }
-        if (containerRef.current) {
-          if (contentOpacity > 0.1) {
-            containerRef.current.removeAttribute('data-no-glow')
-          } else {
-            containerRef.current.setAttribute('data-no-glow', '')
-          }
+      if (cardLeftRef.current) {
+        cardLeftRef.current.style.transform = `translateX(${-cardExit * 150}vw) rotate(${-3 - cardExit * 12}deg)`
+        cardLeftRef.current.style.opacity = String(1 - cardExit)
+      }
+      if (cardRightRef.current) {
+        cardRightRef.current.style.transform = `translateX(${cardExit * 150}vw) rotate(${3 + cardExit * 12}deg)`
+        cardRightRef.current.style.opacity = String(1 - cardExit)
+      }
+      if (titleRef.current) {
+        titleRef.current.style.opacity = String(titleOpacity)
+      }
+      if (contentRef.current) {
+        contentRef.current.style.opacity = String(contentOpacity)
+        contentRef.current.style.pointerEvents = contentOpacity > 0.1 ? 'auto' : 'none'
+      }
+      if (containerRef.current) {
+        if (contentOpacity > 0.1) {
+          containerRef.current.removeAttribute('data-no-glow')
+        } else {
+          containerRef.current.setAttribute('data-no-glow', '')
         }
       }
     }
@@ -102,65 +73,92 @@ export function Community() {
     }
   }, [])
 
+  const goNext = () => setActiveStep((s) => Math.min(MOBILE_STEPS - 1, s + 1))
+  const goPrev = () => setActiveStep((s) => Math.max(0, s - 1))
+
+  const handleTouchStart = (e: TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+  }
+  const handleTouchEnd = (e: TouchEvent) => {
+    if (touchStartX.current === null) return
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current
+    const threshold = 50
+    if (deltaX > threshold) goPrev()
+    else if (deltaX < -threshold) goNext()
+    touchStartX.current = null
+  }
+
   return (
     <section
       id="community"
       data-no-glow
       ref={containerRef}
-      className="relative h-[270vh] select-none"
+      className="relative select-none lg:h-[270vh]"
     >
-      <div className="sticky top-0 h-screen min-h-[600px] lg:min-h-[700px] flex items-center justify-center overflow-hidden w-full">
-        <div className="container-page w-full flex flex-col items-center relative min-h-[380px] py-10">
+      <div className="lg:sticky lg:top-0 lg:h-screen min-h-[600px] lg:min-h-[700px] flex items-center justify-center lg:overflow-hidden w-full">
+        <div className="container-page w-full flex flex-col items-center relative min-h-[380px] py-16 lg:py-10">
 
-          {/* Mobile/tablet: single fixed stage, elements cross-fade in place one at a time */}
-          <div className="lg:hidden absolute inset-0 grid grid-cols-1 grid-rows-1 place-items-center px-4">
+          {/* Mobile/tablet: swipeable steps, one screen at a time */}
+          <div className="lg:hidden relative w-full">
             <div
-              ref={cardLeftMobileRef}
-              className="[grid-area:1/1] pointer-events-none bg-white/95 backdrop-blur-md border border-white/80 rounded-3xl p-7 w-[90%] sm:w-[420px] shadow-[0_15px_45px_rgba(0,0,0,0.1)]"
-              style={{ opacity: 1 }}
+              className="overflow-hidden"
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
             >
-              <p className="text-lg text-brand-dark-navy leading-snug m-0">
-                Offri <strong>soluzioni innovative</strong> e vuoi metterle al servizio delle
-                imprese?
-              </p>
-            </div>
-
-            <div
-              ref={cardRightMobileRef}
-              className="[grid-area:1/1] pointer-events-none bg-white/95 backdrop-blur-md border border-white/80 rounded-3xl p-7 w-[90%] sm:w-[420px] shadow-[0_15px_45px_rgba(0,0,0,0.1)]"
-              style={{ opacity: 0 }}
-            >
-              <p className="text-lg text-brand-dark-navy leading-snug m-0">
-                Hai un'<strong>idea, un progetto o una sfida</strong> da affrontare nel mondo
-                digitale?
-              </p>
-            </div>
-
-            <h2
-              ref={titleMobileRef}
-              className="[grid-area:1/1] pointer-events-none font-light text-[40px] sm:text-5xl text-brand-navy leading-[1.1] text-center"
-              style={{ opacity: 0 }}
-            >
-              Entra a far parte della <br />
-              <span className="text-brand-light-blue font-semibold">Community</span>
-            </h2>
-
-            <div
-              ref={contentMobileRef}
-              className="[grid-area:1/1] w-full px-2 text-center flex flex-col items-center"
-              style={{ opacity: 0, pointerEvents: 'none' }}
-            >
-              <p className="text-lg sm:text-xl text-brand-dark-navy leading-relaxed mb-8 max-w-[800px]">
-                Un ecosistema dell'innovazione che unisce imprese, università, enti di ricerca e
-                professionisti che propongono soluzioni, condividono know-how e sviluppano progetti
-              </p>
-              <a
-                href="/innova-co"
-                className="inline-block bg-brand-ice/30 text-brand-dark-navy px-9 py-3.5 rounded-lg font-semibold border-0 cursor-pointer shadow-[0_4px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)] no-underline"
+              <div
+                className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                style={{ transform: `translateX(-${activeStep * 100}%)` }}
               >
-                Scopri la nostra community
-              </a>
+                <div className="w-full shrink-0 flex items-center justify-center px-4">
+                  <div className="bg-white/95 backdrop-blur-md border border-white/80 rounded-3xl p-7 w-[90%] sm:w-[420px] shadow-[0_15px_45px_rgba(0,0,0,0.1)]">
+                    <p className="text-lg text-brand-dark-navy leading-snug m-0">
+                      Offri <strong>soluzioni innovative</strong> e vuoi metterle al servizio delle
+                      imprese?
+                    </p>
+                  </div>
+                </div>
+
+                <div className="w-full shrink-0 flex items-center justify-center px-4">
+                  <div className="bg-white/95 backdrop-blur-md border border-white/80 rounded-3xl p-7 w-[90%] sm:w-[420px] shadow-[0_15px_45px_rgba(0,0,0,0.1)]">
+                    <p className="text-lg text-brand-dark-navy leading-snug m-0">
+                      Hai un'<strong>idea, un progetto o una sfida</strong> da affrontare nel mondo
+                      digitale?
+                    </p>
+                  </div>
+                </div>
+
+                <div className="w-full shrink-0 flex items-center justify-center px-4 text-center">
+                  <h2 className="font-light text-[40px] sm:text-5xl text-brand-navy leading-[1.1]">
+                    Entra a far parte della <br />
+                    <span className="text-brand-light-blue font-semibold">Community</span>
+                  </h2>
+                </div>
+
+                <div className="w-full shrink-0 flex flex-col items-center px-4 text-center">
+                  <p className="text-lg sm:text-xl text-brand-dark-navy leading-relaxed mb-8 max-w-[800px]">
+                    Un ecosistema dell'innovazione che unisce imprese, università, enti di ricerca e
+                    professionisti che propongono soluzioni, condividono know-how e sviluppano progetti
+                  </p>
+                  <a
+                    href="/innova-co"
+                    className="inline-block bg-brand-ice/30 text-brand-dark-navy px-9 py-3.5 rounded-lg font-semibold border-0 cursor-pointer shadow-[0_4px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)] no-underline"
+                  >
+                    Scopri la nostra community
+                  </a>
+                </div>
+              </div>
             </div>
+
+            {activeStep < MOBILE_STEPS - 1 && (
+              <button
+                type="button"
+                onClick={goNext}
+                aria-label="Avanti"
+                className="absolute right-2 top-1/2 -translate-y-1/2 z-40 flex items-center justify-center size-12 rounded-full bg-[#E3EAEC] shadow-neumorphic text-brand-navy transition-transform duration-300 hover:scale-110"
+              >
+                <ChevronRight className="size-6" strokeWidth={2} />
+              </button>
+            )}
           </div>
 
           {/* Desktop: title in flow, cards fly off to the sides, content fades in centered */}
@@ -216,7 +214,15 @@ export function Community() {
           </div>
 
           {/* Step progress indicator */}
-          <div className="absolute bottom-2 left-0 right-0 flex justify-center pb-5 z-40">
+          <div className="lg:hidden mt-6 flex justify-center z-40">
+            <img
+              src={`/assets/barra${Math.max(0, activeStep - 1) + 1}.svg`}
+              alt=""
+              aria-hidden="true"
+              className="w-[90%] max-w-[600px]"
+            />
+          </div>
+          <div className="hidden lg:flex lg:absolute lg:bottom-2 lg:left-0 lg:right-0 justify-center lg:pb-5 z-40">
             <img
               src={`/assets/barra${step + 1}.svg`}
               alt=""

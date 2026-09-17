@@ -1,5 +1,6 @@
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
+import { ContactPrefooter } from '@/components/sections/ContactPrefooter'
 
 const DOCUMENTS = [
   {
@@ -93,6 +94,8 @@ export function TrasparenzaPage() {
             </div>
           </div>
         </div>
+
+        <ContactPrefooter />
       </main>
 
       <Footer />

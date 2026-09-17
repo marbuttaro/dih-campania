@@ -1,6 +1,7 @@
 import { GlowCursor } from '@/components/effects/GlowCursor'
 import { About } from '@/components/sections/About'
 import { Community } from '@/components/sections/Community'
+import { ContactPrefooter } from '@/components/sections/ContactPrefooter'
 import { Events } from '@/components/sections/Events'
 import { Experience } from '@/components/sections/Experience'
 import { FAQ } from '@/components/sections/FAQ'
@@ -26,6 +27,7 @@ function App() {
         <Grants />
         <Events />
         <FAQ />
+        <ContactPrefooter />
       </main>
       <Footer />
     </div>

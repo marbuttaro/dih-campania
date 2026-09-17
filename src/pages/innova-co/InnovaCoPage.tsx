@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { GlowCursor } from '@/components/effects/GlowCursor'
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
+import { ContactPrefooter } from '@/components/sections/ContactPrefooter'
 import { TextType } from '@/components/effects/TextType'
 import { PartnerFormModal } from './PartnerFormModal'
 import { SolutionRequestModal } from './SolutionRequestModal'
@@ -542,6 +543,8 @@ export function InnovaCoPage() {
           </div>
         </div>
         </div>
+
+        <ContactPrefooter />
       </main>
 
       <Footer />

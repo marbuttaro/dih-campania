@@ -182,7 +182,7 @@ export function DigitalTransformationPage() {
         </div> {/* Chiude container-page */}
 
         {/* 5. Custom Assessment Form Section (Full Width Background) */}
-        <div className="w-full relative sm:bg-[url('/assets/sfondo_form.png')] sm:bg-cover sm:bg-center pt-20 pb-0 sm:pb-20 reveal-element">
+        <div id="contatti" className="w-full relative sm:bg-[url('/assets/sfondo_form.png')] sm:bg-cover sm:bg-center pt-20 pb-0 sm:pb-20 reveal-element scroll-mt-28">
           <div className="container-page relative z-10">
             <div className="-mx-8 sm:mx-auto sm:max-w-[920px] rounded-none sm:rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container bg-[url('/assets/sfondo_contatti_mobile.png')] bg-cover bg-center sm:bg-none">
               

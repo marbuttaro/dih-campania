@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
+import { ContactPrefooter } from '@/components/sections/ContactPrefooter'
 
 
 
@@ -407,6 +408,8 @@ export function AboutUsPage() {
           </div>
 
         </div>
+
+        <ContactPrefooter />
       </main>
 
       {/* 9. Footer */}

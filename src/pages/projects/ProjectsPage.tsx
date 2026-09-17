@@ -1,6 +1,7 @@
 import { useEffect, type CSSProperties, type ReactNode } from 'react'
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
+import { ContactPrefooter } from '@/components/sections/ContactPrefooter'
 
 const MAIN_PROJECTS = [
   {
@@ -250,6 +251,8 @@ export function ProjectsPage() {
             </div>
           </div>
         </div>
+
+        <ContactPrefooter />
       </main>
 
       <Footer />
