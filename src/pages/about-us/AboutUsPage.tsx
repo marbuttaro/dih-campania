@@ -103,7 +103,7 @@ export function AboutUsPage() {
                       I Soci
                     </h3>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-2 xl:grid-cols-3 gap-4">
                     {[
                       { src: '/assets/chi-siamo/soci/unione-industriali-napoli.png', alt: 'Unione Industriali Napoli', name: 'Unione Industriali\nNapoli' },
                       { src: '/assets/chi-siamo/soci/confindustria-avellino.png', alt: 'Confindustria Avellino', name: 'Confindustria\nAvellino' },
@@ -112,9 +112,9 @@ export function AboutUsPage() {
                       { src: '/assets/chi-siamo/soci/confindustria-salerno.png', alt: 'Confindustria Salerno', name: 'Confindustria\nSalerno' },
                       { src: '/assets/chi-siamo/soci/ance.png', alt: 'Ance Campania', name: 'Ance\nCampania' },
                     ].map((socio) => (
-                      <div key={socio.alt} className="flex items-center gap-4 bg-white/5 backdrop-blur-md border border-white/30 rounded-xl p-4 min-h-[92px] transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 shadow-sm">
+                      <div key={socio.alt} className="flex items-center gap-2 sm:gap-4 bg-white/5 backdrop-blur-md border border-white/30 rounded-xl p-3 sm:p-4 min-h-[92px] transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 shadow-sm">
                         {socio.src && (
-                          <div className={`h-12 ${socio.wide ? 'w-28' : 'w-20'} flex items-center justify-center shrink-0`}>
+                          <div className={`h-10 sm:h-12 ${socio.wide ? 'w-20 sm:w-28' : 'w-14 sm:w-20'} flex items-center justify-center shrink-0`}>
                             <img
                               src={socio.src}
                               alt={socio.alt}
@@ -122,7 +122,7 @@ export function AboutUsPage() {
                             />
                           </div>
                         )}
-                        <span className="text-sm font-light text-white/90 leading-tight whitespace-pre-line" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                        <span className="text-xs sm:text-sm font-light text-white/90 leading-tight whitespace-pre-line" style={{ fontFamily: 'Montserrat, sans-serif' }}>
                           {socio.name}
                         </span>
                       </div>
@@ -137,18 +137,18 @@ export function AboutUsPage() {
                       Partner tecnologici
                     </h3>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-3 gap-3 sm:gap-4">
                     {[
                       { src: '/assets/chi-siamo/partner/tim.png', alt: 'TIM', small: true },
                       { src: '/assets/chi-siamo/partner/windtre.png', alt: 'WindTre' },
                       { src: '/assets/chi-siamo/partner/netgroup.png', alt: 'Netgroup' },
                     ].map((partner) => (
-                      <div key={partner.alt} className="flex items-center justify-center bg-white/5 backdrop-blur-md border border-white/30 rounded-xl p-4 min-h-[92px] transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 shadow-sm">
+                      <div key={partner.alt} className="flex items-center justify-center bg-white/5 backdrop-blur-md border border-white/30 rounded-xl p-3 sm:p-4 min-h-[92px] transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 shadow-sm">
                         {partner.src && (
                           <img
                             src={partner.src}
                             alt={partner.alt}
-                            className={`${partner.small ? 'max-h-8' : 'max-h-12'} max-w-[80%] object-contain`}
+                            className={`${partner.small ? 'max-h-6 sm:max-h-8' : 'max-h-9 sm:max-h-12'} max-w-[85%] object-contain`}
                           />
                         )}
                       </div>

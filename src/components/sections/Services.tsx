@@ -12,6 +12,12 @@ const SERVICES = [
     desc: "Supporto alle imprese nei percorsi di trasformazione digitale end-to-end, dalla valutazione della maturità digitale alla definizione di roadmap tecnologiche, favorendo l'adozione di soluzioni innovative e sostenibili lungo l'intera catena del valore.",
     image: '/assets/slider_servizi_1.png',
     link: '/trasformazione-digitale.html',
+    areas: [
+      'Strategia e consulenza',
+      'Accesso ai finanziamenti',
+      'Assessment maturità digitale',
+      'Open innovation',
+    ],
   },
   {
     id: '02',
@@ -19,6 +25,12 @@ const SERVICES = [
     desc: "Supporto alle imprese nel rafforzamento della sicurezza informatica e della resilienza digitale, attraverso la valutazione dei rischi cyber, l'analisi della maturità in ambito cybersecurity e la definizione di azioni di remediation in linea con i principali standard e requisiti normativi.",
     image: '/assets/slider_servizi_2.png',
     link: '/cybersecurity.html',
+    areas: [
+      'Formazione cybersecurity',
+      'Assessment sicurezza',
+      'Compliance normativa',
+      'Awareness digitale',
+    ],
   },
   {
     id: '03',
@@ -26,6 +38,12 @@ const SERVICES = [
     desc: "Supporto alle imprese nell'adozione consapevole dell'Intelligenza Artificiale, valutando il livello di data readiness, individuando i casi d'uso a maggiore valore e supportando l'integrazione delle soluzioni AI nei processi aziendali per incrementare efficienza e competitività.",
     image: '/assets/slider_servizi_3.png',
     link: '/intelligenza-artificiale.html',
+    areas: [
+      "Formazione sull'IA",
+      'Progetti applicativi',
+      'Etica e regolamentazione',
+      'Innovazione collaborativa',
+    ],
   },
   // ESG temporaneamente nascosto: servizio non ancora attivo
   // {
@@ -35,13 +53,6 @@ const SERVICES = [
   //   image: '/assets/slider_servizi_4.png',
   // },
 ] as const
-
-const AREAS = [
-  'Strategia e consulenza',
-  'Accesso ai finanziamenti',
-  'Assessment maturità digitale',
-  'Open innovation',
-]
 
 export function Services() {
   const [activeTab, setActiveTab] = useState(0)
@@ -89,7 +100,7 @@ export function Services() {
     >
       <div
         aria-hidden
-        className="absolute top-0 left-0 w-full h-full z-0 bg-cover bg-center"
+        className="absolute top-0 left-0 w-full h-full z-0 bg-cover bg-center rounded-[24px] sm:rounded-none"
         style={{ backgroundImage: "url('/assets/sfondo_servizi.png')" }}
       />
 
@@ -155,36 +166,39 @@ export function Services() {
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
-          <GlareHover
-            className="order-2 sm:order-none z-10 -mx-8 sm:mx-0 -mt-8 sm:mt-0 basis-full xl:basis-[36%] xl:h-full"
-            width="auto"
-            borderRadius="0px"
-            glareOpacity={0.4}
-            glareSize={200}
-          >
-            <div
-              className="w-full h-full rounded-t-none rounded-b-[24px] sm:rounded-[24px] p-8 sm:p-10 text-white flex flex-col items-center text-center sm:items-start sm:text-left bg-cover bg-center shadow-[0_15px_40px_rgba(0,0,0,0.3)] overflow-hidden"
-              style={{ backgroundImage: "url('/assets/sfondo_card_servizi.png')" }}
+          <div className="order-2 sm:order-none z-10 -mx-8 sm:mx-0 -mt-8 sm:mt-0 basis-full xl:basis-[36%] xl:h-full rounded-t-none rounded-b-[24px] sm:rounded-[24px] shadow-[0_15px_40px_rgba(0,0,0,0.3)]">
+            <GlareHover
+              className="w-full h-full"
+              width="100%"
+              height="100%"
+              borderRadius="inherit"
+              glareOpacity={0.4}
+              glareSize={200}
             >
-              <div className="flex items-center gap-3 mb-5 sm:block sm:mb-0">
-                <div className="text-[67px] sm:text-[77px] font-normal leading-none sm:mb-6">
-                  {active.id}
-                </div>
-                <h3 className="text-2xl max-w-[15rem] sm:max-w-none sm:text-[25px] font-semibold sm:mb-5 text-white text-left leading-tight">
-                  {active.title}
-                </h3>
-              </div>
-              <p className="text-base sm:text-lg font-normal leading-snug text-white/90 mb-7">
-                {active.desc}
-              </p>
-              <a
-                href={active.link}
-                className="mt-auto self-center sm:self-start px-5 py-2.5 rounded-[8.6px] bg-white/[0.09] border border-white/40 backdrop-blur-md text-white font-semibold shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-brand-light-blue hover:text-brand-dark-navy hover:-translate-y-0.5 inline-block text-center"
+              <div
+                className="w-full h-full p-8 sm:p-10 text-white flex flex-col items-center text-center sm:items-start sm:text-left bg-cover bg-center"
+                style={{ backgroundImage: "url('/assets/sfondo_card_servizi_v2.png')" }}
               >
-                Scopri di più
-              </a>
-            </div>
-          </GlareHover>
+                <div className="flex items-center gap-3 mb-5 sm:block sm:mb-0">
+                  <div className="text-[67px] sm:text-[77px] font-normal leading-none sm:mb-6">
+                    {active.id}
+                  </div>
+                  <h3 className="text-2xl max-w-[15rem] sm:max-w-none sm:text-[25px] font-semibold sm:mb-5 text-white text-left leading-tight">
+                    {active.title}
+                  </h3>
+                </div>
+                <p className="text-base sm:text-lg font-normal leading-snug text-white/90 mb-7">
+                  {active.desc}
+                </p>
+                <a
+                  href={active.link}
+                  className="mt-auto self-center sm:self-start px-5 py-2.5 rounded-[8.6px] bg-white/[0.09] border border-white/40 backdrop-blur-md text-white font-semibold shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-brand-light-blue hover:text-brand-dark-navy hover:-translate-y-0.5 inline-block text-center"
+                >
+                  Scopri di più
+                </a>
+              </div>
+            </GlareHover>
+          </div>
 
           <div className="order-1 sm:order-none relative -mx-8 sm:mx-0 aspect-[4/3] sm:aspect-auto basis-full xl:basis-[64%] xl:h-full rounded-t-[24px] rounded-b-none sm:rounded-[24px] overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.3)] sm:min-h-[400px] bg-brand-dark-navy/20 flex items-center justify-center">
             <img
@@ -198,7 +212,7 @@ export function Services() {
                 Aree principali:
               </h4>
               <div className="grid grid-cols-2 gap-1.5 sm:flex sm:flex-wrap sm:gap-2.5">
-                {AREAS.map((area) => (
+                {active.areas.map((area) => (
                   <span
                     key={area}
                     className="bg-transparent border border-white/40 px-1.5 py-1.5 sm:px-3 rounded-md text-[9.5px] leading-tight sm:text-sm font-bold text-brand-light-blue whitespace-normal sm:whitespace-nowrap text-center"

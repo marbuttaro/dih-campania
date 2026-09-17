@@ -51,7 +51,7 @@ export function Footer() {
             <img
               src="/assets/logo DIH.svg"
               alt="Campania DIH"
-              className="h-[50px] mb-5 brightness-[10]"
+              className="h-14 sm:h-[50px] mb-5"
             />
             <p className="text-white/60 text-sm mb-4 leading-relaxed">
               Campania Digital Innovation Hub

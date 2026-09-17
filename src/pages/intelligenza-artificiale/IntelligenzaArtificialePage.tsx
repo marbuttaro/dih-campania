@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { ArrowLeft } from 'lucide-react'
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
 
@@ -65,7 +66,14 @@ export function IntelligenzaArtificialePage() {
         <div className="absolute inset-0 bg-white/15 pointer-events-none" />
 
         <div className="container-page relative z-10">
-          
+          <a
+            href="/servizi.html#servizi"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-brand-navy/70 hover:text-brand-navy transition-colors mb-6 reveal-element no-underline"
+          >
+            <ArrowLeft className="size-4" />
+            Torna ai servizi
+          </a>
+
           {/* 1. Hero Section Content: Two Columns */}
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center mb-24">
             {/* Left Column: Text & Metrics */}
@@ -150,15 +158,15 @@ export function IntelligenzaArtificialePage() {
         </div> {/* Chiude container-page */}
 
         {/* 5. Custom Assessment Form Section (Full Width Background) */}
-        <div className="w-full relative bg-cover bg-center py-20 reveal-element" style={{ backgroundImage: "url('/assets/sfondo_form.png')" }}>
+        <div className="w-full relative sm:bg-[url('/assets/sfondo_form.png')] sm:bg-cover sm:bg-center pt-20 pb-0 sm:pb-20 reveal-element">
           <div className="container-page relative z-10">
-            <div className="-mx-8 sm:mx-auto sm:max-w-[920px] rounded-none sm:rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container">
+            <div className="-mx-8 sm:mx-auto sm:max-w-[920px] rounded-none sm:rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container bg-[url('/assets/sfondo_contatti_mobile.png')] bg-cover bg-center sm:bg-none">
               
               {/* Ambient inner glow */}
               <div className="absolute -top-40 -right-40 size-80 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
 
               <div className="relative z-10 text-center mb-8">
-                <h2 className="text-[34px] sm:text-[2.1rem] font-light mb-2 text-white tracking-tight">
+                <h2 className="text-[48px] sm:text-[2.1rem] font-light mb-2 text-white tracking-tight">
                   Richiedi maggiori informazioni
                 </h2>
                 <p className="text-sm sm:text-base text-brand-light-blue/80 font-normal">

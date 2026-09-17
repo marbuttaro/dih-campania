@@ -153,11 +153,11 @@ export function Projects() {
         </div>
 
         {/* Mobile: swipeable carousel with center focus + flip button */}
-        <div className="sm:hidden -mx-8 mb-12">
+        <div className="sm:hidden -mx-8 mb-4">
           <div
             ref={scrollRef}
             onScroll={handleScroll}
-            className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar px-[11%] pb-2"
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar px-[11%] pt-2 pb-12"
             style={{ perspective: 1000 }}
           >
             {PROJECT_CARDS.map((card, index) => {

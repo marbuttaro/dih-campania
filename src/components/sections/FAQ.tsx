@@ -60,13 +60,13 @@ export function FAQ() {
                         src="/assets/icon_plus.svg"
                         alt=""
                         aria-hidden
-                        className="plus size-6 sm:size-7"
+                        className="plus size-7"
                       />
                       <img
                         src="/assets/icon_minus.svg"
                         alt=""
                         aria-hidden
-                        className="minus size-6 sm:size-7"
+                        className="minus size-7"
                       />
                     </span>
                   </AccordionTrigger>

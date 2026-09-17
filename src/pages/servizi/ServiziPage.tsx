@@ -305,14 +305,14 @@ export function ServiziPage() {
                     <button
                       type="button"
                       onClick={() => setStepExpanded((v) => !v)}
-                      className="mt-2 self-end inline-flex items-center gap-2 rounded-full bg-white pl-4 pr-2 py-2 shadow-[0_4px_15px_rgba(0,25,51,0.08)] text-brand-navy font-semibold text-sm"
+                      className="mt-2 self-end inline-flex items-center gap-2 text-brand-navy font-semibold text-sm"
                     >
                       {stepExpanded ? 'Mostra meno' : 'Leggi tutto'}
-                      <span className="flex items-center justify-center size-8 rounded-full bg-[#E3EAEC] shrink-0">
+                      <span className="flex items-center justify-center size-9 rounded-full bg-[#E3EAEC] shrink-0 shadow-[0_4px_15px_rgba(0,25,51,0.08)]">
                         <img
                           src={stepExpanded ? '/assets/icon_minus.svg' : '/assets/icon_plus.svg'}
                           alt=""
-                          className="size-4"
+                          className="size-5"
                         />
                       </span>
                     </button>
@@ -321,7 +321,7 @@ export function ServiziPage() {
               )
             })()}
 
-            <div className="mt-4 flex items-center gap-4">
+            <div className="mt-4 flex items-center justify-center gap-4">
               <button
                 type="button"
                 onClick={() => setActiveStep((s) => Math.max(0, s - 1))}
@@ -517,15 +517,15 @@ export function ServiziPage() {
         </div>
 
         {/* 6. Pronto per iniziare */}
-        <div id="contatti" className="w-full relative bg-cover bg-center py-20 reveal-element scroll-mt-28" style={{ backgroundImage: "url('/assets/sfondo_form.png')" }}>
+        <div id="contatti" className="w-full relative sm:bg-[url('/assets/sfondo_form.png')] sm:bg-cover sm:bg-center pt-20 pb-0 sm:pb-20 reveal-element scroll-mt-28">
           <div className="container-page relative z-10">
-            <div className="-mx-8 sm:mx-auto sm:max-w-[920px] rounded-none sm:rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container">
+            <div className="-mx-8 sm:mx-auto sm:max-w-[920px] rounded-none sm:rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container bg-[url('/assets/sfondo_contatti_mobile.png')] bg-cover bg-center sm:bg-none">
 
               {/* Ambient inner glow */}
               <div className="absolute -top-40 -right-40 size-80 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
 
               <div className="relative z-10 text-center mb-8">
-                <h2 className="text-[34px] sm:text-[2.1rem] font-light mb-2 text-white tracking-tight">
+                <h2 className="text-[48px] sm:text-[2.1rem] font-light mb-2 text-white tracking-tight">
                   Pronto per iniziare?
                 </h2>
                 <p className="text-sm sm:text-base text-brand-light-blue/80 font-normal">
