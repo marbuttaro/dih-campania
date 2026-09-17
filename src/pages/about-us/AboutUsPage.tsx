@@ -109,15 +109,15 @@ export function AboutUsPage() {
                       { src: '/assets/chi-siamo/soci/confindustria-avellino.png', alt: 'Confindustria Avellino' },
                       { src: '/assets/chi-siamo/soci/confindustria-benevento.png', alt: 'Confindustria Benevento' },
                       { src: '/assets/chi-siamo/soci/confindustria-caserta.png', alt: 'Confindustria Caserta' },
-                      { src: '/assets/chi-siamo/soci/confindustria-salerno.png', alt: 'Confindustria Salerno' },
-                      { src: '/assets/chi-siamo/soci/ance.png', alt: 'Ance Campania' },
+                      { src: '/assets/chi-siamo/soci/confindustria-salerno.png', alt: 'Confindustria Salerno', tall: true },
+                      { src: '/assets/chi-siamo/soci/ance.png', alt: 'Ance Campania', nudgeDown: true },
                     ].map((socio) => (
                       <div key={socio.alt} className="flex items-center justify-center bg-white/5 backdrop-blur-md border border-white/30 rounded-xl p-4 min-h-[100px] transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 shadow-sm">
                         {socio.src && (
                           <img
                             src={socio.src}
                             alt={socio.alt}
-                            className="max-h-16 sm:max-h-20 max-w-full object-contain"
+                            className={`${socio.tall ? 'max-h-20 sm:max-h-24' : 'max-h-16 sm:max-h-20'} ${socio.nudgeDown ? 'translate-y-[3px]' : ''} max-w-full object-contain`}
                           />
                         )}
                       </div>
