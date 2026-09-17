@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState, type TouchEvent } from 'react'
-import { ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 function remap(v: number, inLo: number, inHi: number, outLo: number, outHi: number) {
   return outLo + Math.max(0, Math.min(1, (v - inLo) / (inHi - inLo))) * (outHi - outLo)
@@ -99,9 +99,33 @@ export function Community() {
         <div className="container-page w-full flex flex-col items-center relative min-h-[380px] py-16 lg:py-10">
 
           {/* Mobile/tablet: swipeable steps, one screen at a time */}
-          <div className="lg:hidden relative w-full">
+          <div className="lg:hidden relative w-full min-h-[420px] flex items-center">
+            <button
+              type="button"
+              onClick={goPrev}
+              disabled={activeStep === 0}
+              aria-label="Indietro"
+              className={`absolute left-2 top-1/2 -translate-y-1/2 z-40 p-2 transition-colors ${
+                activeStep === 0 ? 'text-brand-navy/25' : 'text-brand-dark-navy'
+              }`}
+            >
+              <ChevronLeft className="size-8" strokeWidth={2} />
+            </button>
+
+            <button
+              type="button"
+              onClick={goNext}
+              disabled={activeStep === MOBILE_STEPS - 1}
+              aria-label="Avanti"
+              className={`absolute right-2 top-1/2 -translate-y-1/2 z-40 p-2 transition-colors ${
+                activeStep === MOBILE_STEPS - 1 ? 'text-brand-navy/25' : 'text-brand-dark-navy'
+              }`}
+            >
+              <ChevronRight className="size-8" strokeWidth={2} />
+            </button>
+
             <div
-              className="overflow-hidden"
+              className="overflow-hidden w-full"
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
@@ -109,56 +133,49 @@ export function Community() {
                 className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
                 style={{ transform: `translateX(-${activeStep * 100}%)` }}
               >
-                <div className="w-full shrink-0 flex items-center justify-center px-4">
-                  <div className="bg-white/95 backdrop-blur-md border border-white/80 rounded-3xl p-7 w-[90%] sm:w-[420px] shadow-[0_15px_45px_rgba(0,0,0,0.1)]">
-                    <p className="text-lg text-brand-dark-navy leading-snug m-0">
+                <div className="w-full shrink-0 flex items-center justify-center px-11">
+                  <div className="shadow-box w-full text-center !p-8">
+                    <p className="text-lg text-brand-navy leading-snug m-0">
                       Offri <strong>soluzioni innovative</strong> e vuoi metterle al servizio delle
                       imprese?
                     </p>
                   </div>
                 </div>
 
-                <div className="w-full shrink-0 flex items-center justify-center px-4">
-                  <div className="bg-white/95 backdrop-blur-md border border-white/80 rounded-3xl p-7 w-[90%] sm:w-[420px] shadow-[0_15px_45px_rgba(0,0,0,0.1)]">
-                    <p className="text-lg text-brand-dark-navy leading-snug m-0">
+                <div className="w-full shrink-0 flex items-center justify-center px-11">
+                  <div className="shadow-box w-full text-center !p-8">
+                    <p className="text-lg text-brand-navy leading-snug m-0">
                       Hai un'<strong>idea, un progetto o una sfida</strong> da affrontare nel mondo
                       digitale?
                     </p>
                   </div>
                 </div>
 
-                <div className="w-full shrink-0 flex items-center justify-center px-4 text-center">
-                  <h2 className="font-light text-[40px] sm:text-5xl text-brand-navy leading-[1.1]">
-                    Entra a far parte della <br />
-                    <span className="text-brand-light-blue font-semibold">Community</span>
+                <div className="w-full shrink-0 flex items-center justify-center px-11 text-center">
+                  <h2 className="font-bold text-[32px] text-brand-dark-navy leading-[1.2]">
+                    Entra a far parte della{' '}
+                    <span className="text-brand-light-blue">
+                      Community
+                      <br />
+                      INNOVA.CO
+                    </span>
                   </h2>
                 </div>
 
-                <div className="w-full shrink-0 flex flex-col items-center px-4 text-center">
-                  <p className="text-lg sm:text-xl text-brand-dark-navy leading-relaxed mb-8 max-w-[800px]">
-                    Un ecosistema dell'innovazione che unisce imprese, università, enti di ricerca e
-                    professionisti che propongono soluzioni, condividono know-how e sviluppano progetti
+                <div className="w-full shrink-0 flex flex-col items-center px-6 text-center gap-8">
+                  <p className="text-lg text-brand-navy leading-relaxed">
+                    Uno spazio aperto dove imprese, professionisti, startup ed enti si incontrano
+                    per crescere insieme, scambiarsi competenze e creare soluzioni reali per
+                    l'innovazione.
                   </p>
-                  <a
-                    href="/innova-co"
-                    className="inline-block bg-brand-ice/30 text-brand-dark-navy px-9 py-3.5 rounded-lg font-semibold border-0 cursor-pointer shadow-[0_4px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)] no-underline"
-                  >
-                    Scopri la nostra community
+                  <a href="/innova-co" className="shadow-box !py-4 !px-8 inline-block no-underline">
+                    <span className="font-bold text-brand-dark-navy underline decoration-brand-light-blue decoration-2 underline-offset-4">
+                      Scopri la nostra community
+                    </span>
                   </a>
                 </div>
               </div>
             </div>
-
-            {activeStep < MOBILE_STEPS - 1 && (
-              <button
-                type="button"
-                onClick={goNext}
-                aria-label="Avanti"
-                className="absolute right-2 top-1/2 -translate-y-1/2 z-40 flex items-center justify-center size-12 rounded-full bg-[#E3EAEC] shadow-neumorphic text-brand-navy transition-transform duration-300 hover:scale-110"
-              >
-                <ChevronRight className="size-6" strokeWidth={2} />
-              </button>
-            )}
           </div>
 
           {/* Desktop: title in flow, cards fly off to the sides, content fades in centered */}
@@ -213,15 +230,7 @@ export function Community() {
             </div>
           </div>
 
-          {/* Step progress indicator */}
-          <div className="lg:hidden mt-6 flex justify-center z-40">
-            <img
-              src={`/assets/barra${Math.max(0, activeStep - 1) + 1}.svg`}
-              alt=""
-              aria-hidden="true"
-              className="w-[90%] max-w-[600px]"
-            />
-          </div>
+          {/* Step progress indicator (desktop only) */}
           <div className="hidden lg:flex lg:absolute lg:bottom-2 lg:left-0 lg:right-0 justify-center lg:pb-5 z-40">
             <img
               src={`/assets/barra${step + 1}.svg`}
