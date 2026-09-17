@@ -150,7 +150,7 @@ export function Community() {
                   </h2>
                 </div>
 
-                <div className="w-full shrink-0 flex flex-col items-center px-3 text-center gap-8">
+                <div className="w-full shrink-0 flex flex-col items-center px-3 pt-10 text-center gap-8">
                   <p className="text-lg text-brand-navy leading-relaxed">
                     Uno spazio aperto dove imprese, professionisti, startup ed enti si incontrano
                     per crescere insieme, scambiarsi competenze e creare soluzioni reali per

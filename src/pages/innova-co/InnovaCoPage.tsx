@@ -266,28 +266,11 @@ export function InnovaCoPage() {
 
         {/* Everything below the hero shares the same light atmosphere background */}
         <div className="relative">
-          <div
-            className="absolute -top-16 sm:-top-20 inset-x-0 bottom-0 bg-white/70 pointer-events-none"
-            style={{
-              backgroundImage: "url('/assets/sfondo.svg')",
-              backgroundSize: 'cover',
-              backgroundAttachment: 'fixed',
-            }}
-          />
-
           {/* 2. Scroll-triggered questions, typed in one at a time.
-                 Same light atmosphere as the rest of the page, but pinned to the
-                 viewport (background-attachment: fixed) so it holds still while
+                 Pinned to the viewport (sticky) so it holds still while
                  the section is stuck, instead of scrolling underneath the text. */}
           <section ref={questionsSectionRef} className="relative z-10 h-[300vh] select-none">
-            <div
-              className="sticky top-0 h-screen flex items-center justify-center overflow-hidden w-full bg-white/20"
-              style={{
-                backgroundImage: "url('/assets/sfondo.svg')",
-                backgroundSize: 'cover',
-                backgroundAttachment: 'fixed',
-              }}
-            >
+            <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden w-full">
               <div className="container-page relative w-full text-center">
                 <div
                   ref={q1WrapRef}
