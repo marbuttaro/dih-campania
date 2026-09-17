@@ -155,7 +155,7 @@ export function InnovaCoPage() {
   const [tab, setTab] = useState<ParticipationTab>('offro')
   const [formOpen, setFormOpen] = useState(false)
   const [solutionFormOpen, setSolutionFormOpen] = useState(false)
-  const [communityOpen, setCommunityOpen] = useState(false)
+  const [showAllMembers, setShowAllMembers] = useState(false)
   const [q1Active, setQ1Active] = useState(false)
   const [q2Active, setQ2Active] = useState(false)
   const [q3Active, setQ3Active] = useState(false)
@@ -405,81 +405,70 @@ export function InnovaCoPage() {
             </div>
           </div>
 
-          {/* 5. La community oggi — accordion */}
+          {/* 5. La community oggi */}
           <div className="pb-20 reveal-element">
-            <button
-              type="button"
-              onClick={() => setCommunityOpen((v) => !v)}
-              aria-expanded={communityOpen}
-              className="flex items-center justify-between w-full pb-4 group"
-            >
-              <h2 className="text-4xl sm:text-5xl font-light text-brand-navy">
-                La community oggi
-              </h2>
-              <img
-                src="/assets/innova-co/arrow.png"
-                alt=""
-                aria-hidden="true"
-                className={`size-10 shrink-0 transition-transform duration-300 ${
-                  communityOpen ? 'rotate-180' : ''
-                }`}
-              />
-            </button>
-            <div className="border-b border-brand-navy/10" />
+            <h2 className="text-4xl sm:text-5xl font-light text-brand-navy pb-4">
+              La community oggi
+            </h2>
+            <div className="border-b border-brand-navy/10 mb-6" />
 
-            <div
-              className={`grid transition-all duration-500 ease-in-out ${
-                communityOpen ? 'grid-rows-[1fr] opacity-100 mt-6' : 'grid-rows-[0fr] opacity-0'
-              }`}
-            >
-              <div className="overflow-hidden">
-                <div className="overflow-x-auto">
-                  <table className="w-full min-w-[720px] border-collapse">
-                    <thead>
-                      <tr className="border-b border-brand-navy/15 text-left">
-                        <th className="pb-4 pr-4 font-semibold text-brand-navy text-sm w-48">Azienda</th>
-                        <th className="pb-4 pr-4 font-semibold text-brand-navy text-sm">Descrizione</th>
-                        <th className="pb-4 font-semibold text-brand-navy text-sm whitespace-nowrap">&nbsp;</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {COMMUNITY_MEMBERS.map((member, i) => (
-                        <tr key={i} className="border-b border-brand-navy/10">
-                          <td className="py-5 pr-8 align-top">
-                            <div className="h-24 w-40 flex items-center justify-center">
-                              {member.logo ? (
-                                <img
-                                  src={member.logo}
-                                  alt={member.name}
-                                  className="max-h-full max-w-full object-contain"
-                                />
-                              ) : (
-                                <span className="text-xs font-semibold text-brand-navy text-center leading-tight">
-                                  {member.name}
-                                </span>
-                              )}
-                            </div>
-                          </td>
-                          <td className="py-5 pr-8 max-w-[320px] text-brand-dark-navy/80 text-xs leading-snug">
-                            {member.description}
-                          </td>
-                          <td className="py-5 text-right align-middle whitespace-nowrap">
-                            <a
-                              href={member.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center whitespace-nowrap bg-[#E3EAEC] text-brand-dark-navy font-semibold text-sm px-5 py-2.5 rounded-lg shadow-[0_4px_10px_rgba(1,49,103,0.18)] hover:shadow-[0_6px_16px_rgba(1,49,103,0.25)] hover:-translate-y-0.5 transition-all duration-300"
-                            >
-                              Visita il sito
-                            </a>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[720px] border-collapse">
+                <thead>
+                  <tr className="border-b border-brand-navy/15 text-left">
+                    <th className="pb-4 pr-4 font-semibold text-brand-navy text-sm w-48">Azienda</th>
+                    <th className="pb-4 pr-4 font-semibold text-brand-navy text-sm">Descrizione</th>
+                    <th className="pb-4 font-semibold text-brand-navy text-sm whitespace-nowrap">&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(showAllMembers ? COMMUNITY_MEMBERS : COMMUNITY_MEMBERS.slice(0, 4)).map((member, i) => (
+                    <tr key={i} className="border-b border-brand-navy/10">
+                      <td className="py-5 pr-8 align-top">
+                        <div className="h-24 w-40 flex items-center justify-center">
+                          {member.logo ? (
+                            <img
+                              src={member.logo}
+                              alt={member.name}
+                              className="max-h-full max-w-full object-contain"
+                            />
+                          ) : (
+                            <span className="text-xs font-semibold text-brand-navy text-center leading-tight">
+                              {member.name}
+                            </span>
+                          )}
+                        </div>
+                      </td>
+                      <td className="py-5 pr-8 max-w-[320px] text-brand-dark-navy/80 text-xs leading-snug">
+                        {member.description}
+                      </td>
+                      <td className="py-5 text-right align-middle whitespace-nowrap">
+                        <a
+                          href={member.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center whitespace-nowrap bg-[#E3EAEC] text-brand-dark-navy font-semibold text-sm px-5 py-2.5 rounded-lg shadow-[0_4px_10px_rgba(1,49,103,0.18)] hover:shadow-[0_6px_16px_rgba(1,49,103,0.25)] hover:-translate-y-0.5 transition-all duration-300"
+                        >
+                          Visita il sito
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
+
+            {COMMUNITY_MEMBERS.length > 4 && (
+              <div className="flex justify-center mt-8">
+                <button
+                  type="button"
+                  onClick={() => setShowAllMembers((v) => !v)}
+                  className="inline-flex items-center bg-[#E3EAEC] text-brand-dark-navy font-semibold text-sm px-6 py-2.5 rounded-lg shadow-[0_4px_10px_rgba(1,49,103,0.18)] hover:shadow-[0_6px_16px_rgba(1,49,103,0.25)] hover:-translate-y-0.5 transition-all duration-300"
+                >
+                  {showAllMembers ? 'Mostra meno' : 'Mostra tutti'}
+                </button>
+              </div>
+            )}
           </div>
 
           {/* 6. Un ecosistema che cresce con te */}
