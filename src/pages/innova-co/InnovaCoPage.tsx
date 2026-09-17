@@ -237,7 +237,7 @@ export function InnovaCoPage() {
       <GlowCursor />
       <Navbar />
 
-      <main className="flex-grow relative bg-brand-surface">
+      <main className="flex-grow relative">
         {/* 1. Hero — full viewport, dark gradient, rounded bottom corners */}
         <section
           className="relative z-10 w-full min-h-dvh flex items-center pt-28 sm:pt-32 pb-16 rounded-b-[40px] sm:rounded-b-[56px] overflow-hidden"

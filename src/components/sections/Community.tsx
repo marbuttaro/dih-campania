@@ -122,7 +122,7 @@ export function Community() {
                 style={{ transform: `translateX(-${activeStep * 100}%)` }}
               >
                 <div className="w-full shrink-0 flex items-center justify-center px-2">
-                  <div className="shadow-box w-full text-center !p-7">
+                  <div className="bg-[#E3EAEC]/50 rounded-[20px] shadow-[0_20px_45px_-15px_rgba(0,25,51,0.2)] w-full text-center p-7">
                     <p className="text-lg text-brand-navy leading-snug m-0">
                       Offri <strong>soluzioni innovative</strong> e vuoi metterle al servizio delle
                       imprese?
@@ -131,7 +131,7 @@ export function Community() {
                 </div>
 
                 <div className="w-full shrink-0 flex items-center justify-center px-2">
-                  <div className="shadow-box w-full text-center !p-7">
+                  <div className="bg-[#E3EAEC]/50 rounded-[20px] shadow-[0_20px_45px_-15px_rgba(0,25,51,0.2)] w-full text-center p-7">
                     <p className="text-lg text-brand-navy leading-snug m-0">
                       Hai un'<strong>idea, un progetto o una sfida</strong> da affrontare nel mondo
                       digitale?
@@ -156,7 +156,7 @@ export function Community() {
                     per crescere insieme, scambiarsi competenze e creare soluzioni reali per
                     l'innovazione.
                   </p>
-                  <a href="/innova-co" className="shadow-box !py-4 !px-8 inline-block no-underline">
+                  <a href="/innova-co" className="bg-[#E3EAEC]/50 rounded-[20px] shadow-[0_20px_45px_-15px_rgba(0,25,51,0.2)] py-4 px-8 inline-block no-underline">
                     <span className="font-bold text-brand-dark-navy">
                       Scopri la nostra community
                     </span>
