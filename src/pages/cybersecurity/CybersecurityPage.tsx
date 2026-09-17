@@ -67,7 +67,7 @@ export function CybersecurityPage() {
 
         <div className="container-page relative z-10">
           <a
-            href="/servizi.html#servizi"
+            href="/servizi#servizi"
             className="inline-flex items-center gap-2 text-sm font-semibold text-brand-navy/70 hover:text-brand-navy transition-colors mb-6 reveal-element no-underline"
           >
             <ArrowLeft className="size-4" />

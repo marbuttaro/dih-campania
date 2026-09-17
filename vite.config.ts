@@ -1,10 +1,39 @@
 import path from 'node:path'
-import { defineConfig } from 'vite'
+import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
+const CLEAN_URL_ROUTES: Record<string, string> = {
+  '/chi-siamo': '/chi-siamo.html',
+  '/cybersecurity': '/cybersecurity.html',
+  '/intelligenza-artificiale': '/intelligenza-artificiale.html',
+  '/trasformazione-digitale': '/trasformazione-digitale.html',
+  '/innova-co': '/innova-co.html',
+  '/progetti': '/progetti.html',
+  '/servizi': '/servizi.html',
+  '/trasparenza': '/trasparenza.html',
+}
+
+function cleanUrlsDev(): Plugin {
+  return {
+    name: 'clean-urls-dev',
+    configureServer(server) {
+      server.middlewares.use((req, _res, next) => {
+        if (req.url) {
+          const [pathname, search] = req.url.split('?')
+          const target = CLEAN_URL_ROUTES[pathname]
+          if (target) {
+            req.url = search ? `${target}?${search}` : target
+          }
+        }
+        next()
+      })
+    },
+  }
+}
+
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), cleanUrlsDev()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

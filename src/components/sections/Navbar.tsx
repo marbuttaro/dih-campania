@@ -13,14 +13,14 @@ import {
 import { cn } from '@/lib/utils'
 
 const NAV_LINKS = [
-  { href: '/servizi.html', label: 'Servizi' },
-  { href: '/progetti.html', label: 'Progetti' },
+  { href: '/servizi', label: 'Servizi' },
+  { href: '/progetti', label: 'Progetti' },
   // Bandi, Newsletter e Infosfera temporaneamente nascosti su richiesta
   // { href: '#bandi', label: 'Bandi' },
   // { href: '#newsletter', label: 'Newsletter' },
   // { href: '#infosfera', label: 'Infosfera' },
-  { href: '/innova-co.html', label: 'Innova.Co' },
-  { href: '/chi-siamo.html', label: 'Chi Siamo' },
+  { href: '/innova-co', label: 'Innova.Co' },
+  { href: '/chi-siamo', label: 'Chi Siamo' },
 ] as const
 
 export function Navbar() {
@@ -83,7 +83,7 @@ export function Navbar() {
             asChild
             className="bg-[#8EBEF7] text-[#013167] hover:bg-white hover:translate-y-0 px-6 rounded-xl font-bold"
           >
-            <a href="/servizi.html#contatti">Contattaci</a>
+            <a href="/servizi#contatti">Contattaci</a>
           </Button>
         </div>
 
@@ -124,7 +124,7 @@ export function Navbar() {
                 asChild
                 className="mt-6 w-full bg-[#8EBEF7] text-[#013167] hover:bg-white font-bold"
               >
-                <a href="/servizi.html#contatti">Contattaci</a>
+                <a href="/servizi#contatti">Contattaci</a>
               </Button>
             </SheetClose>
           </SheetContent>

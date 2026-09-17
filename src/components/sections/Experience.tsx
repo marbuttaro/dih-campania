@@ -28,7 +28,7 @@ export function Experience() {
             PA ed è coadiuvata da specialisti di settore ed innovation manager.
           </p>
           <a
-            href="/chi-siamo.html"
+            href="/chi-siamo"
             className="block w-fit mx-auto sm:inline-block sm:mx-0 whitespace-nowrap bg-white/80 border border-brand-navy/10 sm:bg-brand-ice/30 sm:border-0 text-brand-dark-navy px-5 sm:px-9 py-3.5 rounded-lg font-semibold cursor-pointer shadow-[0_4px_15px_rgba(0,0,0,0.1)] sm:shadow-[0_4px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)] no-underline"
           >
             Scopri il nostro team

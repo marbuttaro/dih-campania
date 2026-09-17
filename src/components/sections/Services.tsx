@@ -11,7 +11,7 @@ const SERVICES = [
     title: 'Trasformazione Digitale',
     desc: "Supporto alle imprese nei percorsi di trasformazione digitale end-to-end, dalla valutazione della maturità digitale alla definizione di roadmap tecnologiche, favorendo l'adozione di soluzioni innovative e sostenibili lungo l'intera catena del valore.",
     image: '/assets/slider_servizi_1.png',
-    link: '/trasformazione-digitale.html',
+    link: '/trasformazione-digitale',
     areas: [
       'Strategia e consulenza',
       'Accesso ai finanziamenti',
@@ -24,7 +24,7 @@ const SERVICES = [
     title: 'Cybersecurity',
     desc: "Supporto alle imprese nel rafforzamento della sicurezza informatica e della resilienza digitale, attraverso la valutazione dei rischi cyber, l'analisi della maturità in ambito cybersecurity e la definizione di azioni di remediation in linea con i principali standard e requisiti normativi.",
     image: '/assets/slider_servizi_2.png',
-    link: '/cybersecurity.html',
+    link: '/cybersecurity',
     areas: [
       'Formazione cybersecurity',
       'Assessment sicurezza',
@@ -37,7 +37,7 @@ const SERVICES = [
     title: 'Intelligenza Artificiale',
     desc: "Supporto alle imprese nell'adozione consapevole dell'Intelligenza Artificiale, valutando il livello di data readiness, individuando i casi d'uso a maggiore valore e supportando l'integrazione delle soluzioni AI nei processi aziendali per incrementare efficienza e competitività.",
     image: '/assets/slider_servizi_3.png',
-    link: '/intelligenza-artificiale.html',
+    link: '/intelligenza-artificiale',
     areas: [
       "Formazione sull'IA",
       'Progetti applicativi',

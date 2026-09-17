@@ -7,7 +7,7 @@ const NAV_COLUMNS = [
       { href: '#servizi', label: 'Servizi' },
       { href: '#progetti', label: 'Progetti' },
       { href: '#bandi', label: 'Bandi' },
-      { href: '/chi-siamo.html', label: 'Chi Siamo' },
+      { href: '/chi-siamo', label: 'Chi Siamo' },
     ],
   },
   {
@@ -23,7 +23,7 @@ const NAV_COLUMNS = [
     links: [
       { href: '#contatti', label: 'Contattaci' },
       { href: '#', label: 'DIH Campania' },
-      { href: '/trasparenza.html', label: 'Trasparenza' },
+      { href: '/trasparenza', label: 'Trasparenza' },
     ],
   },
 ]
