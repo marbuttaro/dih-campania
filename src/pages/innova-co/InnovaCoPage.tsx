@@ -355,10 +355,10 @@ export function InnovaCoPage() {
                  scroll-linked opacity/transform approach as the questions above. */}
           <section
             ref={stackSectionRef}
-            className="relative z-10 w-full h-[280vh] select-none"
+            className="relative z-10 w-full h-[220vh] select-none"
           >
             <div
-              className="sticky top-0 h-screen flex flex-col items-center justify-center pb-16 overflow-hidden w-full"
+              className="sticky top-0 h-screen flex flex-col items-center justify-start lg:justify-center pt-20 sm:pt-24 lg:pt-0 overflow-hidden w-full"
               style={{
                 background: 'linear-gradient(120deg, #001933 0%, #013a6b 35%, #0e568b 65%, #3a82b8 100%)',
               }}
