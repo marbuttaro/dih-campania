@@ -286,7 +286,7 @@ export function InnovaCoPage() {
       <main className="flex-grow relative">
         {/* 1. Hero — full viewport, dark gradient, rounded bottom corners */}
         <section
-          className="relative z-10 w-full min-h-[62vh] sm:min-h-[68vh] flex items-center pt-24 sm:pt-28 pb-10 sm:pb-12 rounded-b-[40px] sm:rounded-b-[56px] overflow-hidden"
+          className="relative z-10 w-full min-h-dvh sm:min-h-[68vh] flex items-center pt-24 sm:pt-28 pb-10 sm:pb-12 rounded-b-[40px] sm:rounded-b-[56px] overflow-hidden"
           style={{
             background:
               'linear-gradient(120deg, #001933 0%, #013a6b 35%, #0e568b 65%, #3a82b8 100%)',
@@ -321,28 +321,28 @@ export function InnovaCoPage() {
               <div className="container-page relative w-full text-center">
                 <div
                   ref={q1WrapRef}
-                  className="lg:absolute inset-0 flex items-center justify-center px-4"
+                  className="absolute inset-0 flex items-center justify-center px-4"
                   style={{ opacity: 1, transform: 'translateY(0px)' }}
                 >
-                  <h2 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-snug text-balance">
+                  <h2 className="text-3xl sm:text-4xl lg:text-[3rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-tight text-balance">
                     Cerchi una soluzione o hai un'idea o un progetto da affrontare nel mondo digitale?
                   </h2>
                 </div>
                 <div
                   ref={q2WrapRef}
-                  className="lg:absolute inset-0 flex items-center justify-center px-4"
+                  className="absolute inset-0 flex items-center justify-center px-4"
                   style={{ opacity: 0, transform: 'translateY(26px)' }}
                 >
-                  <h2 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-snug">
+                  <h2 className="text-3xl sm:text-4xl lg:text-[3rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-tight">
                     Offri soluzioni innovative e vuoi metterle al servizio delle imprese?
                   </h2>
                 </div>
                 <div
                   ref={q3WrapRef}
-                  className="lg:absolute inset-0 flex items-center justify-center px-4"
+                  className="absolute inset-0 flex items-center justify-center px-4"
                   style={{ opacity: 0, transform: 'translateY(26px)' }}
                 >
-                  <h2 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-snug">
+                  <h2 className="text-3xl sm:text-4xl lg:text-[3rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-tight">
                     Allora sei nel posto giusto.
                   </h2>
                 </div>
@@ -396,19 +396,19 @@ export function InnovaCoPage() {
             </h2>
 
             <div className="max-w-[900px] mx-auto">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4">
                 <button
                   type="button"
                   onClick={() => setTab('offro')}
-                  className={`flex flex-col items-center justify-center gap-2 rounded-2xl py-4 px-6 transition-all duration-300 ${
+                  className={`flex flex-col items-center justify-center gap-1.5 sm:gap-2 rounded-xl sm:rounded-2xl py-3 px-3 sm:py-4 sm:px-6 transition-all duration-300 ${
                     tab === 'offro'
                       ? 'bg-[#E3EAEC] shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.55)]'
                       : 'bg-[#E3EAEC]/85 shadow-[-3px_-3px_10px_rgba(255,255,255,0.5),4px_4px_12px_rgba(164,177,188,0.25)] hover:bg-[#E3EAEC]'
                   }`}
                 >
-                  <img src="/assets/innova-co/servizio.svg" alt="" aria-hidden="true" className="size-7" />
+                  <img src="/assets/innova-co/servizio.svg" alt="" aria-hidden="true" className="size-5 sm:size-7" />
                   <span
-                    className={`font-semibold text-lg ${
+                    className={`font-semibold text-sm sm:text-lg text-center leading-tight ${
                       tab === 'offro' ? 'text-brand-navy' : 'text-brand-navy/50'
                     }`}
                   >
@@ -419,15 +419,15 @@ export function InnovaCoPage() {
                 <button
                   type="button"
                   onClick={() => setTab('cerco')}
-                  className={`flex flex-col items-center justify-center gap-2 rounded-2xl py-4 px-6 transition-all duration-300 ${
+                  className={`flex flex-col items-center justify-center gap-1.5 sm:gap-2 rounded-xl sm:rounded-2xl py-3 px-3 sm:py-4 sm:px-6 transition-all duration-300 ${
                     tab === 'cerco'
                       ? 'bg-[#E3EAEC] shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.55)]'
                       : 'bg-[#E3EAEC]/85 shadow-[-3px_-3px_10px_rgba(255,255,255,0.5),4px_4px_12px_rgba(164,177,188,0.25)] hover:bg-[#E3EAEC]'
                   }`}
                 >
-                  <img src="/assets/innova-co/discovery.svg" alt="" aria-hidden="true" className="size-7" />
+                  <img src="/assets/innova-co/discovery.svg" alt="" aria-hidden="true" className="size-5 sm:size-7" />
                   <span
-                    className={`font-semibold text-lg ${
+                    className={`font-semibold text-sm sm:text-lg text-center leading-tight ${
                       tab === 'cerco' ? 'text-brand-navy' : 'text-brand-navy/50'
                     }`}
                   >
@@ -465,7 +465,7 @@ export function InnovaCoPage() {
               <table className="w-full min-w-[720px] border-collapse">
                 <thead>
                   <tr className="border-b border-brand-navy/15 text-left">
-                    <th className="pb-4 pr-4 font-semibold text-brand-navy text-sm w-48">Azienda</th>
+                    <th className="pb-4 pr-4 font-semibold text-brand-navy text-sm w-32">Azienda</th>
                     <th className="pb-4 pr-4 font-semibold text-brand-navy text-sm">Descrizione</th>
                     <th className="pb-4 font-semibold text-brand-navy text-sm whitespace-nowrap">&nbsp;</th>
                   </tr>
@@ -474,7 +474,7 @@ export function InnovaCoPage() {
                   {(showAllMembers ? COMMUNITY_MEMBERS : COMMUNITY_MEMBERS.slice(0, 3)).map((member, i) => (
                     <tr key={i} className="border-b border-brand-navy/10">
                       <td className="py-5 pr-8 align-top">
-                        <div className="h-24 w-40 flex items-center justify-center">
+                        <div className="h-16 w-28 flex items-center justify-center">
                           {member.logo ? (
                             <img
                               src={member.logo}
@@ -488,7 +488,7 @@ export function InnovaCoPage() {
                           )}
                         </div>
                       </td>
-                      <td className="py-5 pr-8 max-w-[320px] text-brand-dark-navy/80 text-xs leading-snug">
+                      <td className="py-5 pr-8 max-w-[440px] text-brand-dark-navy/80 text-xs leading-snug">
                         {member.description}
                       </td>
                       <td className="py-5 text-right align-middle whitespace-nowrap">

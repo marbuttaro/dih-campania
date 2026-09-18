@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { ArrowLeft, ArrowRight, Check, ChevronDown, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -232,6 +232,11 @@ export function PartnerFormModal({
   const [step, setStep] = useState<Step>(0)
   const [form, setForm] = useState<FormState>(INITIAL_STATE)
   const [submitted, setSubmitted] = useState(false)
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    contentRef.current?.scrollTo({ top: 0 })
+  }, [step])
 
   const set = <K extends keyof FormState>(key: K, value: FormState[K]) =>
     setForm((f) => ({ ...f, [key]: value }))
@@ -278,7 +283,8 @@ export function PartnerFormModal({
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-white/40 backdrop-blur-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
         <Dialog.Content
-          className="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] max-w-[820px] max-h-[88vh] overflow-y-auto rounded-[32px] sm:rounded-[40px] bg-[#EDF1F3] p-8 sm:p-14 shadow-[0_30px_60px_rgba(0,25,51,0.18),0_10px_25px_rgba(0,25,51,0.08)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
+          ref={contentRef}
+          className="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] max-w-[820px] max-h-[88vh] overflow-y-auto overflow-x-hidden rounded-[32px] sm:rounded-[40px] bg-[#EDF1F3] p-8 sm:p-14 shadow-[0_30px_60px_rgba(0,25,51,0.18),0_10px_25px_rgba(0,25,51,0.08)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
         >
           <Dialog.Close className="absolute right-6 top-6 sm:right-8 sm:top-8 inline-flex items-center justify-center size-9 rounded-xl bg-[#E7EDF0] text-brand-navy/60 hover:text-brand-navy shadow-[-2px_-2px_6px_rgba(255,255,255,0.8),2px_2px_6px_rgba(164,177,188,0.45)] transition-colors">
             <X className="size-4" />
@@ -367,7 +373,7 @@ export function PartnerFormModal({
                       <h3 className="text-sm font-semibold text-brand-navy mb-4">Sede Legale</h3>
                       <div className="space-y-4">
                         <Field label="Via" value={form.sedeLegaleVia} onChange={(v) => set('sedeLegaleVia', v)} />
-                        <div className="grid grid-cols-[2fr_1fr_1fr] gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr] gap-4">
                           <Field label="Città" value={form.sedeLegaleCitta} onChange={(v) => set('sedeLegaleCitta', v)} />
                           <Field label="Provincia" value={form.sedeLegaleProvincia} onChange={(v) => set('sedeLegaleProvincia', v)} />
                           <Field label="CAP" value={form.sedeLegaleCap} onChange={(v) => set('sedeLegaleCap', v)} />
@@ -379,7 +385,7 @@ export function PartnerFormModal({
                       <h3 className="text-sm font-semibold text-brand-navy mb-4">Sede Operativa</h3>
                       <div className="space-y-4">
                         <Field label="Via" value={form.sedeOperativaVia} onChange={(v) => set('sedeOperativaVia', v)} />
-                        <div className="grid grid-cols-[2fr_1fr_1fr] gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr] gap-4">
                           <Field label="Città" value={form.sedeOperativaCitta} onChange={(v) => set('sedeOperativaCitta', v)} />
                           <Field label="Provincia" value={form.sedeOperativaProvincia} onChange={(v) => set('sedeOperativaProvincia', v)} />
                           <Field label="CAP" value={form.sedeOperativaCap} onChange={(v) => set('sedeOperativaCap', v)} />
