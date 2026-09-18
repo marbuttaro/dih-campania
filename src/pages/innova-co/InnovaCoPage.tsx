@@ -292,8 +292,8 @@ export function InnovaCoPage() {
               'linear-gradient(120deg, #001933 0%, #013a6b 35%, #0e568b 65%, #3a82b8 100%)',
           }}
         >
-          <div className="container-page relative z-10 grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-8 lg:gap-16 items-center reveal-element">
-            <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] leading-[1.25] tracking-tight">
+          <div className="container-page relative z-10 grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-8 lg:gap-16 items-center text-center lg:text-left reveal-element">
+            <h1 className="text-4xl lg:text-[2.75rem] leading-[1.25] tracking-tight">
               <span className="font-light text-white/90">Benvenuto in Innova.CO:</span>
               <br />
               <span className="font-bold text-brand-light-blue">
