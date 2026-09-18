@@ -48,7 +48,7 @@ export function FAQ() {
           </div>
 
           <div className="flex-[1.5] w-full">
-            <Accordion type="single" collapsible defaultValue="item-1">
+            <Accordion type="single" collapsible>
               {FAQ_ITEMS.map((item, index) => (
                 <AccordionItem key={index} value={`item-${index}`}>
                   <AccordionTrigger>
