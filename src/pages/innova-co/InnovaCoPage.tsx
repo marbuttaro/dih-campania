@@ -159,6 +159,7 @@ export function InnovaCoPage() {
   const q3WrapRef = useRef<HTMLDivElement>(null)
 
   const stackSectionRef = useRef<HTMLDivElement>(null)
+  const stackStickyRef = useRef<HTMLDivElement>(null)
   const stackCardRefs = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
@@ -244,7 +245,8 @@ export function InnovaCoPage() {
     const handleScroll = () => {
       if (!stackSectionRef.current) return
       const rect = stackSectionRef.current.getBoundingClientRect()
-      const totalHeight = rect.height - window.innerHeight
+      const stickyHeight = stackStickyRef.current?.offsetHeight ?? window.innerHeight
+      const totalHeight = rect.height - stickyHeight
       if (totalHeight <= 0) return
       const p = Math.max(0, Math.min(1, -rect.top / totalHeight))
 
@@ -355,10 +357,11 @@ export function InnovaCoPage() {
                  scroll-linked opacity/transform approach as the questions above. */}
           <section
             ref={stackSectionRef}
-            className="relative z-10 w-full h-[220vh] select-none"
+            className="relative z-10 w-full h-[190vh] sm:h-[195vh] lg:h-[220vh] select-none"
           >
             <div
-              className="sticky top-0 h-screen flex flex-col items-center justify-start lg:justify-center pt-20 sm:pt-24 lg:pt-0 overflow-hidden w-full"
+              ref={stackStickyRef}
+              className="sticky top-0 h-[68vh] sm:h-[72vh] lg:h-screen flex flex-col items-center justify-start lg:justify-center pt-14 sm:pt-16 lg:pt-0 overflow-hidden w-full"
               style={{
                 background: 'linear-gradient(120deg, #001933 0%, #013a6b 35%, #0e568b 65%, #3a82b8 100%)',
               }}
