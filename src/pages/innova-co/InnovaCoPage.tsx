@@ -302,7 +302,7 @@ export function InnovaCoPage() {
                 Campania DIH
               </span>
             </h1>
-            <p className="text-sm sm:text-base text-white/75 leading-relaxed">
+            <p className="text-sm sm:text-base text-white/75 leading-relaxed mt-3 lg:mt-6">
               Il cuore pulsante di Campania DIH: uno spazio dinamico dove imprenditori,
               professionisti, startupper, ricercatori si incontrano per crescere insieme,
               condividere know-how e progettare soluzioni concrete per l'innovazione.
@@ -316,15 +316,15 @@ export function InnovaCoPage() {
                  Pinned to the viewport (sticky) so it holds still while
                  the section is stuck, instead of scrolling underneath the text. */}
           <section ref={questionsSectionRef} className="relative z-10 h-[300vh] select-none">
-            <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden w-full">
-              <GatewayFlow />
+            <div className="sticky top-0 h-screen flex items-center justify-center pb-14 overflow-hidden w-full">
+              <GatewayFlow centerYOffset={28} />
               <div className="container-page relative w-full text-center">
                 <div
                   ref={q1WrapRef}
                   className="absolute inset-0 flex items-center justify-center px-4"
                   style={{ opacity: 1, transform: 'translateY(0px)' }}
                 >
-                  <h2 className="text-3xl sm:text-4xl lg:text-[3rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-tight text-balance">
+                  <h2 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-tight text-balance">
                     Cerchi una soluzione o hai un'idea o un progetto da affrontare nel mondo digitale?
                   </h2>
                 </div>
@@ -333,7 +333,7 @@ export function InnovaCoPage() {
                   className="absolute inset-0 flex items-center justify-center px-4"
                   style={{ opacity: 0, transform: 'translateY(26px)' }}
                 >
-                  <h2 className="text-3xl sm:text-4xl lg:text-[3rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-tight">
+                  <h2 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-tight">
                     Offri soluzioni innovative e vuoi metterle al servizio delle imprese?
                   </h2>
                 </div>
@@ -342,7 +342,7 @@ export function InnovaCoPage() {
                   className="absolute inset-0 flex items-center justify-center px-4"
                   style={{ opacity: 0, transform: 'translateY(26px)' }}
                 >
-                  <h2 className="text-3xl sm:text-4xl lg:text-[3rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-tight">
+                  <h2 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-tight">
                     Allora sei nel posto giusto.
                   </h2>
                 </div>
@@ -358,7 +358,7 @@ export function InnovaCoPage() {
             className="relative z-10 w-full h-[280vh] select-none"
           >
             <div
-              className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden w-full"
+              className="sticky top-0 h-screen flex flex-col items-center justify-center pb-16 overflow-hidden w-full"
               style={{
                 background: 'linear-gradient(120deg, #001933 0%, #013a6b 35%, #0e568b 65%, #3a82b8 100%)',
               }}
@@ -551,7 +551,7 @@ export function InnovaCoPage() {
           </div>
 
           {/* 7. Hai domande */}
-          <div className="pb-24 reveal-element">
+          <div className="pb-10 reveal-element">
             <div className="shadow-box grid grid-cols-1 lg:grid-cols-2 gap-8 items-center !p-10 sm:!p-14">
               <h2 className="text-4xl sm:text-5xl font-light text-brand-navy">Hai domande?</h2>
               <div>

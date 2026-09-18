@@ -29,7 +29,7 @@ interface Dot {
  * loosely inspired by 21st.dev's "Gateway Flow", recolored to the site's
  * navy/light-blue palette and kept low-opacity so overlaid text stays legible.
  */
-export function GatewayFlow() {
+export function GatewayFlow({ centerYOffset = 0 }: { centerYOffset?: number }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
   useEffect(() => {
@@ -68,7 +68,7 @@ export function GatewayFlow() {
     const animate = () => {
       ctx.clearRect(0, 0, width, height)
       const cx = width / 2
-      const cy = height / 2
+      const cy = height / 2 - centerYOffset
       const maxR = Math.hypot(width, height) / 2
       const endR = maxR * 0.12 // beams stop short of dead-center so the text stays clear
 
@@ -140,7 +140,7 @@ export function GatewayFlow() {
       cancelAnimationFrame(animationFrameId)
       window.removeEventListener('resize', handleResize)
     }
-  }, [])
+  }, [centerYOffset])
 
   return (
     <canvas
