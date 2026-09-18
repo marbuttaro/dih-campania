@@ -3,7 +3,7 @@ import { GlowCursor } from '@/components/effects/GlowCursor'
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
 import { ContactPrefooter } from '@/components/sections/ContactPrefooter'
-import { TextType } from '@/components/effects/TextType'
+import { GatewayFlow } from '@/components/effects/GatewayFlow'
 import { PartnerFormModal } from './PartnerFormModal'
 import { SolutionRequestModal } from './SolutionRequestModal'
 
@@ -152,17 +152,11 @@ export function InnovaCoPage() {
   const [formOpen, setFormOpen] = useState(false)
   const [solutionFormOpen, setSolutionFormOpen] = useState(false)
   const [showAllMembers, setShowAllMembers] = useState(false)
-  const [q1Active, setQ1Active] = useState(false)
-  const [q2Active, setQ2Active] = useState(false)
-  const [q3Active, setQ3Active] = useState(false)
 
   const questionsSectionRef = useRef<HTMLDivElement>(null)
   const q1WrapRef = useRef<HTMLDivElement>(null)
   const q2WrapRef = useRef<HTMLDivElement>(null)
   const q3WrapRef = useRef<HTMLDivElement>(null)
-  const q1ActiveRef = useRef(false)
-  const q2ActiveRef = useRef(false)
-  const q3ActiveRef = useRef(false)
 
   const stackSectionRef = useRef<HTMLDivElement>(null)
   const stackCardRefs = useRef<(HTMLDivElement | null)[]>([])
@@ -197,30 +191,31 @@ export function InnovaCoPage() {
       if (totalHeight <= 0) return
       const p = Math.max(0, Math.min(1, -rect.top / totalHeight))
 
-      // Wide solid windows give the typing animation time to finish before each
-      // question starts fading out, even when the user scrolls quickly. A small
-      // gap (both at opacity 0) is kept between questions so the outgoing and
-      // incoming text never overlap on screen at the same time.
+      // The first question is already in place the moment the section is
+      // reached (no rise/fade-in). The next two rise in from below with a
+      // quick fade as their window starts, hold in place, then fade out (no
+      // movement) before the next one enters. A small gap (both at opacity 0)
+      // is kept between questions so outgoing and incoming text never overlap
+      // on screen at the same time.
+      const RISE = 26
+      const q1Enter = 1
       const q1Opacity = 1 - remap(p, 0.3, 0.36, 0, 1)
-      const q2Opacity =
-        remap(p, 0.38, 0.44, 0, 1) * (1 - remap(p, 0.6, 0.66, 0, 1))
-      const q3Opacity = remap(p, 0.68, 0.74, 0, 1)
+      const q2Enter = remap(p, 0.38, 0.44, 0, 1)
+      const q2Opacity = q2Enter * (1 - remap(p, 0.6, 0.66, 0, 1))
+      const q3Enter = remap(p, 0.68, 0.74, 0, 1)
+      const q3Opacity = q3Enter
 
-      if (q1WrapRef.current) q1WrapRef.current.style.opacity = String(q1Opacity)
-      if (q2WrapRef.current) q2WrapRef.current.style.opacity = String(q2Opacity)
-      if (q3WrapRef.current) q3WrapRef.current.style.opacity = String(q3Opacity)
-
-      if (p > 0.01 && !q1ActiveRef.current) {
-        q1ActiveRef.current = true
-        setQ1Active(true)
+      if (q1WrapRef.current) {
+        q1WrapRef.current.style.opacity = String(q1Opacity)
+        q1WrapRef.current.style.transform = `translateY(${RISE * (1 - q1Enter)}px)`
       }
-      if (p > 0.38 && !q2ActiveRef.current) {
-        q2ActiveRef.current = true
-        setQ2Active(true)
+      if (q2WrapRef.current) {
+        q2WrapRef.current.style.opacity = String(q2Opacity)
+        q2WrapRef.current.style.transform = `translateY(${RISE * (1 - q2Enter)}px)`
       }
-      if (p > 0.68 && !q3ActiveRef.current) {
-        q3ActiveRef.current = true
-        setQ3Active(true)
+      if (q3WrapRef.current) {
+        q3WrapRef.current.style.opacity = String(q3Opacity)
+        q3WrapRef.current.style.transform = `translateY(${RISE * (1 - q3Enter)}px)`
       }
     }
 
@@ -291,7 +286,7 @@ export function InnovaCoPage() {
       <main className="flex-grow relative">
         {/* 1. Hero — full viewport, dark gradient, rounded bottom corners */}
         <section
-          className="relative z-10 w-full min-h-dvh flex items-center pt-28 sm:pt-32 pb-16 rounded-b-[40px] sm:rounded-b-[56px] overflow-hidden"
+          className="relative z-10 w-full min-h-[62vh] sm:min-h-[68vh] flex items-center pt-24 sm:pt-28 pb-10 sm:pb-12 rounded-b-[40px] sm:rounded-b-[56px] overflow-hidden"
           style={{
             background:
               'linear-gradient(120deg, #001933 0%, #013a6b 35%, #0e568b 65%, #3a82b8 100%)',
@@ -322,54 +317,33 @@ export function InnovaCoPage() {
                  the section is stuck, instead of scrolling underneath the text. */}
           <section ref={questionsSectionRef} className="relative z-10 h-[300vh] select-none">
             <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden w-full">
-              <div
-                className="absolute top-10 right-0 sm:right-10 size-80 sm:size-96 bg-brand-light-blue/25 rounded-full blur-[100px] pointer-events-none"
-                aria-hidden="true"
-              />
-              <div
-                className="absolute bottom-10 left-0 sm:left-10 size-72 bg-brand-light-blue/15 rounded-full blur-[100px] pointer-events-none"
-                aria-hidden="true"
-              />
+              <GatewayFlow />
               <div className="container-page relative w-full text-center">
                 <div
                   ref={q1WrapRef}
                   className="lg:absolute inset-0 flex items-center justify-center px-4"
+                  style={{ opacity: 1, transform: 'translateY(0px)' }}
                 >
                   <h2 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-snug text-balance">
-                    <TextType
-                      text="Cerchi una soluzione o hai un'idea o un progetto da affrontare nel mondo digitale?"
-                      typingSpeed={32}
-                      cursorCharacter="|"
-                      active={q1Active}
-                    />
+                    Cerchi una soluzione o hai un'idea o un progetto da affrontare nel mondo digitale?
                   </h2>
                 </div>
                 <div
                   ref={q2WrapRef}
                   className="lg:absolute inset-0 flex items-center justify-center px-4"
-                  style={{ opacity: 0 }}
+                  style={{ opacity: 0, transform: 'translateY(26px)' }}
                 >
                   <h2 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-snug">
-                    <TextType
-                      text="Offri soluzioni innovative e vuoi metterle al servizio delle imprese?"
-                      typingSpeed={32}
-                      cursorCharacter="|"
-                      active={q2Active}
-                    />
+                    Offri soluzioni innovative e vuoi metterle al servizio delle imprese?
                   </h2>
                 </div>
                 <div
                   ref={q3WrapRef}
                   className="lg:absolute inset-0 flex items-center justify-center px-4"
-                  style={{ opacity: 0 }}
+                  style={{ opacity: 0, transform: 'translateY(26px)' }}
                 >
                   <h2 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-snug">
-                    <TextType
-                      text="Allora sei nel posto giusto."
-                      typingSpeed={32}
-                      cursorCharacter="|"
-                      active={q3Active}
-                    />
+                    Allora sei nel posto giusto.
                   </h2>
                 </div>
               </div>
@@ -381,7 +355,7 @@ export function InnovaCoPage() {
                  scroll-linked opacity/transform approach as the questions above. */}
           <section
             ref={stackSectionRef}
-            className="relative z-10 w-full h-[380vh] select-none"
+            className="relative z-10 w-full h-[280vh] select-none"
           >
             <div
               className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden w-full"
@@ -390,12 +364,12 @@ export function InnovaCoPage() {
               }}
             >
               <h2
-                className="text-3xl sm:text-4xl lg:text-[2.75rem] font-light text-white/90 px-6 text-center mb-10 sm:mb-14"
+                className="text-4xl sm:text-5xl lg:text-[3.25rem] font-light text-white/90 px-6 text-center mb-10 sm:mb-14"
               >
                 Cosa troverai in Innova.CO
               </h2>
 
-              <div className="relative w-[88%] sm:w-full max-w-[520px] h-[220px] sm:h-[260px]">
+              <div className="relative w-[90%] sm:w-full max-w-[600px] h-[260px] sm:h-[300px]">
                 {STACK_CARDS.map((card, i) => (
                   <div
                     key={card.label}
@@ -405,7 +379,7 @@ export function InnovaCoPage() {
                     className="absolute inset-0 rounded-xl bg-white/5 backdrop-blur-md border border-white/30 shadow-[0_15px_45px_rgba(0,0,0,0.25)] flex items-center justify-center p-8 text-center"
                     style={{ opacity: 0, transform: 'translateY(60px) scale(1)', zIndex: i, willChange: 'transform, opacity' }}
                   >
-                    <p className="text-2xl sm:text-3xl font-light text-white">
+                    <p className="text-3xl sm:text-4xl font-light text-white">
                       {card.label}
                     </p>
                   </div>
