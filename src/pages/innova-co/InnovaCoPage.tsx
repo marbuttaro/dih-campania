@@ -35,53 +35,17 @@ const PARTICIPATION_CONTENT: Record<
 
 const COMMUNITY_MEMBERS = [
   {
-    name: 'Infosfera srls',
-    logo: '/assets/innova-co/partner-logos/infosfera.png',
+    name: 'CC START 4.0',
+    logo: '/assets/innova-co/partner-logos/ccstart.png',
     description:
-      'Infosfera S.r.l.s. è una PMI innovativa che sviluppa piattaforme software e soluzioni di intelligenza artificiale per trasformare dati, documenti e processi in conoscenza condivisa. Aiutiamo imprese ed enti a valorizzare il proprio patrimonio informativo e a prendere decisioni più consapevoli.',
-    url: 'https://memoria.infosfera.win/',
+      "Centro di Competenza nazionale ad alta specializzazione START4.0 del Ministero delle Imprese e del Made in Italy sulla sicurezza e l'ottimizzazione delle infrastrutture strategiche.",
+    url: 'https://www.start4-0.it',
   },
   {
-    name: "TIME VISION SOCIETA' COOPERATIVA A R.L.",
-    logo: '/assets/innova-co/partner-logos/timevision.png',
-    description:
-      "Time Vision è un'Agenzia per il Lavoro e Ente di Formazione che supporta le imprese nell'innovazione. Offriamo soluzioni su misura di recruiting, upskilling e consulenza HR per trasformare l'evoluzione delle competenze e delle risorse umane in crescita aziendale.",
-    url: 'https://www.timevision.it',
-  },
-  {
-    name: 'WARIAN SRL',
-    logo: '/assets/innova-co/partner-logos/warian.png',
-    description:
-      'Warian SRL supporta imprese e PA nei percorsi di trasformazione digitale attraverso soluzioni di cloud, connettività, cybersecurity e infrastrutture ICT evolute, contribuendo alla Community INNOVA.CO con competenze tecniche e capacità progettuale.',
-    url: 'https://www.warian.net',
-  },
-  {
-    name: 'Strategic Management Partners srl',
-    logo: '/assets/innova-co/partner-logos/strategic-management-partners.png',
-    description:
-      'Società di Management Consulting, a matrice Italiana, fondata nel 2000 e specializzata in attività di Digital Transformation e Governance.',
-    url: 'https://www.strategicmp.it',
-  },
-  {
-    name: 'SMARTFAB SOLUTIONS S.R.L.',
-    logo: '/assets/innova-co/partner-logos/smartfab.svg',
-    description:
-      'Smartfab Solutions è il partner per la Smart Factory. Offriamo consulenza, implementazione e sviluppo di soluzioni Industry 4.0 e 5.0, integrando macchine, sistemi e dati per trasformare le informazioni in valore e rendere i processi più efficienti e sostenibili.',
-    url: 'https://www.smartfabsolutions.it/',
-  },
-  {
-    name: 'VJLAB SRL',
-    logo: '/assets/innova-co/partner-logos/vjlab.png',
-    description:
-      'VJLAB S.r.l. è una società multidisciplinare che offre consulenza strategica, compliance, certificazioni ISO, cybersecurity, informatica forense, sviluppo software, marketing, formazione e innovazione, supportando imprese ed enti nella crescita, digitalizzazione e gestione dei processi aziendali.',
-    url: 'https://vjdigital.it',
-  },
-  {
-    name: 'Flugantia Lab s.r.l.',
-    logo: null,
-    description:
-      "Forniamo tecnologie innovative per il monitoraggio e la movimentazione ottimale dei contenitori industriali fissi o scarrabili. Sfruttiamo l'Intelligenza Artificiale, l'IoT e il cloud per creare un gemello digitale dell'intera raccolta rifiuti e supportare le decisioni operative in tempo reale.",
-    url: 'https://www.flugantia.it/',
+    name: 'Data Felix SRL',
+    logo: '/assets/innova-co/partner-logos/datafelix.png',
+    description: 'Regional Data Center della Campania.',
+    url: 'https://www.datafelix.it/',
   },
   {
     name: 'ENJOIP Srl',
@@ -91,31 +55,11 @@ const COMMUNITY_MEMBERS = [
     url: 'https://enjoip.it/',
   },
   {
-    name: 'Qualitas Spa',
+    name: 'Flugantia Lab s.r.l.',
     logo: null,
     description:
-      'Qualitas Spa è una software house consolidata nel settore industriale che offre soluzioni per ottimizzare i processi produttivi, la produzione, la pianificazione e la logistica migliorandone i risultati grazie ai software proprietari: la suite NET@PRO e il software Movisped.',
-    url: 'https://www.qualitas.it/',
-  },
-  {
-    name: 'Data Felix SRL',
-    logo: '/assets/innova-co/partner-logos/datafelix.png',
-    description: 'Regional Data Center della Campania.',
-    url: 'https://www.datafelix.it/',
-  },
-  {
-    name: 'CC START 4.0',
-    logo: '/assets/innova-co/partner-logos/ccstart.png',
-    description:
-      "Centro di Competenza nazionale ad alta specializzazione START4.0 del Ministero delle Imprese e del Made in Italy sulla sicurezza e l'ottimizzazione delle infrastrutture strategiche.",
-    url: 'https://www.start4-0.it',
-  },
-  {
-    name: 'MEDITERRANEO LAB 4.0 SRL',
-    logo: '/assets/innova-co/partner-logos/mediterraneo-lab.png',
-    description:
-      'PMI innovativa specializzata in Digital Transformation, Data Governance, AI e Blockchain. Supporta PMI, PA e organismi formativi nello sviluppo di strategie data-driven, competenze digitali e soluzioni innovative per la Twin Transition, in linea con le priorità europee.',
-    url: 'https://www.mediterraneolab.it',
+      "Forniamo tecnologie innovative per il monitoraggio e la movimentazione ottimale dei contenitori industriali fissi o scarrabili. Sfruttiamo l'Intelligenza Artificiale, l'IoT e il cloud per creare un gemello digitale dell'intera raccolta rifiuti e supportare le decisioni operative in tempo reale.",
+    url: 'https://www.flugantia.it/',
   },
   {
     name: 'FORM RETAIL S.R.L.',
@@ -123,6 +67,13 @@ const COMMUNITY_MEMBERS = [
     description:
       'Form Retail s.r.l. realizza attività di formazione e consulenza, e servizi di politiche attive del lavoro. Quattro i suoi principi ispiratori: attenzione alle esigenze del cliente, ricerca e sperimentazione continua, implementazione di strumenti innovativi, attenzione ai temi della sostenibilità.',
     url: 'https://www.formretail.it',
+  },
+  {
+    name: 'Infosfera srls',
+    logo: '/assets/innova-co/partner-logos/infosfera.png',
+    description:
+      'Infosfera S.r.l.s. è una PMI innovativa che sviluppa piattaforme software e soluzioni di intelligenza artificiale per trasformare dati, documenti e processi in conoscenza condivisa. Aiutiamo imprese ed enti a valorizzare il proprio patrimonio informativo e a prendere decisioni più consapevoli.',
+    url: 'https://memoria.infosfera.win/',
   },
   {
     name: 'Kynetic S.r.l.',
@@ -139,11 +90,60 @@ const COMMUNITY_MEMBERS = [
     url: 'https://www.logogramma.com/',
   },
   {
+    name: 'MEDITERRANEO LAB 4.0 SRL',
+    logo: '/assets/innova-co/partner-logos/mediterraneo-lab.png',
+    description:
+      'PMI innovativa specializzata in Digital Transformation, Data Governance, AI e Blockchain. Supporta PMI, PA e organismi formativi nello sviluppo di strategie data-driven, competenze digitali e soluzioni innovative per la Twin Transition, in linea con le priorità europee.',
+    url: 'https://www.mediterraneolab.it',
+  },
+  {
     name: 'Progressive Systems Srl',
     logo: '/assets/innova-co/partner-logos/progressive-systems.png',
     description:
       "Progressive Systems è specializzata nella progettazione e gestione di architetture digitali avanzate e nell'orchestrazione di grandi moli di dati (Big Data). Gestiamo ecosistemi di dati su larga scala fornendo soluzioni pronte all'uso per il settore privato, la ricerca e la Pubblica Amministrazione.",
     url: 'https://progressivesystems.it/',
+  },
+  {
+    name: 'Qualitas Spa',
+    logo: null,
+    description:
+      'Qualitas Spa è una software house consolidata nel settore industriale che offre soluzioni per ottimizzare i processi produttivi, la produzione, la pianificazione e la logistica migliorandone i risultati grazie ai software proprietari: la suite NET@PRO e il software Movisped.',
+    url: 'https://www.qualitas.it/',
+  },
+  {
+    name: 'SMARTFAB SOLUTIONS S.R.L.',
+    logo: '/assets/innova-co/partner-logos/smartfab.svg',
+    description:
+      'Smartfab Solutions è il partner per la Smart Factory. Offriamo consulenza, implementazione e sviluppo di soluzioni Industry 4.0 e 5.0, integrando macchine, sistemi e dati per trasformare le informazioni in valore e rendere i processi più efficienti e sostenibili.',
+    url: 'https://www.smartfabsolutions.it/',
+  },
+  {
+    name: 'Strategic Management Partners srl',
+    logo: '/assets/innova-co/partner-logos/strategic-management-partners.png',
+    description:
+      'Società di Management Consulting, a matrice Italiana, fondata nel 2000 e specializzata in attività di Digital Transformation e Governance.',
+    url: 'https://www.strategicmp.it',
+  },
+  {
+    name: "TIME VISION SOCIETA' COOPERATIVA A R.L.",
+    logo: '/assets/innova-co/partner-logos/timevision.png',
+    description:
+      "Time Vision è un'Agenzia per il Lavoro e Ente di Formazione che supporta le imprese nell'innovazione. Offriamo soluzioni su misura di recruiting, upskilling e consulenza HR per trasformare l'evoluzione delle competenze e delle risorse umane in crescita aziendale.",
+    url: 'https://www.timevision.it',
+  },
+  {
+    name: 'VJLAB SRL',
+    logo: '/assets/innova-co/partner-logos/vjlab.png',
+    description:
+      'VJLAB S.r.l. è una società multidisciplinare che offre consulenza strategica, compliance, certificazioni ISO, cybersecurity, informatica forense, sviluppo software, marketing, formazione e innovazione, supportando imprese ed enti nella crescita, digitalizzazione e gestione dei processi aziendali.',
+    url: 'https://vjdigital.it',
+  },
+  {
+    name: 'WARIAN SRL',
+    logo: '/assets/innova-co/partner-logos/warian.png',
+    description:
+      'Warian SRL supporta imprese e PA nei percorsi di trasformazione digitale attraverso soluzioni di cloud, connettività, cybersecurity e infrastrutture ICT evolute, contribuendo alla Community INNOVA.CO con competenze tecniche e capacità progettuale.',
+    url: 'https://www.warian.net',
   },
 ]
 
@@ -554,7 +554,7 @@ export function InnovaCoPage() {
           </div>
 
           {/* 7. Hai domande */}
-          <div className="pb-10 reveal-element">
+          <div className="pb-20 lg:pb-28 reveal-element">
             <div className="shadow-box grid grid-cols-1 lg:grid-cols-2 gap-8 items-center !p-10 sm:!p-14">
               <h2 className="text-4xl sm:text-5xl font-light text-brand-navy">Hai domande?</h2>
               <div>

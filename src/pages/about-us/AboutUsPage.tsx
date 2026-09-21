@@ -236,7 +236,7 @@ export function AboutUsPage() {
           </div>
 
           {/* 8. La struttura organizzativa Section */}
-          <div className="w-full max-w-[1200px] mx-auto reveal-element reveal-delay-200">
+          <div className="w-full max-w-[1200px] mx-auto mb-20 lg:mb-28 reveal-element reveal-delay-200">
             <h2 className="text-3xl sm:text-[36px] font-semibold text-brand-navy mb-10 tracking-tight">
               La struttura organizzativa
             </h2>

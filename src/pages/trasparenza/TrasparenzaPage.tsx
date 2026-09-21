@@ -73,7 +73,7 @@ export function TrasparenzaPage() {
             Trasparenza
           </h1>
 
-          <div className="max-w-2xl flex flex-col gap-8">
+          <div className="max-w-2xl flex flex-col gap-8 mb-20 lg:mb-28">
             <p className="text-sm sm:text-base text-brand-dark-navy/85 leading-relaxed">
               Nella Sezione trasparenza sono pubblicati i seguenti documenti:
             </p>

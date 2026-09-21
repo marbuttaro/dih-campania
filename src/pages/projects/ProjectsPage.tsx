@@ -205,7 +205,7 @@ export function ProjectsPage() {
             ))}
           </div>
 
-          <div className="reveal-element">
+          <div className="mb-20 lg:mb-28 reveal-element">
             <h2 className="text-xl sm:text-2xl font-light text-brand-navy mb-6 tracking-tight">
               Altre collaborazioni o partecipazioni
             </h2>
