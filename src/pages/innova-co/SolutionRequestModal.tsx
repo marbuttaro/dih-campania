@@ -66,7 +66,7 @@ const INITIAL_STATE: FormState = {
   consensoPrivacy: false,
 }
 
-function Field({
+export function Field({
   label,
   value,
   onChange,
@@ -121,7 +121,7 @@ function Field({
   )
 }
 
-function Checkbox({
+export function Checkbox({
   checked,
   onChange,
   children,
@@ -155,7 +155,7 @@ function Checkbox({
   )
 }
 
-function NavButton({
+export function NavButton({
   direction,
   children,
   onClick,

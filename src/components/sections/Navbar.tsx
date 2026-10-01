@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
 import { ContactModal } from './ContactModal'
+import { NewsletterTab } from './NewsletterTab'
 
 const SERVIZI_SUBLINKS = [
   { href: '/trasformazione-digitale', label: 'Trasformazione Digitale' },
@@ -206,6 +207,7 @@ export function Navbar() {
     </nav>
 
     <ContactModal open={contactModalOpen} onClose={() => setContactModalOpen(false)} />
+    <NewsletterTab />
     </>
   )
 }

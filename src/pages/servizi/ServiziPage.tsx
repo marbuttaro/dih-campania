@@ -99,18 +99,11 @@ const JOURNEY_STEPS = [
     objective: "far crescere l'impresa all'interno di un ecosistema innovativo, aperto e competitivo.",
   },
   {
-    title: '6. Open Innovation',
+    title: '6. Start up & Open Innovation',
     intro:
-      'Sviluppo e gestione di iniziative di Open Innovation, mentoring, matchmaking tra imprese, PMI innovative, startup o spinoff innovativi, centri di ricerca e grandi player industriali.',
+      'Sviluppo e gestione di percorsi di accompagnamento, mentoring e valorizzazione delle iniziative imprenditoriali. Promozione e organizzazione di iniziative di Open Innovation e matchmaking tra startup, PMI innovative, spinoff, centri di ricerca e grandi player industriali per favorire il technology transfer.',
     bullets: [],
-    objective: '',
-  },
-  {
-    title: '7. Start up & Acceleratore',
-    intro:
-      'Supporto allo sviluppo della nuova imprenditoria e delle idee innovative, attraverso percorsi di accompagnamento e valorizzazione delle iniziative imprenditoriali, sviluppo e gestione di programmi di accelerazione per le startup, con particolare attenzione al contesto regionale.',
-    bullets: [],
-    objective: '',
+    objective: 'supportare la nascita e la scalabilità di nuove idee imprenditoriali, accelerando al contempo',
   },
 ]
 

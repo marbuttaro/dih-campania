@@ -45,6 +45,20 @@ const SERVICES = [
       'Innovazione collaborativa',
     ],
   },
+  {
+    id: '04',
+    title: "Credito d'imposta",
+    desc: "Il Campania DIH, iscritto all'Albo MIMIT dei certificatori, offre servizi di certificazione dei crediti d'imposta per attività di ricerca e sviluppo e innovazione tecnologica, supportando le imprese nell'accesso agli incentivi previsti dalla normativa vigente.",
+    image: '/assets/slider_servizi_credito.jpg',
+    // Nessuna pagina dedicata per ora: senza link non compare "Scopri di più"
+    link: null,
+    areas: [
+      'Certificazione dei crediti',
+      'Ricerca e sviluppo',
+      'Incentivi e agevolazioni',
+      'Innovazione tecnologica',
+    ],
+  },
   // ESG temporaneamente nascosto: servizio non ancora attivo
   // {
   //   id: '04',
@@ -190,12 +204,14 @@ export function Services() {
                 <p className="text-base sm:text-lg font-normal leading-snug text-white/90 mb-7">
                   {active.desc}
                 </p>
-                <a
-                  href={active.link}
-                  className="mt-auto self-center sm:self-start px-5 py-2.5 rounded-[8.6px] bg-white/[0.09] border border-white/40 backdrop-blur-md text-white font-semibold shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-brand-light-blue hover:text-brand-dark-navy hover:-translate-y-0.5 inline-block text-center"
-                >
-                  Scopri di più
-                </a>
+                {active.link && (
+                  <a
+                    href={active.link}
+                    className="mt-auto self-center sm:self-start px-5 py-2.5 rounded-[8.6px] bg-white/[0.09] border border-white/40 backdrop-blur-md text-white font-semibold shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-brand-light-blue hover:text-brand-dark-navy hover:-translate-y-0.5 inline-block text-center"
+                  >
+                    Scopri di più
+                  </a>
+                )}
               </div>
             </GlareHover>
           </div>
