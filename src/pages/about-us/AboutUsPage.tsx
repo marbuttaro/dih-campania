@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
 import { ContactPrefooter } from '@/components/sections/ContactPrefooter'
+import { ApproachSlider } from './ApproachSlider'
+import { Timeline } from './Timeline'
 
 
 
@@ -46,7 +48,8 @@ export function AboutUsPage() {
         <div className="container-page relative z-10">
 
           {/* 2. Hero Section */}
-          <div className="text-center max-w-[840px] mx-auto mt-16 mb-32 reveal-element">
+          {/* Fills the first viewport so the next section starts below the fold */}
+          <div className="min-h-[calc(100svh-8rem)] sm:min-h-[calc(100svh-9rem)] flex flex-col justify-center text-center max-w-[840px] mx-auto pb-24 mb-16 reveal-element">
             <h1 className="text-4xl sm:text-5xl lg:text-[4rem] font-light text-brand-dark-navy leading-[1.2] mb-6 tracking-tight">
               Costruiamo insieme<br />
               il Futuro Digitale.
@@ -56,35 +59,31 @@ export function AboutUsPage() {
             </p>
           </div>
 
-          {/* 3. La nostra mission Card */}
-          <div className="w-full max-w-[1200px] mx-auto mb-24 reveal-element reveal-delay-100">
-            <div
-              className="rounded-[20px] p-9 shadow-neumorphic"
-              style={{ backgroundColor: '#E3EAEC' }}
-            >
-              <h2 className="text-[34px] sm:text-[40px] lg:text-[48px] font-light text-[#013167] mb-5 leading-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                La nostra mission
-              </h2>
-              <p className="text-base sm:text-lg text-brand-dark-navy/85 font-normal leading-relaxed">
-                Il Campania DIH riunisce una rete di soggetti operanti a supporto della doppia transizione (digitale e sostenibile) delle imprese e della PA. Tra le tech di maggior interesse: cybersecurity, AI e HPC. Attraverso la propria attività analizza le esigenze (raccogliendo dati) che emergono dal campo favorendo attività di innovazione, R&D e sviluppo delle competenze necessarie a sostenere la twin transition.
-              </p>
-            </div>
-          </div>
-
-          {/* 4. Approccio Data-Driven Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-8 lg:gap-16 w-full max-w-[1200px] mx-auto mb-24 items-start reveal-element">
+          {/* 3. Intro Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-8 lg:gap-16 w-full max-w-[1200px] mx-auto mb-24 items-center reveal-element reveal-delay-100">
             <div>
               <h2 className="text-[34px] sm:text-[40px] lg:text-[48px] font-light text-[#013167] leading-[1.15]" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                Approccio Data-<br />Driven e<br />Partnership
+                Un punto di riferimento per l’innovazione in Campania
               </h2>
             </div>
-            <div>
-              <p className="text-base sm:text-lg text-brand-dark-navy/85 leading-relaxed font-normal">
-                Campania DIH adotta un approccio data-driven per favorire la creazione di massa critica a livello nazionale ed europeo. Promuove progettualità condivise, partnership strategiche e occasioni di incontro tra gli attori dell’innovazione a supporto della twin transition.
+            <div className="space-y-6 text-base sm:text-lg text-[#013167] leading-relaxed font-normal [&_strong]:font-semibold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              <p>
+                Dal 2017, il Campania Digital Innovation Hub – Rete Confindustria <strong>supporta imprese e Pubblica Amministrazione nella trasformazione digitale e sostenibile</strong>, connettendo esigenze territoriali, competenze e tecnologie.
+              </p>
+              <p>
+                Opera in ambiti quali digitalizzazione, Cybersecurity, Intelligenza Artificiale, High Performance Computing e sostenibilità, trasformando i bisogni in azioni concrete.
               </p>
             </div>
           </div>
 
+        </div>
+
+        {/* 4. Approccio integrato Slider */}
+        <ApproachSlider />
+
+        <div className="container-page relative z-10">
+          {/* 4b. Timeline */}
+          <Timeline />
         </div>
 
         {/* 5. Socio & Partner Tecnologici Full Width Section */}
