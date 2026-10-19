@@ -117,8 +117,10 @@ function lengthAtY(y: number) {
 export function Timeline() {
   const sectionRef = useRef<HTMLElement>(null)
   const trackRef = useRef<SVGSVGElement>(null)
+  const fillPathRef = useRef<SVGPathElement>(null)
   const mobileLineRef = useRef<HTMLDivElement>(null)
-  const [drawn, setDrawn] = useState({ length: 0, mobile: 0, activeCount: 0 })
+  const mobileFillRef = useRef<HTMLDivElement>(null)
+  const [activeCount, setActiveCount] = useState(0)
 
   useEffect(() => {
     let frame = 0
@@ -129,17 +131,32 @@ export function Timeline() {
       // The line's tip follows a marker slightly above the middle of the viewport
       const marker = window.innerHeight * 0.55
       const track = trackRef.current?.getBoundingClientRect()
-      const mobileLine = mobileLineRef.current?.getBoundingClientRect()
       const circles = Array.from(section.querySelectorAll<HTMLElement>('[data-year-circle]'))
         .filter((el) => el.offsetParent !== null)
-      setDrawn({
-        length: track && marker > track.top ? lengthAtY(Math.min(marker - track.top, TRACK_H)) : 0,
-        mobile: mobileLine ? Math.min(Math.max(marker - mobileLine.top, 0), mobileLine.height) : 0,
-        activeCount: circles.filter((el) => {
-          const rect = el.getBoundingClientRect()
-          return rect.top + rect.height / 2 <= marker
-        }).length,
-      })
+      // The mobile line runs from the first year circle to the last one, not past it
+      const mobileLineEl = mobileLineRef.current
+      if (mobileLineEl && mobileLineEl.offsetParent !== null && circles.length > 1) {
+        const span = circles[circles.length - 1].getBoundingClientRect().top - circles[0].getBoundingClientRect().top
+        mobileLineEl.style.height = `${span}px`
+      }
+      const mobileLine = mobileLineEl?.getBoundingClientRect()
+      // The line is written straight to the DOM on every frame, so it tracks the scroll
+      // without re-rendering React; only the circle highlight goes through state
+      const fillPath = fillPathRef.current
+      if (fillPath && track) {
+        const length = marker > track.top ? lengthAtY(Math.min(marker - track.top, TRACK_H)) : 0
+        fillPath.style.strokeDashoffset = String(TOTAL_LENGTH - length)
+        fillPath.style.opacity = length > 0 ? '1' : '0'
+      }
+      const mobileFill = mobileFillRef.current
+      if (mobileFill && mobileLine && mobileLine.height > 0) {
+        const progress = Math.min(Math.max((marker - mobileLine.top) / mobileLine.height, 0), 1)
+        mobileFill.style.transform = `scaleY(${progress})`
+      }
+      setActiveCount(circles.filter((el) => {
+        const rect = el.getBoundingClientRect()
+        return rect.top + rect.height / 2 <= marker
+      }).length)
     }
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(update)
@@ -178,15 +195,15 @@ export function Timeline() {
           </defs>
           <path d={TRACK_PATH} fill="none" stroke="#8EBEF7" strokeOpacity={0.4} strokeWidth={STROKE} strokeLinecap="round" className="drop-shadow-[0_0_8px_rgba(142,190,247,0.45)]" />
           <path
+            ref={fillPathRef}
             d={TRACK_PATH}
             fill="none"
             stroke="url(#timeline-fill)"
             strokeWidth={STROKE}
             strokeLinecap="round"
             strokeDasharray={TOTAL_LENGTH}
-            strokeDashoffset={TOTAL_LENGTH - drawn.length}
-            className="transition-[stroke-dashoffset] duration-150 ease-out drop-shadow-[0_0_10px_rgba(142,190,247,0.7)]"
-            style={{ opacity: drawn.length > 0 ? 1 : 0 }}
+            className="drop-shadow-[0_0_10px_rgba(142,190,247,0.7)]"
+            style={{ strokeDashoffset: TOTAL_LENGTH, opacity: 0 }}
           />
         </svg>
 
@@ -221,8 +238,8 @@ export function Timeline() {
                 className={cn(
                   'absolute top-1/2 -translate-x-1/2 -translate-y-1/2 size-[180px] text-[38px] transition-[box-shadow,color] duration-500',
                   yearCircle,
-                  index < drawn.activeCount && 'text-[#013167] shadow-[-6px_-6px_14px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.8),0_0_0_3px_rgba(142,190,247,0.9)]',
-                  index >= drawn.activeCount && 'text-[#013167]/55',
+                  index < activeCount && 'text-[#013167] shadow-[-6px_-6px_14px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.8),0_0_0_3px_rgba(142,190,247,0.9)]',
+                  index >= activeCount && 'text-[#013167]/55',
                 )}
                 style={{ left: `calc(50% + ${rowShift(index)}px)` }}
               >
@@ -245,8 +262,8 @@ export function Timeline() {
 
       {/* Mobile/tablet: vertical timeline */}
       <div className="lg:hidden relative pl-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-        <div ref={mobileLineRef} className="absolute left-[44px] top-4 bottom-4 w-[4px] rounded-full bg-[#8EBEF7]/35 overflow-hidden">
-          <div className="w-full rounded-full bg-gradient-to-b from-[#8EBEF7] to-[#2F7BE0] transition-[height] duration-150 ease-out" style={{ height: drawn.mobile }} />
+        <div ref={mobileLineRef} className="absolute left-[44px] top-[38px] w-[4px] rounded-full bg-[#8EBEF7]/35 overflow-hidden">
+          <div ref={mobileFillRef} className="h-full w-full rounded-full bg-gradient-to-b from-[#8EBEF7] to-[#2F7BE0] origin-top will-change-transform" style={{ transform: 'scaleY(0)' }} />
         </div>
         <ol className="relative space-y-12">
           {TIMELINE.map((item, index) => (
@@ -256,17 +273,15 @@ export function Timeline() {
                 className={cn(
                   'relative shrink-0 size-[76px] text-[17px] transition-[box-shadow,color] duration-500',
                   yearCircle,
-                  index < drawn.activeCount && 'shadow-[-6px_-6px_14px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.8),0_0_0_3px_rgba(142,190,247,0.9)]',
-                  index >= drawn.activeCount && 'text-[#013167]/55',
+                  index < activeCount && 'shadow-[-6px_-6px_14px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.8),0_0_0_3px_rgba(142,190,247,0.9)]',
+                  index >= activeCount && 'text-[#013167]/55',
                 )}
               >
                 {item.year}
               </div>
               <div className="pt-2">
                 <h3 className="text-xl font-medium text-[#013167] leading-tight mb-3 [&_br]:hidden">{item.title}</h3>
-                <div className={cn(pillInner, 'rounded-[24px] px-6 py-5')}>
-                  <p className={cn(bodyText, 'text-[14px]')}>{item.body}</p>
-                </div>
+                <p className={cn(bodyText, 'text-[15px]')}>{item.body}</p>
               </div>
             </li>
           ))}
