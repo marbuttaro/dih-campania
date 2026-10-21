@@ -170,12 +170,17 @@
 }
 
 .animate-ticker {
-  animation: ticker 40s linear infinite;
+  animation: ticker 60s linear infinite;
+}
+
+/* Lets visitors stop the headlines to click one */
+.animate-ticker:hover {
+  animation-play-state: paused;
 }
 
 @media (max-width: 640px) {
   .animate-ticker {
-    animation-duration: 20s;
+    animation-duration: 30s;
   }
 }
 

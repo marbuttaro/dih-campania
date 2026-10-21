@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import { GlowCursor } from '@/components/effects/GlowCursor'
 import { About } from '@/components/sections/About'
 import { Community } from '@/components/sections/Community'
@@ -13,6 +15,24 @@ import { Projects } from '@/components/sections/Projects'
 import { Services } from '@/components/sections/Services'
 
 function App() {
+  // Pages without their own contact form link here with #contatti (e.g. the news pages)
+  useEffect(() => {
+    if (window.location.hash !== '#contatti') return
+
+    const scrollToContact = () => {
+      document.getElementById('contatti')?.scrollIntoView({ block: 'start' })
+    }
+
+    scrollToContact()
+    window.addEventListener('load', scrollToContact)
+    const timeout = window.setTimeout(scrollToContact, 600)
+
+    return () => {
+      window.removeEventListener('load', scrollToContact)
+      window.clearTimeout(timeout)
+    }
+  }, [])
+
   return (
     <div className="flex flex-col min-h-screen">
       <GlowCursor />

@@ -2,15 +2,30 @@ import { motion } from 'framer-motion'
 
 import { BlurText } from '@/components/effects/BlurText'
 import { ParticleNetwork } from '@/components/effects/ParticleNetwork'
+import { NEWS, newsUrl } from '@/pages/news/newsData'
 
-const TICKER_ITEMS = [
-  'Investimenti Sostenibili 4.0: 448 milioni per le PMI del Mezzogiorno',
-  'Sviluppo competenze specialistiche: dal 10 settembre nuovi incentivi per le PMI del Mezzogiorno',
-]
+const TICKER_SEPARATOR = '\u00a0\u00a0\u00a0\u00a0|\u00a0\u00a0\u00a0\u00a0'
+
+function TickerItems({ hidden = false }: { hidden?: boolean }) {
+  return (
+    <span className="flex shrink-0" aria-hidden={hidden || undefined}>
+      {NEWS.map((item) => (
+        <span key={item.slug} className="flex shrink-0">
+          <a
+            href={newsUrl(item.slug)}
+            tabIndex={hidden ? -1 : undefined}
+            className="hover:underline underline-offset-4 decoration-white/70"
+          >
+            {item.title}
+          </a>
+          <span className="text-white/60">{TICKER_SEPARATOR}</span>
+        </span>
+      ))}
+    </span>
+  )
+}
 
 export function Hero() {
-  const tickerText = TICKER_ITEMS.join('    |    ') + '    |    '
-
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-24 sm:pt-28 bg-[linear-gradient(135deg,#001933_0%,#002D5C_50%,#001933_100%)]">
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -62,9 +77,9 @@ export function Hero() {
       </div>
 
       <div className="absolute bottom-0 left-0 w-full overflow-hidden whitespace-nowrap border-t border-white/20 bg-[rgba(100,130,160,0.4)] backdrop-blur-md py-3 text-white text-sm">
-        <div className="flex animate-ticker">
-          <span>{tickerText}</span>
-          <span>{tickerText}</span>
+        <div className="flex w-max animate-ticker">
+          <TickerItems />
+          <TickerItems hidden />
         </div>
       </div>
     </section>

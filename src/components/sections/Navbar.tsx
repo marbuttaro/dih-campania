@@ -33,7 +33,12 @@ const NAV_LINKS = [
 
 function scrollToContact(e: MouseEvent<HTMLAnchorElement>) {
   const target = document.getElementById('contatti')
-  if (!target) return
+  // Pages without a contact section (e.g. the news pages) use the one on the home page
+  if (!target) {
+    e.preventDefault()
+    window.location.assign('/#contatti')
+    return
+  }
 
   e.preventDefault()
   const offset = 112 // matches scroll-mt-28 used on the contact sections

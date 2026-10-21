@@ -1,15 +1,54 @@
-import { useRef } from 'react'
+import { useRef, type ComponentType, type SVGProps } from 'react'
+import { cn } from '@/lib/utils'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Scissors, Factory, Wheat, HeartPulse, Truck, Palette, type LucideIcon } from 'lucide-react'
+import {
+  Anchor,
+  Building2,
+  Car,
+  Cpu,
+  Dna,
+  Factory,
+  HeartPulse,
+  Landmark,
+  Leaf,
+  Rocket,
+  Sprout,
+  Truck,
+} from 'lucide-react'
 
-const SECTORS: { label: string; icon: LucideIcon }[] = [
-  { label: 'Moda, artigianato e design', icon: Scissors },
-  { label: 'Industria/manifattura & mobilità', icon: Factory },
-  { label: 'Agro-alimentare e filiere localizzate', icon: Wheat },
-  { label: 'Salute, servizi alla persona', icon: HeartPulse },
-  { label: 'Trasporto, logistica e infrastrutture smart', icon: Truck },
-  { label: 'Turismo, cultura e creatività', icon: Palette },
+// Lucide has no clothes hanger, so draw one in the same outline style
+function Hanger({ strokeWidth = 2, ...props }: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M10 5.5a2 2 0 1 1 2 2v1.5" />
+      <path d="M12 9 3.2 15.6a.8.8 0 0 0 .5 1.4h16.6a.8.8 0 0 0 .5-1.4L12 9" />
+    </svg>
+  )
+}
+
+const SECTORS: { label: string; icon: ComponentType<SVGProps<SVGSVGElement>>; iconClassName?: string }[] = [
+  { label: 'Agro-alimentare, agritech e filiere localizzate', icon: Sprout },
+  { label: 'Moda, Made in Italy e design', icon: Hanger },
+  { label: 'Trasporto e logistica', icon: Truck },
+  { label: 'Infrastrutture smart', icon: Building2 },
+  { label: 'Turismo, patrimonio culturale e industrie creative', icon: Landmark },
+  { label: 'Aerospazio e difesa', icon: Rocket },
+  { label: 'Biotecnologie', icon: Dna, iconClassName: '-rotate-45' },
+  { label: 'Healthcare', icon: HeartPulse },
+  { label: 'Industria manifatturiera', icon: Factory },
+  { label: 'Energia, ambiente e costruzioni sostenibili', icon: Leaf },
+  { label: 'Automotive', icon: Car },
+  { label: 'Economia del mare', icon: Anchor },
+  { label: 'Tecnologie ICT ed emergenti', icon: Cpu },
 ]
+
+// Cards rise and fade in as they scroll into view, staggered across each row of four
+const cardReveal = (index: number) => ({
+  initial: { opacity: 0, y: 40 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '0px 0px -60px 0px' },
+  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const, delay: (index % 4) * 0.08 },
+})
 
 export function About() {
   const ref = useRef<HTMLElement | null>(null)
@@ -76,35 +115,47 @@ export function About() {
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
-          <div className="basis-full lg:basis-[40%]">
-            <h3 className="text-2xl lg:text-[1.6rem] text-brand-dark-navy mb-4 font-semibold">
-              In quali settori opera?
-            </h3>
-            <p className="max-w-[320px] text-neutral-600">
-              Il Campania DIH opera trasversalmente su settori chiave del territorio e
-              dell'economia:
-            </p>
-          </div>
-          <div className="basis-full lg:basis-[60%] grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {SECTORS.map((sector) => {
-              const Icon = sector.icon
-              return (
-                <div
-                  key={sector.label}
-                  className="px-6 py-3.5 border-2 border-brand-light-blue/30 rounded-xl text-sm font-medium text-brand-dark-navy bg-white/40 flex items-center gap-3 text-left transition-all cursor-pointer hover:border-brand-light-blue hover:bg-white/80"
-                >
-                  <Icon
-                    className="size-10 text-brand-light-blue shrink-0"
-                    strokeWidth={1.25}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+        <h2 className="text-[30px] sm:text-[38px] lg:text-[46px] font-light text-[#013167] leading-[1.15] tracking-tight mb-8 lg:mb-10" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+          In quali settori opera?
+        </h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-5" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+          {SECTORS.map((sector, index) => {
+            const Icon = sector.icon
+            return (
+              <motion.div
+                key={sector.label}
+                {...cardReveal(index)}
+                className="flex sm:flex-col items-center sm:items-start sm:justify-between gap-4 sm:gap-4 sm:min-h-[120px] lg:min-h-[128px] rounded-[16px] sm:rounded-[20px] bg-[#E3EAEC]/40 shadow-[-4px_-4px_10px_rgba(255,255,255,0.75),5px_5px_14px_rgba(164,177,188,0.45)] px-4 py-3 sm:px-5 sm:py-4"
+              >
+                <span className="flex items-center justify-center shrink-0 size-11 rounded-[10px] bg-white/60 shadow-[0_2px_6px_rgba(164,177,188,0.25)]">
+                  <Icon className={cn('size-7 text-[#8EBEF7]', sector.iconClassName)} strokeWidth={1.1} />
+                </span>
+                <span className="text-[15px] lg:text-base font-medium text-[#013167] leading-[1.25]">
                   {sector.label}
-                </div>
-              )
-            })}
-          </div>
+                </span>
+              </motion.div>
+            )
+          })}
+
+          <motion.div
+            {...cardReveal(SECTORS.length)}
+            className="md:col-span-2 lg:col-span-3 flex flex-col lg:flex-row lg:items-center justify-between gap-4 lg:gap-6 rounded-[20px] bg-[#E3EAEC]/40 shadow-[-4px_-4px_10px_rgba(255,255,255,0.75),5px_5px_14px_rgba(164,177,188,0.45)] p-5 lg:px-8 lg:py-4"
+          >
+            <p className="text-lg lg:text-[22px] font-medium text-[#013167] leading-[1.25] max-w-[460px]">
+              Il Campania DIH opera trasversalmente su settori chiave del territorio e dell’economia.
+            </p>
+            <div className="flex items-center gap-5 lg:gap-8 lg:pr-6">
+              <span className="text-[64px] lg:text-[80px] font-thin leading-none text-[#8EBEF7]/50 tracking-tight">
+                {SECTORS.length}
+              </span>
+              <span className="text-[20px] lg:text-[26px] font-medium text-[#013167] leading-[1.1]">
+                settori
+                <br />
+                strategici
+              </span>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

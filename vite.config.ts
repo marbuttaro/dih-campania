@@ -12,6 +12,9 @@ const CLEAN_URL_ROUTES: Record<string, string> = {
   '/progetti': '/progetti.html',
   '/servizi': '/servizi.html',
   '/trasparenza': '/trasparenza.html',
+  '/news/investimenti-sostenibili-4-0': '/news/investimenti-sostenibili-4-0.html',
+  '/news/sviluppo-competenze-specialistiche': '/news/sviluppo-competenze-specialistiche.html',
+  '/news/voucher-cloud-cybersecurity': '/news/voucher-cloud-cybersecurity.html',
 }
 
 function cleanUrlsDev(): Plugin {
@@ -51,6 +54,9 @@ export default defineConfig({
         progetti: path.resolve(__dirname, 'progetti.html'),
         servizi: path.resolve(__dirname, 'servizi.html'),
         trasparenza: path.resolve(__dirname, 'trasparenza.html'),
+        newsInvestimentiSostenibili: path.resolve(__dirname, 'news/investimenti-sostenibili-4-0.html'),
+        newsSviluppoCompetenze: path.resolve(__dirname, 'news/sviluppo-competenze-specialistiche.html'),
+        newsVoucherCloud: path.resolve(__dirname, 'news/voucher-cloud-cybersecurity.html'),
       },
     },
   },
