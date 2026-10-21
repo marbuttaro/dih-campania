@@ -8,6 +8,8 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 // Linguetta fissa sul bordo destro che apre il form di iscrizione alla newsletter
 export function NewsletterTab() {
   const [open, setOpen] = useState(false)
+  const [nome, setNome] = useState('')
+  const [cognome, setCognome] = useState('')
   const [email, setEmail] = useState('')
   const [consensoPrivacy, setConsensoPrivacy] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -15,13 +17,16 @@ export function NewsletterTab() {
   const resetAndClose = () => {
     setOpen(false)
     setTimeout(() => {
+      setNome('')
+      setCognome('')
       setEmail('')
       setConsensoPrivacy(false)
       setSubmitted(false)
     }, 300)
   }
 
-  const canSubmit = EMAIL_PATTERN.test(email.trim()) && consensoPrivacy
+  const canSubmit =
+    nome.trim() !== '' && cognome.trim() !== '' && EMAIL_PATTERN.test(email.trim()) && consensoPrivacy
 
   const handleSubmit = () => {
     if (!canSubmit) return
@@ -84,6 +89,10 @@ export function NewsletterTab() {
               </Dialog.Description>
 
               <div className="space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <Field label="Nome" value={nome} onChange={setNome} />
+                  <Field label="Cognome" value={cognome} onChange={setCognome} />
+                </div>
                 <Field label="Mail" value={email} onChange={setEmail} type="email" />
 
                 <Checkbox

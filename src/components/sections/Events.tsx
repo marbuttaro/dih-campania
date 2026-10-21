@@ -76,6 +76,15 @@ export function Events() {
             </article>
           ))}
         </div>
+
+        <div className="flex justify-center mt-12">
+          <a
+            href="/eventi"
+            className="bg-brand-navy text-white px-10 py-3.5 rounded-lg font-semibold transition-all duration-300 hover:bg-brand-dark-navy hover:-translate-y-0.5 no-underline"
+          >
+            Vedi tutti
+          </a>
+        </div>
       </div>
     </section>
   )

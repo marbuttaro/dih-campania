@@ -23,6 +23,7 @@ const SERVIZI_SUBLINKS = [
 const NAV_LINKS = [
   { href: '/servizi', label: 'Servizi', children: SERVIZI_SUBLINKS },
   { href: '/progetti', label: 'Progetti' },
+  { href: '/eventi', label: 'Eventi' },
   // Bandi, Newsletter e Infosfera temporaneamente nascosti su richiesta
   // { href: '#bandi', label: 'Bandi' },
   // { href: '#newsletter', label: 'Newsletter' },
