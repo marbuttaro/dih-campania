@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react'
-
 const NAV_COLUMNS = [
   {
     title: 'Navigazione',
@@ -7,7 +5,8 @@ const NAV_COLUMNS = [
       { href: '#servizi', label: 'Servizi' },
       { href: '#progetti', label: 'Progetti' },
       { href: '/eventi', label: 'Eventi' },
-      { href: '#bandi', label: 'Bandi' },
+      { href: '/news?categoria=bandi', label: 'Bandi' },
+      { href: '/news', label: 'News e archivio' },
       { href: '/chi-siamo', label: 'Chi Siamo' },
     ],
   },
@@ -30,14 +29,8 @@ const NAV_COLUMNS = [
 ]
 
 export function Footer() {
-  const [isHome, setIsHome] = useState(true)
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const path = window.location.pathname
-      setIsHome(path === '/' || path.endsWith('index.html') || path === '')
-    }
-  }, [])
+  const path = window.location.pathname
+  const isHome = path === '/' || path.endsWith('index.html') || path === ''
 
   const getLinkHref = (href: string) => {
     if (href.startsWith('/') || href === '#') return href

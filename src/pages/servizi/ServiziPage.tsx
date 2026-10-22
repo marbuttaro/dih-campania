@@ -108,14 +108,15 @@ const JOURNEY_STEPS = [
 ]
 
 export function ServiziPage() {
-  const [activeStep, setActiveStep] = useState(0)
+  const [activeStep, updateActiveStep] = useState(0)
   const [stepExpanded, setStepExpanded] = useState(false)
   const [stepTruncated, setStepTruncated] = useState(false)
   const stepContentRef = useRef<HTMLDivElement | null>(null)
 
-  useEffect(() => {
+  const setActiveStep = (next: number | ((previous: number) => number)) => {
     setStepExpanded(false)
-  }, [activeStep])
+    updateActiveStep(next)
+  }
 
   useEffect(() => {
     const el = stepContentRef.current

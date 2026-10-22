@@ -24,6 +24,7 @@ const NAV_LINKS = [
   { href: '/servizi', label: 'Servizi', children: SERVIZI_SUBLINKS },
   { href: '/progetti', label: 'Progetti' },
   { href: '/eventi', label: 'Eventi' },
+  { href: '/news', label: 'News' },
   // Bandi, Newsletter e Infosfera temporaneamente nascosti su richiesta
   // { href: '#bandi', label: 'Bandi' },
   // { href: '#newsletter', label: 'Newsletter' },
@@ -62,17 +63,13 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [contactModalOpen, setContactModalOpen] = useState(false)
-  const [isHome, setIsHome] = useState(true)
+  const path = window.location.pathname
+  const isHome = path === '/' || path.endsWith('index.html') || path === ''
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
     window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
-
-    if (typeof window !== 'undefined') {
-      const path = window.location.pathname
-      setIsHome(path === '/' || path.endsWith('index.html') || path === '')
-    }
 
     return () => window.removeEventListener('scroll', onScroll)
   }, [])

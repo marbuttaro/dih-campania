@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-22",
+  "stage": "local_validation_complete_hosted_setup_pending",
+  "source": "https://www.campaniadih.it/",
+  "wordpress_articles": 1133,
+  "wordpress_published": 1123,
+  "wordpress_drafts": 7,
+  "wordpress_private": 3,
+  "existing_new_site_articles": 3,
+  "locally_verified_articles": 1136,
+  "available_referenced_assets": 777,
+  "downloaded_asset_bytes": 244146573,
+  "source_asset_urls_returning_404": 316,
+  "source_featured_attachment_references_missing_from_wxr": 533,
+  "source_published_articles_without_titles": 3,
+  "notes": [
+    "Media and feature-image issues already exist in the source and are retained in private reports.",
+    "All prepared article fields were compared after a PostgreSQL import rehearsal.",
+    "Hosted Supabase, mailbox creation, production deployment and confirmation email are not completed."
+  ]
+}

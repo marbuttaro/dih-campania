@@ -25,7 +25,7 @@ function cleanUrlsDev(): Plugin {
       server.middlewares.use((req, _res, next) => {
         if (req.url) {
           const [pathname, search] = req.url.split('?')
-          const target = CLEAN_URL_ROUTES[pathname]
+          const target = /^\/(news(?:\/.*)?|admin|\d{4}\/\d{2}\/\d{2}\/.*)\/?$/.test(pathname) ? '/cms.html' : CLEAN_URL_ROUTES[pathname]
           if (target) {
             req.url = search ? `${target}?${search}` : target
           }
@@ -47,6 +47,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'index.html'),
+        cms: path.resolve(__dirname, 'cms.html'),
         trasformazione: path.resolve(__dirname, 'trasformazione-digitale.html'),
         cybersecurity: path.resolve(__dirname, 'cybersecurity.html'),
         intelligenzaArtificiale: path.resolve(__dirname, 'intelligenza-artificiale.html'),

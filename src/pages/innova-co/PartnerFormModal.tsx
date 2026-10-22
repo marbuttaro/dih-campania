@@ -3,23 +3,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { ArrowLeft, ArrowRight, Check, ChevronDown, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-export const TIPOLOGIA_PARTNER_OPTIONS = [
-  'Grandi Imprese',
-  'Medie Imprese',
-  'Piccole Imprese',
-  'Micro, Start-up innovative',
-  'Incubatori',
-  'Distretti/poli/cluster',
-  'Università/enti di formazione',
-  'Organismi di Ricerca pubblici e privati',
-  'Istituzioni nazionali ed internazionali operanti nel campo della ricerca e sperimentazione',
-  'Centri di competenza, European Digital Innovation Hub, Digital Innovation Hub, Poli di innovazione',
-  'Enti istituzionali',
-  'Associazioni, Ordini Professionali, Fondazioni ed altri Enti di diritto privato',
-  'Banche, investitori e fondi (ovvero Fondazioni bancarie e Istituti di credito)',
-  'Assicurazioni',
-  "Altri soggetti di diritto pubblico o privato, che condividano gli scopi e l'oggetto della Società",
-]
+import { TIPOLOGIA_PARTNER_OPTIONS } from './partnerOptions'
 
 type Step = 0 | 1 | 2 | 3
 

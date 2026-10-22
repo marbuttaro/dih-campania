@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { ArrowLeft, ArrowRight, Check, ChevronDown, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { TIPOLOGIA_PARTNER_OPTIONS } from './PartnerFormModal'
+import { TIPOLOGIA_PARTNER_OPTIONS } from './partnerOptions'
 
 type Step = 1 | 2 | 3
 

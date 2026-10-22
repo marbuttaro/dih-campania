@@ -1,4 +1,15 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/:year(\\d{4})/:month(\\d{2})/:day(\\d{2})/:slug", "destination": "/news/:slug", "permanent": true },
+    { "source": "/category/:category", "destination": "/news?categoria=:category", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/news", "destination": "/cms" },
+    { "source": "/news/:slug", "destination": "/cms" },
+    { "source": "/admin", "destination": "/cms" },
+    { "source": "/:year(\\d{4})/:month(\\d{2})/:day(\\d{2})/:slug", "destination": "/cms" }
+  ],
+  "headers": [{ "source": "/admin", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] }]
 }

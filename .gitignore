@@ -23,6 +23,13 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+.env
+.env.*
+!.env.example
+migration-data/
+*.dpapi
+/cms-preview.html
+/src/cms/Preview.local.tsx
 
 # Large video files
 *.mov
