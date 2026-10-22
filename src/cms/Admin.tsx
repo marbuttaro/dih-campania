@@ -55,7 +55,7 @@ function Dashboard({ session }: { session: Session }) {
   }, [allowed, page, query, status, category, trash, version])
   const signOut = async () => { const { error } = await requireSupabase().auth.signOut(); if (error) setError(error.message) }
   return <div className="cms min-h-screen bg-[#f0f4f8]">
-    <header className="bg-white border-b px-5 sm:px-10 py-5 flex flex-wrap items-center gap-5 justify-between"><a href="/" className="font-bold text-xl">Campania DIH <span className="font-normal text-sm">/ Redazione</span></a><div className="flex items-center gap-4"><span className="text-xs break-all">{session.user.email}</span><button className="secondary" onClick={signOut}>Esci</button></div></header>
+    <header className="bg-white border-b px-5 sm:px-10 py-5 flex flex-wrap items-center gap-5 justify-between"><a href="/" className="font-bold text-xl">Campania DIH <span className="font-normal text-sm">/ Redazione</span></a><div className="flex items-center gap-4"><span className="text-xs break-all">{session.user.email}</span><button className="secondary" onClick={signOut} disabled={editing !== undefined} title={editing !== undefined ? 'Chiudi prima l’articolo per uscire' : undefined}>Esci</button></div></header>
     <main className="max-w-[1440px] mx-auto px-5 sm:px-10 py-8">
       {allowed === null && <p role="status">Verifica accesso…</p>}
       {allowed === false && <p role="alert" className="error">Questo account non è abilitato alla redazione. Contatta l’amministratore.</p>}

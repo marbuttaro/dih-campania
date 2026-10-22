@@ -28,15 +28,15 @@ export function ArticleForm({ article, categories, onClose, onSaved }: { article
     finally { setBusy(false) }
   }
   return <form onSubmit={save} className="space-y-6">
-    <div className="flex flex-wrap items-center justify-between gap-4"><h1 className="text-2xl">{article ? 'Modifica articolo' : 'Nuovo articolo'}</h1><div className="flex gap-2"><button type="button" className="secondary" onClick={async () => { if (!dirty || await confirmAction('Uscire senza salvare le modifiche?')) onClose() }}>Chiudi</button><button disabled={busy}>{busy ? 'Salvataggio…' : 'Salva articolo'}</button></div></div>
+    <div className="flex flex-wrap items-center justify-between gap-4"><h1 className="text-2xl">{article ? 'Modifica articolo' : 'Nuovo articolo'}</h1><div className="flex gap-2"><button type="button" className="secondary" disabled={busy} onClick={async () => { if (!dirty || await confirmAction('Uscire senza salvare le modifiche?')) onClose() }}>Chiudi</button><button disabled={busy}>{busy ? 'Operazione in corso…' : 'Salva articolo'}</button></div></div>
     {error && <p role="alert" className="error">{error}</p>}
-    <div className="grid lg:grid-cols-[minmax(0,1fr)_320px] gap-6 items-start">
+    <fieldset disabled={busy} className="grid lg:grid-cols-[minmax(0,1fr)_320px] gap-6 items-start min-w-0">
       <div className="panel space-y-6">
         <label>Titolo<input required maxLength={1000} value={form.title} onChange={e => { change('title', e.target.value); if (!article && (!form.slug || form.slug === slugify(form.title))) change('slug', slugify(e.target.value)) }} /></label>
         <label>Indirizzo (slug)<input required maxLength={220} pattern="[^/?#\s]+" value={form.slug} onChange={e => change('slug', e.target.value)} /></label>
         {article && <a href={articleUrl(article.slug)} target="_blank" rel="noreferrer" className="underline text-sm">Apri anteprima salvata ↗</a>}
         <label>Sommario<textarea rows={3} value={form.excerpt} onChange={e => change('excerpt', e.target.value)} /></label>
-        <ContentEditor value={form.content_html} onChange={value => change('content_html', value)} imported={!!article} onBusyChange={setBusy} />
+        <ContentEditor value={form.content_html} onChange={value => change('content_html', value)} imported={!!article} disabled={busy} onBusyChange={setBusy} />
       </div>
       <aside className="space-y-6">
         <section className="panel space-y-4"><h2>Pubblicazione</h2>
@@ -59,6 +59,6 @@ export function ArticleForm({ article, categories, onClose, onSaved }: { article
         <section className="panel space-y-4"><h2>Evento (facoltativo)</h2><label>Data e ora evento<input type="datetime-local" step="1" value={eventDate} onChange={e => { setEventDate(e.target.value); setDirty(true) }} /></label><label>Luogo<input value={form.event_location} onChange={e => change('event_location', e.target.value)} /></label></section>
         <section className="panel"><label>Descrizione per i motori di ricerca<textarea rows={4} maxLength={320} value={form.seo_description} onChange={e => change('seo_description', e.target.value)} /></label></section>
       </aside>
-    </div>
+    </fieldset>
   </form>
 }

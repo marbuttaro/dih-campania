@@ -1,13 +1,30 @@
 // @vitest-environment jsdom
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { ArticleForm } from '../src/cms/ArticleForm'
-import { saveArticle, type Article } from '../src/lib/articles'
-vi.mock('../src/lib/articles', async importOriginal => ({ ...await importOriginal<typeof import('../src/lib/articles')>(), saveArticle: vi.fn() }))
+import { saveArticle, uploadMedia, type Article } from '../src/lib/articles'
+vi.mock('../src/lib/articles', async importOriginal => ({ ...await importOriginal<typeof import('../src/lib/articles')>(), saveArticle: vi.fn(), uploadMedia: vi.fn() }))
 afterEach(() => { cleanup(); vi.clearAllMocks() })
 const originalHtml = '<figure class="wp-block-gallery"><img src="https://example.org/image.jpg"><figcaption>Didascalia</figcaption></figure><table><tr><td>Dato</td></tr></table><iframe src="https://www.youtube.com/embed/abc"></iframe>'
 const article: Article = { id: 'article-1', wp_id: 42, slug: 'storico', title: 'Articolo storico', excerpt: '<p>Introduzione</p>', content_html: originalHtml, featured_image: '', featured_image_alt: '', author_name: 'Campania DIH', category_slugs: ['news'], tags: [], status: 'published', published_at: '2021-07-10T08:20:31Z', created_at: '2021-07-10T08:20:31Z', updated_at: '2026-10-01T10:00:00Z', deleted_at: null, original_url: 'https://www.campaniadih.it/2021/07/10/storico/', is_featured: false, event_at: null, event_location: '', seo_description: '' }
 describe('Editor workflow', () => {
+  it('locks changes and closing during an attachment upload, preserving imported content', async () => {
+    let finishUpload!: (url: string) => void
+    vi.mocked(uploadMedia).mockImplementation(() => new Promise(resolve => { finishUpload = resolve }))
+    const onClose = vi.fn()
+    render(<ArticleForm article={article} categories={[]} onClose={onClose} onSaved={vi.fn()} />)
+    fireEvent.change(screen.getByLabelText('Aggiungi immagine o allegato al contenuto'), { target: { files: [new File(['test'], 'allegato.pdf', { type: 'application/pdf' })] } })
+    expect(screen.getByLabelText('Contenuto HTML').matches(':disabled')).toBe(true)
+    expect(screen.getByLabelText('Carica immagine').matches(':disabled')).toBe(true)
+    expect(screen.getByRole('button', { name: 'Operazione in corso…' }).matches(':disabled')).toBe(true)
+    fireEvent.click(screen.getByRole('button', { name: 'Chiudi' }))
+    expect(onClose).not.toHaveBeenCalled()
+    await act(async () => { finishUpload('https://example.org/allegato.pdf') })
+    const html = screen.getByLabelText('Contenuto HTML') as HTMLTextAreaElement
+    expect(html.matches(':disabled')).toBe(false)
+    expect(html.value).toContain(originalHtml)
+    expect(html.value).toContain('https://example.org/allegato.pdf')
+  })
   it('opens the visual editor for a new article', async () => {
     render(<ArticleForm article={null} categories={[]} onClose={vi.fn()} onSaved={vi.fn()} />)
     expect(await screen.findByLabelText('Testo dell’articolo')).toBeTruthy()

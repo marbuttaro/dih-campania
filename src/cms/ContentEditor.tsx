@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Image from '@tiptap/extension-image'
@@ -9,7 +9,7 @@ import { uploadMedia } from '../lib/articles'
 import { Audio, Embed, Video, videoEmbedUrl } from './mediaExtensions'
 import { confirmAction, requestUrl } from './dialogs'
 
-function VisualEditor({ value, onChange, onBusyChange }: { value: string; onChange: (html: string) => void; onBusyChange: (busy: boolean) => void }) {
+function VisualEditor({ value, onChange, onBusyChange, disabled }: { value: string; onChange: (html: string) => void; onBusyChange: (busy: boolean) => void; disabled: boolean }) {
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
   const editor = useEditor({
@@ -18,6 +18,7 @@ function VisualEditor({ value, onChange, onBusyChange }: { value: string; onChan
     onUpdate: ({ editor }) => onChange(editor.getHTML()),
     editorProps: { attributes: { 'aria-label': 'Testo dell’articolo', class: 'article-content' } },
   })
+  useEffect(() => { editor?.setEditable(!disabled) }, [editor, disabled])
   if (!editor) return null
   return <div>
     <div className="toolbar" role="toolbar" aria-label="Formattazione testo">
@@ -57,7 +58,7 @@ function VisualEditor({ value, onChange, onBusyChange }: { value: string; onChan
   </div>
 }
 
-export function ContentEditor({ value, onChange, imported, onBusyChange }: { value: string; onChange: (html: string) => void; imported: boolean; onBusyChange: (busy: boolean) => void }) {
+export function ContentEditor({ value, onChange, imported, onBusyChange, disabled = false }: { value: string; onChange: (html: string) => void; imported: boolean; onBusyChange: (busy: boolean) => void; disabled?: boolean }) {
   const [mode, setMode] = useState<'html' | 'visual' | 'preview'>(imported ? 'html' : 'visual')
   const [uploading, setUploading] = useState(false)
   const [uploadError, setUploadError] = useState('')
@@ -71,7 +72,7 @@ export function ContentEditor({ value, onChange, imported, onBusyChange }: { val
       <button type="button" className="secondary" aria-pressed={mode === 'html'} onClick={() => setMode('html')}>HTML</button>
       <button type="button" className="secondary" aria-pressed={mode === 'preview'} onClick={() => setMode('preview')}>Anteprima</button>
     </div>
-    {mode === 'visual' && <VisualEditor value={value} onChange={onChange} onBusyChange={onBusyChange} />}
+    {mode === 'visual' && <VisualEditor value={value} onChange={onChange} onBusyChange={onBusyChange} disabled={disabled} />}
     {mode === 'html' && <><p className="text-sm mb-3">HTML originale conservato. Puoi inserire tabelle, gallerie, allegati, audio, video e incorporamenti YouTube/Vimeo.</p><textarea aria-label="Contenuto HTML" rows={18} value={value} onChange={e => onChange(e.target.value)} className="font-mono text-sm" spellCheck={false} /></>}
     {mode === 'html' && <label className="mt-4">Aggiungi immagine o allegato al contenuto<input type="file" disabled={uploading} onChange={async e => {
       const file = e.target.files?.[0]; if (!file) return
