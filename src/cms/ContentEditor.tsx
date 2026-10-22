@@ -18,7 +18,7 @@ function VisualEditor({ value, onChange, onBusyChange, disabled }: { value: stri
     onUpdate: ({ editor }) => onChange(editor.getHTML()),
     editorProps: { attributes: { 'aria-label': 'Testo dell’articolo', class: 'article-content' } },
   })
-  useEffect(() => { editor?.setEditable(!disabled) }, [editor, disabled])
+  useEffect(() => { editor?.setEditable(!disabled, false) }, [editor, disabled])
   if (!editor) return null
   return <div>
     <div className="toolbar" role="toolbar" aria-label="Formattazione testo">

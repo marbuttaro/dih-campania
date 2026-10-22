@@ -40,6 +40,7 @@ node scripts/validate-backup.mjs /private/backup
 node scripts/import-wordpress.mjs /private/backup
 node --env-file=.env.migration scripts/import-wordpress.mjs /private/backup --apply
 node --env-file=.env.migration scripts/provision-editor.mjs
+node --env-file=.env.migration scripts/verify-hosted.mjs /private/backup
 ```
 
 The importer validates uniqueness, preserves original IDs/statuses/UTC timestamps,
@@ -60,3 +61,9 @@ are preserved even inside the repeated autumn hour.
 sanitization, exact date conversion and editor persistence contracts. The private
 `local-import-verification.json` reports a full field-by-field import rehearsal.
 These local checks do not replace the final tests against the hosted project.
+
+The hosted verification script exercises real Auth sessions, anonymous and ordinary
+user access, editor CRUD, stale updates, historical slugs, exact dates, private and
+scheduled visibility, trash/restore and Storage permissions. It creates isolated
+fixtures with random UUIDs and removes only those fixtures in a final cleanup step.
+Its private `hosted-verification.json` must pass before production deployment.
