@@ -6,6 +6,7 @@ import { createClient } from '@supabase/supabase-js'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 import { join, basename } from 'node:path'
+import { isDeepStrictEqual } from 'node:util'
 
 const directory = process.argv[2]
 if (!directory) throw new Error('Specify the private migration backup directory')
@@ -71,14 +72,16 @@ async function allRows(table, columns = '*') {
 const existing = new Map((await allRows('articles')).map(a => [a.slug, a]))
 const comparable = ['wp_id','slug','title','excerpt','content_html','featured_image','featured_image_alt','author_name','category_slugs','tags','status','deleted_at','original_url','is_featured','event_location','seo_description']
 function differences(expected, actual) {
-  return [...comparable.filter(k => JSON.stringify(expected[k]) !== JSON.stringify(actual[k])), ...['published_at','event_at'].filter(k => (expected[k] ? Date.parse(expected[k]) : null) !== (actual[k] ? Date.parse(actual[k]) : null))]
+  return [...comparable.filter(k => !isDeepStrictEqual(expected[k], actual[k])), ...['id'].filter(k => expected[k] !== undefined && expected[k] !== actual[k]), ...['published_at','event_at','created_at','updated_at'].filter(k => expected[k] !== undefined && (expected[k] ? Date.parse(expected[k]) : null) !== (actual[k] ? Date.parse(actual[k]) : null))]
 }
 for (const article of articles) {
   const found = existing.get(article.slug)
   if (found && differences(article, found).length) throw new Error(`Existing article differs; refusing to overwrite editorial work: ${article.slug}`)
 }
 const pending = articles.filter(a => !existing.has(a.slug))
-for (let i = 0; i < pending.length; i += 50) check(await db.from('articles').insert(pending.slice(i, i + 50)))
+// WordPress rows have source IDs/timestamps; new-site rows use database defaults.
+// PostgREST must apply defaults to absent fields in mixed bulk inserts.
+for (let i = 0; i < pending.length; i += 50) check(await db.from('articles').insert(pending.slice(i, i + 50), { defaultToNull: false }))
 const existingSources = new Set((await allRows('article_sources', 'article_id')).map(s => s.article_id))
 const pendingSources = sources.filter(s => !existingSources.has(s.article_id))
 for (let i = 0; i < pendingSources.length; i += 25) check(await db.from('article_sources').insert(pendingSources.slice(i, i + 25)))
@@ -90,7 +93,9 @@ for (const source of sources) {
 }
 const remote = new Map((await allRows('articles')).map(a => [a.slug, a]))
 const mismatches = articles.flatMap(a => { const row = remote.get(a.slug); const fields = row ? differences(a, row) : ['missing']; return fields.length ? [{ slug: a.slug, fields }] : [] })
-const report = { ...summary, verified_articles: articles.length - mismatches.length, mismatches, verified_at: new Date().toISOString(), source_backup: 'wordpress.xml', checksummed_uploaded_files: Object.keys(uploaded).length }
+const remoteSources = new Map((await allRows('article_sources')).map(s => [s.article_id, s.source]))
+const sourceMismatches = sources.filter(s => !isDeepStrictEqual(s.source, remoteSources.get(s.article_id))).map(s => s.article_id)
+const report = { ...summary, verified_articles: articles.length - mismatches.length, mismatches, verified_source_records: sources.length - sourceMismatches.length, source_mismatches: sourceMismatches, verified_at: new Date().toISOString(), source_backup: 'wordpress.xml', checksummed_uploaded_files: Object.keys(uploaded).length }
 writeFileSync(join(directory, 'import-verification.json'), JSON.stringify(report, null, 2))
-if (mismatches.length) throw new Error('Article verification failed; see private import-verification.json')
+if (mismatches.length || sourceMismatches.length) throw new Error('Article verification failed; see private import-verification.json')
 console.log(JSON.stringify(report, null, 2))

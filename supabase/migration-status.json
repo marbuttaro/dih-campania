@@ -1,6 +1,6 @@
 {
   "date": "2026-10-22",
-  "stage": "local_validation_complete_hosted_setup_pending",
+  "stage": "hosted_import_verified",
   "source": "https://www.campaniadih.it/",
   "wordpress_articles": 1133,
   "wordpress_published": 1123,
@@ -14,8 +14,18 @@
   "source_featured_attachment_references_missing_from_wxr": 533,
   "source_published_articles_without_titles": 3,
   "notes": [
-    "Media and feature-image issues already exist in the source and are retained in private reports.",
-    "All prepared article fields were compared after a PostgreSQL import rehearsal.",
-    "Hosted Supabase, mailbox creation, production deployment and confirmation email are not completed."
-  ]
+    "All 1136 articles and 1133 raw WordPress source records match the private backup, including original IDs and timestamps.",
+    "777 downloaded files map to 774 immutable checksum-verified storage objects because identical content and names are deduplicated.",
+    "316 source URLs already returned 404; 533 featured-image references were already absent from the WordPress export. These issues are retained in private reports.",
+    "All temporary hosted/API/browser test fixtures were removed. Public signup is disabled; editor access requires the cms_editors allowlist.",
+    "The user-supplied Gmail address was verified and used for the dedicated Supabase Free account. All new credentials are stored only in ignored local .env files."
+  ],
+  "hosted_verified_articles": 1136,
+  "hosted_verified_source_records": 1133,
+  "checksummed_storage_objects": 774,
+  "supabase_project_url": "https://nibfsdhvxguqtbqyqeas.supabase.co",
+  "hosted_security_checks_passed": 26,
+  "unit_tests_passed": 20,
+  "browser_crud_verified": true,
+  "verified_at": "2026-10-22T08:13:24.1814549Z"
 }

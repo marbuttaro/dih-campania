@@ -8,12 +8,17 @@ Never place a service-role key in a `VITE_` variable or the repository.
 ## Deployment sequence
 
 1. Create the dedicated free Supabase organization and European-region project.
-2. Apply `migrations/202610220001_articles.sql` through the SQL editor or trusted
-   database connection. The migration is transactional and creates RLS policies,
-   immutable revision snapshots, search indexes and the media bucket.
+2. Apply the SQL files in `migrations/` in filename order through the SQL editor or
+   trusted database connection. They create RLS policies, immutable revision
+   snapshots, search indexes, the media bucket and explicit service-role grants.
+   Automatic exposure of new tables may remain disabled.
 3. Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in local development and
    Vercel Preview/Production. Keep `SUPABASE_SERVICE_ROLE_KEY` in a separate,
    ignored server-only environment file used only for migration/provisioning.
+   This workstation stores account, database and editor credentials in `.env`
+   (ignored, mode 600); `.env.local` contains only the public Supabase variables
+   and Vercel's local CLI configuration. Never add a service secret with a `VITE_`
+   prefix. Commands below may use `--env-file=.env` on this workstation.
 4. Disable public Auth signup. Set the actual deployment URL as the Auth site URL.
 5. Run the data preparation, validation and import commands below. Review the
    source-asset defect report before a production domain change.

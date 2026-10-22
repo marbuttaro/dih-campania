@@ -10,7 +10,7 @@ async function asUser<T>(role: 'anon' | 'authenticated', user: string, action: (
   try { return await action() } finally { await db.exec('reset role; reset request.jwt.claim.sub;') }
 }
 beforeAll(async () => {
-  await db.exec(`create role anon; create role authenticated;
+  await db.exec(`create role anon; create role authenticated; create role service_role bypassrls;
     create schema auth; create table auth.users(id uuid primary key);
     create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;
     grant usage on schema auth to anon, authenticated; grant execute on function auth.uid() to anon, authenticated;
@@ -19,6 +19,7 @@ beforeAll(async () => {
     alter table storage.objects enable row level security;
     grant usage on schema storage to anon,authenticated; grant select,insert on storage.objects to anon,authenticated;`)
   await db.exec(readFileSync(new URL('../supabase/migrations/202610220001_articles.sql', import.meta.url), 'utf8'))
+  await db.exec(readFileSync(new URL('../supabase/migrations/202610220002_service_permissions.sql', import.meta.url), 'utf8'))
   await db.query('insert into auth.users values ($1),($2)', [editor, outsider])
   await db.query('insert into cms_editors(user_id) values($1)', [editor])
   await db.exec("insert into categories(slug,name) values ('news','News');")
@@ -31,6 +32,14 @@ beforeAll(async () => {
 afterAll(() => db.close())
 
 describe('Database access and editorial integrity', () => {
+  it('trusted migration access works without automatic table grants', async () => {
+    await db.exec('set role service_role')
+    try {
+      expect((await db.query('select slug from articles')).rows).toHaveLength(5)
+      await db.query('insert into cms_editors(user_id) values($1)', [outsider])
+      await db.query('delete from cms_editors where user_id=$1', [outsider])
+    } finally { await db.exec('reset role') }
+  })
   it('anonymous readers see only due, published, untrashed articles', async () => {
     const result = await asUser('anon', '', () => db.query('select slug from articles'))
     expect(result.rows).toEqual([{ slug: 'public' }])
