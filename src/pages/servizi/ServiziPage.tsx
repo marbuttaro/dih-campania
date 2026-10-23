@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import { Scissors, Factory, Wheat, HeartPulse, Truck, Palette, type LucideIcon } from 'lucide-react'
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
+import { Sectors } from '@/components/sections/Sectors'
 import { Services } from '@/components/sections/Services'
 
 const VALUE_ITEMS = [
@@ -29,15 +29,6 @@ const VALUE_ITEMS = [
     icon: '/assets/servizi/sostenibilita.svg',
     text: 'Diventare più competitive e sostenibili nel lungo periodo',
   },
-]
-
-const SECTORS: { label: string; icon: LucideIcon }[] = [
-  { label: 'Moda, artigianato e design', icon: Scissors },
-  { label: 'Industria/manifattura & mobilità', icon: Factory },
-  { label: 'Agro-alimentare e filiere localizzate', icon: Wheat },
-  { label: 'Salute, servizi alla persona', icon: HeartPulse },
-  { label: 'Trasporto, logistica e infrastrutture smart', icon: Truck },
-  { label: 'Turismo, cultura e creatività', icon: Palette },
 ]
 
 const JOURNEY_STEPS = [
@@ -209,12 +200,13 @@ export function ServiziPage() {
           <div className="container-page relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center reveal-element">
               <div>
-                <h1 className="text-balance text-4xl sm:text-5xl lg:text-[2.75rem] font-light text-brand-navy leading-[1.2] tracking-tight mb-6">
-                  Un facilitatore tra{' '}il mondo produttivo e{' '}le{' '}istituzioni
+                <h1 className="text-balance text-3xl sm:text-4xl lg:text-[2.25rem] font-light text-brand-navy leading-[1.25] tracking-tight mb-6">
+                  Un facilitatore di innovazione che connette il sistema produttivo con
+                  l'ecosistema della ricerca, della tecnologia, dei finanziamenti e delle Istituzioni.
                 </h1>
                 <p className="text-sm sm:text-base text-brand-dark-navy/80 leading-relaxed font-normal">
-                  Il Campania DIH supporta le aziende <strong>in tutte le fasi del percorso
-                  di trasformazione digitale.</strong>
+                  Il Campania DIH supporta la crescita digitale delle imprese affiancandole{' '}
+                  <strong>in tutte le fasi del percorso di innovazione e trasformazione digitale</strong>
                 </p>
               </div>
               <div className="rounded-[24px] overflow-hidden shadow-neumorphic aspect-[4/3]">
@@ -479,35 +471,8 @@ export function ServiziPage() {
 
         {/* 5. In quali settori opera? */}
         <div className="container-page relative z-10 py-20 sm:py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-10 lg:gap-16 items-start reveal-element">
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-light text-brand-navy mb-4 tracking-tight">
-                In quali settori opera?
-              </h2>
-              <p className="text-sm sm:text-base text-brand-dark-navy/70 leading-relaxed">
-                Il Campania DIH opera trasversalmente su settori chiave del territorio e
-                dell'economia:
-              </p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {SECTORS.map((sector) => {
-                const Icon = sector.icon
-                return (
-                  <div
-                    key={sector.label}
-                    className="flex items-center gap-3 text-left border border-brand-navy/15 bg-white/40 rounded-xl px-6 py-5 font-semibold text-brand-navy"
-                  >
-                    <Icon
-                      className="size-8 text-brand-light-blue shrink-0"
-                      strokeWidth={1.25}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    {sector.label}
-                  </div>
-                )
-              })}
-            </div>
+          <div className="reveal-element">
+            <Sectors />
           </div>
         </div>
 
