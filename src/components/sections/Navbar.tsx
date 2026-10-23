@@ -25,6 +25,7 @@ const NAV_LINKS = [
   { href: '/progetti', label: 'Progetti' },
   { href: '/eventi', label: 'Eventi' },
   { href: '/news', label: 'News' },
+  { href: '/abc-del-digitale', label: 'ABC del digitale' },
   // Bandi, Newsletter e Infosfera temporaneamente nascosti su richiesta
   // { href: '#bandi', label: 'Bandi' },
   // { href: '#newsletter', label: 'Newsletter' },
