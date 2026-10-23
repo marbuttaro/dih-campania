@@ -93,7 +93,7 @@ export function IntelligenzaArtificialePage() {
                   Novità
                 </span>
                 <span className="text-sm sm:text-base font-semibold text-brand-dark-navy leading-snug">
-                  Nuovo tool disponibile da gennaio 2026<br />
+                  Nuovo tool presto disponibile<br />
                   per la data readiness
                 </span>
               </div>
