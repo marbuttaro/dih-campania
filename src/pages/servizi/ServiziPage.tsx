@@ -103,7 +103,8 @@ const JOURNEY_STEPS = [
     intro:
       'Sviluppo e gestione di percorsi di accompagnamento, mentoring e valorizzazione delle iniziative imprenditoriali. Promozione e organizzazione di iniziative di Open Innovation e matchmaking tra startup, PMI innovative, spinoff, centri di ricerca e grandi player industriali per favorire il technology transfer.',
     bullets: [],
-    objective: 'supportare la nascita e la scalabilità di nuove idee imprenditoriali, accelerando al contempo',
+    objective:
+      "supportare la nascita e la scalabilità di nuove idee imprenditoriali, accelerando al contempo la transizione tecnologica e digitale delle imprese partner attraverso l'adozione strategica di soluzioni innovative.",
   },
 ]
 
