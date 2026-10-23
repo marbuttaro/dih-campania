@@ -45,7 +45,7 @@ export async function listCategories(): Promise<Category[]> {
   return data
 }
 
-export async function listArticles({ page = 1, search = '', category = '', year = '', admin = false, status = '', trash = false, limit = PAGE_SIZE } = {}) {
+export async function listArticles({ page = 1, search = '', category = '', year = '', admin = false, status = '', trash = false, limit = PAGE_SIZE, offset = 0 } = {}) {
   let query = requireSupabase().from('articles').select(ARTICLE_COLUMNS, { count: 'exact' })
   query = trash ? query.not('deleted_at', 'is', null) : query.is('deleted_at', null)
   if (!admin) query = query.eq('status', 'published').lte('published_at', new Date().toISOString())
@@ -53,9 +53,9 @@ export async function listArticles({ page = 1, search = '', category = '', year 
   if (category) query = query.contains('category_slugs', [category])
   if (year && /^\d{4}$/.test(year)) query = query.gte('published_at', `${year}-01-01T00:00:00+01:00`).lt('published_at', `${Number(year) + 1}-01-01T00:00:00+01:00`)
   if (status) query = query.eq('status', status)
-  const { data, error, count } = await query.order('published_at', { ascending: false }).order('id').range((page - 1) * limit, page * limit - 1)
+  const { data, error, count } = await query.order('published_at', { ascending: false }).order('id').range((page - 1) * limit + offset, page * limit + offset - 1)
   if (error) throw error
-  return { articles: data as Article[], count: count ?? 0 }
+  return { articles: data as Article[], count: Math.max(0, (count ?? 0) - offset) }
 }
 
 export async function getArticle(slug: string): Promise<Article | null> {
