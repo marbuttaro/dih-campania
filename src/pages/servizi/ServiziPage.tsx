@@ -31,6 +31,31 @@ const VALUE_ITEMS = [
   },
 ]
 
+// \u00a0 tiene la & attaccata alla parola precedente quando l'etichetta va a capo
+const KPI_ITEMS = [
+  {
+    label: 'Digital Transformation & Innovation Advisory',
+    value: '+740',
+    caption: 'Servizi erogati',
+  },
+  {
+    label: 'Awareness\u00a0& Training',
+    sublabel: 'Formazione',
+    value: '19',
+    caption: 'Aziende partecipanti',
+  },
+  {
+    label: 'Networking\u00a0& Community',
+    value: '2000',
+    caption: 'Aziende coinvolte',
+  },
+  {
+    label: 'Start Up\u00a0& Open Innovation',
+    value: '43',
+    caption: 'Aziende partecipanti a\npercorsi di innovazione\naperta ed accelerazione',
+  },
+]
+
 const JOURNEY_STEPS = [
   {
     title: '1. Analisi e orientamento',
@@ -216,6 +241,29 @@ export function ServiziPage() {
                   className="w-full h-full object-cover block"
                 />
               </div>
+            </div>
+
+            {/* KPI */}
+            <div className="mt-16 sm:mt-20 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 xl:gap-4 reveal-element">
+              {KPI_ITEMS.map((kpi) => (
+                <div
+                  key={kpi.label}
+                  className="kpi-card flex items-center justify-between gap-5 xl:gap-4 rounded-[14px] bg-brand-ice/40 px-5 xl:px-4 py-3.5 shadow-[-5px_-5px_14px_rgba(255,255,255,1),8px_8px_24px_rgba(164,177,188,0.6)]"
+                >
+                  <div className="kpi-label flex-1">
+                    <p className="text-[15px] min-[360px]:text-base min-[400px]:text-[17px] xl:text-base font-semibold text-brand-navy leading-snug">{kpi.label}</p>
+                    {kpi.sublabel && (
+                      <p className="mt-1.5 text-[15px] min-[360px]:text-base min-[400px]:text-[17px] xl:text-base font-medium text-brand-navy leading-snug">{kpi.sublabel}</p>
+                    )}
+                  </div>
+                  <div className="kpi-value text-right">
+                    <p className="text-[2rem] min-[360px]:text-4xl min-[400px]:text-[2.75rem] xl:text-4xl font-medium text-brand-light-blue leading-none tracking-tight tabular-nums">
+                      {kpi.value}
+                    </p>
+                    <p className="mt-1.5 text-xs text-brand-dark-navy/80 leading-tight whitespace-pre-line xl:whitespace-pre">{kpi.caption}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

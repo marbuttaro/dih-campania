@@ -20,12 +20,17 @@ const SERVIZI_SUBLINKS = [
   { href: '/intelligenza-artificiale', label: 'Intelligenza Artificiale' },
 ] as const
 
+const RISORSE_SUBLINKS = [
+  { href: '/abc-del-digitale', label: 'ABC del digitale' },
+] as const
+
+// Le voci senza href (es. Risorse) servono solo ad aprire il sottomenu
 const NAV_LINKS = [
   { href: '/servizi', label: 'Servizi', children: SERVIZI_SUBLINKS },
   { href: '/progetti', label: 'Progetti' },
   { href: '/eventi', label: 'Eventi' },
   { href: '/news', label: 'News' },
-  { href: '/abc-del-digitale', label: 'ABC del digitale' },
+  { label: 'Risorse', children: RISORSE_SUBLINKS },
   // Bandi, Newsletter e Infosfera temporaneamente nascosti su richiesta
   // { href: '#bandi', label: 'Bandi' },
   // { href: '#newsletter', label: 'Newsletter' },
@@ -103,16 +108,27 @@ export function Navbar() {
 
         <div className="hidden lg:flex items-center gap-6 xl:gap-8">
           {NAV_LINKS.map((link) =>
-            'children' in link && link.children ? (
-              <div key={link.href} className="relative group py-2 -my-2">
-                <a
-                  href={getLinkHref(link.href)}
-                  className="flex items-center gap-1 text-[15px] font-normal text-[#E3EAEC] hover:text-white transition-colors"
-                >
-                  {link.label}
-                  <ChevronDown className="size-4 transition-transform duration-200 group-hover:rotate-180" />
-                </a>
-                <div className="absolute left-0 top-full pt-2 opacity-0 invisible -translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 z-50">
+            'children' in link ? (
+              <div key={link.label} className="relative group py-2 -my-2">
+                {'href' in link ? (
+                  <a
+                    href={getLinkHref(link.href)}
+                    className="flex items-center gap-1 text-[15px] font-normal text-[#E3EAEC] hover:text-white transition-colors"
+                  >
+                    {link.label}
+                    <ChevronDown className="size-4 transition-transform duration-200 group-hover:rotate-180" />
+                  </a>
+                ) : (
+                  <button
+                    type="button"
+                    aria-haspopup="true"
+                    className="flex items-center gap-1 text-[15px] font-normal text-[#E3EAEC] hover:text-white focus-visible:text-white transition-colors cursor-default"
+                  >
+                    {link.label}
+                    <ChevronDown className="size-4 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180" />
+                  </button>
+                )}
+                <div className="absolute left-0 top-full pt-2 opacity-0 invisible -translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200 z-50">
                   <div className="min-w-[240px] rounded-xl bg-brand-dark-navy/95 backdrop-blur-md border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.3)] py-2">
                     {link.children.map((child) => (
                       <a
@@ -128,7 +144,7 @@ export function Navbar() {
               </div>
             ) : (
               <a
-                key={link.href}
+                key={link.label}
                 href={getLinkHref(link.href)}
                 className="text-[15px] font-normal text-[#E3EAEC] hover:text-white transition-colors"
               >
@@ -169,15 +185,19 @@ export function Navbar() {
             </SheetHeader>
             <div className="mt-6 flex flex-col gap-1">
               {NAV_LINKS.map((link) => (
-                <div key={link.href}>
-                  <SheetClose asChild>
-                    <a
-                      href={getLinkHref(link.href)}
-                      className="block px-3 py-3 rounded-md text-base text-white/90 hover:bg-white/10 transition-colors"
-                    >
-                      {link.label}
-                    </a>
-                  </SheetClose>
+                <div key={link.label}>
+                  {'href' in link ? (
+                    <SheetClose asChild>
+                      <a
+                        href={getLinkHref(link.href)}
+                        className="block px-3 py-3 rounded-md text-base text-white/90 hover:bg-white/10 transition-colors"
+                      >
+                        {link.label}
+                      </a>
+                    </SheetClose>
+                  ) : (
+                    <span className="block px-3 py-3 text-base text-white/90">{link.label}</span>
+                  )}
                   {'children' in link && link.children && (
                     <div className="flex flex-col gap-0.5 pl-6 mb-1">
                       {link.children.map((child) => (
