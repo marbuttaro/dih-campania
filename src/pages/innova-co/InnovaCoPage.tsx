@@ -151,7 +151,6 @@ export function InnovaCoPage() {
   const [tab, setTab] = useState<ParticipationTab>('offro')
   const [formOpen, setFormOpen] = useState(false)
   const [solutionFormOpen, setSolutionFormOpen] = useState(false)
-  const [showAllMembers, setShowAllMembers] = useState(false)
 
   const questionsSectionRef = useRef<HTMLDivElement>(null)
   const q1WrapRef = useRef<HTMLDivElement>(null)
@@ -474,7 +473,7 @@ export function InnovaCoPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {(showAllMembers ? COMMUNITY_MEMBERS : COMMUNITY_MEMBERS.slice(0, 3)).map((member, i) => (
+                  {COMMUNITY_MEMBERS.map((member, i) => (
                     <tr key={i} className="border-b border-brand-navy/10">
                       <td className="py-5 pr-8 align-top">
                         <div className="h-16 w-28 flex items-center justify-center">
@@ -510,17 +509,6 @@ export function InnovaCoPage() {
               </table>
             </div>
 
-            {COMMUNITY_MEMBERS.length > 3 && (
-              <div className="flex justify-center mt-8">
-                <button
-                  type="button"
-                  onClick={() => setShowAllMembers((v) => !v)}
-                  className="inline-flex items-center bg-[#E3EAEC] text-brand-dark-navy font-semibold text-sm px-6 py-2.5 rounded-lg shadow-[0_4px_10px_rgba(1,49,103,0.18)] hover:shadow-[0_6px_16px_rgba(1,49,103,0.25)] hover:-translate-y-0.5 transition-all duration-300"
-                >
-                  {showAllMembers ? 'Mostra meno' : 'Mostra tutti'}
-                </button>
-              </div>
-            )}
           </div>
 
           {/* 6. Un ecosistema che cresce con te */}

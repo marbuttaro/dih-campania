@@ -143,7 +143,7 @@ export function AboutUsPage() {
                           <img
                             src={partner.src}
                             alt={partner.alt}
-                            className={`${partner.small ? 'max-h-6 sm:max-h-8' : 'max-h-9 sm:max-h-12'} ${partner.wide ? 'max-w-[96%]' : 'max-w-[85%]'} object-contain`}
+                            className={`${partner.small ? 'max-h-7 sm:max-h-8' : 'max-h-9 sm:max-h-12'} ${partner.wide ? 'max-w-[96%]' : 'max-w-[85%]'} object-contain`}
                           />
                         )}
                       </div>
