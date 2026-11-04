@@ -22,6 +22,7 @@ const SERVIZI_SUBLINKS = [
 
 const RISORSE_SUBLINKS = [
   { href: '/abc-del-digitale', label: 'ABC del digitale' },
+  { href: '/infosfera', label: 'Infosfera' },
 ] as const
 
 // Le voci senza href (es. Risorse) servono solo ad aprire il sottomenu
@@ -31,10 +32,9 @@ const NAV_LINKS = [
   { href: '/eventi', label: 'Eventi' },
   { href: '/news', label: 'News' },
   { label: 'Risorse', children: RISORSE_SUBLINKS },
-  // Bandi, Newsletter e Infosfera temporaneamente nascosti su richiesta
+  // Bandi e Newsletter temporaneamente nascosti su richiesta (Infosfera è sotto Risorse)
   // { href: '#bandi', label: 'Bandi' },
   // { href: '#newsletter', label: 'Newsletter' },
-  // { href: '#infosfera', label: 'Infosfera' },
   { href: '/innova-co', label: 'Innova.Co' },
   { href: '/chi-siamo', label: 'Chi Siamo' },
 ] as const
