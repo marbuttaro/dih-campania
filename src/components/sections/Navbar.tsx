@@ -22,7 +22,6 @@ const SERVIZI_SUBLINKS = [
 
 const RISORSE_SUBLINKS = [
   { href: '/abc-del-digitale', label: 'ABC del digitale' },
-  { href: '/infosfera', label: 'Infosfera' },
 ] as const
 
 // Le voci senza href (es. Risorse) servono solo ad aprire il sottomenu
@@ -32,7 +31,8 @@ const NAV_LINKS = [
   { href: '/eventi', label: 'Eventi' },
   { href: '/news', label: 'News' },
   { label: 'Risorse', children: RISORSE_SUBLINKS },
-  // Bandi e Newsletter temporaneamente nascosti su richiesta (Infosfera è sotto Risorse)
+  { href: '/infosfera', label: 'Infosfera' },
+  // Bandi e Newsletter temporaneamente nascosti su richiesta
   // { href: '#bandi', label: 'Bandi' },
   // { href: '#newsletter', label: 'Newsletter' },
   { href: '/innova-co', label: 'Innova.Co' },
@@ -106,14 +106,14 @@ export function Navbar() {
           <img src="/assets/logo DIH.svg" alt="Campania DIH" className="h-10 hidden lg:block" />
         </a>
 
-        <div className="hidden lg:flex items-center gap-6 xl:gap-8">
+        <div className="hidden lg:flex items-center gap-4 xl:gap-8">
           {NAV_LINKS.map((link) =>
             'children' in link ? (
               <div key={link.label} className="relative group py-2 -my-2">
                 {'href' in link ? (
                   <a
                     href={getLinkHref(link.href)}
-                    className="flex items-center gap-1 text-[15px] font-normal text-[#E3EAEC] hover:text-white transition-colors"
+                    className="flex items-center gap-1 whitespace-nowrap text-[14px] xl:text-[15px] font-normal text-[#E3EAEC] hover:text-white transition-colors"
                   >
                     {link.label}
                     <ChevronDown className="size-4 transition-transform duration-200 group-hover:rotate-180" />
@@ -122,7 +122,7 @@ export function Navbar() {
                   <button
                     type="button"
                     aria-haspopup="true"
-                    className="flex items-center gap-1 text-[15px] font-normal text-[#E3EAEC] hover:text-white focus-visible:text-white transition-colors cursor-default"
+                    className="flex items-center gap-1 whitespace-nowrap text-[14px] xl:text-[15px] font-normal text-[#E3EAEC] hover:text-white focus-visible:text-white transition-colors cursor-default"
                   >
                     {link.label}
                     <ChevronDown className="size-4 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180" />
@@ -146,7 +146,7 @@ export function Navbar() {
               <a
                 key={link.label}
                 href={getLinkHref(link.href)}
-                className="text-[15px] font-normal text-[#E3EAEC] hover:text-white transition-colors"
+                className="whitespace-nowrap text-[14px] xl:text-[15px] font-normal text-[#E3EAEC] hover:text-white transition-colors"
               >
                 {link.label}
               </a>

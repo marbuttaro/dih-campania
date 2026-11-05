@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, LayoutGrid, List } fr
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
 import { cn } from '@/lib/utils'
+import { LearningByDihBanner } from './LearningByDihBanner'
 import { EVENTS, dayLabel, fullDate, monthShort, parseDate, toIso, type EventItem } from './eventsData'
 
 const PAGE_SIZE = 6
@@ -267,6 +268,10 @@ export function EventsPage() {
         <div className="absolute inset-0 bg-white/20 pointer-events-none" />
 
         <div className="container-page relative z-10 pb-24 lg:pb-32">
+          <div className="mb-16 lg:mb-20">
+            <LearningByDihBanner />
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] xl:grid-cols-[minmax(0,1fr)_320px] gap-12 lg:gap-14 xl:gap-20 items-start">
             <div>
               <div className="flex items-center justify-between gap-6 mb-10">
