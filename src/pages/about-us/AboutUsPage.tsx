@@ -178,8 +178,8 @@ export function AboutUsPage() {
             </h2>
             
             <div className="space-y-6">
-              {/* Row 1: Executive Cards (3 columns, aligned with the board grid) */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Row 1: Executive Cards, centrate e larghe quanto le card dei consiglieri */}
+              <div className="flex flex-col md:flex-row md:justify-center gap-6 [&>*]:md:w-[calc((100%-3rem)/3)]">
                 <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
                   <span className="text-lg font-medium text-brand-dark-navy">Maurizio Manfellotto</span>
                   <span className="text-sm font-semibold text-brand-navy mt-1.5">Presidente</span>
@@ -187,10 +187,6 @@ export function AboutUsPage() {
                 <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
                   <span className="text-lg font-medium text-brand-dark-navy">Edoardo Imperiale</span>
                   <span className="text-sm font-semibold text-brand-navy mt-1.5">Amministratore Delegato</span>
-                </div>
-                {/* TODO: ruolo in arrivo */}
-                <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
-                  <span className="text-lg font-medium text-brand-dark-navy">Maria Luisa Faraone Mennella</span>
                 </div>
               </div>
 
@@ -205,8 +201,8 @@ export function AboutUsPage() {
                 <div className="w-12 h-0.5 bg-[#013167]/20 mx-auto mt-3" />
               </div>
 
-              {/* Board Members Grid (3 columns), alphabetical by surname */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Board Members (3 per riga, ultima riga centrata), alphabetical by surname */}
+              <div className="flex flex-col md:flex-row md:flex-wrap md:justify-center gap-6 [&>*]:md:w-[calc((100%-3rem)/3)]">
                 <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
                   <span className="text-lg font-medium text-[#001933]">Francesco Benucci</span>
                 </div>
@@ -215,6 +211,9 @@ export function AboutUsPage() {
                 </div>
                 <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
                   <span className="text-lg font-medium text-[#001933]">Giuseppe Esposito Mocerino</span>
+                </div>
+                <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
+                  <span className="text-lg font-medium text-[#001933]">Maria Luisa Faraone Mennella</span>
                 </div>
                 <div className="shadow-box bg-white/[0.15] p-6 rounded-2xl flex flex-col justify-center items-center text-center">
                   <span className="text-lg font-medium text-[#001933]">Mario Ferraro</span>

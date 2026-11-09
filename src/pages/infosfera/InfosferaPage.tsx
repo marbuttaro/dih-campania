@@ -3,6 +3,7 @@ import { ChevronRight } from 'lucide-react'
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
 import { cn } from '@/lib/utils'
+import { InfosferaReader } from './InfosferaReader'
 import { EDITORIAL_TEAM, LATEST_ISSUE, PAST_ISSUES, type InfosferaIssue } from './infosferaData'
 
 const REASONS = [
@@ -28,21 +29,30 @@ const GLASS_CARD =
   'bg-white/40 backdrop-blur-md border border-white/70 shadow-[0_15px_40px_rgba(1,49,103,0.12)]'
 
 function SfogliaButton({ issue, variant = 'primary' }: { issue: InfosferaIssue; variant?: 'primary' | 'soft' }) {
+  const [readerOpen, setReaderOpen] = useState(false)
+  const className = cn(
+    'inline-flex items-center justify-center font-semibold rounded-lg no-underline transition-all duration-300 hover:-translate-y-0.5 cursor-pointer',
+    variant === 'primary'
+      ? 'bg-gradient-to-r from-brand-navy to-[#0b4a86] text-white text-sm px-10 py-3 shadow-[0_6px_16px_rgba(1,49,103,0.35)] hover:shadow-[0_10px_22px_rgba(1,49,103,0.4)]'
+      : 'bg-[#E3EAEC] text-brand-dark-navy text-sm px-6 py-2.5 shadow-[0_4px_10px_rgba(1,49,103,0.18)] hover:shadow-[0_6px_16px_rgba(1,49,103,0.25)]',
+  )
+
+  // Senza anteprima (numeri non ancora preparati) il pulsante apre direttamente il PDF
+  if (!issue.previewPages?.length) {
+    return (
+      <a href={issue.url} target="_blank" rel="noopener noreferrer" title="Si apre in una nuova finestra" className={className}>
+        Sfoglia
+      </a>
+    )
+  }
+
   return (
-    <a
-      href={issue.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      title="Si apre in una nuova finestra"
-      className={cn(
-        'inline-flex items-center justify-center font-semibold rounded-lg no-underline transition-all duration-300 hover:-translate-y-0.5',
-        variant === 'primary'
-          ? 'bg-gradient-to-r from-brand-navy to-[#0b4a86] text-white text-sm px-10 py-3 shadow-[0_6px_16px_rgba(1,49,103,0.35)] hover:shadow-[0_10px_22px_rgba(1,49,103,0.4)]'
-          : 'bg-[#E3EAEC] text-brand-dark-navy text-sm px-6 py-2.5 shadow-[0_4px_10px_rgba(1,49,103,0.18)] hover:shadow-[0_6px_16px_rgba(1,49,103,0.25)]',
-      )}
-    >
-      Sfoglia
-    </a>
+    <>
+      <button type="button" onClick={() => setReaderOpen(true)} className={className}>
+        Sfoglia
+      </button>
+      {readerOpen && <InfosferaReader issue={issue} open onOpenChange={setReaderOpen} />}
+    </>
   )
 }
 

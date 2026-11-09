@@ -4,25 +4,19 @@ import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
 import { cn } from '@/lib/utils'
 import { LearningByDihBanner } from './LearningByDihBanner'
-import { EVENTS, dayLabel, fullDate, monthShort, parseDate, toIso, type EventItem } from './eventsData'
+import { EventGalleries } from './EventGalleries'
+import { EVENTS, MONTHS, fullDate, isMonthOnly, monthShort, parseDate, sortEvents, toIso, type EventItem } from './eventsData'
 
 const PAGE_SIZE = 6
-const MONTHS = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre']
 const WEEKDAYS_SHORT = ['Lu', 'Ma', 'Me', 'Gi', 'Ve', 'Sa', 'Do']
 const font = { fontFamily: 'Montserrat, sans-serif' }
 
 type View = 'grid' | 'list'
 
-// Upcoming events first (soonest on top), then past ones (most recent on top)
-function sortEvents(events: EventItem[]) {
-  const today = toIso(new Date())
-  const upcoming = events.filter((e) => e.date >= today).sort((a, b) => a.date.localeCompare(b.date))
-  const past = events.filter((e) => e.date < today).sort((a, b) => b.date.localeCompare(a.date))
-  return [...upcoming, ...past]
-}
-
 // Vertical (day over month) in the top-right corner, or a compact horizontal pill in the top-left
-function DateBadge({ date, horizontal = false }: { date: Date; horizontal?: boolean }) {
+function DateBadge({ event, horizontal = false }: { event: EventItem; horizontal?: boolean }) {
+  const date = parseDate(event.date)
+  const monthOnly = isMonthOnly(event)
   return (
     <div
       className={cn(
@@ -33,21 +27,25 @@ function DateBadge({ date, horizontal = false }: { date: Date; horizontal?: bool
       )}
       style={font}
     >
-      <span className="font-semibold text-[#8EBEF7]">{date.getDate()}</span>
-      <span className="font-semibold text-[#DEEAEE] lowercase">{monthShort(date)}</span>
+      {monthOnly ? (
+        <span className="font-semibold text-[#DEEAEE] lowercase">{monthShort(date)}</span>
+      ) : (
+        <>
+          <span className="font-semibold text-[#8EBEF7]">{date.getDate()}</span>
+          <span className="font-semibold text-[#DEEAEE] lowercase">{monthShort(date)}</span>
+        </>
+      )}
     </div>
   )
 }
 
-function EventMeta({ event, date }: { event: EventItem; date: Date }) {
+// Sotto il titolo: la location (il giorno è già nel badge sulla foto), con l'orario se c'è
+function EventMeta({ event }: { event: EventItem }) {
+  const where = [event.location, event.time && `ore ${event.time}`].filter(Boolean).join(' | ')
   return (
     <>
-      <p className="text-xs text-[#013167] mt-1">
-        {dayLabel(date)}
-        {event.time && ` | ${event.time}`}
-      </p>
+      {where && <p className="text-xs font-medium text-[#013167] mt-1">{where}</p>}
       <p className="text-[13px] font-light text-brand-dark-navy leading-snug mt-3">{event.description}</p>
-      {event.location && <p className="text-[11px] font-medium text-[#013167] mt-3">{event.location}</p>}
     </>
   )
 }
@@ -65,19 +63,20 @@ function JoinButton() {
 }
 
 function EventCard({ event }: { event: EventItem }) {
-  const date = parseDate(event.date)
   return (
     <article className="flex flex-col rounded-[20px] overflow-hidden bg-[#E3EAEC] shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_24px_rgba(164,177,188,0.55)]">
       <div className="relative h-[150px] sm:h-[130px]">
         <img src={event.image} alt="" className="w-full h-full object-cover" />
-        <DateBadge date={date} />
+        <DateBadge event={event} />
       </div>
       <div className="flex flex-col flex-1 px-6 pt-5 pb-4">
         <h3 className="text-[22px] font-normal text-[#001933] leading-[1.05]">{event.title}</h3>
-        <EventMeta event={event} date={date} />
-        <div className="flex justify-end mt-auto pt-4">
-          <JoinButton />
-        </div>
+        <EventMeta event={event} />
+        {event.joinable && (
+          <div className="flex justify-end mt-auto pt-4">
+            <JoinButton />
+          </div>
+        )}
       </div>
     </article>
   )
@@ -85,21 +84,22 @@ function EventCard({ event }: { event: EventItem }) {
 
 // Fixed height so every row lines up; long titles and descriptions are clamped
 function EventRow({ event }: { event: EventItem }) {
-  const date = parseDate(event.date)
   return (
     <article className="flex flex-col sm:flex-row h-[340px] sm:h-[160px] rounded-[20px] overflow-hidden bg-[#E3EAEC] shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_24px_rgba(164,177,188,0.55)]">
       <div className="relative h-[140px] sm:h-full sm:w-[220px] shrink-0">
         <img src={event.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
-        <DateBadge date={date} horizontal />
+        <DateBadge event={event} horizontal />
       </div>
       <div className="flex flex-col sm:flex-row justify-between gap-4 flex-1 min-h-0 px-6 py-5">
         <div className="flex-1 min-w-0 flex flex-col justify-center [&>p:nth-of-type(2)]:line-clamp-2">
           <h3 className="text-[22px] font-normal text-[#001933] leading-[1.1] line-clamp-2">{event.title}</h3>
-          <EventMeta event={event} date={date} />
+          <EventMeta event={event} />
         </div>
-        <div className="flex justify-end sm:items-end shrink-0">
-          <JoinButton />
-        </div>
+        {event.joinable && (
+          <div className="flex justify-end sm:items-end shrink-0">
+            <JoinButton />
+          </div>
+        )}
       </div>
     </article>
   )
@@ -153,6 +153,8 @@ function EventsCalendar({ events }: { events: EventItem[] }) {
   const daysInMonth = new Date(year, m + 1, 0).getDate()
   const cells = [...Array(leadingBlanks).fill(null), ...Array.from({ length: daysInMonth }, (_, i) => i + 1)]
   const selectedEvents = selected ? byDay.get(selected) ?? [] : []
+  const monthIso = toIso(month).slice(0, 7)
+  const undatedEvents = events.filter((e) => isMonthOnly(e) && e.date === monthIso)
 
   const shiftMonth = (delta: number) => setMonth(new Date(year, m + delta, 1))
 
@@ -206,13 +208,27 @@ function EventsCalendar({ events }: { events: EventItem[] }) {
         })}
       </div>
 
+      {undatedEvents.length > 0 && (
+        <div className="mt-5 text-[11px] text-[#001933] leading-snug">
+          <p className="font-semibold">In {MONTHS[m].toLowerCase()}, data da definire:</p>
+          <ul className="mt-1 space-y-1">
+            {undatedEvents.map((e) => (
+              <li key={e.id}>
+                {e.title}
+                {e.location && ` – ${e.location}`}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <div className="mt-6 pt-6 border-t border-[#C9D4DA] min-h-[120px]">
         {selectedEvents.length === 0 ? (
           <p className="text-xs text-[#5B6B7C]">Seleziona un giorno evidenziato per vedere l’evento.</p>
         ) : (
           <ul className="space-y-6">
             {selectedEvents.map((event) => (
-              <li key={event.title}>
+              <li key={event.id}>
                 <p className="text-[10px] text-[#001933]">
                   {fullDate(parseDate(event.date))}
                   {event.time && ` | ${event.time}`}
@@ -289,7 +305,7 @@ export function EventsPage() {
                 style={font}
               >
                 {visible.map((event) =>
-                  view === 'grid' ? <EventCard key={event.title} event={event} /> : <EventRow key={event.title} event={event} />,
+                  view === 'grid' ? <EventCard key={event.id} event={event} /> : <EventRow key={event.id} event={event} />,
                 )}
               </div>
 
@@ -300,6 +316,8 @@ export function EventsPage() {
               <EventsCalendar events={events} />
             </aside>
           </div>
+
+          <EventGalleries />
         </div>
       </main>
 
