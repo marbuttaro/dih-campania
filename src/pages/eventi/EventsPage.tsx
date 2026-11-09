@@ -290,11 +290,11 @@ export function EventsPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] xl:grid-cols-[minmax(0,1fr)_320px] gap-12 lg:gap-14 xl:gap-20 items-start">
             <div>
-              <div className="flex items-center justify-between gap-6 mb-10">
+              <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-4 mb-10">
                 <h1 className="text-[30px] sm:text-[38px] font-light text-[#013167] leading-tight" style={font}>
-                  I nostri eventi
+                  Prossimi appuntamenti
                 </h1>
-                <div className="flex gap-3">
+                <div className="flex gap-3 shrink-0">
                   {viewButton('grid', 'Visualizza a griglia', LayoutGrid)}
                   {viewButton('list', 'Visualizza a elenco', List)}
                 </div>
