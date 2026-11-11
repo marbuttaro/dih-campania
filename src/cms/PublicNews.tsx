@@ -7,13 +7,8 @@ import { safeHtml, plainText } from '../lib/content'
 
 const FEATURED_COUNT = 3
 
-// Giorno e mese del riquadro data, nel fuso di Roma come il resto delle date del CMS
-const dayFormat = new Intl.DateTimeFormat('it-IT', { timeZone: 'Europe/Rome', day: 'numeric' })
-const monthFormat = new Intl.DateTimeFormat('it-IT', { timeZone: 'Europe/Rome', month: 'short' })
-
-/** Stessa card degli "Appuntamenti" in home: immagine con riquadro data, titolo, riga info, testo e pulsante */
+/** Stessa card degli "Appuntamenti" in home, senza il riquadro data sull'immagine: titolo, riga info, testo e pulsante */
 function Card({ article, categories }: { article: Article; categories: Category[] }) {
-  const date = new Date(article.published_at)
   const url = articleUrl(article.slug)
   // "In evidenza" è una categoria tecnica del vecchio WordPress: non serve mostrarla
   const categoryNames = article.category_slugs
@@ -26,10 +21,6 @@ function Card({ article, categories }: { article: Article; categories: Category[
         ? <img src={article.featured_image} alt="" loading="lazy" className="w-full h-full object-cover" />
         // Metà dell'archivio migrato non ha immagine: fondo blu del sito con il logo
         : <div className="w-full h-full bg-[url('/assets/sfondo_form.png')] bg-cover bg-center flex items-center justify-start pl-8"><img src="/assets/logo DIH.svg" alt="" className="w-[52%] opacity-80" /></div>}
-      <div className="absolute top-5 right-5 w-[90px] h-[120px] rounded-[18px] flex flex-col items-center justify-center bg-brand-navy/30 backdrop-blur-[8px] border border-white/20 gap-0.5">
-        <span className="text-[48px] font-semibold text-[#8EBEF7] leading-none">{dayFormat.format(date)}</span>
-        <span className="text-[34px] font-semibold text-[#DEEAEE] leading-none lowercase">{monthFormat.format(date).replace('.', '')}</span>
-      </div>
     </a>
     <div className="p-7 flex-1 flex flex-col justify-between">
       <div className="mb-7">
