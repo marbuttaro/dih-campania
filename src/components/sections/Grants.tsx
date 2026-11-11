@@ -30,7 +30,7 @@ export function Grants() {
             Ti aiutiamo a orientarti tra i bandi attivi e a cogliere le migliori opportunità
           </p>
           <a
-            href="#bandi"
+            href="/bandi"
             className="inline-block px-8 py-3.5 rounded-[8.6px] bg-white/[0.09] border border-white/40 backdrop-blur-md text-white font-semibold shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-white/20 hover:-translate-y-0.5"
           >
             Scopri le opportunità

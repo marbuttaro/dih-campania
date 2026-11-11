@@ -7,12 +7,40 @@ import { safeHtml, plainText } from '../lib/content'
 
 const FEATURED_COUNT = 3
 
-function Card({ article }: { article: Article }) {
-  return <article className="panel flex flex-col h-full">
-    <a href={articleUrl(article.slug)}>{article.featured_image && <img src={article.featured_image} alt={article.featured_image_alt} loading="lazy" className="w-full aspect-video object-cover rounded-xl mb-5" />}<h2 className="text-xl leading-snug hover:underline">{articleTitle(article)}</h2></a>
-    <time dateTime={article.published_at} className="text-sm mt-3">{formatDate(article.published_at)}</time>
-    <p className="text-sm leading-relaxed my-4 line-clamp-4">{plainText(article.excerpt || article.content_html).slice(0, 240)}</p>
-    <a href={articleUrl(article.slug)} className="underline mt-auto font-semibold text-sm">Leggi l’articolo ↗</a>
+// Giorno e mese del riquadro data, nel fuso di Roma come il resto delle date del CMS
+const dayFormat = new Intl.DateTimeFormat('it-IT', { timeZone: 'Europe/Rome', day: 'numeric' })
+const monthFormat = new Intl.DateTimeFormat('it-IT', { timeZone: 'Europe/Rome', month: 'short' })
+
+/** Stessa card degli "Appuntamenti" in home: immagine con riquadro data, titolo, riga info, testo e pulsante */
+function Card({ article, categories }: { article: Article; categories: Category[] }) {
+  const date = new Date(article.published_at)
+  const url = articleUrl(article.slug)
+  // "In evidenza" è una categoria tecnica del vecchio WordPress: non serve mostrarla
+  const categoryNames = article.category_slugs
+    .filter(slug => !slug.includes('evidenza'))
+    .slice(0, 2)
+    .map(slug => categories.find(c => c.slug === slug)?.name || slug)
+  return <article className="bg-white rounded-[28px] overflow-hidden shadow-neumorphic flex flex-col w-full max-w-[380px] min-h-[520px] mx-auto transition-transform duration-300 hover:-translate-y-2">
+    <a href={url} tabIndex={-1} aria-hidden="true" className="relative block h-[280px] overflow-hidden">
+      {article.featured_image
+        ? <img src={article.featured_image} alt="" loading="lazy" className="w-full h-full object-cover" />
+        // Metà dell'archivio migrato non ha immagine: fondo blu del sito con il logo
+        : <div className="w-full h-full bg-[url('/assets/sfondo_form.png')] bg-cover bg-center flex items-center justify-start pl-8"><img src="/assets/logo DIH.svg" alt="" className="w-[52%] opacity-80" /></div>}
+      <div className="absolute top-5 right-5 w-[90px] h-[120px] rounded-[18px] flex flex-col items-center justify-center bg-brand-navy/30 backdrop-blur-[8px] border border-white/20 gap-0.5">
+        <span className="text-[48px] font-semibold text-[#8EBEF7] leading-none">{dayFormat.format(date)}</span>
+        <span className="text-[34px] font-semibold text-[#DEEAEE] leading-none lowercase">{monthFormat.format(date).replace('.', '')}</span>
+      </div>
+    </a>
+    <div className="p-7 flex-1 flex flex-col justify-between">
+      <div className="mb-7">
+        <h3 className="font-medium text-[19px] sm:text-[22px] text-[#013167] leading-tight line-clamp-3"><a href={url} className="hover:underline">{articleTitle(article)}</a></h3>
+        <p className="mt-2 text-sm font-medium text-[#013167]/80">{[...categoryNames, formatDate(article.published_at)].join(' | ')}</p>
+        <p className="mt-3 text-[15px] font-light text-brand-dark-navy leading-snug line-clamp-4">{plainText(article.excerpt || article.content_html).slice(0, 240)}</p>
+      </div>
+      <div className="flex justify-end">
+        <a href={url} className="bg-[#E3EAEC]/50 border border-white/50 text-brand-dark-navy px-8 py-3 rounded-xl font-semibold text-base sm:text-lg shadow-neumorphic inline-block no-underline transition-colors duration-300 hover:bg-[#E3EAEC]" aria-label={`Leggi: ${articleTitle(article)}`}>Leggi</a>
+      </div>
+    </div>
   </article>
 }
 
@@ -67,10 +95,10 @@ export default function PublicNews({ slug }: { slug?: string }) {
       </article>
       <aside><div className="panel"><h2 className="text-2xl mb-6">Altre news</h2>{articles.filter(a => a.id !== article.id).slice(0, 3).map(a => <div key={a.id} className="border-t py-5"><a className="font-medium hover:underline" href={articleUrl(a.slug)}>{articleTitle(a)}</a><p className="text-xs mt-3">{formatDate(a.published_at)}</p></div>)}</div><div className="mt-8"><h2 className="mb-4">Archivio</h2>{years.map(y => <a className="block border-t py-4 text-xl" href={`/news?anno=${y}`} key={y}>{y} ↗</a>)}<a href="/news" className="button mt-5">Archivio completo</a></div></aside>
     </div> : <div className="panel my-10"><h1 className="text-3xl">Articolo non trovato</h1><p className="mt-4">L’indirizzo potrebbe essere cambiato oppure il contenuto non è pubblico.</p><a href="/news" className="button mt-6">Cerca nell’archivio</a></div> : <>
-      {featured.length > 0 && <section aria-labelledby="news-evidenza" className="mb-16"><h1 id="news-evidenza" className="text-4xl sm:text-5xl font-light my-9">News in evidenza</h1><div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">{featured.map(a => <Card article={a} key={a.id} />)}</div></section>}
+      {featured.length > 0 && <section aria-labelledby="news-evidenza" className="mb-16"><h1 id="news-evidenza" className="text-4xl sm:text-5xl font-light my-9">News in evidenza</h1><div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">{featured.map(a => <Card article={a} categories={categories} key={a.id} />)}</div></section>}
       <header className="my-9"><h2 className="text-4xl sm:text-5xl font-light">Dal nostro archivio</h2><p className="mt-4 text-lg">Tutte le notizie, bandi, eventi e opportunità per le imprese.</p></header>
       <form action="/news" className="panel grid sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_auto] gap-4 items-end mb-9"><label>Cerca<input type="search" name="q" defaultValue={search} placeholder="Parole chiave" /></label><label>Categoria<select name="categoria" defaultValue={category}><option value="">Tutte le categorie</option>{categories.map(c => <option key={c.slug} value={c.slug}>{c.name}</option>)}</select></label><label>Anno<select name="anno" defaultValue={year}><option value="">Tutti gli anni</option>{years.map(y => <option key={y} value={y}>{y}</option>)}</select></label><button>Cerca</button></form>
-      <p className="text-sm mb-5">{count} articoli trovati</p><div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">{articles.map(a => <Card article={a} key={a.id} />)}</div>{!count && <p className="panel">Nessun articolo corrisponde ai filtri. <a href="/news" className="underline">Mostra tutto l’archivio</a>.</p>}
+      <p className="text-sm mb-5">{count} articoli trovati</p><div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">{articles.map(a => <Card article={a} categories={categories} key={a.id} />)}</div>{!count && <p className="panel">Nessun articolo corrisponde ai filtri. <a href="/news" className="underline">Mostra tutto l’archivio</a>.</p>}
       <nav aria-label="Pagine archivio" className="flex justify-center items-center gap-5 mt-10">{page > 1 && <a className="button" href={pageUrl(page - 1)}>Precedente</a>}<span>Pagina {page} di {Math.max(1, Math.ceil(count / PAGE_SIZE))}</span>{page * PAGE_SIZE < count && <a className="button" href={pageUrl(page + 1)}>Successiva</a>}</nav>
     </>}
   </div></main><Footer /></>

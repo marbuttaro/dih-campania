@@ -5,7 +5,7 @@ const NAV_COLUMNS = [
       { href: '#servizi', label: 'Servizi' },
       { href: '#progetti', label: 'Progetti' },
       { href: '/eventi', label: 'Eventi' },
-      { href: '/news?categoria=bandi', label: 'Bandi' },
+      { href: '/bandi', label: 'Bandi' },
       { href: '/news', label: 'News e archivio' },
       { href: '/chi-siamo', label: 'Chi Siamo' },
     ],

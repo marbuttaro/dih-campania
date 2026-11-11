@@ -28,12 +28,12 @@ const RISORSE_SUBLINKS = [
 const NAV_LINKS = [
   { href: '/servizi', label: 'Servizi', children: SERVIZI_SUBLINKS },
   { href: '/progetti', label: 'Progetti' },
+  { href: '/bandi', label: 'Bandi' },
   { href: '/eventi', label: 'Eventi' },
   { href: '/news', label: 'News' },
   { label: 'Risorse', children: RISORSE_SUBLINKS },
   { href: '/infosfera', label: 'Infosfera' },
-  // Bandi e Newsletter temporaneamente nascosti su richiesta
-  // { href: '#bandi', label: 'Bandi' },
+  // Newsletter temporaneamente nascosta su richiesta
   // { href: '#newsletter', label: 'Newsletter' },
   { href: '/innova-co', label: 'Innova.Co' },
   { href: '/chi-siamo', label: 'Chi Siamo' },
