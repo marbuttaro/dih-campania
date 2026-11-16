@@ -18,6 +18,7 @@ const SERVIZI_SUBLINKS = [
   { href: '/trasformazione-digitale', label: 'Trasformazione Digitale' },
   { href: '/cybersecurity', label: 'Cybersecurity' },
   { href: '/intelligenza-artificiale', label: 'Intelligenza Artificiale' },
+  { href: '/credito-d-imposta', label: "Credito d'imposta" },
 ] as const
 
 const RISORSE_SUBLINKS = [

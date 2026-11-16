@@ -76,7 +76,7 @@ function LatestIssueBox({ className }: { className?: string }) {
 
 function PastIssueCard({ issue }: { issue: InfosferaIssue }) {
   const [open, setOpen] = useState(false)
-  const listId = `contenuti-${issue.id}`
+  const listId = `autori-${issue.id}`
 
   return (
     <article className="flex flex-col items-start w-full sm:max-w-[240px] mx-auto reveal-element">
@@ -84,20 +84,24 @@ function PastIssueCard({ issue }: { issue: InfosferaIssue }) {
         src={issue.cover}
         alt={`Copertina Infosfera ${issue.label}`}
         loading="lazy"
-        className="w-full aspect-[1061/1501] object-cover shadow-[0_10px_30px_rgba(1,49,103,0.25)]"
+        // Copertine intere, con le loro proporzioni: quelle dei numeri passati non sono tutte uguali
+        className="w-full h-auto shadow-[0_10px_30px_rgba(1,49,103,0.25)]"
       />
       <p className="mt-5 text-sm font-light text-brand-navy">{issue.label}</p>
       <h3 className="mt-1 text-lg font-medium text-brand-navy leading-snug">{issue.title}</h3>
-      {issue.contents?.length ? (
+      {issue.description && (
+        <p className="mt-3 text-[13px] text-brand-dark-navy/80 leading-relaxed">{issue.description}</p>
+      )}
+      {issue.authors?.length ? (
         <>
           <button
             type="button"
             aria-expanded={open}
             aria-controls={listId}
             onClick={() => setOpen((v) => !v)}
-            className="mt-2 inline-flex items-center gap-3 text-xs text-brand-navy/80 hover:text-brand-navy cursor-pointer"
+            className="mt-3 inline-flex items-center gap-3 text-xs text-brand-navy/80 hover:text-brand-navy cursor-pointer"
           >
-            In questo numero
+            Tra gli autori
             <span className="inline-flex size-6 items-center justify-center rounded-full bg-white/60 border border-white shadow-[0_2px_6px_rgba(1,49,103,0.15)]">
               <ChevronRight className={cn('size-3.5 transition-transform duration-300', open && 'rotate-90')} />
             </span>
@@ -105,10 +109,12 @@ function PastIssueCard({ issue }: { issue: InfosferaIssue }) {
           <ul
             id={listId}
             hidden={!open}
-            className="mt-3 space-y-0.5 text-xs text-brand-navy/80 leading-snug list-disc pl-4 marker:text-brand-navy/50"
+            className="mt-3 space-y-1.5 text-xs text-brand-navy/80 leading-snug list-disc pl-4 marker:text-brand-navy/50"
           >
-            {issue.contents.map((item) => (
-              <li key={item}>{item}</li>
+            {issue.authors.map((author) => (
+              <li key={author.name}>
+                <span className="font-semibold text-brand-navy">{author.name}</span> – {author.role}
+              </li>
             ))}
           </ul>
         </>

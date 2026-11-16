@@ -50,8 +50,7 @@ const SERVICES = [
     title: "Credito d'imposta",
     desc: "Il Campania DIH, iscritto all'Albo MIMIT dei certificatori, offre servizi di certificazione dei crediti d'imposta per attività di ricerca e sviluppo e innovazione tecnologica, supportando le imprese nell'accesso agli incentivi previsti dalla normativa vigente.",
     image: '/assets/slider_servizi_credito.jpg',
-    // Nessuna pagina dedicata per ora: senza link non compare "Scopri di più"
-    link: null,
+    link: '/credito-d-imposta',
     areas: [
       'Certificazione dei crediti',
       'Ricerca e sviluppo',
