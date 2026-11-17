@@ -1,25 +1,33 @@
-import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 
 export function Experience() {
-  const ref = useRef<HTMLElement | null>(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  })
-  const y = useTransform(scrollYProgress, [0, 1], [40, -40])
+  const boxRef = useRef<HTMLDivElement | null>(null)
+
+  // Il blocco compare allo scroll come nelle pagine dei servizi (classi reveal-element / reveal-visible)
+  useEffect(() => {
+    const el = boxRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry], obs) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-visible')
+          obs.disconnect()
+        }
+      },
+      { threshold: 0.15 },
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <section id="esperienza" ref={ref} className="relative pt-6 pb-16">
+    <section id="esperienza" className="relative pt-6 pb-16">
       <div className="container-page flex justify-center">
-        <div className="w-full max-w-[1200px] shadow-box">
-          <motion.h2
-            className="font-light text-3xl sm:text-4xl lg:text-[44px] text-brand-navy leading-tight mb-6 lg:mb-7"
-            style={{ y }}
-          >
+        <div ref={boxRef} className="w-full max-w-[1200px] shadow-box reveal-element">
+          <h2 className="font-light text-3xl sm:text-4xl lg:text-[44px] text-brand-navy leading-tight mb-6 lg:mb-7">
             La nostra esperienza
             <br />a servizio delle aziende
-          </motion.h2>
+          </h2>
           <p className="text-base lg:text-lg leading-relaxed text-brand-dark-navy/80 mb-8 lg:mb-9">
             Il CampaniaDIH dal 2017 supporta attività di ricerca, orientamento e sviluppo di
             progetti di DT a favore delle imprese. Guidato da un senior strategic PM, il team è

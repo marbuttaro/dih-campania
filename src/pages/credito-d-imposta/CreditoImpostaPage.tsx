@@ -127,14 +127,15 @@ function Percorso() {
         <PercorsoIntro />
 
         <ol className="relative mt-10 lg:mt-16 grid grid-cols-3 gap-4 lg:gap-8">
-          {/* Linea che unisce i cerchi: si riempie con lo scroll */}
+          {/* Linea che unisce i cerchi, stesso stile della timeline di Chi siamo:
+              binario azzurro tenue con bagliore, riempimento #8EBEF7 → #2F7BE0 che avanza con lo scroll */}
           <span
             aria-hidden
-            className="absolute left-[calc(100%/6)] right-[calc(100%/6)] top-[26px] lg:top-[43px] h-[3px] rounded-full bg-brand-navy/10 overflow-hidden"
+            className="absolute left-[calc(100%/6)] right-[calc(100%/6)] top-[25px] lg:top-[38.5px] h-[6px] lg:h-[11px] rounded-full bg-[#8EBEF7]/40 shadow-[0_0_8px_rgba(142,190,247,0.45)]"
           >
             <motion.span
               style={{ scaleX: linea }}
-              className="block h-full w-full origin-left bg-gradient-to-r from-brand-light-blue via-[#6fa3dd] to-brand-navy"
+              className="block h-full w-full rounded-full origin-left bg-gradient-to-r from-[#8EBEF7] to-[#2F7BE0] shadow-[0_0_10px_rgba(142,190,247,0.7)]"
             />
           </span>
 

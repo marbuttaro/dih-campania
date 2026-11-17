@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { GlowCursor } from '@/components/effects/GlowCursor'
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
 import { ContactPrefooter } from '@/components/sections/ContactPrefooter'
@@ -281,7 +280,6 @@ export function InnovaCoPage() {
 
   return (
     <>
-      <GlowCursor />
       <Navbar />
 
       <main className="flex-grow relative">

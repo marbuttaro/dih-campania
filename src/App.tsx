@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 
-import { GlowCursor } from '@/components/effects/GlowCursor'
 import { About } from '@/components/sections/About'
 import { Community } from '@/components/sections/Community'
 import { ContactPrefooter } from '@/components/sections/ContactPrefooter'
@@ -35,7 +34,6 @@ function App() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <GlowCursor />
       <Navbar />
       <main>
         <Hero />

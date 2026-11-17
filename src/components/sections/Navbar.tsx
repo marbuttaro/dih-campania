@@ -13,6 +13,7 @@ import {
 import { cn } from '@/lib/utils'
 import { ContactModal } from './ContactModal'
 import { NewsletterTab } from './NewsletterTab'
+import { GlowCursor } from '@/components/effects/GlowCursor'
 
 const SERVIZI_SUBLINKS = [
   { href: '/trasformazione-digitale', label: 'Trasformazione Digitale' },
@@ -233,6 +234,8 @@ export function Navbar() {
 
     <ContactModal open={contactModalOpen} onClose={() => setContactModalOpen(false)} />
     <NewsletterTab />
+    {/* Bagliore del cursore vicino ai pulsanti, su tutte le pagine */}
+    <GlowCursor />
     </>
   )
 }
