@@ -39,7 +39,7 @@ export const EDITORIAL_TEAM = [
 const PRIDE_UPLOADS = 'https://www.edih-pride.eu/wp-content/uploads'
 
 /**
- * Numeri precedenti, dal più recente. Il n. 2/2024 manca: copertina e testo da recuperare.
+ * Numeri precedenti, dal più recente. Il n. 2/2024 (n. 8) manca: PDF, copertina e testo da recuperare.
  * Senza `previewPages` il pulsante "Sfoglia" apre direttamente il PDF (o lo sfogliatore) sul sito EDIH PRIDE.
  */
 export const PAST_ISSUES: InfosferaIssue[] = [
@@ -137,6 +137,103 @@ export const PAST_ISSUES: InfosferaIssue[] = [
       { name: 'Federico Cabitza', role: "Professore associato di Interazione Uomo-Macchina all'Università di Milano Bicocca" },
       { name: "Zeno D'Agostino", role: 'Presidente Autorità di Sistema Portuale del Mare Adriatico Orientale' },
       { name: 'Antonio Zoccoli', role: 'Professore di fisica, Università degli Studi di Bologna' },
+    ],
+  },
+  {
+    id: '4',
+    label: 'N°2/2022',
+    title: "Cambiamento d'epoca – Green is Blue: scenari di sostenibilità digitale",
+    cover: '/assets/infosfera/numeri/4/copertina.webp',
+    url: '/assets/infosfera/numeri/4/infosfera-2-2022.pdf',
+    description:
+      "Esploriamo l'intreccio tra transizione ecologica e trasformazione digitale (twin transition) come risposta alle sfide energetiche, industriali e ambientali del presente. Scopriamo il potenziale trasformativo delle energie pulite (rinnovabili e nucleare), i paradigmi dell'Open Innovation e l'impatto filosofico e sociale dell'intelligenza artificiale e del cloud.",
+    authors: [
+      { name: 'Franco Bernabè', role: 'Cavaliere del Lavoro' },
+      { name: 'Nicola Lanzetta', role: 'Direttore Italia di Enel' },
+      { name: 'Umberto Minopoli', role: "Presidente dell'Associazione Nucleare Italiana" },
+      { name: 'Anthony Elliott', role: "Sociologo e pensatore sui temi dell'impatto sociale delle nuove tecnologie" },
+      { name: 'Henry Chesbrough', role: "Teorico dell'Open Innovation" },
+      { name: 'Federico Maffezzoli', role: "Ricercatore dell'Osservatorio Smart Agrifood" },
+      { name: 'Silvia Petrone e Marco Pini', role: "Ricercatori dell'Istituto Tagliacarne" },
+    ],
+  },
+  {
+    id: '3',
+    label: 'N°1/2022',
+    title: 'Tecnologia e innovazione, la forza che unisce',
+    cover: '/assets/infosfera/numeri/3/copertina.webp',
+    url: '/assets/infosfera/numeri/3/infosfera-1-2022.pdf',
+    description:
+      "Analizziamo l'innovazione e la transizione digitale come leve strategiche e politiche indispensabili per la competitività. Approfondiamo l'internazionalizzazione del Made in Italy, lo stato della ricerca scientifica italiana, le filiere 4.0, la nascita dell'acceleratore Terra Next per la bioeconomia e le nuove frontiere del Fintech.",
+    authors: [
+      { name: 'Anna Ascani', role: 'Sottosegretario di Stato al Ministero dello Sviluppo Economico' },
+      { name: 'Mauro Alfonso', role: 'Amministratore Delegato e Direttore Generale di SIMEST' },
+      { name: 'Carlo Ferro', role: "Presidente dell'Agenzia ICE" },
+      { name: 'Nicola Lener', role: "Ambasciatore d'Italia negli Emirati Arabi Uniti" },
+      {
+        name: 'Doris Messina',
+        role: 'Chief Digital Transformation Officer di Banca Sella e co-founder del Fintech District',
+      },
+      { name: 'Francesca Bria', role: 'Presidente di CDP Venture Capital' },
+      { name: 'Riccardo Porro', role: 'Chief Operating Officer di Cariplo Factory' },
+    ],
+  },
+  {
+    id: '2',
+    label: 'N°2/2021',
+    title: 'La forza magnetica della città',
+    cover: '/assets/infosfera/numeri/2/copertina.webp',
+    url: '/assets/infosfera/numeri/2/infosfera-2-2021.pdf',
+    description:
+      'Affrontiamo il ripensamento del paradigma urbano e delle smart city nell\'era della transizione digitale ed ecologica. Analizziamo i modelli di sviluppo delle grandi metropoli globali, unendo le potenzialità delle nuove tecnologie (5G, IoT, intelligenza artificiale) con la sostenibilità ambientale e la centralità del capitale umano.',
+    authors: [
+      { name: 'Maria Cristina Messa', role: "Ministro dell'Università e della Ricerca" },
+      {
+        name: 'Carlo Robiglio',
+        role: 'Presidente di Piccola Industria Confindustria e Vicepresidente di Confindustria',
+      },
+      {
+        name: 'Carlo Ratti',
+        role: 'Architetto, ingegnere e direttore del Senseable City Lab presso il MIT di Boston',
+      },
+      { name: 'Juhana Mikael Vartiainen', role: 'Sindaco di Helsinki' },
+      { name: 'Alison Gilliland', role: 'Sindaca di Dublino (Lord Mayor)' },
+    ],
+  },
+  {
+    id: '1',
+    label: 'N°1/2021',
+    title: 'Aumentare il futuro',
+    cover: '/assets/infosfera/numeri/1/copertina.webp',
+    url: '/assets/infosfera/numeri/1/infosfera-1-2021.pdf',
+    description:
+      "Affrontiamo il tema della transizione digitale e culturale delle PMI italiane verso l'Industria 4.0 e la preparazione all'Industria 5.0, con un forte focus sul ruolo strategico del Mezzogiorno, del PNRR, del capitale umano e della sicurezza informatica.",
+    authors: [
+      { name: 'David Weinberger', role: "Tecnologo e filosofo dell'informazione" },
+      { name: 'Marco Taisch', role: 'Presidente Competence Center MADE' },
+      { name: 'Gianluigi Viscardi', role: 'Presidente Rete Nazionale DIH Confindustria' },
+      { name: 'Paolo Rostirolla ed Enrico Mercadante', role: 'Leonardo e Cisco' },
+      { name: 'Paolo Prinetto', role: 'Laboratorio CINI Cybersecurity' },
+    ],
+  },
+  {
+    id: '0',
+    label: 'N°1/2020',
+    title: 'Perché il digitale è un destino',
+    cover: '/assets/infosfera/numeri/0/copertina.webp',
+    url: '/assets/infosfera/numeri/0/infosfera-1-2020.pdf',
+    description:
+      "Il numero d'esordio del magazine esplora la pervasività della rivoluzione digitale e dell'Industria 4.0, mostrando come l'innovazione tecnologica, l'intelligenza artificiale e la robotica non siano opzioni accessorie, ma leve strategiche indispensabili per la competitività delle imprese.",
+    authors: [
+      { name: 'Luigi Nicolais', role: 'Presidente Campania Digital Innovation Hub' },
+      { name: 'Elio Catania', role: 'Consigliere per la politica industriale del MISE' },
+      {
+        name: 'Andrea Bianchi',
+        role: 'Responsabile pianificazione strategica e politiche industriali di Invitalia',
+      },
+      { name: 'Luciano Floridi', role: "Professore di Filosofia ed Etica dell'informazione all'Università di Oxford" },
+      { name: 'Piero Salatino', role: 'Presidente MedITech e Preside Scuola Politecnica Federico II' },
+      { name: 'Bruno Siciliano', role: "Ordinario di Controlli e Robotica all'Università Federico II" },
     ],
   },
 ]
