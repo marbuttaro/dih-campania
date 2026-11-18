@@ -75,11 +75,15 @@ function LatestIssueBox({ className }: { className?: string }) {
 }
 
 function PastIssueCard({ issue }: { issue: InfosferaIssue }) {
+  // Desktop: autori aperti/chiusi con "Tra gli autori".
+  // Mobile: descrizione ridotta a due righe e autori nascosti finché non si preme "Leggi tutto".
   const [open, setOpen] = useState(false)
+  const [expanded, setExpanded] = useState(false)
   const listId = `autori-${issue.id}`
+  const detailsId = `dettagli-${issue.id}`
 
   return (
-    <article className="flex flex-col items-start w-full sm:max-w-[240px] mx-auto reveal-element">
+    <article className="flex flex-col items-start w-full max-w-[260px] sm:max-w-[240px] mx-auto reveal-element">
       <img
         src={issue.cover}
         alt={`Copertina Infosfera ${issue.label}`}
@@ -89,36 +93,66 @@ function PastIssueCard({ issue }: { issue: InfosferaIssue }) {
       />
       <p className="mt-5 text-sm font-light text-brand-navy">{issue.label}</p>
       <h3 className="mt-1 text-lg font-medium text-brand-navy leading-snug">{issue.title}</h3>
-      {issue.description && (
-        <p className="mt-3 text-[13px] text-brand-dark-navy/80 leading-relaxed">{issue.description}</p>
+      <div id={detailsId} className="w-full">
+        {issue.description && (
+          <p
+            className={cn(
+              'mt-3 text-[13px] text-brand-dark-navy/80 leading-relaxed sm:line-clamp-none',
+              !expanded && 'line-clamp-2',
+            )}
+          >
+            {issue.description}
+          </p>
+        )}
+        {issue.authors?.length ? (
+          <>
+            <button
+              type="button"
+              aria-expanded={open}
+              aria-controls={listId}
+              onClick={() => setOpen((v) => !v)}
+              className="mt-3 hidden sm:inline-flex items-center gap-3 text-xs text-brand-navy/80 hover:text-brand-navy cursor-pointer"
+            >
+              Tra gli autori
+              <span className="inline-flex size-6 items-center justify-center rounded-full bg-white/60 border border-white shadow-[0_2px_6px_rgba(1,49,103,0.15)]">
+                <ChevronRight className={cn('size-3.5 transition-transform duration-300', open && 'rotate-90')} />
+              </span>
+            </button>
+            {/* Su mobile, a testo espanso, un titoletto prende il posto del pulsante */}
+            <p className={cn('mt-4 text-xs font-medium text-brand-navy sm:hidden', !expanded && 'hidden')}>
+              Tra gli autori
+            </p>
+            <ul
+              id={listId}
+              className={cn(
+                'mt-3 space-y-1.5 text-xs text-brand-navy/80 leading-snug list-disc pl-4 marker:text-brand-navy/50',
+                expanded ? 'block' : 'hidden',
+                open ? 'sm:block' : 'sm:hidden',
+              )}
+            >
+              {issue.authors.map((author) => (
+                <li key={author.name}>
+                  <span className="font-semibold text-brand-navy">{author.name}</span> – {author.role}
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : null}
+      </div>
+      {(issue.description || issue.authors?.length) && (
+        <button
+          type="button"
+          aria-expanded={expanded}
+          aria-controls={detailsId}
+          onClick={() => setExpanded((v) => !v)}
+          className="sm:hidden mt-3 inline-flex items-center gap-3 text-xs font-medium text-brand-navy cursor-pointer"
+        >
+          {expanded ? 'Mostra meno' : 'Leggi tutto'}
+          <span className="inline-flex size-6 items-center justify-center rounded-full bg-white/60 border border-white shadow-[0_2px_6px_rgba(1,49,103,0.15)]">
+            <ChevronRight className={cn('size-3.5 transition-transform duration-300', expanded ? '-rotate-90' : 'rotate-90')} />
+          </span>
+        </button>
       )}
-      {issue.authors?.length ? (
-        <>
-          <button
-            type="button"
-            aria-expanded={open}
-            aria-controls={listId}
-            onClick={() => setOpen((v) => !v)}
-            className="mt-3 inline-flex items-center gap-3 text-xs text-brand-navy/80 hover:text-brand-navy cursor-pointer"
-          >
-            Tra gli autori
-            <span className="inline-flex size-6 items-center justify-center rounded-full bg-white/60 border border-white shadow-[0_2px_6px_rgba(1,49,103,0.15)]">
-              <ChevronRight className={cn('size-3.5 transition-transform duration-300', open && 'rotate-90')} />
-            </span>
-          </button>
-          <ul
-            id={listId}
-            hidden={!open}
-            className="mt-3 space-y-1.5 text-xs text-brand-navy/80 leading-snug list-disc pl-4 marker:text-brand-navy/50"
-          >
-            {issue.authors.map((author) => (
-              <li key={author.name}>
-                <span className="font-semibold text-brand-navy">{author.name}</span> – {author.role}
-              </li>
-            ))}
-          </ul>
-        </>
-      ) : null}
       <div className="mt-5">
         <SfogliaButton issue={issue} variant="soft" />
       </div>
@@ -126,7 +160,7 @@ function PastIssueCard({ issue }: { issue: InfosferaIssue }) {
   )
 }
 
-/** Su mobile i numeri precedenti scorrono orizzontalmente (scroll-snap); da sm in su sono una griglia */
+/** Su mobile i numeri precedenti scorrono uno alla volta, al centro (scroll-snap); da sm in su sono una griglia */
 function PastIssuesSlider() {
   const trackRef = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
@@ -134,14 +168,12 @@ function PastIssuesSlider() {
   const onScroll = () => {
     const track = trackRef.current
     if (!track || !track.firstElementChild) return
-    const slide = (track.firstElementChild as HTMLElement).offsetWidth
-    setActive(Math.round(track.scrollLeft / slide))
+    setActive(Math.round(track.scrollLeft / track.clientWidth))
   }
 
   const goTo = (i: number) => {
     const track = trackRef.current
-    const slide = track?.children[i] as HTMLElement | undefined
-    if (track && slide) track.scrollTo({ left: slide.offsetLeft - track.offsetLeft, behavior: 'smooth' })
+    if (track) track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' })
   }
 
   return (
@@ -149,10 +181,10 @@ function PastIssuesSlider() {
       <div
         ref={trackRef}
         onScroll={onScroll}
-        className="mt-10 -mx-6 px-6 pt-4 pb-6 flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-px-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mt-14 sm:mx-0 sm:px-0 sm:py-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-14 sm:overflow-visible items-start"
+        className="mt-10 -mx-6 pt-4 pb-6 flex overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mt-14 sm:mx-0 sm:px-0 sm:py-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-14 sm:overflow-visible items-start"
       >
         {PAST_ISSUES.map((issue) => (
-          <div key={issue.id} className="snap-start shrink-0 w-[72%] sm:w-auto">
+          <div key={issue.id} className="snap-center shrink-0 w-full px-6 sm:px-0 sm:w-auto">
             <PastIssueCard issue={issue} />
           </div>
         ))}
