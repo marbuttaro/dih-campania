@@ -21,7 +21,7 @@ export function ContactModal({ open, onClose }: ContactModalProps) {
 
   return (
     <div className="fixed inset-0 z-40 lg:hidden" role="dialog" aria-modal="true" aria-label="Form di contatto">
-      <div className="absolute inset-0 overflow-y-auto overscroll-contain bg-[url('/assets/background_page.png')] bg-cover bg-center">
+      <div className="absolute inset-0 overflow-y-auto overscroll-contain bg-[url('/assets/background_page.png')] max-lg:bg-[url('/assets/background_page_mobile.webp')] pointer-coarse:bg-[url('/assets/background_page_mobile.webp')] bg-cover bg-center">
         <div className="relative min-h-full w-full pt-24 pb-10">
           <button
             type="button"

@@ -79,6 +79,15 @@
     overflow-x: hidden;
   }
 
+  /* Telefoni e tablet: l'immagine grande (3024×18094, ~55 MP) supera i limiti di Safari/Chrome su iPhone e iPad,
+     che la disegnano solo in parte (metà schermo resta bianca). Lì usiamo una copia leggera da 800 px. */
+  @media (max-width: 1023px), (hover: none) and (pointer: coarse) {
+    body {
+      background-image: url('/assets/background_page_mobile.webp');
+      background-attachment: scroll;
+    }
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply text-brand-dark-navy font-semibold leading-tight;
   }
