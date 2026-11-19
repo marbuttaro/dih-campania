@@ -30,7 +30,6 @@ const GLASS_CARD =
 
 function SfogliaButton({ issue, variant = 'primary' }: { issue: InfosferaIssue; variant?: 'primary' | 'soft' }) {
   const [readerOpen, setReaderOpen] = useState(false)
-  const [initialGate, setInitialGate] = useState(false)
   const className = cn(
     'inline-flex items-center justify-center font-semibold rounded-lg no-underline transition-all duration-300 hover:-translate-y-0.5 cursor-pointer',
     variant === 'primary'
@@ -40,11 +39,10 @@ function SfogliaButton({ issue, variant = 'primary' }: { issue: InfosferaIssue; 
 
   return (
     <>
-      <button type="button" onClick={() => {setInitialGate(false);setReaderOpen(true)}} className={className}>
+      <button type="button" onClick={() => setReaderOpen(true)} className={className}>
         Sfoglia
       </button>
-      <button type="button" onClick={()=>{setInitialGate(true);setReaderOpen(true)}} className="inline-flex items-center justify-center px-3 py-2 text-sm font-semibold text-brand-navy underline underline-offset-4">Scarica PDF</button>
-      {readerOpen && <InfosferaReader issue={issue} open initialGate={initialGate} onOpenChange={setReaderOpen} />}
+      {readerOpen && <InfosferaReader issue={issue} open onOpenChange={setReaderOpen} />}
     </>
   )
 }

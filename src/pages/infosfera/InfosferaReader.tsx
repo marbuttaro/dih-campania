@@ -210,12 +210,10 @@ export function InfosferaReader({
   issue,
   open,
   onOpenChange,
-  initialGate = false,
 }: {
   issue: InfosferaIssue
   open: boolean
   onOpenChange: (open: boolean) => void
-  initialGate?: boolean
 }) {
   const pages = useMemo(() => issue.previewPages ?? [], [issue.previewPages])
   const isDesktop = useIsDesktop()
@@ -223,7 +221,7 @@ export function InfosferaReader({
     () => buildViews(pages.length, isDesktop, issue.blankPages),
     [pages.length, isDesktop, issue.blankPages],
   )
-  const [index, setIndex] = useState(initialGate ? views.length : 0)
+  const [index, setIndex] = useState(0)
   const [touchX, setTouchX] = useState<number | null>(null)
   const [zoomIndex, setZoomIndex] = useState(0)
   const zoom = ZOOM_LEVELS[zoomIndex]
