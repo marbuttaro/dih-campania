@@ -2,20 +2,24 @@
 export interface GlossaryTerm {
   term: string
   definition: string
+  /** Voce nascosta dal sito (es. definizione in attesa di revisione). */
+  hidden?: boolean
 }
 
 export const GLOSSARY: GlossaryTerm[] = [
   { term: "Accesso", definition: "Permesso di entrare in un sistema." },
   { term: "Account", definition: "Profilo utente per accedere a servizi online." },
   { term: "Account temporaneo", definition: "Profilo con accesso limitato nel tempo." },
-  { term: "AI (Intelligenza Artificiale)", definition: "Tecnologia che consente ai sistemi digitali di apprendere, prevedere, classificare o generare contenuti autonomamente. In edilizia è utilizzata per ottimizzare la progettazione (Generative AI), controlli qualità e manutenzione predittiva." },
+  // Nascosta finché non arriva la definizione corretta.
+  { hidden: true, term: "AI (Intelligenza Artificiale)", definition: "Tecnologia che consente ai sistemi digitali di apprendere, prevedere, classificare o generare contenuti autonomamente. In edilizia è utilizzata per ottimizzare la progettazione (Generative AI), controlli qualità e manutenzione predittiva." },
   { term: "Air Gap", definition: "Isolamento fisico di un sistema." },
   { term: "Algoritmo", definition: "Serie di istruzioni per risolvere un problema." },
   { term: "Analisi Forense", definition: "Ricerca prove digitali dopo un incidente informatico." },
   { term: "Anomalia", definition: "Comportamento inusuale di un sistema." },
   { term: "API", definition: "Interfaccia per comunicazione tra software." },
   { term: "AR (Augmented Reality)", definition: "Realtà aumentata. Tecnologia che sovrappone contenuti digitali (immagini, suoni) alla realtà fisica attraverso dispositivi mobili o occhiali smart." },
-  { term: "Artificial Intelligence of Things (AIoT)", definition: "L'uso di strumenti digitali e software per automatizzare processi aziendali ripetitivi, migliorando l'efficienza e riducendo l'errore umano" },
+  // Nascosta finché non arriva la definizione corretta.
+  { hidden: true, term: "Artificial Intelligence of Things (AIoT)", definition: "L'uso di strumenti digitali e software per automatizzare processi aziendali ripetitivi, migliorando l'efficienza e riducendo l'errore umano" },
   { term: "Autenticazione a due fattori", definition: "Secondo passaggio per verificare identità." },
   { term: "Autenticazione Biometrica", definition: "Verifica identità con dati fisici." },
   { term: "Autorizzazione", definition: "Permessi dati per accedere a risorse." },

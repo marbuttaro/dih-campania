@@ -17,9 +17,6 @@ const CLEAN_URL_ROUTES: Record<string, string> = {
   '/infosfera': '/infosfera.html',
   '/bandi': '/bandi.html',
   '/credito-d-imposta': '/credito-d-imposta.html',
-  '/news/investimenti-sostenibili-4-0': '/news/investimenti-sostenibili-4-0.html',
-  '/news/sviluppo-competenze-specialistiche': '/news/sviluppo-competenze-specialistiche.html',
-  '/news/voucher-cloud-cybersecurity': '/news/voucher-cloud-cybersecurity.html',
 }
 
 function cleanUrlsDev(): Plugin {
@@ -65,9 +62,6 @@ export default defineConfig({
         infosfera: path.resolve(__dirname, 'infosfera.html'),
         bandi: path.resolve(__dirname, 'bandi.html'),
         creditoImposta: path.resolve(__dirname, 'credito-d-imposta.html'),
-        newsInvestimentiSostenibili: path.resolve(__dirname, 'news/investimenti-sostenibili-4-0.html'),
-        newsSviluppoCompetenze: path.resolve(__dirname, 'news/sviluppo-competenze-specialistiche.html'),
-        newsVoucherCloud: path.resolve(__dirname, 'news/voucher-cloud-cybersecurity.html'),
       },
     },
   },

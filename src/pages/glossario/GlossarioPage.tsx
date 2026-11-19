@@ -15,7 +15,7 @@ const letterOf = (term: string) => {
   return /[A-Z]/.test(first) ? first : '#'
 }
 
-const SORTED_TERMS = [...GLOSSARY].sort((a, b) => a.term.localeCompare(b.term, 'it', { sensitivity: 'base' }))
+const SORTED_TERMS = GLOSSARY.filter(t => !t.hidden).sort((a, b) => a.term.localeCompare(b.term, 'it', { sensitivity: 'base' }))
 const AVAILABLE_LETTERS = new Set(SORTED_TERMS.map((item) => letterOf(item.term)))
 
 function TermRow({ item }: { item: GlossaryTerm }) {
