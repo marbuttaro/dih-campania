@@ -147,7 +147,7 @@ export function Navbar() {
               <MenuIcon className="size-7" />
             </button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[85%] sm:w-80">
+          <SheetContent side="right" className="w-[85%] sm:w-80 h-dvh overflow-y-auto overscroll-contain pb-[max(2rem,env(safe-area-inset-bottom))]">
             <SheetHeader>
               <SheetTitle>
                 <img

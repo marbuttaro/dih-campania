@@ -47,9 +47,9 @@ export function NewsletterTab() {
         <button
           type="button"
           aria-label="Iscriviti alla newsletter"
-          className="fixed z-40 flex items-center justify-center bg-[#8EBEF7] text-[#013167] font-bold text-sm shadow-[0_10px_30px_rgba(0,25,51,0.25)] transition-colors hover:bg-white max-lg:bottom-[max(1.25rem,env(safe-area-inset-bottom))] max-lg:right-4 max-lg:size-12 max-lg:rounded-full lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:flex-col lg:gap-3 lg:rounded-l-xl lg:px-3 lg:py-5"
+          className="fixed z-40 flex items-center justify-center bg-[#8EBEF7] text-[#013167] font-bold text-sm shadow-[0_10px_30px_rgba(0,25,51,0.25)] transition-colors hover:bg-white max-lg:bottom-[max(1.25rem,env(safe-area-inset-bottom))] max-lg:right-4 max-lg:size-[54px] max-lg:rounded-full lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:flex-col lg:gap-3 lg:rounded-l-xl lg:px-3 lg:py-5"
         >
-          <Mail className="size-5 shrink-0 lg:-rotate-90" />
+          <Mail className="size-[22px] lg:size-5 shrink-0 lg:-rotate-90" />
           <span aria-hidden="true" className="hidden lg:block [writing-mode:vertical-rl] rotate-180 whitespace-nowrap">
             Iscriviti alla newsletter
           </span>

@@ -59,8 +59,9 @@ export function Footer() {
   return (
     <footer data-no-glow className="bg-brand-dark-navy text-white pt-20 pb-10">
       <div className="container-page">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_auto] gap-10 lg:gap-16 mb-16">
-          <div>
+        {/* Da telefono: logo a tutta larghezza, poi Navigazione | Risorse e Contatti | Social affiancati */}
+        <div className="grid grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_auto] gap-x-6 gap-y-10 sm:gap-10 lg:gap-16 mb-16">
+          <div className="max-sm:col-span-2">
             <img
               src="/assets/logo DIH.svg"
               alt="Campania DIH"
@@ -100,7 +101,7 @@ export function Footer() {
 
           <div>
             <h4 className="text-white text-[15px] font-semibold mb-5">Seguici sui social:</h4>
-            <ul className="flex items-center gap-4 list-none p-0 m-0">
+            <ul className="flex flex-wrap items-center gap-4 list-none p-0 m-0">
               {SOCIAL_LINKS.map((social) => (
                 <li key={social.label}>
                   <a

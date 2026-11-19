@@ -26,7 +26,7 @@ export function ContactFormCard() {
       <div className="absolute -top-40 -right-40 size-80 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
 
       <div className="relative z-10 text-center mb-8">
-        <h2 className="text-[48px] sm:text-[2.1rem] leading-[1.1] sm:leading-normal font-light mb-2 text-white tracking-tight">
+        <h2 className="text-[34px] sm:text-[2.1rem] leading-[1.1] sm:leading-normal font-light mb-2 text-white tracking-tight">
           Pronto per iniziare?
         </h2>
         <p className="text-sm sm:text-base text-brand-light-blue/80 font-normal">

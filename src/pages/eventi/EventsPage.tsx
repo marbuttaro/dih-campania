@@ -51,11 +51,14 @@ function EventMeta({ event }: { event: EventItem }) {
 }
 
 // Not linked yet: there is no registration page
-function JoinButton() {
+function JoinButton({ className }: { className?: string }) {
   return (
     <span
       aria-disabled="true"
-      className="inline-block rounded-[8px] bg-[#E3EAEC] px-3 py-1.5 text-[15px] font-semibold text-[#001933] shadow-[-4px_-4px_10px_rgba(255,255,255,0.9),5px_5px_12px_rgba(164,177,188,0.55)] cursor-default select-none"
+      className={cn(
+        'inline-block rounded-[8px] bg-[#E3EAEC] px-3 py-1.5 text-[15px] font-semibold text-[#001933] shadow-[-4px_-4px_10px_rgba(255,255,255,0.9),5px_5px_12px_rgba(164,177,188,0.55)] cursor-default select-none',
+        className,
+      )}
     >
       Partecipa
     </span>
@@ -82,22 +85,23 @@ function EventCard({ event }: { event: EventItem }) {
   )
 }
 
-// Fixed height so every row lines up; long titles and descriptions are clamped
+// Riga orizzontale: foto quadrata a sinistra, a destra le informazioni essenziali e in basso "Partecipa".
+// Altezza fissa così tutte le righe sono allineate; titoli e descrizioni lunghe vengono troncati.
 function EventRow({ event }: { event: EventItem }) {
+  const where = [event.location, event.time && `ore ${event.time}`].filter(Boolean).join(' | ')
   return (
-    <article className="flex flex-col sm:flex-row h-[340px] sm:h-[160px] rounded-[20px] overflow-hidden bg-[#E3EAEC] shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_24px_rgba(164,177,188,0.55)]">
-      <div className="relative h-[140px] sm:h-full sm:w-[220px] shrink-0">
+    <article className="flex h-[136px] sm:h-[160px] rounded-[20px] overflow-hidden bg-[#E3EAEC] shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_24px_rgba(164,177,188,0.55)]">
+      <div className="relative h-full aspect-square shrink-0">
         <img src={event.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
         <DateBadge event={event} horizontal />
       </div>
-      <div className="flex flex-col sm:flex-row justify-between gap-4 flex-1 min-h-0 px-6 py-5">
-        <div className="flex-1 min-w-0 flex flex-col justify-center [&>p:nth-of-type(2)]:line-clamp-2">
-          <h3 className="text-[22px] font-normal text-[#001933] leading-[1.1] line-clamp-2">{event.title}</h3>
-          <EventMeta event={event} />
-        </div>
+      <div className="flex flex-col flex-1 min-w-0 px-4 py-3 sm:px-6 sm:py-4">
+        <h3 className="text-[18px] sm:text-[22px] font-normal text-[#001933] leading-[1.1] line-clamp-2">{event.title}</h3>
+        {where && <p className="text-xs font-medium text-[#013167] mt-1 truncate">{where}</p>}
+        <p className="hidden sm:block text-[13px] font-light text-brand-dark-navy leading-snug mt-2 line-clamp-1">{event.description}</p>
         {event.joinable && (
-          <div className="flex justify-end sm:items-end shrink-0">
-            <JoinButton />
+          <div className="flex justify-end mt-auto">
+            <JoinButton className="max-sm:text-[13px] max-sm:px-2.5 max-sm:py-1" />
           </div>
         )}
       </div>

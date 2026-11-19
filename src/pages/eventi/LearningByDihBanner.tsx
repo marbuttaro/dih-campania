@@ -40,7 +40,7 @@ export function LearningByDihBanner() {
           initial={{ opacity: 0, y: 40, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.9, ease: EASE }}
-          className="relative overflow-hidden rounded-[24px] bg-[#020f2a] px-4 py-10 sm:px-[43px] sm:py-[85px]"
+          className="relative overflow-hidden rounded-[24px] bg-[#020f2a]"
         >
           <motion.div
             aria-hidden
@@ -52,6 +52,7 @@ export function LearningByDihBanner() {
               backgroundImage: "url('/assets/eventi/learning-by-dih-sfondo.webp')",
             }}
           />
+          {/* Il riquadro in vetro copre tutto il banner: stessa misura dello sfondo */}
           {/* Lo sfondo originale è molto luminoso: lo scuriamo come nel design */}
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,12,36,0.78)_0%,rgba(2,16,44,0.55)_55%,rgba(2,12,36,0.45)_100%)]" />
 
@@ -59,7 +60,7 @@ export function LearningByDihBanner() {
             variants={card}
             initial="hidden"
             animate="visible"
-            className="relative mx-auto max-w-[885px] rounded-[16px] border border-white/40 bg-white/[0.08] backdrop-blur-[6px] shadow-[0_10px_40px_rgba(0,0,0,0.25)] px-7 py-9 sm:px-[51px] sm:pt-[70px] sm:pb-[54px] grid grid-cols-1 md:grid-cols-[1fr_276px] gap-8 md:gap-[48px] items-center"
+            className="relative rounded-[24px] border border-white/40 bg-white/[0.08] backdrop-blur-[6px] shadow-[0_10px_40px_rgba(0,0,0,0.25)] px-7 py-10 sm:px-[64px] sm:pt-[70px] sm:pb-[58px] grid grid-cols-1 md:grid-cols-[1fr_276px] gap-8 md:gap-[48px] items-center"
           >
             <div>
               <h2 className="text-[40px] sm:text-[58px] leading-[1.03] tracking-[-0.01em]">

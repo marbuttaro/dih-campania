@@ -716,12 +716,11 @@ const SUPPORTO = [
 
 function ConsulenzaBanner() {
   return (
-    <section
-      data-no-glow
-      className="mt-24 sm:mt-32 rounded-t-[20px] bg-[url('/assets/sfondo_form.png')] bg-cover bg-center py-14 sm:py-[70px]"
-    >
+    <section data-no-glow className="mt-24 sm:mt-32 mb-20 sm:mb-28">
       <div className="container-page">
-        <div className="glass-stroke-container rounded-[12px] backdrop-blur-[3px] px-7 py-10 sm:px-10 sm:py-12 grid grid-cols-1 lg:grid-cols-[1.15fr_1.3fr] gap-10 lg:gap-12 items-center text-white reveal-element">
+        {/* Sfondo blu e riquadro glass hanno la stessa misura: perfettamente sovrapposti */}
+        <div className="rounded-[12px] overflow-hidden bg-[url('/assets/sfondo_form.png')] bg-cover bg-center reveal-element">
+        <div className="glass-stroke-container rounded-[12px] backdrop-blur-[3px] px-7 py-10 sm:px-10 sm:py-12 grid grid-cols-1 lg:grid-cols-[1.15fr_1.3fr] gap-10 lg:gap-12 items-center text-white">
           <div>
             <p className="text-[11px] uppercase tracking-[0.1em] text-brand-light-blue">Servizio di consulenza</p>
             <h2 className="mt-3 text-3xl sm:text-[2.1rem] font-medium text-white leading-[1.15] max-w-[440px]">
@@ -746,6 +745,7 @@ function ConsulenzaBanner() {
               </div>
             ))}
           </dl>
+        </div>
         </div>
       </div>
     </section>

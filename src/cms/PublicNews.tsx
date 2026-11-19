@@ -15,21 +15,22 @@ function Card({ article, categories }: { article: Article; categories: Category[
     .filter(slug => !slug.includes('evidenza'))
     .slice(0, 2)
     .map(slug => categories.find(c => c.slug === slug)?.name || slug)
-  return <article className="bg-white rounded-[28px] overflow-hidden shadow-neumorphic flex flex-col w-full max-w-[380px] min-h-[410px] mx-auto transition-transform duration-300 hover:-translate-y-2">
-    <a href={url} tabIndex={-1} aria-hidden="true" className="relative block h-[195px] overflow-hidden">
+  return <article className="bg-white rounded-[28px] overflow-hidden shadow-neumorphic flex flex-col w-full max-w-[380px] sm:min-h-[410px] mx-auto transition-transform duration-300 hover:-translate-y-2">
+    <a href={url} tabIndex={-1} aria-hidden="true" className="relative block h-[150px] sm:h-[195px] overflow-hidden">
       {article.featured_image
         ? <img src={article.featured_image} alt="" loading="lazy" className="w-full h-full object-cover" />
         // Metà dell'archivio migrato non ha immagine: fondo blu del sito con il logo
         : <div className="w-full h-full bg-[url('/assets/sfondo_form.png')] bg-cover bg-center flex items-center justify-start pl-8"><img src="/assets/logo DIH.svg" alt="" className="w-[52%] opacity-80" /></div>}
     </a>
-    <div className="px-7 pt-6 pb-6 flex-1 flex flex-col justify-between">
-      <div className="mb-4">
-        <h3 className="font-medium text-[19px] sm:text-[22px] text-[#013167] leading-tight line-clamp-3"><a href={url} className="hover:underline">{articleTitle(article)}</a></h3>
-        <p className="mt-2 text-sm font-medium text-[#013167]/80">{[...categoryNames, formatDate(article.published_at)].join(' | ')}</p>
-        <p className="mt-3 text-[15px] font-light text-brand-dark-navy leading-snug line-clamp-3">{plainText(article.excerpt || article.content_html).slice(0, 180)}</p>
+    {/* Da telefono la card è compatta: solo titolo, categoria/data e "Leggi" */}
+    <div className="px-6 py-4 sm:px-7 sm:pt-6 sm:pb-6 flex-1 flex flex-col justify-between">
+      <div className="mb-2 sm:mb-4">
+        <h3 className="font-medium text-[18px] sm:text-[22px] text-[#013167] leading-tight line-clamp-2 sm:line-clamp-3"><a href={url} className="hover:underline">{articleTitle(article)}</a></h3>
+        <p className="mt-1.5 sm:mt-2 text-[13px] sm:text-sm font-medium text-[#013167]/80">{[...categoryNames, formatDate(article.published_at)].join(' | ')}</p>
+        <p className="max-sm:hidden mt-3 text-[15px] font-light text-brand-dark-navy leading-snug line-clamp-3">{plainText(article.excerpt || article.content_html).slice(0, 180)}</p>
       </div>
       <div className="flex justify-end">
-        <a href={url} className="bg-[#E3EAEC]/50 border border-white/50 text-brand-dark-navy px-8 py-3 rounded-xl font-semibold text-base sm:text-lg shadow-neumorphic inline-block no-underline transition-colors duration-300 hover:bg-[#E3EAEC]" aria-label={`Leggi: ${articleTitle(article)}`}>Leggi</a>
+        <a href={url} className="bg-[#E3EAEC]/50 border border-white/50 text-brand-dark-navy px-6 py-2 sm:px-8 sm:py-3 rounded-xl font-semibold text-[15px] sm:text-lg shadow-neumorphic inline-block no-underline transition-colors duration-300 hover:bg-[#E3EAEC]" aria-label={`Leggi: ${articleTitle(article)}`}>Leggi</a>
       </div>
     </div>
   </article>
