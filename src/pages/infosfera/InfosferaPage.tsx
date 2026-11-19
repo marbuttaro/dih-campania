@@ -73,8 +73,9 @@ function PastIssueCard({ issue }: { issue: InfosferaIssue }) {
   const listId = `autori-${issue.id}`
   const detailsId = `dettagli-${issue.id}`
 
+  // Da telefono copertina, testi e pulsante sono centrati nella pagina
   return (
-    <article className="flex flex-col items-start w-full max-w-[260px] sm:max-w-[240px] mx-auto reveal-element">
+    <article className="flex flex-col items-center text-center sm:items-start sm:text-left w-full max-w-[260px] sm:max-w-[240px] mx-auto reveal-element">
       <img
         src={issue.cover}
         alt={`Copertina Infosfera ${issue.label}`}
@@ -117,7 +118,7 @@ function PastIssueCard({ issue }: { issue: InfosferaIssue }) {
             <ul
               id={listId}
               className={cn(
-                'mt-3 space-y-1.5 text-xs text-brand-navy/80 leading-snug list-disc pl-4 marker:text-brand-navy/50',
+                'mt-3 space-y-1.5 text-left text-xs text-brand-navy/80 leading-snug list-disc pl-4 marker:text-brand-navy/50',
                 expanded ? 'block' : 'hidden',
                 open ? 'sm:block' : 'sm:hidden',
               )}
