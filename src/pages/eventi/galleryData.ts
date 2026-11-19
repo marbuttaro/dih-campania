@@ -29,6 +29,17 @@ const photos = (folder: string, sizes: [number, number][]): GalleryPhoto[] =>
 // Dal più recente al meno recente. Le foto si aggiungono in public/assets/eventi/gallery/<cartella>/
 export const EVENT_GALLERIES: EventGallery[] = [
   {
+    id: 'talk-infosfera-2026-11-11',
+    label: 'Talk Infosfera',
+    caption: '«Intelligenza Artificiale tra opportunità e cambiamenti». Napoli, Città della Scienza, 11 novembre 2026',
+    photos: photos('talk-infosfera-2026-11-11', [
+      [960, 1200],
+      [960, 1200],
+      [960, 1200],
+      [960, 1200],
+    ]),
+  },
+  {
     id: 'pride-2026-04-28',
     label: 'PRIDE',
     caption: 'Risultati, Impatti e Visioni per la Trasformazione Digitale. Napoli, 28 aprile 2026',
