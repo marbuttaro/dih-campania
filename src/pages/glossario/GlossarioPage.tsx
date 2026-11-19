@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react'
-import { Search, X } from 'lucide-react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { ChevronDown, Search, X } from 'lucide-react'
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
 import { cn } from '@/lib/utils'
@@ -25,6 +25,89 @@ function TermRow({ item }: { item: GlossaryTerm }) {
         {item.term}
       </dt>
       <dd className="text-sm sm:text-[15px] text-brand-dark-navy/75 leading-relaxed">{item.definition}</dd>
+    </div>
+  )
+}
+
+/** Da telefono: le lettere stanno in un menu a tendina invece che in riga */
+function LetterDropdown({ letter, onChange }: { letter: string | null; onChange: (letter: string | null) => void }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+    const close = (e: PointerEvent) => !ref.current?.contains(e.target as Node) && setOpen(false)
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
+    document.addEventListener('pointerdown', close)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('pointerdown', close)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
+  const pick = (value: string | null) => {
+    onChange(value)
+    setOpen(false)
+  }
+
+  return (
+    <div ref={ref} className="relative sm:hidden">
+      <span className="block text-white/85 text-[15px] mb-3">filtra per lettera:</span>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls="glossario-lettere"
+        className="w-full flex items-center justify-between rounded-[12px] bg-white/5 border border-white/40 text-white px-4 py-2.5 text-sm focus:outline-none focus:border-[#8EBEF7] focus:ring-1 focus:ring-[#8EBEF7] cursor-pointer"
+      >
+        {letter ? `Lettera ${letter}` : 'Vedi tutto'}
+        <ChevronDown className={cn('size-5 text-white/70 transition-transform', open && 'rotate-180')} />
+      </button>
+      {open && (
+        <div
+          id="glossario-lettere"
+          className="absolute left-0 right-0 top-full mt-2 z-30 rounded-[14px] bg-[#002a5a] border border-white/25 p-3 shadow-[0_20px_40px_rgba(0,25,51,0.4)]"
+        >
+          <div className="grid grid-cols-7 gap-1.5">
+            {LETTERS.map((item) => {
+              const available = AVAILABLE_LETTERS.has(item)
+              const active = letter === item
+              return (
+                <button
+                  key={item}
+                  type="button"
+                  disabled={!available}
+                  aria-pressed={active}
+                  aria-label={item === '#' ? 'Termini che iniziano con un numero o simbolo' : `Lettera ${item}`}
+                  onClick={() => pick(item)}
+                  className={cn(
+                    'h-10 rounded-md text-[17px] font-medium transition-colors',
+                    active
+                      ? 'bg-[#8EBEF7] text-brand-dark-navy'
+                      : available
+                        ? 'text-white bg-white/5 active:bg-white/15'
+                        : 'text-white/25',
+                  )}
+                >
+                  {item}
+                </button>
+              )
+            })}
+          </div>
+          <button
+            type="button"
+            onClick={() => pick(null)}
+            aria-pressed={!letter}
+            className={cn(
+              'w-full mt-2 rounded-md py-2 text-sm font-medium transition-colors',
+              !letter ? 'bg-[#8EBEF7] text-brand-dark-navy' : 'text-white bg-white/5',
+            )}
+          >
+            Vedi tutto
+          </button>
+        </div>
+      )}
     </div>
   )
 }
@@ -78,7 +161,7 @@ export function GlossarioPage() {
           </div>
         </section>
 
-        <div className="container-page relative z-10 -mt-20 sm:-mt-16">
+        <div className="container-page relative z-20 -mt-20 sm:-mt-16">
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-6 lg:gap-12 items-end rounded-[20px] bg-[#002a5a] shadow-[0_20px_50px_rgba(0,25,51,0.25)] px-6 py-6 sm:px-10 sm:py-8">
             <label className="block">
               <span className="block text-white/85 text-[15px] mb-3">cerca per parola chiave:</span>
@@ -105,7 +188,9 @@ export function GlossarioPage() {
               </span>
             </label>
 
-            <div>
+            <LetterDropdown letter={letter} onChange={setLetter} />
+
+            <div className="max-sm:hidden">
               <div className="flex items-baseline gap-3 mb-3">
                 <button
                   type="button"

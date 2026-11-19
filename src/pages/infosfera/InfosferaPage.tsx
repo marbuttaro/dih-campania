@@ -79,10 +79,11 @@ function PastIssueCard({ issue }: { issue: InfosferaIssue }) {
         src={issue.cover}
         alt={`Copertina Infosfera ${issue.label}`}
         loading="lazy"
-        // Copertine intere, con le loro proporzioni: quelle dei numeri passati non sono tutte uguali
-        className="w-full h-auto shadow-[0_10px_30px_rgba(1,49,103,0.25)]"
+        // Copertine intere, con le loro proporzioni: quelle dei numeri passati non sono tutte uguali.
+        // Da telefono la copertina si rimpicciolisce per far stare in una schermata copertina, testi, "Sfoglia" e pallini
+        className="w-auto max-w-full h-auto max-h-[clamp(180px,calc(100svh-430px),300px)] sm:w-full sm:max-h-none shadow-[0_10px_30px_rgba(1,49,103,0.25)]"
       />
-      <p className="mt-5 text-sm font-light text-brand-navy">{issue.label}</p>
+      <p className="mt-4 sm:mt-5 text-sm font-light text-brand-navy">{issue.label}</p>
       <h3 className="mt-1 text-lg font-medium text-brand-navy leading-snug">{issue.title}</h3>
       <div id={detailsId} className="w-full">
         {issue.description && (
@@ -144,7 +145,7 @@ function PastIssueCard({ issue }: { issue: InfosferaIssue }) {
           </span>
         </button>
       )}
-      <div className="mt-5">
+      <div className="mt-4 sm:mt-5">
         <SfogliaButton issue={issue} variant="soft" />
       </div>
     </article>
@@ -172,15 +173,15 @@ function PastIssuesSlider() {
       <div
         ref={trackRef}
         onScroll={onScroll}
-        className="mt-10 -mx-6 pt-4 pb-6 flex overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mt-14 sm:mx-0 sm:px-0 sm:py-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-14 sm:overflow-visible items-start"
+        className="mt-8 -mx-8 pt-4 pb-5 flex overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mt-14 sm:mx-0 sm:px-0 sm:py-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-14 sm:overflow-visible items-start"
       >
         {PAST_ISSUES.map((issue) => (
-          <div key={issue.id} className="snap-center shrink-0 w-full px-6 sm:px-0 sm:w-auto">
+          <div key={issue.id} className="snap-center shrink-0 w-full px-8 sm:px-0 sm:w-auto">
             <PastIssueCard issue={issue} />
           </div>
         ))}
       </div>
-      <div className="sm:hidden mt-4 flex justify-center gap-2">
+      <div className="sm:hidden mt-3 flex justify-center gap-2">
         {PAST_ISSUES.map((issue, i) => (
           <button
             key={issue.id}
@@ -221,7 +222,7 @@ export function InfosferaPage() {
 
       <main className="flex-grow relative pt-32 sm:pt-40 pb-24 overflow-hidden">
         {/* Hero */}
-        <section className="mx-auto w-full max-w-[1290px] px-6 sm:px-8 lg:px-[30px] grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-16 items-center">
+        <section className="mx-auto w-full max-w-[1290px] px-8 lg:px-[30px] grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-16 items-center">
           <div className="reveal-element lg:mb-24">
             <p className="text-base sm:text-lg font-light text-brand-navy/80">La rivista del Campania DIH</p>
             <h1 className="mt-3 text-5xl sm:text-6xl lg:text-[4.25rem] font-normal text-brand-navy tracking-tight leading-none">
@@ -276,7 +277,7 @@ export function InfosferaPage() {
         </section>
 
         {/* Un ponte tra ricerca e impresa */}
-        <section className="mx-auto w-full max-w-[1290px] px-6 sm:px-8 lg:px-[30px] mt-28 sm:mt-36 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 reveal-element">
+        <section className="mx-auto w-full max-w-[1290px] px-8 lg:px-[30px] mt-28 sm:mt-36 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 reveal-element">
           <h2 className="text-4xl sm:text-5xl font-light text-brand-navy leading-[1.1] tracking-tight">
             Un ponte tra
             <br /> ricerca scientifica
@@ -290,7 +291,7 @@ export function InfosferaPage() {
         </section>
 
         {/* La nostra mission */}
-        <section className="mx-auto w-full max-w-[1290px] px-6 sm:px-8 lg:px-[30px] mt-24 sm:mt-28 reveal-element">
+        <section className="mx-auto w-full max-w-[1290px] px-8 lg:px-[30px] mt-24 sm:mt-28 reveal-element">
           <div
             className={cn(
               'grid grid-cols-1 lg:grid-cols-[0.7fr_1.5fr] gap-6 lg:gap-12 items-center rounded-2xl px-8 py-10 sm:px-16 sm:py-14',
@@ -316,7 +317,7 @@ export function InfosferaPage() {
         </section>
 
         {/* Perché leggere Infosfera? — misure dal design a 1512px: card 292×344, gap 20 */}
-        <section className="mx-auto w-full max-w-[1290px] px-6 sm:px-8 lg:px-[30px] mt-28 sm:mt-32">
+        <section className="mx-auto w-full max-w-[1290px] px-8 lg:px-[30px] mt-28 sm:mt-32">
           <div className="reveal-element">
             <h2 className="text-[38px] sm:text-[48px] font-light text-brand-navy leading-[1.15]">
               Perché leggere Infosfera?
@@ -357,7 +358,7 @@ export function InfosferaPage() {
         </section>
 
         {/* Numeri precedenti */}
-        <section className="mx-auto w-full max-w-[1290px] px-6 sm:px-8 lg:px-[30px] mt-28 sm:mt-32">
+        <section className="mx-auto w-full max-w-[1290px] px-8 lg:px-[30px] mt-28 sm:mt-32">
           <h2 className="text-4xl sm:text-5xl font-light text-brand-navy tracking-tight reveal-element">
             Numeri precedenti
           </h2>
