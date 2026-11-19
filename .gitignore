@@ -34,3 +34,5 @@ migration-data/
 # Large video files
 *.mov
 public/assets/*.mov
+.env.infosfera-test
+public/assets/pdfjs/

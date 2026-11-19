@@ -4,6 +4,7 @@ import { supabase, requireSupabase } from '../lib/supabase'
 import { listArticles, listCategories, setTrashed, formatDate, PAGE_SIZE, type Article, type Category } from '../lib/articles'
 import { ArticleForm } from './ArticleForm'
 import { confirmAction } from './dialogs'
+import { InfosferaLeads } from './InfosferaLeads'
 
 const message = (e: unknown) => e instanceof Error ? e.message : 'Operazione non riuscita. Riprova.'
 function Login() {
@@ -60,6 +61,7 @@ function Dashboard({ session }: { session: Session }) {
       {allowed === null && <p role="status">Verifica accesso…</p>}
       {allowed === false && <p role="alert" className="error">Questo account non è abilitato alla redazione. Contatta l’amministratore.</p>}
       {allowed && editing !== undefined ? <ArticleForm key={editing?.id || 'new'} article={editing} categories={categories} onClose={() => setEditing(undefined)} onSaved={article => { setEditing(undefined); setVersion(v => v + 1); setNotice(`Articolo “${article.title}” salvato.`) }} /> : allowed && <>
+        <InfosferaLeads />
         <div className="flex justify-between items-center gap-4 mb-6"><div><h1 className="text-3xl">Articoli</h1><p className="mt-2 text-sm">{count} risultati {trash && 'nel cestino'}</p></div><button onClick={() => { setNotice(''); setEditing(null) }}>+ Nuovo articolo</button></div>
         {notice && <p role="status" className="success mb-5">{notice}</p>}
         <form className="panel grid md:grid-cols-[2fr_1fr_1fr_auto] items-end gap-4 mb-6" onSubmit={e => { e.preventDefault(); setQuery(search); setPage(1) }}>

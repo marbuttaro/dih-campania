@@ -20,6 +20,7 @@ beforeAll(async () => {
     grant usage on schema storage to anon,authenticated; grant select,insert on storage.objects to anon,authenticated;`)
   await db.exec(readFileSync(new URL('../supabase/migrations/202610220001_articles.sql', import.meta.url), 'utf8'))
   await db.exec(readFileSync(new URL('../supabase/migrations/202610220002_service_permissions.sql', import.meta.url), 'utf8'))
+  await db.exec(readFileSync(new URL('../supabase/migrations/202611190001_infosfera.sql', import.meta.url), 'utf8'))
   await db.query('insert into auth.users values ($1),($2)', [editor, outsider])
   await db.query('insert into cms_editors(user_id) values($1)', [editor])
   await db.exec("insert into categories(slug,name) values ('news','News');")
@@ -32,6 +33,30 @@ beforeAll(async () => {
 afterAll(() => db.close())
 
 describe('Database access and editorial integrity', () => {
+  it('Infosfera originals and reader sessions are private even for editors', async () => {
+    await db.exec("insert into infosfera_issues(id,storage_path,page_count,preview_pages,sha256,byte_size) values('12','12/original.pdf',100,7,'hash',1234)")
+    await db.exec("insert into infosfera_leads(issue_id,first_name,email,privacy_consent) values('12','Test Reader','fixture@example.invalid',true)")
+    await db.exec("insert into storage.objects(bucket_id,name) values('infosfera-private','12/original.pdf')")
+    for(const role of ['anon','authenticated'] as const) {
+      await expect(asUser(role,editor,()=>db.query('select * from infosfera_sessions'))).rejects.toThrow()
+      await expect(asUser(role,editor,()=>db.query('select * from infosfera_issues'))).rejects.toThrow()
+      expect((await asUser(role,editor,()=>db.query("select * from storage.objects where bucket_id='infosfera-private'"))).rows).toHaveLength(0)
+      await expect(asUser(role,editor,()=>db.query("select infosfera_rate_limit('attack',1,60)"))).rejects.toThrow()
+    }
+    await expect(asUser('anon','',()=>db.query('select * from infosfera_leads'))).rejects.toThrow()
+    expect((await asUser('authenticated',outsider,()=>db.query('select * from infosfera_leads'))).rows).toHaveLength(0)
+    expect((await asUser('authenticated',editor,()=>db.query('select * from infosfera_leads'))).rows).toHaveLength(1)
+    await expect(asUser('authenticated',editor,()=>db.exec("insert into infosfera_leads(issue_id,first_name,email,privacy_consent) values('12','Attack','attack@example.invalid',true)"))).rejects.toThrow()
+    expect((await db.query("select public from storage.buckets where id='infosfera-private'" )).rows).toEqual([{public:false}])
+  })
+  it('Infosfera rate limiting is atomic, expires, and rejects excess requests',async()=>{
+    await db.exec('set role service_role')
+    try {
+      for(const expected of [true,true,false]) expect((await db.query<{allowed:boolean}>("select infosfera_rate_limit('fixture',2,60) as allowed")).rows[0].allowed).toBe(expected)
+      await db.exec("update infosfera_rate_limits set expires_at=now()-interval '1 second' where key='fixture'")
+      expect((await db.query<{allowed:boolean}>("select infosfera_rate_limit('fixture',2,60) as allowed")).rows[0].allowed).toBe(true)
+    } finally {await db.exec('reset role')}
+  })
   it('trusted migration access works without automatic table grants', async () => {
     await db.exec('set role service_role')
     try {

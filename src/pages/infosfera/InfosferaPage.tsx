@@ -30,6 +30,7 @@ const GLASS_CARD =
 
 function SfogliaButton({ issue, variant = 'primary' }: { issue: InfosferaIssue; variant?: 'primary' | 'soft' }) {
   const [readerOpen, setReaderOpen] = useState(false)
+  const [initialGate, setInitialGate] = useState(false)
   const className = cn(
     'inline-flex items-center justify-center font-semibold rounded-lg no-underline transition-all duration-300 hover:-translate-y-0.5 cursor-pointer',
     variant === 'primary'
@@ -37,21 +38,13 @@ function SfogliaButton({ issue, variant = 'primary' }: { issue: InfosferaIssue; 
       : 'bg-[#E3EAEC] text-brand-dark-navy text-sm px-6 py-2.5 shadow-[0_4px_10px_rgba(1,49,103,0.18)] hover:shadow-[0_6px_16px_rgba(1,49,103,0.25)]',
   )
 
-  // Senza anteprima (numeri non ancora preparati) il pulsante apre direttamente il PDF
-  if (!issue.previewPages?.length) {
-    return (
-      <a href={issue.url} target="_blank" rel="noopener noreferrer" title="Si apre in una nuova finestra" className={className}>
-        Sfoglia
-      </a>
-    )
-  }
-
   return (
     <>
-      <button type="button" onClick={() => setReaderOpen(true)} className={className}>
+      <button type="button" onClick={() => {setInitialGate(false);setReaderOpen(true)}} className={className}>
         Sfoglia
       </button>
-      {readerOpen && <InfosferaReader issue={issue} open onOpenChange={setReaderOpen} />}
+      <button type="button" onClick={()=>{setInitialGate(true);setReaderOpen(true)}} className="inline-flex items-center justify-center px-3 py-2 text-sm font-semibold text-brand-navy underline underline-offset-4">Scarica PDF</button>
+      {readerOpen && <InfosferaReader issue={issue} open initialGate={initialGate} onOpenChange={setReaderOpen} />}
     </>
   )
 }
@@ -208,6 +201,7 @@ function PastIssuesSlider() {
 }
 
 export function InfosferaPage() {
+  const [coverOpen, setCoverOpen] = useState(false)
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) =>
@@ -248,6 +242,7 @@ export function InfosferaPage() {
               </strong>
             </p>
 
+            <p className="mt-4 max-w-[560px] text-sm text-brand-navy">Sfoglia liberamente ogni numero fino alla fine dell’editoriale. Per leggere tutte le pagine o scaricare il PDF, lascia nome ed email: l’accesso è gratuito.</p>
             <LatestIssueBox className="hidden lg:flex mt-10" />
           </div>
 
@@ -256,10 +251,9 @@ export function InfosferaPage() {
               <span className="absolute -top-5 -left-6 z-10 rounded-md bg-brand-navy px-3 py-1.5 text-[11px] font-semibold text-white shadow-[0_4px_12px_rgba(1,49,103,0.35)]">
                 Ultimo Numero
               </span>
-              <a
-                href={LATEST_ISSUE.url}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                onClick={()=>setCoverOpen(true)}
                 className="block transition-transform duration-500 hover:-translate-y-1"
                 aria-label={`Sfoglia Infosfera ${LATEST_ISSUE.label}`}
               >
@@ -268,7 +262,8 @@ export function InfosferaPage() {
                   alt={`Copertina Infosfera ${LATEST_ISSUE.label}: ${LATEST_ISSUE.title}`}
                   className="w-full aspect-[1061/1501] object-cover shadow-[0_20px_50px_rgba(1,49,103,0.3)]"
                 />
-              </a>
+              </button>
+              {coverOpen && <InfosferaReader issue={LATEST_ISSUE} open onOpenChange={setCoverOpen}/>}
               <LatestIssueBox className="flex lg:hidden mt-8" />
               <dl className="mt-6 text-[15px] text-brand-navy font-light leading-relaxed">
                 {EDITORIAL_TEAM.map((member) => (

@@ -1,13 +1,14 @@
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { ArrowLeft, ArrowRight, Download, ExternalLink, Lock, Minus, Plus, X } from 'lucide-react'
-import { Checkbox, Field } from '@/pages/innova-co/SolutionRequestModal'
-import { supabase } from '@/lib/supabase'
+import { Field } from '@/pages/innova-co/SolutionRequestModal'
+import { requestAccess, type MagazineAccess } from './infosferaAccess'
+import { MagazineDownload } from './MagazineDownload'
+const FullIssueReader = lazy(() => import('./FullIssueReader'))
 import { cn } from '@/lib/utils'
 import type { InfosferaIssue } from './infosferaData'
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-const UNLOCK_KEY = 'infosfera-sbloccati'
 /** Larghezza / altezza di una pagina della rivista (A4) */
 const PAGE_RATIO = 1100 / 1556
 const ZOOM_LEVELS = [1, 1.5, 2, 2.5, 3]
@@ -69,24 +70,6 @@ function ZoomControls({
   )
 }
 
-/** Numeri già sbloccati su questo browser: chi ha già compilato il form non lo ricompila */
-function readUnlocked(): string[] {
-  try {
-    const value = JSON.parse(localStorage.getItem(UNLOCK_KEY) ?? '[]')
-    return Array.isArray(value) ? value : []
-  } catch {
-    return []
-  }
-}
-
-function markUnlocked(issueId: string) {
-  try {
-    localStorage.setItem(UNLOCK_KEY, JSON.stringify([...new Set([...readUnlocked(), issueId])]))
-  } catch {
-    // localStorage non disponibile (es. navigazione privata): il form verrà richiesto di nuovo
-  }
-}
-
 function useIsDesktop() {
   const query = '(min-width: 1024px)'
   const [matches, setMatches] = useState(() => window.matchMedia(query).matches)
@@ -108,73 +91,39 @@ function buildViews(pageCount: number, spreads: boolean, blankPages: number[] = 
   return views
 }
 
-function driveDownloadUrl(url: string) {
-  const id = url.match(/\/d\/([^/]+)/)?.[1]
-  return id ? `https://drive.google.com/uc?export=download&id=${id}` : url
-}
-
-function DownloadPanel({ issue }: { issue: InfosferaIssue }) {
-  return (
-    <div className="text-center">
-      <Dialog.Title className="text-2xl sm:text-3xl font-light text-brand-navy">
-        Il numero completo è tuo
-      </Dialog.Title>
-      <Dialog.Description className="mt-3 text-sm text-brand-dark-navy/70">
-        Grazie! Puoi scaricare Infosfera {issue.label} oppure leggerlo online.
-      </Dialog.Description>
-      <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
-        <a
-          href={driveDownloadUrl(issue.url)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-brand-navy to-[#0b4a86] px-6 py-3 text-sm font-semibold text-white no-underline shadow-[0_6px_16px_rgba(1,49,103,0.35)] transition-transform hover:-translate-y-0.5"
-        >
-          <Download className="size-4" /> Scarica il PDF
-        </a>
-        <a
-          href={issue.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          title="Si apre in una nuova finestra"
-          className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#E3EAEC] px-6 py-3 text-sm font-semibold text-brand-dark-navy no-underline shadow-[0_4px_10px_rgba(1,49,103,0.18)] transition-transform hover:-translate-y-0.5"
-        >
-          <ExternalLink className="size-4" /> Leggi online
-        </a>
-      </div>
+function DownloadPanel({ issue, access, onRead }: { issue: InfosferaIssue; access: MagazineAccess; onRead: () => void }) {
+  const button = 'inline-flex items-center justify-center gap-2 rounded-lg bg-brand-navy px-6 py-3 text-sm font-semibold text-white no-underline hover:bg-brand-dark-navy'
+  return <div className="text-center">
+    <Dialog.Title className="text-2xl sm:text-3xl font-light text-brand-navy">Il numero completo è tuo</Dialog.Title>
+    <Dialog.Description className="mt-3 text-base text-brand-dark-navy/70">Grazie! Puoi sfogliare tutte le pagine di Infosfera {issue.label} oppure scaricare il PDF.</Dialog.Description>
+    <div className="mt-8 flex flex-col items-center gap-3">
+      <button type="button" onClick={onRead} className={button}><ExternalLink className="size-4"/> Sfoglia il numero completo</button>
+      <MagazineDownload id={issue.id} access={access} className={button}/>
     </div>
-  )
+  </div>
 }
 
-function LeadForm({ issue, onUnlocked }: { issue: InfosferaIssue; onUnlocked: () => void }) {
+function LeadForm({ issue, onUnlocked }: { issue: InfosferaIssue; onUnlocked: (access: MagazineAccess) => void }) {
   const [nome, setNome] = useState('')
-  const [cognome, setCognome] = useState('')
+  const [website, setWebsite] = useState('')
   const [email, setEmail] = useState('')
   const [consensoPrivacy, setConsensoPrivacy] = useState(false)
   const [sending, setSending] = useState(false)
   const [error, setError] = useState('')
 
   const canSubmit =
-    nome.trim() !== '' && cognome.trim() !== '' && EMAIL_PATTERN.test(email.trim()) && consensoPrivacy
+    nome.trim() !== '' && nome.trim().length <= 100 && EMAIL_PATTERN.test(email.trim()) && consensoPrivacy
 
   const handleSubmit = async () => {
     if (!canSubmit || sending) return
     setSending(true)
     setError('')
     try {
-      if (!supabase) throw new Error('Supabase non configurato')
-      const { error: insertError } = await supabase.from('infosfera_leads').insert({
-        issue_id: issue.id,
-        first_name: nome.trim(),
-        last_name: cognome.trim(),
-        email: email.trim().toLowerCase(),
-        privacy_consent: true,
-      })
-      if (insertError) throw insertError
-      markUnlocked(issue.id)
-      onUnlocked()
+      const result = await requestAccess(issue.id, {name:nome,email,privacy:consensoPrivacy,website})
+      if (!result) throw new Error('Accesso non riuscito. Riprova.')
+      onUnlocked(result)
     } catch (err) {
-      console.error(err)
-      setError('Non è stato possibile inviare la richiesta. Riprova tra qualche istante.')
+      setError(err instanceof Error ? err.message : 'Non è stato possibile inviare la richiesta. Riprova tra qualche istante.')
     } finally {
       setSending(false)
     }
@@ -195,25 +144,18 @@ function LeadForm({ issue, onUnlocked }: { issue: InfosferaIssue; onUnlocked: ()
         Continua a leggere Infosfera
       </Dialog.Title>
       <Dialog.Description className="mt-2 mb-5 sm:mb-6 [@media(max-height:700px)]:mb-3 text-center text-[13px] sm:text-sm leading-snug text-brand-dark-navy/70">
-        Hai letto l'anteprima fino all'editoriale. Lascia i tuoi dati per scaricare gratuitamente il
-        numero completo.
+        L’anteprima fino all’editoriale è gratuita. Lascia nome ed email per sfogliare o scaricare il numero completo.
       </Dialog.Description>
 
       <div className="space-y-4 [@media(max-height:700px)]:space-y-3">
-        <div className="grid grid-cols-2 gap-3 sm:gap-5">
-          <Field label="Nome" value={nome} onChange={setNome} />
-          <Field label="Cognome" value={cognome} onChange={setCognome} />
-        </div>
-        <Field label="Mail" value={email} onChange={setEmail} type="email" />
-        <Checkbox
-          checked={consensoPrivacy}
-          onChange={() => setConsensoPrivacy((v) => !v)}
-          className="italic [&>span:last-child]:text-xs [&>span:last-child]:leading-snug"
-        >
-          Dichiaro di aver letto e compreso l'Informativa sul trattamento dei dati personali ai sensi
-          del Regolamento (UE) 2016/679 (GDPR) e acconsento al trattamento dei dati per l'invio della
-          rivista Infosfera. <span className="font-bold not-italic">Visualizza informativa Privacy.</span>
-        </Checkbox>
+        <Field label="Nome" value={nome} onChange={setNome} />
+        <div aria-hidden="true" className="hidden"><label>Sito web<input tabIndex={-1} autoComplete="off" value={website} onChange={e=>setWebsite(e.target.value)}/></label></div>
+        <Field label="Email" value={email} onChange={setEmail} type="email" />
+        <label className="flex items-start gap-3 text-sm leading-snug cursor-pointer">
+          <input type="checkbox" checked={consensoPrivacy} onChange={e=>setConsensoPrivacy(e.target.checked)} className="mt-1 size-5 shrink-0 accent-brand-navy"/>
+          <span>Ho letto l’<a href="https://www.campaniadih.it/privacy-policy-2/" target="_blank" rel="noopener noreferrer" className="font-semibold underline">informativa privacy</a> e richiedo l’accesso alla rivista. Nome ed email sono raccolti per gestire questa richiesta; non viene attivata alcuna iscrizione a newsletter.</span>
+        </label>
+        <p className="text-sm text-brand-dark-navy/70">L’accesso a questo numero viene ricordato su questo browser per 30 giorni.</p>
       </div>
 
       {error && (
@@ -231,7 +173,7 @@ function LeadForm({ issue, onUnlocked }: { issue: InfosferaIssue; onUnlocked: ()
         )}
       >
         <Download className="size-4" />
-        {sending ? 'Invio in corso…' : 'Scarica il numero completo'}
+        {sending ? 'Invio in corso…' : 'Accedi al numero completo'}
       </button>
     </form>
   )
@@ -262,16 +204,18 @@ function ArrowButton({
 
 /**
  * Sfogliatore di anteprima: le pagine fino all'editoriale si leggono liberamente,
- * andando oltre compare il form (nome, cognome, mail) che sblocca il PDF completo.
+ * andando oltre compare il form (nome ed email) che sblocca il PDF completo.
  */
 export function InfosferaReader({
   issue,
   open,
   onOpenChange,
+  initialGate = false,
 }: {
   issue: InfosferaIssue
   open: boolean
   onOpenChange: (open: boolean) => void
+  initialGate?: boolean
 }) {
   const pages = useMemo(() => issue.previewPages ?? [], [issue.previewPages])
   const isDesktop = useIsDesktop()
@@ -279,14 +223,21 @@ export function InfosferaReader({
     () => buildViews(pages.length, isDesktop, issue.blankPages),
     [pages.length, isDesktop, issue.blankPages],
   )
-  const [index, setIndex] = useState(0)
+  const [index, setIndex] = useState(initialGate ? views.length : 0)
   const [touchX, setTouchX] = useState<number | null>(null)
   const [zoomIndex, setZoomIndex] = useState(0)
   const zoom = ZOOM_LEVELS[zoomIndex]
   const [viewportRef, viewportEl, viewport] = useElementSize<HTMLDivElement>()
   const drag = useRef<{ x: number; y: number; left: number; top: number } | null>(null)
   // Il lettore viene montato a ogni apertura: si riparte dalla copertina
-  const [unlocked, setUnlocked] = useState(() => readUnlocked().includes(issue.id))
+  const [access, setAccess] = useState<MagazineAccess | null>(null)
+  const [full, setFull] = useState(false)
+  const [checking, setChecking] = useState(true)
+  useEffect(() => {
+    let alive=true
+    requestAccess(issue.id).then(result=>{if(alive)setAccess(result)}).catch(()=>{}).finally(()=>{if(alive)setChecking(false)})
+    return ()=>{alive=false}
+  },[issue.id])
 
   // index === views.length è la "pagina" con il form / download
   const gateIndex = views.length
@@ -360,6 +311,8 @@ export function InfosferaReader({
       ? `Pagine ${current[0] + 1}–${current[1] + 1} di ${pages.length}`
       : `Pagina ${current[0] + 1} di ${pages.length}`
 
+  if (full && access) return <Suspense fallback={<div role="status" className="fixed inset-0 z-50 grid place-items-center bg-[#020f2a] text-white">Caricamento rivista…</div>}><FullIssueReader issue={issue} access={access} onClose={()=>onOpenChange(false)} onExpired={()=>{setFull(false);setAccess(null);setIndex(gateIndex)}}/></Suspense>
+
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
@@ -396,10 +349,10 @@ export function InfosferaReader({
               className="flex-1 min-w-0 h-full flex items-center justify-center">
               {atGate ? (
                 <div className="w-full max-w-[520px] max-h-full overflow-y-auto rounded-[24px] sm:rounded-[36px] bg-[#EDF1F3] px-5 py-6 sm:p-10 [@media(max-height:700px)]:py-4 text-brand-dark-navy shadow-[0_30px_60px_rgba(0,0,0,0.35)]">
-                  {unlocked ? (
-                    <DownloadPanel issue={issue} />
+                  {checking ? <><Dialog.Title className="sr-only">Accesso Infosfera</Dialog.Title><p role="status">Verifica accesso…</p></> : access ? (
+                    <DownloadPanel issue={issue} access={access} onRead={()=>setFull(true)} />
                   ) : (
-                    <LeadForm issue={issue} onUnlocked={() => setUnlocked(true)} />
+                    <LeadForm issue={issue} onUnlocked={setAccess} />
                   )}
                 </div>
               ) : (
@@ -462,7 +415,7 @@ export function InfosferaReader({
                 {pageLabel}
                 {!atGate && index === gateIndex - 1 && (
                   <span className="block sm:inline sm:ml-2 text-white">
-                    <span className="hidden sm:inline">· </span>Vai avanti per scaricare il numero completo
+                    <span className="hidden sm:inline">· </span>Vai avanti per sfogliare o scaricare il numero completo
                   </span>
                 )}
               </p>
