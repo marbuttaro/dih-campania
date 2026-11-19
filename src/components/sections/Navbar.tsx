@@ -1,4 +1,4 @@
-import { useEffect, useState, type MouseEvent } from 'react'
+import { useEffect, useState } from 'react'
 import { MenuIcon, ChevronDown } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
@@ -11,7 +11,6 @@ import {
   SheetClose,
 } from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
-import { ContactModal } from './ContactModal'
 import { NewsletterTab } from './NewsletterTab'
 import { GlowCursor } from '@/components/effects/GlowCursor'
 
@@ -41,36 +40,9 @@ const NAV_LINKS = [
   { href: '/chi-siamo', label: 'Chi Siamo' },
 ] as const
 
-function scrollToContact(e: MouseEvent<HTMLAnchorElement>) {
-  const target = document.getElementById('contatti')
-  // Pages without a contact section (e.g. the news pages) use the one on the home page
-  if (!target) {
-    e.preventDefault()
-    window.location.assign('/#contatti')
-    return
-  }
-
-  e.preventDefault()
-  const offset = 112 // matches scroll-mt-28 used on the contact sections
-  const startY = window.scrollY
-  const targetY = target.getBoundingClientRect().top + startY - offset
-  const distance = targetY - startY
-  const duration = 450
-  const startTime = performance.now()
-
-  const step = (now: number) => {
-    const t = Math.min(1, (now - startTime) / duration)
-    const eased = 1 - Math.pow(1 - t, 3)
-    window.scrollTo(0, startY + distance * eased)
-    if (t < 1) requestAnimationFrame(step)
-  }
-  requestAnimationFrame(step)
-}
-
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
-  const [contactModalOpen, setContactModalOpen] = useState(false)
   const path = window.location.pathname
   const isHome = path === '/' || path.endsWith('index.html') || path === ''
 
@@ -161,7 +133,7 @@ export function Navbar() {
             asChild
             className="bg-[#8EBEF7] text-[#013167] hover:bg-white hover:translate-y-0 px-6 rounded-xl font-bold"
           >
-            <a href="#contatti" onClick={scrollToContact}>Contattaci</a>
+            <a href="/contatti">Contattaci</a>
           </Button>
         </div>
 
@@ -222,9 +194,7 @@ export function Navbar() {
                 asChild
                 className="mt-6 w-full bg-[#8EBEF7] text-[#013167] hover:bg-white font-bold"
               >
-                <button type="button" onClick={() => setContactModalOpen(true)}>
-                  Contattaci
-                </button>
+                <a href="/contatti">Contattaci</a>
               </Button>
             </SheetClose>
           </SheetContent>
@@ -232,7 +202,6 @@ export function Navbar() {
       </div>
     </nav>
 
-    <ContactModal open={contactModalOpen} onClose={() => setContactModalOpen(false)} />
     <NewsletterTab />
     {/* Bagliore del cursore vicino ai pulsanti, su tutte le pagine */}
     <GlowCursor />

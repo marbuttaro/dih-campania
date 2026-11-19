@@ -43,12 +43,14 @@ export function NewsletterTab() {
       }}
     >
       <Dialog.Trigger asChild>
+        {/* Da computer: linguetta sul bordo destro. Su telefono e tablet: solo icona tonda in basso a destra */}
         <button
           type="button"
-          className="fixed right-0 top-1/2 z-40 -translate-y-1/2 flex flex-col items-center gap-3 rounded-l-xl bg-[#8EBEF7] px-2.5 py-4 sm:px-3 sm:py-5 text-[#013167] font-bold text-sm shadow-[0_10px_30px_rgba(0,25,51,0.25)] transition-colors hover:bg-white"
+          aria-label="Iscriviti alla newsletter"
+          className="fixed z-40 flex items-center justify-center bg-[#8EBEF7] text-[#013167] font-bold text-sm shadow-[0_10px_30px_rgba(0,25,51,0.25)] transition-colors hover:bg-white max-lg:bottom-[max(1.25rem,env(safe-area-inset-bottom))] max-lg:right-4 max-lg:size-12 max-lg:rounded-full lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:flex-col lg:gap-3 lg:rounded-l-xl lg:px-3 lg:py-5"
         >
-          <Mail className="size-4 sm:size-5 shrink-0 -rotate-90" />
-          <span className="[writing-mode:vertical-rl] rotate-180 whitespace-nowrap">
+          <Mail className="size-5 shrink-0 lg:-rotate-90" />
+          <span aria-hidden="true" className="hidden lg:block [writing-mode:vertical-rl] rotate-180 whitespace-nowrap">
             Iscriviti alla newsletter
           </span>
         </button>

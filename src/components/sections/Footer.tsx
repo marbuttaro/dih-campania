@@ -21,7 +21,7 @@ const NAV_COLUMNS = [
   {
     title: 'Contatti',
     links: [
-      { href: '#contatti', label: 'Contattaci' },
+      { href: '/contatti', label: 'Contattaci' },
       { href: '#', label: 'DIH Campania' },
       { href: '/trasparenza', label: 'Trasparenza' },
     ],

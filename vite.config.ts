@@ -17,6 +17,7 @@ const CLEAN_URL_ROUTES: Record<string, string> = {
   '/infosfera': '/infosfera.html',
   '/bandi': '/bandi.html',
   '/credito-d-imposta': '/credito-d-imposta.html',
+  '/contatti': '/contatti.html',
 }
 
 function cleanUrlsDev(): Plugin {
@@ -62,6 +63,7 @@ export default defineConfig({
         infosfera: path.resolve(__dirname, 'infosfera.html'),
         bandi: path.resolve(__dirname, 'bandi.html'),
         creditoImposta: path.resolve(__dirname, 'credito-d-imposta.html'),
+        contatti: path.resolve(__dirname, 'contatti.html'),
       },
     },
   },
