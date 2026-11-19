@@ -2,8 +2,9 @@ import { createClient } from '@supabase/supabase-js'
 import { createHash, createHmac, randomBytes } from 'node:crypto'
 
 const sha = value => createHash('sha256').update(value).digest('hex')
-const cookieName = id => `infosfera_${id}`
-const SESSION_SECONDS = 30 * 24 * 3600
+const COOKIE_NAME = 'infosfera_access'
+const SESSION_SECONDS = 180 * 24 * 3600
+const COOKIE_OPTIONS = 'Path=/api/infosfera; HttpOnly; Secure; SameSite=Lax'
 export function validateLead(body) {
   if (!body || typeof body !== 'object' || Array.isArray(body)) return null
   const name = typeof body.name === 'string' ? body.name.trim().replace(/\s+/g, ' ') : ''
@@ -37,12 +38,32 @@ export function createHandler({ client, random = () => randomBytes(32).toString(
       const { data: issue, error: issueError } = await db.from('infosfera_issues').select('*').eq('id',id).eq('active',true).maybeSingle()
       if (issueError) throw issueError
       if (!issue) return fail(404,'Numero non disponibile.')
-      const token = req.headers.cookie?.split(';').map(c => c.trim()).find(c => c.startsWith(`${cookieName(id)}=`))?.split('=')[1]
+      const cookies = (req.headers.cookie || '').split(';').map(c => c.trim().split('='))
+      const token = cookies.find(([name]) => name === COOKIE_NAME)?.[1]
+      const legacy = cookies.filter(([name,value]) => /^infosfera_\d{1,3}$/.test(name) && /^[a-f0-9]{64}$/.test(value || '')).slice(0,16)
+      const startSession = async sourceIssue => {
+        const newToken = random()
+        const expires = new Date(now()+SESSION_SECONDS*1000)
+        // issue_id records where access was originally requested; the browser
+        // session authorizes the whole magazine archive, without storing PII.
+        const {error} = await db.from('infosfera_sessions').insert({token_hash:sha(newToken),issue_id:sourceIssue,expires_at:expires.toISOString()})
+        if (error) throw error
+        const setCookie = `${COOKIE_NAME}=${newToken}; Max-Age=${SESSION_SECONDS}; Expires=${expires.toUTCString()}; ${COOKIE_OPTIONS}`
+        res.setHeader('Set-Cookie',legacy.length ? [setCookie,...legacy.map(([name]) => `${name}=; Max-Age=0; ${COOKIE_OPTIONS}`)] : setCookie)
+      }
       let session = null
       if (/^[a-f0-9]{64}$/.test(token || '')) {
-        const result = await db.from('infosfera_sessions').select('token_hash').eq('token_hash',sha(token)).eq('issue_id',id).gt('expires_at',new Date(now()).toISOString()).maybeSingle()
+        const result = await db.from('infosfera_sessions').select('token_hash').eq('token_hash',sha(token)).gt('expires_at',new Date(now()).toISOString()).maybeSingle()
         if (result.error) throw result.error
         session = result.data
+      }
+      // Existing readers with a valid 30-day, per-issue cookie do not have to
+      // submit the form again. Upgrade once; normal reads never extend expiry.
+      if (!session && legacy.length) {
+        const result = await db.from('infosfera_sessions').select('token_hash,issue_id').in('token_hash',legacy.map(([,value]) => sha(value))).gt('expires_at',new Date(now()).toISOString())
+        if (result.error) throw result.error
+        const previous = result.data?.find(row => legacy.some(([name,value]) => name === `infosfera_${row.issue_id}` && sha(value) === row.token_hash))
+        if (previous) { await startSession(previous.issue_id); session = true }
       }
       if (!session && req.method === 'POST') {
         const lead = validateLead(req.body)
@@ -54,10 +75,7 @@ export function createHandler({ client, random = () => randomBytes(32).toString(
         if (!allowed) { res.setHeader('Retry-After','3600'); return fail(429,'Troppe richieste. Riprova più tardi.') }
         const { error: leadError } = await db.from('infosfera_leads').upsert({ ...lead, issue_id:id },{ onConflict:'issue_id,email', ignoreDuplicates:true })
         if (leadError) throw leadError
-        const newToken = random()
-        const {error: sessionError} = await db.from('infosfera_sessions').insert({token_hash:sha(newToken),issue_id:id,expires_at:new Date(now()+SESSION_SECONDS*1000).toISOString()})
-        if (sessionError) throw sessionError
-        res.setHeader('Set-Cookie',`${cookieName(id)}=${newToken}; Path=/api/infosfera; Max-Age=${SESSION_SECONDS}; HttpOnly; Secure; SameSite=Lax`)
+        await startSession(id)
         session = true
       }
       if (!session) return fail(401,'Lascia nome ed email per accedere al numero completo.')

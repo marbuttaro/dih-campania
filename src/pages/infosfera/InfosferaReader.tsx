@@ -155,7 +155,7 @@ function LeadForm({ issue, onUnlocked }: { issue: InfosferaIssue; onUnlocked: (a
           <input type="checkbox" checked={consensoPrivacy} onChange={e=>setConsensoPrivacy(e.target.checked)} className="mt-1 size-5 shrink-0 accent-brand-navy"/>
           <span>Ho letto l’<a href="https://www.campaniadih.it/privacy-policy-2/" target="_blank" rel="noopener noreferrer" className="font-semibold underline">informativa privacy</a> e richiedo l’accesso alla rivista. Nome ed email sono raccolti per gestire questa richiesta; non viene attivata alcuna iscrizione a newsletter.</span>
         </label>
-        <p className="text-sm text-brand-dark-navy/70">L’accesso a questo numero viene ricordato su questo browser per 30 giorni.</p>
+        <p className="text-sm text-brand-dark-navy/70">Ti riconosciamo su questo browser per 6 mesi (180 giorni): potrai leggere e scaricare tutti i numeri senza reinserire i dati. Alla scadenza o se cancelli i cookie, ti chiederemo nuovamente nome ed email.</p>
       </div>
 
       {error && (

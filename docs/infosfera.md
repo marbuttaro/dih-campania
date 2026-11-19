@@ -40,8 +40,17 @@ precedente da 78 pagine è conservata nel backup.
 - `POST /api/infosfera?issue=ID` valida nome, email, presa visione privacy,
   honeypot e origine; applica un limite di 20 nuove richieste/ora per IP
   pseudonimizzato tramite HMAC. Salva il contatto prima di autorizzare il PDF.
-- Il cookie per numero dura 30 giorni ed è `HttpOnly`, `Secure`, `SameSite=Lax`.
-  Nel database si salva solo l'hash del token. I link firmati durano un'ora.
+- Il cookie unico `infosfera_access` riconosce il browser su tutti i numeri
+  per **180 giorni (circa 6 mesi)**, senza account. È `HttpOnly`, `Secure`,
+  `SameSite=Lax` e contiene un token casuale, mai nome o email. La scadenza
+  è fissa dal primo invio: le letture successive non la prolungano.
+  I precedenti cookie validi per singolo numero vengono convertiti al nuovo
+  cookie automaticamente, senza ripetere il modulo. Alla scadenza, cancellando
+  i cookie o cambiando browser/dispositivo, il modulo viene richiesto di nuovo.
+  Nel database si salva solo l'hash del token; `infosfera_sessions.issue_id`
+  indica il numero della richiesta iniziale, non limita l'accesso. Anche il
+  contatto in redazione si riferisce alla richiesta iniziale: le altre letture
+  non generano nuovi contatti. I link firmati ai PDF durano un'ora.
   Le risposte API non sono memorizzabili in cache. Nessuna chiave server viene
   inclusa nel frontend.
 - Il modulo non attiva iscrizioni a newsletter. Il CSV identifica nome, email,
