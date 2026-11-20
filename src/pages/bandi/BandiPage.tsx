@@ -229,7 +229,7 @@ function Orientamento({ oggi, onApplica }: { oggi: Date; onApplica: (f: Filtri) 
                       key={d.id}
                       className={cn(
                         'h-1 w-7 rounded-full transition-colors duration-300',
-                        i <= step ? 'bg-[#6fa3dd]' : 'bg-brand-navy/10',
+                        i <= step ? 'bg-brand-light-blue' : 'bg-brand-navy/10',
                       )}
                     />
                   ))}
@@ -250,7 +250,7 @@ function Orientamento({ oggi, onApplica }: { oggi: Date; onApplica: (f: Filtri) 
                       className={cn(
                         'group flex items-start gap-3 rounded-[10px] border px-4 py-3 text-left transition-all duration-300 cursor-pointer',
                         'bg-white/70 shadow-[0_6px_18px_rgba(1,49,103,0.10)] hover:-translate-y-0.5 hover:bg-white',
-                        selezionata ? 'border-[#6fa3dd] bg-white' : 'border-white',
+                        selezionata ? 'border-brand-light-blue bg-white' : 'border-white',
                       )}
                     >
                       <span
@@ -292,7 +292,7 @@ function Orientamento({ oggi, onApplica }: { oggi: Date; onApplica: (f: Filtri) 
             </div>
           ) : (
             <div className="flex h-full flex-col justify-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.08em] text-[#6fa3dd]">Le tue risposte</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.08em] text-brand-navy/70">Le tue risposte</p>
               <h3 className="mt-3 text-xl sm:text-[1.4rem] font-medium text-brand-dark-navy">
                 {risultati === 0
                   ? 'Al momento nessun bando corrisponde alle tue risposte'
@@ -323,14 +323,14 @@ function Orientamento({ oggi, onApplica }: { oggi: Date; onApplica: (f: Filtri) 
                       onApplica(filtriDaRisposte(risposte))
                       scrollTo('catalogo')
                     }}
-                    className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-navy to-[#0b4a86] px-6 py-2.5 text-sm font-semibold text-white shadow-[0_6px_16px_rgba(1,49,103,0.35)] transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
+                    className="inline-flex items-center gap-2 rounded-lg bg-brand-navy hover:bg-brand-dark-navy px-6 py-2.5 text-sm font-semibold text-white shadow-[0_6px_16px_rgba(1,49,103,0.35)] transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
                   >
                     Vedi i bandi <ArrowRight className="size-4" />
                   </button>
                 ) : (
                   <a
                     href={CONSULENZA_HREF}
-                    className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-navy to-[#0b4a86] px-6 py-2.5 text-sm font-semibold text-white shadow-[0_6px_16px_rgba(1,49,103,0.35)] transition-all duration-300 hover:-translate-y-0.5 no-underline"
+                    className="inline-flex items-center gap-2 rounded-lg bg-brand-navy hover:bg-brand-dark-navy px-6 py-2.5 text-sm font-semibold text-white shadow-[0_6px_16px_rgba(1,49,103,0.35)] transition-all duration-300 hover:-translate-y-0.5 no-underline"
                   >
                     Chiedi una consulenza <ArrowRight className="size-4" />
                   </a>
@@ -471,7 +471,7 @@ function BandoCard({ bando, oggi }: { bando: Bando; oggi: Date }) {
             href={bando.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-brand-navy to-[#0b4a86] px-4 py-2 text-xs font-semibold text-white shadow-[0_4px_12px_rgba(1,49,103,0.3)] transition-all duration-300 hover:-translate-y-0.5 no-underline"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-brand-navy hover:bg-brand-dark-navy px-4 py-2 text-xs font-semibold text-white shadow-[0_4px_12px_rgba(1,49,103,0.3)] transition-all duration-300 hover:-translate-y-0.5 no-underline"
           >
             Vai al sito dell'ente <ArrowUpRight className="size-3.5" />
           </a>
@@ -522,7 +522,7 @@ function Paginazione({ pagina, totale, onCambia }: { pagina: number; totale: num
         onClick={() => onCambia(pagina - 1)}
         disabled={pagina === 1}
         aria-label="Pagina precedente"
-        className={cn(NEUMORPHIC_BUTTON, 'size-11 text-[#6fa3dd] disabled:opacity-40 disabled:pointer-events-none')}
+        className={cn(NEUMORPHIC_BUTTON, 'size-11 text-brand-light-blue disabled:opacity-40 disabled:pointer-events-none')}
       >
         <ArrowLeft className="size-5" />
       </button>
@@ -535,7 +535,7 @@ function Paginazione({ pagina, totale, onCambia }: { pagina: number; totale: num
             aria-current={p === pagina ? 'page' : undefined}
             className={cn(
               'text-2xl font-normal transition-colors cursor-pointer',
-              p === pagina ? 'text-[#6fa3dd] font-light' : 'text-brand-navy hover:text-[#6fa3dd]',
+              p === pagina ? 'text-brand-light-blue font-light' : 'text-brand-navy hover:text-brand-light-blue',
             )}
           >
             {p}
@@ -547,7 +547,7 @@ function Paginazione({ pagina, totale, onCambia }: { pagina: number; totale: num
         onClick={() => onCambia(pagina + 1)}
         disabled={pagina === totale}
         aria-label="Pagina successiva"
-        className={cn(NEUMORPHIC_BUTTON, 'size-11 text-[#6fa3dd] disabled:opacity-40 disabled:pointer-events-none')}
+        className={cn(NEUMORPHIC_BUTTON, 'size-11 text-brand-light-blue disabled:opacity-40 disabled:pointer-events-none')}
       >
         <ArrowRight className="size-5" />
       </button>
@@ -689,7 +689,7 @@ function Catalogo({
               </button>
               <a
                 href={CONSULENZA_HREF}
-                className="inline-flex items-center rounded-lg bg-gradient-to-r from-brand-navy to-[#0b4a86] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_6px_16px_rgba(1,49,103,0.35)] transition-all duration-300 hover:-translate-y-0.5 no-underline"
+                className="inline-flex items-center rounded-lg bg-brand-navy hover:bg-brand-dark-navy px-5 py-2.5 text-sm font-semibold text-white shadow-[0_6px_16px_rgba(1,49,103,0.35)] transition-all duration-300 hover:-translate-y-0.5 no-underline"
               >
                 Chiedi una consulenza
               </a>

@@ -25,12 +25,12 @@ function Card({ article, categories }: { article: Article; categories: Category[
     {/* Da telefono la card è compatta: solo titolo, categoria/data e "Leggi" */}
     <div className="px-6 py-4 sm:px-7 sm:pt-6 sm:pb-6 flex-1 flex flex-col justify-between">
       <div className="mb-2 sm:mb-4">
-        <h3 className="font-medium text-[18px] sm:text-[22px] text-[#013167] leading-tight line-clamp-2 sm:line-clamp-3"><a href={url} className="hover:underline">{articleTitle(article)}</a></h3>
-        <p className="mt-1.5 sm:mt-2 text-[13px] sm:text-sm font-medium text-[#013167]/80">{[...categoryNames, formatDate(article.published_at)].join(' | ')}</p>
+        <h3 className="font-medium text-[18px] sm:text-[22px] text-brand-navy leading-tight line-clamp-2 sm:line-clamp-3"><a href={url} className="hover:underline">{articleTitle(article)}</a></h3>
+        <p className="mt-1.5 sm:mt-2 text-[13px] sm:text-sm font-medium text-brand-navy/80">{[...categoryNames, formatDate(article.published_at)].join(' | ')}</p>
         <p className="max-sm:hidden mt-3 text-[15px] font-light text-brand-dark-navy leading-snug line-clamp-3">{plainText(article.excerpt || article.content_html).slice(0, 180)}</p>
       </div>
       <div className="flex justify-end">
-        <a href={url} className="bg-[#E3EAEC]/50 border border-white/50 text-brand-dark-navy px-6 py-2 sm:px-8 sm:py-3 rounded-xl font-semibold text-[15px] sm:text-lg shadow-neumorphic inline-block no-underline transition-colors duration-300 hover:bg-[#E3EAEC]" aria-label={`Leggi: ${articleTitle(article)}`}>Leggi</a>
+        <a href={url} className="bg-brand-ice/50 border border-white/50 text-brand-dark-navy px-6 py-2 sm:px-8 sm:py-3 rounded-xl font-semibold text-[15px] sm:text-lg shadow-neumorphic inline-block no-underline transition-colors duration-300 hover:bg-[#E3EAEC]" aria-label={`Leggi: ${articleTitle(article)}`}>Leggi</a>
       </div>
     </div>
   </article>
@@ -78,7 +78,7 @@ export default function PublicNews({ slug }: { slug?: string }) {
     <a href={slug ? '/news' : '/'} className="text-sm underline">← {slug ? 'Tutte le news' : 'Home'}</a>
     {loading ? <p role="status" className="panel mt-8">Caricamento…</p> : error ? <div role="alert" className="panel mt-8"><p>{error}</p><button className="mt-4" onClick={() => window.location.reload()}>Riprova</button></div> : slug ? article ? <div className="grid lg:grid-cols-[minmax(0,1fr)_300px] gap-12 mt-8">
       <article>
-        <header><div className="flex flex-wrap gap-2 mb-4">{article.category_slugs.map(s => <a key={s} href={`/news?categoria=${encodeURIComponent(s)}`} className="bg-[#e3eaec] px-3 py-1 rounded-full text-xs">{categories.find(c => c.slug === s)?.name || s}</a>)}</div><h1 className="text-3xl sm:text-4xl lg:text-[46px] leading-[1.2] font-light text-[#013167]">{articleTitle(article)}</h1><p className="mt-5 text-sm"><time dateTime={article.published_at}>{formatDate(article.published_at)}</time>{article.author_name && ` · ${article.author_name}`}</p></header>
+        <header><div className="flex flex-wrap gap-2 mb-4">{article.category_slugs.map(s => <a key={s} href={`/news?categoria=${encodeURIComponent(s)}`} className="bg-brand-ice px-3 py-1 rounded-full text-xs">{categories.find(c => c.slug === s)?.name || s}</a>)}</div><h1 className="text-3xl sm:text-4xl lg:text-[46px] leading-[1.2] font-light text-brand-navy">{articleTitle(article)}</h1><p className="mt-5 text-sm"><time dateTime={article.published_at}>{formatDate(article.published_at)}</time>{article.author_name && ` · ${article.author_name}`}</p></header>
         {(article.status !== 'published' || new Date(article.published_at) > new Date()) && <p className="success my-5">Anteprima riservata alla redazione — questo articolo non è ancora pubblico.</p>}
         {article.featured_image && <img src={article.featured_image} alt={article.featured_image_alt} className="w-full max-h-[560px] object-contain rounded-2xl my-9" />}
         {article.event_at && <p className="panel my-6">Evento: {formatDate(article.event_at, true)}{article.event_location && ` · ${article.event_location}`}</p>}
