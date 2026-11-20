@@ -26,7 +26,7 @@ function preview(id: keyof typeof manifest) {
 export const LATEST_ISSUE: InfosferaIssue = {
   id: '12',
     ...preview('12'),
-  label: 'n. 12 · Anno VII · Ottobre 2026',
+  label: 'N°1/2026 · Anno VII · Ottobre 2026',
   title: 'Intelligenza Artificiale tra opportunità e cambiamenti',
   cover: '/assets/infosfera/numeri/12/copertina.webp',
 
@@ -40,15 +40,15 @@ export const EDITORIAL_TEAM = [
 
 
 /**
- * Archivio verificato, dal più recente. La voce 2/2024 su PRIDE duplica il PDF
- * di febbraio 2025: una sola scheda per ogni edizione effettiva.
+ * Archivio dal più recente. Numerazione corretta dall'utente il 20/11/2026:
+ * Guardiani digitali 2/2024, The European Way 1/2025, Underwater 2/2025, IA 1/2026.
  * Gli originali completi sono serviti esclusivamente dall'API dopo il modulo.
  */
 export const PAST_ISSUES: InfosferaIssue[] = [
   {
     id: '11',
     ...preview('11'),
-    label: 'N°1/2026',
+    label: 'N°2/2025',
     title: 'Underwater, supercalcolo e quanti: economie in trasformazione',
     cover: '/assets/infosfera/numeri/11/copertina.webp',
 
@@ -64,7 +64,7 @@ export const PAST_ISSUES: InfosferaIssue[] = [
   {
     id: '10',
     ...preview('10'),
-    label: 'N°2/2025',
+    label: 'N°1/2025',
     title: 'The European Way: Innovation, Sovereignty and Peace',
     cover: '/assets/infosfera/numeri/10/copertina.webp',
 
@@ -83,7 +83,7 @@ export const PAST_ISSUES: InfosferaIssue[] = [
   {
     id: '9',
     ...preview('9'),
-    label: 'N°1/2025',
+    label: 'N°2/2024',
     title: 'Guardiani digitali',
     cover: '/assets/infosfera/numeri/9/copertina.webp',
 
