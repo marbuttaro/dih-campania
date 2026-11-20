@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { ChevronDown } from 'lucide-react'
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
 import { ContactPrefooter } from '@/components/sections/ContactPrefooter'
@@ -146,8 +147,13 @@ const COMMUNITY_MEMBERS = [
   },
 ]
 
+// Da telefono l'elenco della community parte chiuso: si mostrano le prime aziende e "Vedi tutti"
+const MOBILE_MEMBERS_PREVIEW = 4
+
 export function InnovaCoPage() {
   const [tab, setTab] = useState<ParticipationTab>('offro')
+  const [showAllMembers, setShowAllMembers] = useState(false)
+  const communityListRef = useRef<HTMLUListElement>(null)
   const [formOpen, setFormOpen] = useState(false)
   const [solutionFormOpen, setSolutionFormOpen] = useState(false)
 
@@ -288,11 +294,12 @@ export function InnovaCoPage() {
           className="relative z-10 w-full min-h-dvh sm:min-h-[68vh] flex items-center pt-24 sm:pt-28 pb-10 sm:pb-12 rounded-b-[40px] sm:rounded-b-[56px] overflow-hidden"
           style={{
             background:
-              'linear-gradient(120deg, #001933 0%, #013a6b 35%, #0e568b 65%, #3a82b8 100%)',
+              'linear-gradient(120deg, #001933 0%, #013167 45%, color-mix(in srgb, #013167 55%, #8ebef7) 100%)',
           }}
         >
           <div className="container-page relative z-10 grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-8 lg:gap-16 items-center text-center lg:text-left reveal-element">
-            <h1 className="text-4xl lg:text-[2.75rem] leading-[1.25] tracking-tight">
+            {/* Eccezione voluta alla scala: da computer il titolo resta a 44 px, più contenuto */}
+            <h1 className="text-[36px] lg:text-[44px] leading-[1.2] tracking-tight">
               <span className="font-light text-white/90">Benvenuto in Innova.CO:</span>
               <br />
               <span className="font-bold text-brand-light-blue">
@@ -301,7 +308,7 @@ export function InnovaCoPage() {
                 Campania DIH
               </span>
             </h1>
-            <p className="text-sm sm:text-base text-white/75 leading-relaxed mt-3 lg:mt-6">
+            <p className="text-base lg:text-xl text-white/75 leading-relaxed mt-3 lg:mt-6">
               Il cuore pulsante di Campania DIH: uno spazio dinamico dove imprenditori,
               professionisti, startupper, ricercatori si incontrano per crescere insieme,
               condividere know-how e progettare soluzioni concrete per l'innovazione.
@@ -323,7 +330,7 @@ export function InnovaCoPage() {
                   className="absolute inset-0 flex items-center justify-center px-4"
                   style={{ opacity: 1, transform: 'translateY(0px)' }}
                 >
-                  <h2 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-tight text-balance">
+                  <h2 className="text-[34px] lg:text-[44px] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-tight text-balance">
                     Cerchi una soluzione o hai un'idea o un progetto da affrontare nel mondo digitale?
                   </h2>
                 </div>
@@ -332,8 +339,10 @@ export function InnovaCoPage() {
                   className="absolute inset-0 flex items-center justify-center px-4"
                   style={{ opacity: 0, transform: 'translateY(26px)' }}
                 >
-                  <h2 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-tight">
-                    Offri soluzioni innovative e vuoi metterle al servizio delle imprese?
+                  <h2 className="text-[34px] lg:text-[44px] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-tight">
+                    Offri soluzioni innovative e vuoi metterle al
+                    <br className="hidden lg:block" />
+                    {' '}servizio delle imprese?
                   </h2>
                 </div>
                 <div
@@ -341,7 +350,7 @@ export function InnovaCoPage() {
                   className="absolute inset-0 flex items-center justify-center px-4"
                   style={{ opacity: 0, transform: 'translateY(26px)' }}
                 >
-                  <h2 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-tight">
+                  <h2 className="text-[34px] lg:text-[44px] font-light text-brand-navy max-w-[1100px] lg:max-w-[1320px] leading-tight">
                     Allora sei nel posto giusto.
                   </h2>
                 </div>
@@ -352,19 +361,20 @@ export function InnovaCoPage() {
           {/* 3. Cosa troverai — heading fades in, then the three cards stack on
                  top of each other while scrolling, reusing the same
                  scroll-linked opacity/transform approach as the questions above. */}
+          {/* Da telefono lo sfondo blu occupa tutta la schermata e titolo + card restano fermi al centro mentre si scorre */}
           <section
             ref={stackSectionRef}
-            className="relative z-10 w-full h-[190vh] sm:h-[195vh] lg:h-[220vh] select-none"
+            className="relative z-10 w-full h-[230svh] lg:h-[220vh] select-none"
           >
             <div
               ref={stackStickyRef}
-              className="sticky top-0 h-[68vh] sm:h-[72vh] lg:h-screen flex flex-col items-center justify-start lg:justify-center pt-14 sm:pt-16 lg:pt-0 overflow-hidden w-full"
+              className="sticky top-0 h-[100svh] lg:h-screen flex flex-col items-center justify-center pt-16 lg:pt-0 overflow-hidden w-full"
               style={{
-                background: 'linear-gradient(120deg, #001933 0%, #013a6b 35%, #0e568b 65%, #3a82b8 100%)',
+                background: 'linear-gradient(120deg, #001933 0%, #013167 45%, color-mix(in srgb, #013167 55%, #8ebef7) 100%)',
               }}
             >
               <h2
-                className="text-4xl sm:text-5xl lg:text-[3.25rem] font-light text-white/90 px-6 text-center mb-10 sm:mb-14"
+                className="text-[34px] lg:text-[44px] font-light text-white/90 px-6 text-center mb-10 sm:mb-14"
               >
                 Cosa troverai in Innova.CO
               </h2>
@@ -376,7 +386,7 @@ export function InnovaCoPage() {
                     ref={(el) => {
                       stackCardRefs.current[i] = el
                     }}
-                    className="absolute inset-0 rounded-xl bg-white/5 backdrop-blur-md border border-white/30 shadow-[0_15px_45px_rgba(0,0,0,0.25)] flex items-center justify-center p-8 text-center"
+                    className="absolute inset-0 rounded-[20px] bg-white/5 backdrop-blur-md border border-white/30 shadow-[0_15px_45px_rgba(0,0,0,0.25)] flex items-center justify-center p-8 text-center"
                     style={{ opacity: 0, transform: 'translateY(60px) scale(1)', zIndex: i, willChange: 'transform, opacity' }}
                   >
                     <p className="text-3xl sm:text-4xl font-light text-white">
@@ -391,7 +401,7 @@ export function InnovaCoPage() {
         <div className="container-page relative z-10">
           {/* 4. Come puoi partecipare */}
           <div className="pt-20 sm:pt-28 pb-20 reveal-element">
-            <h2 className="text-4xl sm:text-5xl font-light text-brand-navy mb-10">
+            <h2 className="text-[34px] lg:text-[44px] font-light text-brand-navy mb-10">
               Come puoi partecipare?
             </h2>
 
@@ -400,10 +410,10 @@ export function InnovaCoPage() {
                 <button
                   type="button"
                   onClick={() => setTab('offro')}
-                  className={`flex flex-col items-center justify-center gap-1.5 sm:gap-2 rounded-xl sm:rounded-2xl py-3 px-3 sm:py-4 sm:px-6 transition-all duration-300 ${
+                  className={`flex flex-col items-center justify-center gap-1.5 sm:gap-2 rounded-[12px] py-3 px-3 sm:py-4 sm:px-6 transition-all duration-300 ${
                     tab === 'offro'
-                      ? 'bg-[#E3EAEC] shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.55)]'
-                      : 'bg-[#E3EAEC]/85 shadow-[-3px_-3px_10px_rgba(255,255,255,0.5),4px_4px_12px_rgba(164,177,188,0.25)] hover:bg-[#E3EAEC]'
+                      ? 'bg-brand-ice shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.55)]'
+                      : 'bg-brand-ice/85 shadow-[-3px_-3px_10px_rgba(255,255,255,0.5),4px_4px_12px_rgba(164,177,188,0.25)] hover:bg-brand-ice'
                   }`}
                 >
                   <img src="/assets/innova-co/servizio.svg" alt="" aria-hidden="true" className="size-5 sm:size-7" />
@@ -419,10 +429,10 @@ export function InnovaCoPage() {
                 <button
                   type="button"
                   onClick={() => setTab('cerco')}
-                  className={`flex flex-col items-center justify-center gap-1.5 sm:gap-2 rounded-xl sm:rounded-2xl py-3 px-3 sm:py-4 sm:px-6 transition-all duration-300 ${
+                  className={`flex flex-col items-center justify-center gap-1.5 sm:gap-2 rounded-[12px] py-3 px-3 sm:py-4 sm:px-6 transition-all duration-300 ${
                     tab === 'cerco'
-                      ? 'bg-[#E3EAEC] shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.55)]'
-                      : 'bg-[#E3EAEC]/85 shadow-[-3px_-3px_10px_rgba(255,255,255,0.5),4px_4px_12px_rgba(164,177,188,0.25)] hover:bg-[#E3EAEC]'
+                      ? 'bg-brand-ice shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.55)]'
+                      : 'bg-brand-ice/85 shadow-[-3px_-3px_10px_rgba(255,255,255,0.5),4px_4px_12px_rgba(164,177,188,0.25)] hover:bg-brand-ice'
                   }`}
                 >
                   <img src="/assets/innova-co/discovery.svg" alt="" aria-hidden="true" className="size-5 sm:size-7" />
@@ -436,8 +446,8 @@ export function InnovaCoPage() {
                 </button>
               </div>
 
-              <div className="shadow-box !bg-[#E3EAEC]/90 flex flex-col items-center text-center">
-                <p className="text-base sm:text-lg text-brand-dark-navy/85 leading-relaxed mb-8 max-w-[640px]">
+              <div className="shadow-box !bg-brand-ice/90 flex flex-col items-center text-center">
+                <p className="text-base lg:text-xl text-brand-dark-navy/85 leading-relaxed mb-8 max-w-[640px]">
                   {active.text}
                 </p>
                 <button
@@ -446,7 +456,7 @@ export function InnovaCoPage() {
                     if (tab === 'offro') setFormOpen(true)
                     else setSolutionFormOpen(true)
                   }}
-                  className="inline-flex items-center gap-2 bg-[#E3EAEC] text-brand-dark-navy font-semibold px-7 py-3.5 rounded-2xl shadow-[-4px_-4px_10px_rgba(255,255,255,0.9),6px_6px_16px_rgba(164,177,188,0.6)] hover:-translate-y-0.5 transition-all duration-300"
+                  className="inline-flex items-center gap-2 bg-brand-ice text-brand-dark-navy text-base font-semibold px-7 py-3.5 rounded-[12px] shadow-[-4px_-4px_10px_rgba(255,255,255,0.9),6px_6px_16px_rgba(164,177,188,0.6)] hover:-translate-y-0.5 transition-all duration-300"
                 >
                   {active.cta}
                 </button>
@@ -456,12 +466,54 @@ export function InnovaCoPage() {
 
           {/* 5. La community oggi */}
           <div className="pb-20 reveal-element">
-            <h2 className="text-4xl sm:text-5xl font-light text-brand-navy pb-4">
+            <h2 className="text-[34px] lg:text-[44px] font-light text-brand-navy pb-4">
               La community oggi
             </h2>
             <div className="border-b border-brand-navy/10 mb-6" />
 
-            <div className="overflow-x-auto">
+            {/* Telefono e tablet: una scheda per azienda (logo, descrizione, link), senza scorrere di lato */}
+            <ul ref={communityListRef} className="md:hidden divide-y divide-brand-navy/10 border-b border-brand-navy/10 scroll-mt-28">
+              {(showAllMembers ? COMMUNITY_MEMBERS : COMMUNITY_MEMBERS.slice(0, MOBILE_MEMBERS_PREVIEW)).map((member, i) => (
+                <li key={i} className="py-6 flex flex-col gap-4">
+                  <div className="h-14 w-32 flex items-center">
+                    {member.logo ? (
+                      <img src={member.logo} alt={member.name} className="max-h-full max-w-full object-contain" />
+                    ) : (
+                      <span className="text-sm font-semibold text-brand-navy leading-tight">{member.name}</span>
+                    )}
+                  </div>
+                  <p className="text-sm text-brand-dark-navy/80 leading-snug">{member.description}</p>
+                  <a
+                    href={member.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="self-start inline-flex items-center whitespace-nowrap bg-brand-ice text-brand-dark-navy font-semibold text-base px-5 py-2.5 rounded-[12px] shadow-[0_4px_10px_rgba(1,49,103,0.18)] hover:shadow-[0_6px_16px_rgba(1,49,103,0.25)] hover:-translate-y-0.5 transition-all duration-300"
+                  >
+                    Visita il sito
+                  </a>
+                </li>
+              ))}
+            </ul>
+            {COMMUNITY_MEMBERS.length > MOBILE_MEMBERS_PREVIEW && (
+              <div className="md:hidden mt-6 flex justify-center">
+                <button
+                  type="button"
+                  aria-expanded={showAllMembers}
+                  onClick={() => {
+                    // Richiudendo, si torna all'inizio dell'elenco per non perdere il punto
+                    if (showAllMembers) communityListRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                    setShowAllMembers((v) => !v)
+                  }}
+                  className="inline-flex items-center gap-2 bg-brand-ice text-brand-dark-navy font-semibold text-base px-6 py-3 rounded-[12px] shadow-[-4px_-4px_10px_rgba(255,255,255,0.9),6px_6px_16px_rgba(164,177,188,0.6)] transition-all duration-300"
+                >
+                  {showAllMembers ? 'Mostra meno' : `Vedi tutti (${COMMUNITY_MEMBERS.length})`}
+                  <ChevronDown className={`size-4 transition-transform duration-300 ${showAllMembers ? 'rotate-180' : ''}`} />
+                </button>
+              </div>
+            )}
+
+            {/* Da computer: tabella */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full min-w-[720px] border-collapse">
                 <thead>
                   <tr className="border-b border-brand-navy/15 text-left">
@@ -488,7 +540,7 @@ export function InnovaCoPage() {
                           )}
                         </div>
                       </td>
-                      <td className="py-5 pr-8 max-w-[440px] text-brand-dark-navy/80 text-xs leading-snug">
+                      <td className="py-5 pr-8 max-w-[440px] text-brand-dark-navy/80 text-sm leading-snug">
                         {member.description}
                       </td>
                       <td className="py-5 text-right align-middle whitespace-nowrap">
@@ -496,7 +548,7 @@ export function InnovaCoPage() {
                           href={member.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center whitespace-nowrap bg-[#E3EAEC] text-brand-dark-navy font-semibold text-sm px-5 py-2.5 rounded-lg shadow-[0_4px_10px_rgba(1,49,103,0.18)] hover:shadow-[0_6px_16px_rgba(1,49,103,0.25)] hover:-translate-y-0.5 transition-all duration-300"
+                          className="inline-flex items-center whitespace-nowrap bg-brand-ice text-brand-dark-navy font-semibold text-base px-5 py-2.5 rounded-[12px] shadow-[0_4px_10px_rgba(1,49,103,0.18)] hover:shadow-[0_6px_16px_rgba(1,49,103,0.25)] hover:-translate-y-0.5 transition-all duration-300"
                         >
                           Visita il sito
                         </a>
@@ -513,23 +565,23 @@ export function InnovaCoPage() {
           <div className="pt-16 sm:pt-20 pb-12 reveal-element">
             <div className="grid grid-cols-1 lg:grid-cols-[36fr_64fr] gap-6 lg:gap-8 items-stretch">
               <div
-                className="rounded-[24px] p-10 sm:p-12 flex flex-col justify-center text-white"
+                className="rounded-[20px] p-10 sm:p-12 flex flex-col justify-center text-white"
                 style={{
-                  background: 'linear-gradient(120deg, #001933 0%, #013a6b 35%, #0e568b 65%, #3a82b8 100%)',
+                  background: 'linear-gradient(120deg, #001933 0%, #013167 45%, color-mix(in srgb, #013167 55%, #8ebef7) 100%)',
                 }}
               >
-                <h2 className="text-4xl sm:text-5xl font-normal mb-6 leading-[1.05]" style={{ color: '#CDE4FF' }}>
+                <h2 className="text-[34px] lg:text-[44px] font-light text-brand-pale-blue mb-6 leading-[1.1]">
                   Un ecosistema
                   <br />
                   che cresce con te
                 </h2>
-                <p className="text-base sm:text-lg text-white/85 leading-relaxed">
+                <p className="text-base lg:text-xl text-white/85 leading-relaxed">
                   Ogni nuova azienda, ogni nuova competenza rende questa community più forte.
                   Siamo ancora all'inizio, ma il valore è già tutto qui: connessioni vere, idee
                   concrete, voglia di fare.
                 </p>
               </div>
-              <div className="rounded-[24px] overflow-hidden min-h-[280px]">
+              <div className="rounded-[20px] overflow-hidden min-h-[280px]">
                 <img
                   src="/assets/innova-co/ecosistema-meeting.jpg"
                   alt=""
@@ -542,9 +594,9 @@ export function InnovaCoPage() {
           {/* 7. Hai domande */}
           <div className="pb-20 lg:pb-28 reveal-element">
             <div className="shadow-box grid grid-cols-1 lg:grid-cols-2 gap-8 items-center !p-10 sm:!p-14">
-              <h2 className="text-4xl sm:text-5xl font-light text-brand-navy">Hai domande?</h2>
+              <h2 className="text-[34px] lg:text-[44px] font-light text-brand-navy">Hai domande?</h2>
               <div>
-                <p className="text-base sm:text-lg text-brand-dark-navy/80 leading-relaxed mb-4">
+                <p className="text-base lg:text-xl text-brand-dark-navy/80 leading-relaxed mb-4">
                   Scrivici, chiamaci o vieni a trovarci: la trasformazione digitale non è un
                   percorso da fare da soli.
                 </p>

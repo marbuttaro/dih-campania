@@ -47,7 +47,7 @@ export function NewsletterTab() {
         <button
           type="button"
           aria-label="Iscriviti alla newsletter"
-          className="fixed z-40 flex items-center justify-center bg-[#8EBEF7] text-[#013167] font-bold text-sm shadow-[0_10px_30px_rgba(0,25,51,0.25)] transition-colors hover:bg-white max-lg:bottom-[max(1.25rem,env(safe-area-inset-bottom))] max-lg:right-4 max-lg:size-[54px] max-lg:rounded-full lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:flex-col lg:gap-3 lg:rounded-l-xl lg:px-3 lg:py-5"
+          className="fixed z-40 flex items-center justify-center bg-brand-light-blue text-brand-navy font-bold text-sm shadow-[0_10px_30px_rgba(0,25,51,0.25)] transition-colors hover:bg-white max-lg:bottom-[max(1.25rem,env(safe-area-inset-bottom))] max-lg:right-4 max-lg:size-[54px] max-lg:rounded-full lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:flex-col lg:gap-3 lg:rounded-l-xl lg:px-3 lg:py-5"
         >
           <Mail className="size-[22px] lg:size-5 shrink-0 lg:-rotate-90" />
           <span aria-hidden="true" className="hidden lg:block [writing-mode:vertical-rl] rotate-180 whitespace-nowrap">
@@ -58,8 +58,8 @@ export function NewsletterTab() {
 
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-white/40 backdrop-blur-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
-        <Dialog.Content className="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] max-w-[520px] max-h-[88vh] overflow-y-auto overflow-x-hidden rounded-[32px] sm:rounded-[40px] bg-[#EDF1F3] p-8 sm:p-12 shadow-[0_30px_60px_rgba(0,25,51,0.18),0_10px_25px_rgba(0,25,51,0.08)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
-          <Dialog.Close className="absolute right-6 top-6 sm:right-8 sm:top-8 inline-flex items-center justify-center size-9 rounded-xl bg-[#E7EDF0] text-brand-navy/60 hover:text-brand-navy shadow-[-2px_-2px_6px_rgba(255,255,255,0.8),2px_2px_6px_rgba(164,177,188,0.45)] transition-colors">
+        <Dialog.Content className="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] max-w-[520px] max-h-[88vh] overflow-y-auto overflow-x-hidden rounded-[32px] sm:rounded-[40px] bg-brand-surface p-8 sm:p-12 shadow-[0_30px_60px_rgba(0,25,51,0.18),0_10px_25px_rgba(0,25,51,0.08)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+          <Dialog.Close className="absolute right-6 top-6 sm:right-8 sm:top-8 inline-flex items-center justify-center size-9 rounded-xl bg-brand-ice text-brand-navy/60 hover:text-brand-navy shadow-[-2px_-2px_6px_rgba(255,255,255,0.8),2px_2px_6px_rgba(164,177,188,0.45)] transition-colors">
             <X className="size-4" />
             <span className="sr-only">Chiudi</span>
           </Dialog.Close>

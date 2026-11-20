@@ -77,7 +77,7 @@ export function ApproachSlider() {
     <section className="relative z-10 w-full pt-16 lg:pt-28 mb-24 reveal-element">
       <div className="container-page">
         <div className="max-w-[1200px] mx-auto mb-12">
-          <h2 className="text-[28px] sm:text-[32px] lg:text-[38px] font-light text-[#013167] leading-[1.2]" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+          <h2 className="text-[34px] lg:text-[44px] font-light text-brand-navy leading-[1.2]" style={{ fontFamily: 'Montserrat, sans-serif' }}>
             Un approccio integrato<br />all’innovazione
           </h2>
         </div>
@@ -94,10 +94,10 @@ export function ApproachSlider() {
             ref={(el) => {
               cardRefs.current[index] = el
             }}
-            className="snap-start shrink-0 w-[85%] sm:w-[550px] sm:h-[330px] rounded-[10px] bg-[#E3EAEC] shadow-neumorphic p-7 sm:px-9 sm:py-8"
+            className="snap-start shrink-0 w-[85%] sm:w-[550px] sm:h-[330px] rounded-[20px] bg-brand-ice shadow-neumorphic p-7 sm:px-9 sm:py-8"
           >
             <img src={card.icon} alt="" className="size-14 mb-4" />
-            <h3 className="text-lg sm:text-[20px] font-semibold text-[#013167] leading-tight mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+            <h3 className="text-lg sm:text-[20px] font-semibold text-brand-navy leading-tight mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>
               {card.title}
             </h3>
             <p className="text-[14px] font-light text-brand-dark-navy leading-[1.45] [&_strong]:font-medium" style={{ fontFamily: 'Montserrat, sans-serif' }}>
@@ -116,7 +116,7 @@ export function ApproachSlider() {
             onClick={() => goTo(index)}
             className={cn(
               'h-2 rounded-full transition-all duration-300',
-              index === activeIndex ? 'w-8 bg-[#013167]' : 'w-2 bg-[#013167]/25',
+              index === activeIndex ? 'w-8 bg-brand-navy' : 'w-2 bg-brand-navy/25',
             )}
           />
         ))}

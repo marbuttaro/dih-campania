@@ -82,7 +82,7 @@ export function Field({
   options?: string[]
 }) {
   const fieldClassName =
-    'w-full bg-[#E7EDF0] rounded-lg px-4 py-3 text-brand-dark-navy placeholder:text-brand-navy/30 border-0 shadow-[inset_2px_2px_5px_rgba(164,177,188,0.35),inset_-2px_-2px_5px_rgba(255,255,255,0.7)] focus:outline-none focus:ring-2 focus:ring-brand-light-blue/50 transition-shadow'
+    'w-full bg-brand-ice rounded-lg px-4 py-3 text-brand-dark-navy placeholder:text-brand-navy/30 border-0 shadow-[inset_2px_2px_5px_rgba(164,177,188,0.35),inset_-2px_-2px_5px_rgba(255,255,255,0.7)] focus:outline-none focus:ring-2 focus:ring-brand-light-blue/50 transition-shadow'
 
   return (
     <label className={cn('block', className)}>
@@ -145,7 +145,7 @@ export function Checkbox({
           'mt-0.5 shrink-0 size-5 rounded-md flex items-center justify-center transition-colors',
           checked
             ? 'bg-brand-navy'
-            : 'bg-[#E7EDF0] shadow-[inset_1px_1px_3px_rgba(164,177,188,0.4),inset_-1px_-1px_3px_rgba(255,255,255,0.7)]',
+            : 'bg-brand-ice shadow-[inset_1px_1px_3px_rgba(164,177,188,0.4),inset_-1px_-1px_3px_rgba(255,255,255,0.7)]',
         )}
       >
         {checked && <Check className="size-3.5 text-white" strokeWidth={3} />}
@@ -175,7 +175,7 @@ export function NavButton({
   const arrowButton = (
     <span
       className={cn(
-        'inline-flex items-center justify-center size-9 rounded-xl bg-[#E7EDF0] text-brand-light-blue shadow-[-2px_-2px_6px_rgba(255,255,255,0.8),2px_2px_6px_rgba(164,177,188,0.45)]',
+        'inline-flex items-center justify-center size-9 rounded-xl bg-brand-ice text-brand-light-blue shadow-[-2px_-2px_6px_rgba(255,255,255,0.8),2px_2px_6px_rgba(164,177,188,0.45)]',
         disabled && 'opacity-40',
       )}
     >
@@ -254,9 +254,9 @@ export function SolutionRequestModal({
         <Dialog.Overlay className="fixed inset-0 z-50 bg-white/40 backdrop-blur-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
         <Dialog.Content
           ref={contentRef}
-          className="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] max-w-[820px] max-h-[88vh] overflow-y-auto overflow-x-hidden rounded-[32px] sm:rounded-[40px] bg-[#EDF1F3] p-8 sm:p-14 shadow-[0_30px_60px_rgba(0,25,51,0.18),0_10px_25px_rgba(0,25,51,0.08)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
+          className="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] max-w-[820px] max-h-[88vh] overflow-y-auto overflow-x-hidden rounded-[32px] sm:rounded-[40px] bg-brand-surface p-8 sm:p-14 shadow-[0_30px_60px_rgba(0,25,51,0.18),0_10px_25px_rgba(0,25,51,0.08)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
         >
-          <Dialog.Close className="absolute right-6 top-6 sm:right-8 sm:top-8 inline-flex items-center justify-center size-9 rounded-xl bg-[#E7EDF0] text-brand-navy/60 hover:text-brand-navy shadow-[-2px_-2px_6px_rgba(255,255,255,0.8),2px_2px_6px_rgba(164,177,188,0.45)] transition-colors">
+          <Dialog.Close className="absolute right-6 top-6 sm:right-8 sm:top-8 inline-flex items-center justify-center size-9 rounded-xl bg-brand-ice text-brand-navy/60 hover:text-brand-navy shadow-[-2px_-2px_6px_rgba(255,255,255,0.8),2px_2px_6px_rgba(164,177,188,0.45)] transition-colors">
             <X className="size-4" />
             <span className="sr-only">Chiudi</span>
           </Dialog.Close>

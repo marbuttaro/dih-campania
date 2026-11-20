@@ -50,11 +50,11 @@ const TIMELINE: { year: string; title: ReactNode; body: ReactNode }[] = [
 ]
 
 const yearCircle =
-  'rounded-full bg-[#E3EAEC] flex items-center justify-center text-[#013167] tracking-[0.12em] shadow-[-6px_-6px_14px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.8)]'
+  'rounded-full bg-brand-ice flex items-center justify-center text-brand-navy tracking-[0.12em] shadow-[-6px_-6px_14px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.8)]'
 const pillOuter =
-  'rounded-full bg-[#E3EAEC]/50 border border-white/50 shadow-[-6px_-6px_16px_rgba(255,255,255,0.7),10px_10px_28px_rgba(164,177,188,0.5)]'
+  'rounded-full bg-brand-ice/50 border border-white/50 shadow-[-6px_-6px_16px_rgba(255,255,255,0.7),10px_10px_28px_rgba(164,177,188,0.5)]'
 const pillInner =
-  'rounded-full bg-gradient-to-b from-[#DCE4E8] to-[#E7EDF0] shadow-[inset_5px_5px_12px_rgba(164,177,188,0.5),inset_-5px_-5px_12px_rgba(255,255,255,0.75)]'
+  'rounded-full bg-gradient-to-b from-brand-grey-blue to-brand-ice shadow-[inset_5px_5px_12px_rgba(164,177,188,0.5),inset_-5px_-5px_12px_rgba(255,255,255,0.75)]'
 const bodyText =
   'leading-normal font-light text-brand-dark-navy [&_strong]:font-semibold'
 
@@ -173,7 +173,7 @@ export function Timeline() {
 
   return (
     <section ref={sectionRef} className="w-full max-w-[1200px] mx-auto mb-40 lg:mb-56 reveal-element">
-      <h2 className="text-[28px] sm:text-[32px] lg:text-[38px] font-light text-[#013167] leading-[1.2] mb-14 lg:mb-20" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+      <h2 className="text-[34px] lg:text-[44px] font-light text-brand-navy leading-[1.2] mb-14 lg:mb-20" style={{ fontFamily: 'Montserrat, sans-serif' }}>
         L’hub che evolve a<br className="hidden sm:block" /> supporto della transizione<br className="hidden sm:block" /> sicura delle imprese
       </h2>
 
@@ -190,7 +190,7 @@ export function Timeline() {
           <defs>
             <linearGradient id="timeline-fill" x1="0" y1="0" x2="0" y2={TRACK_H} gradientUnits="userSpaceOnUse">
               <stop offset="0" stopColor="#8EBEF7" />
-              <stop offset="1" stopColor="#2F7BE0" />
+              <stop offset="1" stopColor="#013167" />
             </linearGradient>
           </defs>
           <path d={TRACK_PATH} fill="none" stroke="#8EBEF7" strokeOpacity={0.4} strokeWidth={STROKE} strokeLinecap="round" className="drop-shadow-[0_0_8px_rgba(142,190,247,0.45)]" />
@@ -229,7 +229,7 @@ export function Timeline() {
                     textLeft ? 'pl-12 pr-[222px]' : 'pr-12 pl-[222px]',
                   )}
                 >
-                  <p className={cn(bodyText, 'text-[15px] xl:text-[16px]')}>{item.body}</p>
+                  <p className={cn(bodyText, 'text-sm xl:text-base')}>{item.body}</p>
                 </div>
               </div>
 
@@ -238,8 +238,8 @@ export function Timeline() {
                 className={cn(
                   'absolute top-1/2 -translate-x-1/2 -translate-y-1/2 size-[180px] text-[38px] transition-[box-shadow,color] duration-500',
                   yearCircle,
-                  index < activeCount && 'text-[#013167] shadow-[-6px_-6px_14px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.8),0_0_0_3px_rgba(142,190,247,0.9)]',
-                  index >= activeCount && 'text-[#013167]/55',
+                  index < activeCount && 'text-brand-navy shadow-[-6px_-6px_14px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.8),0_0_0_3px_rgba(142,190,247,0.9)]',
+                  index >= activeCount && 'text-brand-navy/55',
                 )}
                 style={{ left: `calc(50% + ${rowShift(index)}px)` }}
               >
@@ -248,7 +248,7 @@ export function Timeline() {
 
               <h3
                 className={cn(
-                  'absolute top-1/2 -translate-y-1/2 text-[30px] font-medium text-[#013167] leading-[1.1]',
+                  'absolute top-1/2 -translate-y-1/2 text-[30px] font-medium text-brand-navy leading-[1.1]',
                   !textLeft && 'text-right',
                 )}
                 style={{ [textLeft ? 'left' : 'right']: `calc(50% + ${SHIFT + RING_R + 30}px)` }}
@@ -262,8 +262,8 @@ export function Timeline() {
 
       {/* Mobile/tablet: vertical timeline */}
       <div className="lg:hidden relative pl-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-        <div ref={mobileLineRef} className="absolute left-[44px] top-[38px] w-[4px] rounded-full bg-[#8EBEF7]/35 overflow-hidden">
-          <div ref={mobileFillRef} className="h-full w-full rounded-full bg-gradient-to-b from-[#8EBEF7] to-[#2F7BE0] origin-top will-change-transform" style={{ transform: 'scaleY(0)' }} />
+        <div ref={mobileLineRef} className="absolute left-[44px] top-[38px] w-[4px] rounded-full bg-brand-light-blue/35 overflow-hidden">
+          <div ref={mobileFillRef} className="h-full w-full rounded-full bg-gradient-to-b from-brand-light-blue to-brand-navy origin-top will-change-transform" style={{ transform: 'scaleY(0)' }} />
         </div>
         <ol className="relative space-y-12">
           {TIMELINE.map((item, index) => (
@@ -274,14 +274,14 @@ export function Timeline() {
                   'relative shrink-0 size-[76px] text-[17px] transition-[box-shadow,color] duration-500',
                   yearCircle,
                   index < activeCount && 'shadow-[-6px_-6px_14px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.8),0_0_0_3px_rgba(142,190,247,0.9)]',
-                  index >= activeCount && 'text-[#013167]/55',
+                  index >= activeCount && 'text-brand-navy/55',
                 )}
               >
                 {item.year}
               </div>
               <div className="pt-2">
-                <h3 className="text-xl font-medium text-[#013167] leading-tight mb-3 [&_br]:hidden">{item.title}</h3>
-                <p className={cn(bodyText, 'text-[15px]')}>{item.body}</p>
+                <h3 className="text-xl font-medium text-brand-navy leading-tight mb-3 [&_br]:hidden">{item.title}</h3>
+                <p className={cn(bodyText, 'text-sm')}>{item.body}</p>
               </div>
             </li>
           ))}
