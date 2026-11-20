@@ -20,13 +20,13 @@ export function ContactFormCard() {
   }
 
   return (
-    <div className="-mx-8 sm:mx-auto sm:max-w-[920px] rounded-none sm:rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container bg-[url('/assets/sfondo_contatti_mobile.png')] bg-cover bg-center sm:bg-none">
+    <div className="-mx-8 sm:mx-auto sm:max-w-[920px] rounded-none sm:rounded-[20px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container bg-[url('/assets/sfondo_contatti_mobile.png')] bg-cover bg-center sm:bg-none">
 
       {/* Ambient inner glow */}
       <div className="absolute -top-40 -right-40 size-80 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
 
       <div className="relative z-10 text-center mb-8">
-        <h2 className="text-[34px] sm:text-[2.1rem] leading-[1.1] sm:leading-normal font-light mb-2 text-white tracking-tight">
+        <h2 className="text-[34px] leading-[1.1] sm:leading-normal font-light mb-2 text-white tracking-tight">
           Pronto per iniziare?
         </h2>
         <p className="text-sm sm:text-base text-brand-light-blue/80 font-normal">
@@ -105,7 +105,7 @@ export function ContactFormCard() {
           <div className="pt-2">
             <button
               type="submit"
-              className="w-full bg-[#013167] text-white hover:bg-brand-light-blue hover:text-brand-dark-navy transition-all duration-300 font-semibold py-4 rounded-[12px] shadow-[0_4px_15px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 border border-white/10 cursor-pointer"
+              className="w-full bg-[#013167] text-white hover:bg-brand-light-blue hover:text-brand-dark-navy transition-all duration-300 text-base font-semibold py-4 rounded-[12px] shadow-[0_4px_15px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 border border-white/10 cursor-pointer"
             >
               Invia Richiesta
             </button>

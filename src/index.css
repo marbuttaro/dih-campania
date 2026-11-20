@@ -125,8 +125,8 @@
     color: #ffffff !important;
     font-family: var(--font-sans);
     font-weight: 600;
-    font-size: 18px;
-    border-radius: 8.6px;
+    font-size: 16px;
+    border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.4);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     transition: all 0.3s ease;
@@ -144,11 +144,6 @@
 /* -------------------------------------------------------------------------- */
 /* Keyframes                                                                   */
 /* -------------------------------------------------------------------------- */
-
-@keyframes ticker {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
 
 @keyframes star-movement-bottom {
   0% { transform: translate(0%, 0%); opacity: 1; }
@@ -176,21 +171,6 @@
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
-}
-
-.animate-ticker {
-  animation: ticker 60s linear infinite;
-}
-
-/* Lets visitors stop the headlines to click one */
-.animate-ticker:hover {
-  animation-play-state: paused;
-}
-
-@media (max-width: 640px) {
-  .animate-ticker {
-    animation-duration: 30s;
-  }
 }
 
 .animate-star-bottom {

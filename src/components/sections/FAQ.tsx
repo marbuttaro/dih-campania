@@ -39,6 +39,7 @@ export function FAQ() {
       <div className="container-page">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-24 items-start">
           <div className="flex-1 lg:sticky lg:top-36">
+            {/* Eccezione voluta alla scala: titolo e sottotitolo FAQ restano più grandi */}
             <h2 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-light text-brand-navy mb-1.5 leading-none">
               Hai domande?
             </h2>
@@ -52,7 +53,7 @@ export function FAQ() {
               {FAQ_ITEMS.map((item, index) => (
                 <AccordionItem key={index} value={`item-${index}`}>
                   <AccordionTrigger>
-                    <span className="text-base sm:text-lg lg:text-[1.4rem] text-brand-navy font-normal">
+                    <span className="text-base lg:text-lg text-brand-navy font-normal">
                       {item.question}
                     </span>
                     <span className="ml-auto flex size-10 sm:size-[50px] items-center justify-center rounded-full bg-white shadow-[0_4px_15px_rgba(0,25,51,0.08)] shrink-0 transition-transform">

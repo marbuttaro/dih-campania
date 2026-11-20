@@ -145,7 +145,7 @@ export function Projects() {
       <div className="container-page">
         <div className="mb-12">
           <motion.h2
-            className="text-3xl sm:text-4xl lg:text-[2.5rem] font-light text-brand-dark-navy"
+            className="text-[34px] lg:text-[44px] font-light text-brand-navy"
             style={{ y }}
           >
             Progetti
@@ -248,7 +248,7 @@ export function Projects() {
         <div className="flex justify-center mt-12">
           <a
             href="/progetti"
-            className="bg-brand-navy text-white px-10 py-3.5 rounded-lg font-semibold transition-all duration-300 hover:bg-brand-dark-navy hover:-translate-y-0.5 no-underline"
+            className="bg-brand-navy text-white px-10 py-3.5 rounded-[12px] text-base font-semibold transition-all duration-300 hover:bg-brand-dark-navy hover:-translate-y-0.5 no-underline"
           >
             Vedi tutti i progetti
           </a>

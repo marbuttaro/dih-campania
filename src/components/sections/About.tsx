@@ -23,7 +23,7 @@ export function About() {
       <div className="container-page">
         <div className="flex flex-col lg:flex-row gap-10 mb-20 lg:mb-28 items-start">
           <motion.div className="flex-1" style={{ y }}>
-            <h2 className="text-3xl sm:text-4xl lg:text-[2.8rem] font-light text-brand-navy leading-[1.1] tracking-[-1px]">
+            <h2 className="text-[34px] lg:text-[44px] font-light text-brand-navy leading-[1.1] tracking-[-1px]">
               Un facilitatore tra il
               <br className="hidden sm:block" />
               {' '}mondo produttivo
@@ -32,7 +32,7 @@ export function About() {
             </h2>
           </motion.div>
           <div className="flex-1 lg:pt-2.5">
-            <p className="text-lg lg:text-xl leading-snug text-brand-navy">
+            <p className="text-base lg:text-xl leading-snug text-brand-navy">
               <span className="text-brand-light-blue font-semibold">
                 Il Campania Digital Hub
               </span>{' '}
@@ -48,7 +48,7 @@ export function About() {
             <h3 className="text-[28px] lg:text-[30px] text-brand-dark-navy mb-6 font-semibold leading-tight">
               Cosa può fare Campania DIH per le imprese?
             </h3>
-            <p className="text-[18px] lg:text-[20px] text-neutral-600 leading-snug font-light">
+            <p className="text-base lg:text-xl text-brand-dark-navy/70 leading-snug font-light">
               Il Campania DIH supporta le aziende in{' '}
               <strong className="text-brand-dark-navy font-semibold">
                 tutte le fasi del percorso di trasformazione digitale
@@ -57,7 +57,7 @@ export function About() {
               all'accesso a incentivi e opportunità di finanziamento.
             </p>
           </div>
-          <div className="basis-full lg:basis-[60%] h-[400px] rounded-[30px] overflow-hidden shadow-[0_15px_40px_rgba(0,25,51,0.1)] flex">
+          <div className="basis-full lg:basis-[60%] h-[400px] rounded-[20px] overflow-hidden shadow-[0_15px_40px_rgba(0,25,51,0.1)] flex">
             <img
               src="/assets/foto_1.png"
               alt="Digital hub working"

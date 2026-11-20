@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { BlurText } from '@/components/effects/BlurText'
 import { ParticleNetwork } from '@/components/effects/ParticleNetwork'
@@ -26,6 +26,57 @@ function TickerItems({ items, hidden = false }: { items: { slug: string; title: 
   )
 }
 
+/**
+ * Striscia delle news che scorre. Lo scorrimento sposta la posizione di un contenitore
+ * (scrollLeft) invece di traslare un unico elemento lungo migliaia di pixel: su iPhone
+ * un elemento animato così largo supera i limiti di Safari e una parte delle news spariva.
+ */
+function NewsTicker({ items }: { items: { slug: string; title: string }[] }) {
+  const viewportRef = useRef<HTMLDivElement>(null)
+  const halfRef = useRef<HTMLSpanElement>(null)
+  const pausedRef = useRef(false)
+
+  useEffect(() => {
+    const viewport = viewportRef.current
+    const half = halfRef.current
+    if (!viewport || !half) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    let frame = 0
+    let last = performance.now()
+    let position = viewport.scrollLeft
+    const step = (now: number) => {
+      const width = half.getBoundingClientRect().width
+      // Stessa durata di prima: un giro completo in 60 s da computer, 30 s da telefono
+      const speed = width / (window.innerWidth <= 640 ? 30 : 60)
+      if (!pausedRef.current && width > 0) {
+        position += (speed * (now - last)) / 1000
+        if (position >= width) position -= width
+        viewport.scrollLeft = position
+      }
+      last = now
+      frame = requestAnimationFrame(step)
+    }
+    frame = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(frame)
+  }, [items])
+
+  return (
+    <div
+      ref={viewportRef}
+      className="overflow-hidden"
+      onMouseEnter={() => (pausedRef.current = true)}
+      onMouseLeave={() => (pausedRef.current = false)}
+    >
+      <div className="flex w-max">
+        <span ref={halfRef} className="flex shrink-0">
+          <TickerItems items={items} />
+        </span>
+        <TickerItems items={items} hidden />
+      </div>
+    </div>
+  )
+}
+
 export function Hero() {
   const [headlines, setHeadlines] = useState<{ slug: string; title: string }[]>([])
   useEffect(() => {
@@ -34,7 +85,7 @@ export function Hero() {
     return () => { alive = false }
   }, [])
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-24 sm:pt-28 bg-[linear-gradient(135deg,#001933_0%,#002D5C_50%,#001933_100%)]">
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-24 sm:pt-28 bg-[linear-gradient(135deg,#001933_0%,#013167_50%,#001933_100%)]">
       <div className="absolute inset-0 z-0 overflow-hidden">
         <ParticleNetwork />
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(0,25,51,0.7)_0%,rgba(0,25,51,0.3)_60%,transparent_100%)]" />
@@ -75,7 +126,7 @@ export function Hero() {
             </p>
             <a
               href="/servizi"
-              className="btn-outline px-8 py-3.5 text-base sm:text-lg"
+              className="btn-outline px-8 py-3.5"
             >
               Scopri di più
             </a>
@@ -84,9 +135,11 @@ export function Hero() {
       </div>
 
       <div className="absolute bottom-0 left-0 w-full overflow-hidden whitespace-nowrap border-t border-white/20 bg-[rgba(100,130,160,0.4)] backdrop-blur-md py-3 text-white text-sm">
-        <div className="flex w-max animate-ticker">
-          {headlines.length ? <><TickerItems items={headlines} /><TickerItems items={headlines} hidden /></> : <a href="/news" className="px-8 underline">Scopri tutte le news e le opportunità di Campania DIH ↗</a>}
-        </div>
+        {headlines.length ? (
+          <NewsTicker items={headlines} />
+        ) : (
+          <a href="/news" className="px-8 underline">Scopri tutte le news e le opportunità di Campania DIH ↗</a>
+        )}
       </div>
     </section>
   )

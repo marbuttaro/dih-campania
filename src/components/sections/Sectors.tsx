@@ -50,7 +50,7 @@ const cardReveal = (index: number) => ({
   transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const, delay: (index % 4) * 0.08 },
 })
 
-const CARD_CLASS = 'rounded-[16px] sm:rounded-[20px] bg-[#E3EAEC]/40 shadow-[-4px_-4px_10px_rgba(255,255,255,0.75),5px_5px_14px_rgba(164,177,188,0.45)]'
+const CARD_CLASS = 'rounded-[20px] bg-brand-ice/40 shadow-[-4px_-4px_10px_rgba(255,255,255,0.75),5px_5px_14px_rgba(164,177,188,0.45)]'
 
 // The intro takes the first cells of the grid so the 13 cards fill every row evenly
 export function Sectors() {
@@ -58,12 +58,12 @@ export function Sectors() {
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-5" style={{ fontFamily: 'Montserrat, sans-serif' }}>
       {/* On desktop title and text sit side by side, so the intro fills the row next to the first card */}
       <div className="sm:col-span-2 lg:col-span-3 flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-10 pb-4 sm:pb-0 sm:pr-4 lg:pr-8">
-        <h2 className="shrink-0 text-[30px] sm:text-[38px] lg:text-[46px] font-light text-[#013167] leading-[1.1] tracking-tight">
+        <h2 className="shrink-0 text-[34px] lg:text-[44px] font-light text-brand-navy leading-[1.1] tracking-tight">
           In quali settori
           <br className="hidden lg:block" />
           {' '}opera?
         </h2>
-        <p className="lg:border-l lg:border-[#8EBEF7] lg:pl-10 text-lg lg:text-[21px] font-normal text-[#013167]/85 leading-[1.4] text-pretty">
+        <p className="lg:border-l lg:border-brand-light-blue lg:pl-10 text-base lg:text-xl font-normal text-brand-navy/85 leading-[1.4] text-pretty">
           Il Campania DIH opera trasversalmente affiancando imprese di tutte le dimensioni, settori e filiere produttive
         </p>
       </div>
@@ -82,9 +82,9 @@ export function Sectors() {
             )}
           >
             <span className="flex items-center justify-center shrink-0 size-11 rounded-[10px] bg-white/60 shadow-[0_2px_6px_rgba(164,177,188,0.25)]">
-              <Icon className={cn('size-7 text-[#8EBEF7]', sector.iconClassName)} strokeWidth={1.1} />
+              <Icon className={cn('size-7 text-brand-light-blue', sector.iconClassName)} strokeWidth={1.1} />
             </span>
-            <span className="text-[15px] lg:text-base font-medium text-[#013167] leading-[1.25]">
+            <span className="text-[15px] lg:text-base font-medium text-brand-navy leading-[1.25]">
               {sector.label}
             </span>
           </motion.div>

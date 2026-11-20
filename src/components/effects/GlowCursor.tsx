@@ -81,7 +81,7 @@ export function GlowCursor() {
         transform: 'translate(-50%, -50%)',
         transition: 'opacity 0.18s ease',
         background:
-          'radial-gradient(circle at center, rgba(255,255,255,0.5) 0%, rgba(180,215,255,0.45) 6%, rgba(142,190,247,0.38) 18%, rgba(142,190,247,0.16) 36%, rgba(142,190,247,0.04) 55%, transparent 100%)',
+          'radial-gradient(circle at center, rgba(255,255,255,0.75) 0%, rgba(180,215,255,0.65) 6%, rgba(142,190,247,0.52) 18%, rgba(142,190,247,0.22) 36%, rgba(142,190,247,0.06) 55%, transparent 100%)',
       }}
     />
   )

@@ -122,7 +122,7 @@ export function Community() {
                 style={{ transform: `translateX(-${activeStep * 100}%)` }}
               >
                 <div className="w-full shrink-0 flex items-center justify-center px-4">
-                  <div className="bg-[#E3EAEC]/50 rounded-[20px] shadow-[0_14px_28px_-12px_rgba(0,25,51,0.2)] w-full text-center p-7">
+                  <div className="bg-brand-ice/50 rounded-[20px] shadow-[0_14px_28px_-12px_rgba(0,25,51,0.2)] w-full text-center p-7">
                     <p className="text-lg text-brand-navy leading-snug m-0">
                       Offri <strong>soluzioni innovative</strong> e vuoi metterle al servizio delle
                       imprese?
@@ -131,7 +131,7 @@ export function Community() {
                 </div>
 
                 <div className="w-full shrink-0 flex items-center justify-center px-4">
-                  <div className="bg-[#E3EAEC]/50 rounded-[20px] shadow-[0_14px_28px_-12px_rgba(0,25,51,0.2)] w-full text-center p-7">
+                  <div className="bg-brand-ice/50 rounded-[20px] shadow-[0_14px_28px_-12px_rgba(0,25,51,0.2)] w-full text-center p-7">
                     <p className="text-lg text-brand-navy leading-snug m-0">
                       Hai un'<strong>idea, un progetto o una sfida</strong> da affrontare nel mondo
                       digitale?
@@ -140,9 +140,10 @@ export function Community() {
                 </div>
 
                 <div className="w-full shrink-0 flex items-center justify-center px-4 text-center">
-                  <h2 className="font-bold text-[32px] text-brand-dark-navy leading-[1.2]">
+                  {/* Eccezione voluta alla scala: Innova.CO è un servizio da mettere in evidenza */}
+                  <h2 className="font-light text-[40px] text-brand-navy leading-[1.15]">
                     Entra a far parte della{' '}
-                    <span className="text-brand-light-blue">
+                    <span className="text-brand-light-blue font-semibold">
                       Community
                       <br />
                       INNOVA.CO
@@ -151,13 +152,13 @@ export function Community() {
                 </div>
 
                 <div className="w-full shrink-0 flex flex-col items-center px-4 pt-10 text-center gap-8">
-                  <p className="text-lg text-brand-navy leading-relaxed">
+                  <p className="text-base text-brand-navy leading-relaxed">
                     Uno spazio aperto dove imprese, professionisti, startup ed enti si incontrano
                     per crescere insieme, scambiarsi competenze e creare soluzioni reali per
                     l'innovazione.
                   </p>
-                  <a href="/innova-co" className="bg-[#E3EAEC]/50 rounded-[20px] shadow-[0_14px_28px_-12px_rgba(0,25,51,0.2)] py-4 px-8 inline-block no-underline">
-                    <span className="font-bold text-brand-dark-navy">
+                  <a href="/innova-co" className="bg-brand-ice/50 rounded-[12px] shadow-[0_14px_28px_-12px_rgba(0,25,51,0.2)] py-3.5 px-8 inline-block no-underline">
+                    <span className="text-base font-semibold text-brand-dark-navy">
                       Scopri la nostra community
                     </span>
                   </a>
@@ -192,7 +193,7 @@ export function Community() {
             <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center">
               <div
                 ref={cardLeftRef}
-                className="pointer-events-auto bg-white/95 backdrop-blur-md border border-white/80 rounded-3xl p-9 w-[440px] shadow-[0_15px_45px_rgba(0,0,0,0.1)] absolute left-[10%] top-[5%]"
+                className="pointer-events-auto bg-white/95 backdrop-blur-md border border-white/80 rounded-[20px] p-9 w-[440px] shadow-[0_15px_45px_rgba(0,0,0,0.1)] absolute left-[10%] top-[5%]"
                 style={{ willChange: 'transform, opacity' }}
               >
                 <p className="text-[26px] text-brand-dark-navy leading-snug m-0">
@@ -202,7 +203,7 @@ export function Community() {
               </div>
               <div
                 ref={cardRightRef}
-                className="pointer-events-auto bg-white/95 backdrop-blur-md border border-white/80 rounded-3xl p-9 w-[440px] shadow-[0_15px_45px_rgba(0,0,0,0.1)] absolute right-[10%] bottom-[5%]"
+                className="pointer-events-auto bg-white/95 backdrop-blur-md border border-white/80 rounded-[20px] p-9 w-[440px] shadow-[0_15px_45px_rgba(0,0,0,0.1)] absolute right-[10%] bottom-[5%]"
                 style={{ willChange: 'transform, opacity' }}
               >
                 <p className="text-[26px] text-brand-dark-navy leading-snug m-0">
@@ -217,13 +218,13 @@ export function Community() {
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-10 text-center flex flex-col items-center z-30"
               style={{ opacity: 0, pointerEvents: 'none' }}
             >
-              <p className="text-2xl text-brand-dark-navy leading-relaxed mb-10 max-w-[800px]">
+              <p className="text-xl text-brand-dark-navy leading-relaxed mb-10 max-w-[800px]">
                 Un ecosistema dell'innovazione che unisce imprese, università, enti di ricerca e
                 professionisti che propongono soluzioni, condividono know-how e sviluppano progetti
               </p>
               <a
                 href="/innova-co"
-                className="inline-block bg-brand-ice/30 text-brand-dark-navy px-9 py-3.5 rounded-lg font-semibold border-0 cursor-pointer shadow-[0_4px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)] no-underline"
+                className="inline-block bg-brand-ice/30 text-brand-dark-navy px-9 py-3.5 rounded-[12px] text-base font-semibold border-0 cursor-pointer shadow-[0_4px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)] no-underline"
               >
                 Scopri la nostra community
               </a>

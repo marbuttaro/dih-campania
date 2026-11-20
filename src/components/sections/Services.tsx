@@ -113,14 +113,14 @@ export function Services() {
     >
       <div
         aria-hidden
-        className="absolute top-0 left-0 w-full h-full z-0 bg-cover bg-center rounded-[24px] sm:rounded-none"
+        className="absolute top-0 left-0 w-full h-full z-0 bg-cover bg-center rounded-[20px] sm:rounded-none"
         style={{ backgroundImage: "url('/assets/sfondo_servizi.png')" }}
       />
 
 
       <div className="container-page relative z-10">
         <motion.h2
-          className="text-4xl sm:text-4xl lg:text-[2.5rem] text-white font-light mb-12 sm:mb-5 text-center sm:text-left"
+          className="text-[34px] lg:text-[44px] text-white font-light mb-12 sm:mb-5 text-center sm:text-left"
           style={{ y: yTitle }}
         >
           I nostri servizi
@@ -179,7 +179,7 @@ export function Services() {
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
-          <div className="order-2 sm:order-none z-10 -mx-8 sm:mx-0 -mt-8 sm:mt-0 basis-full xl:basis-[36%] xl:h-full rounded-t-none rounded-b-[24px] sm:rounded-[24px] shadow-[0_15px_40px_rgba(0,0,0,0.3)]">
+          <div className="order-2 sm:order-none z-10 -mx-8 sm:mx-0 -mt-8 sm:mt-0 basis-full xl:basis-[36%] xl:h-full rounded-t-none rounded-b-[20px] sm:rounded-[20px] shadow-[0_15px_40px_rgba(0,0,0,0.3)]">
             <GlareHover
               className="w-full h-full"
               width="100%"
@@ -200,13 +200,13 @@ export function Services() {
                     {active.title}
                   </h3>
                 </div>
-                <p className="text-base sm:text-lg font-normal leading-snug text-white/90 mb-7">
+                <p className="text-sm sm:text-base font-normal leading-snug text-white/90 mb-7">
                   {active.desc}
                 </p>
                 {active.link && (
                   <a
                     href={active.link}
-                    className="mt-auto self-center sm:self-start px-5 py-2.5 rounded-[8.6px] bg-white/[0.09] border border-white/40 backdrop-blur-md text-white font-semibold shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-brand-light-blue hover:text-brand-dark-navy hover:-translate-y-0.5 inline-block text-center"
+                    className="mt-auto self-center sm:self-start px-5 py-2.5 rounded-[12px] text-base bg-white/[0.09] border border-white/40 backdrop-blur-md text-white font-semibold shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-brand-light-blue hover:text-brand-dark-navy hover:-translate-y-0.5 inline-block text-center"
                   >
                     Scopri di più
                   </a>
@@ -215,7 +215,7 @@ export function Services() {
             </GlareHover>
           </div>
 
-          <div className="order-1 sm:order-none relative -mx-8 sm:mx-0 aspect-[4/3] sm:aspect-auto basis-full xl:basis-[64%] xl:h-full rounded-t-[24px] rounded-b-none sm:rounded-[24px] overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.3)] sm:min-h-[400px] bg-brand-dark-navy/20 flex items-center justify-center">
+          <div className="order-1 sm:order-none relative -mx-8 sm:mx-0 aspect-[4/3] sm:aspect-auto basis-full xl:basis-[64%] xl:h-full rounded-t-[20px] rounded-b-none sm:rounded-[20px] overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.3)] sm:min-h-[400px] bg-brand-dark-navy/20 flex items-center justify-center">
             <img
               src={active.image}
               alt={active.title}
