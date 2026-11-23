@@ -69,7 +69,7 @@ export function TrasparenzaPage() {
         <div className="absolute inset-0 bg-white/15 pointer-events-none" />
 
         <div className="container-page relative z-10">
-          <h1 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-light text-brand-dark-navy leading-[1.2] tracking-tight text-center mb-16">
+          <h1 className="text-[36px] lg:text-[52px] font-light text-brand-dark-navy leading-[1.2] tracking-tight mb-16">
             Trasparenza
           </h1>
 

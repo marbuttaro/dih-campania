@@ -165,12 +165,12 @@ export function ProjectsPage() {
 
         <div className="container-page relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16 mb-20 sm:mb-28 items-start reveal-element">
-            <h1 className="text-4xl sm:text-5xl lg:text-[2.75rem] font-light text-brand-navy leading-[1.2] tracking-tight">
+            <h1 className="text-[36px] lg:text-[52px] font-light text-brand-navy leading-[1.2] tracking-tight">
               I progetti del
               <br />
               Campania DIH
             </h1>
-            <p className="text-sm sm:text-base text-brand-dark-navy/80 leading-relaxed font-normal">
+            <p className="text-base lg:text-xl text-brand-dark-navy/80 leading-relaxed font-normal">
               Il Campania DIH nell'ultimo triennio ha operato come snodo tra politiche europee e
               nazionali e bisogni concreti di imprese e PA, coordinando e integrando programmi UE e
               PNRR in servizi operativi, misurabili e replicabili a supporto della trasformazione
@@ -206,7 +206,7 @@ export function ProjectsPage() {
           </div>
 
           <div className="mb-20 lg:mb-28 reveal-element">
-            <h2 className="text-xl sm:text-2xl font-light text-brand-navy mb-6 tracking-tight">
+            <h2 className="text-2xl md:text-[30px] font-light text-brand-navy mb-6 tracking-tight">
               Altre collaborazioni o partecipazioni
             </h2>
 
@@ -236,7 +236,7 @@ export function ProjectsPage() {
                         </span>
                       )}
                     </div>
-                    <p className="text-[12px] leading-[1.2] text-brand-dark-navy/80 font-normal">
+                    <p className="text-sm leading-snug text-brand-dark-navy/80 font-normal">
                       {item.description}
                     </p>
                   </Wrapper>

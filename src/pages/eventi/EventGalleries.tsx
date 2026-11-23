@@ -17,7 +17,7 @@ function Caption({ gallery, className }: { gallery: EventGallery; className?: st
 }
 
 const arrowClass =
-  'flex items-center justify-center size-10 shrink-0 rounded-[8px] bg-[#E3EAEC] text-[#013167] shadow-[-4px_-4px_10px_rgba(255,255,255,0.9),5px_5px_12px_rgba(164,177,188,0.5)] transition-opacity disabled:opacity-35 disabled:shadow-none'
+  'flex items-center justify-center size-10 shrink-0 rounded-[12px] bg-brand-ice text-brand-navy shadow-[-4px_-4px_10px_rgba(255,255,255,0.9),5px_5px_12px_rgba(164,177,188,0.5)] transition-opacity disabled:opacity-35 disabled:shadow-none'
 
 /** Visore a schermo intero: frecce, tastiera e didascalia */
 function Lightbox({
@@ -51,7 +51,7 @@ function Lightbox({
   return (
     <Dialog.Root open onOpenChange={(open) => !open && onClose()}>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-[#020f2a]/92 backdrop-blur-sm data-[state=open]:animate-in data-[state=open]:fade-in-0" />
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-brand-dark-navy/92 backdrop-blur-sm data-[state=open]:animate-in data-[state=open]:fade-in-0" />
         <Dialog.Content
           aria-describedby={undefined}
           className="fixed inset-0 z-50 flex flex-col text-white focus:outline-none data-[state=open]:animate-in data-[state=open]:fade-in-0"
@@ -160,7 +160,7 @@ function GalleryStrip({ gallery }: { gallery: EventGallery }) {
             type="button"
             onClick={() => setOpen(i)}
             aria-label={`Apri foto ${i + 1} di ${gallery.photos.length}`}
-            className="group snap-start shrink-0 overflow-hidden rounded-[16px] shadow-[0_10px_24px_rgba(1,49,103,0.18)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#013167]"
+            className="group snap-start shrink-0 overflow-hidden rounded-[20px] shadow-[0_10px_24px_rgba(1,49,103,0.18)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#013167]"
           >
             <img
               src={photo.thumb}
@@ -196,7 +196,7 @@ export function EventGalleries() {
   if (EVENT_GALLERIES.length === 0) return null
   return (
     <section aria-labelledby="dai-nostri-eventi" className="mt-24 lg:mt-32">
-      <h2 id="dai-nostri-eventi" className="text-[30px] sm:text-[38px] font-light text-[#013167] leading-tight mb-10" style={font}>
+      <h2 id="dai-nostri-eventi" className="text-[34px] lg:text-[44px] font-light text-brand-navy leading-tight mb-10" style={font}>
         Dai nostri eventi
       </h2>
       <div className="space-y-16">

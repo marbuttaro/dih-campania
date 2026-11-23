@@ -111,7 +111,7 @@ function EventRow({ event }: { event: EventItem }) {
 
 function Pagination({ page, pages, onChange }: { page: number; pages: number; onChange: (page: number) => void }) {
   const arrow =
-    'flex items-center justify-center size-9 rounded-[8px] bg-[#E3EAEC] text-[#8EBEF7] shadow-[-4px_-4px_10px_rgba(255,255,255,0.9),5px_5px_12px_rgba(164,177,188,0.5)] disabled:opacity-40 disabled:shadow-none transition-opacity'
+    'flex items-center justify-center size-9 rounded-[12px] bg-brand-ice text-brand-light-blue shadow-[-4px_-4px_10px_rgba(255,255,255,0.9),5px_5px_12px_rgba(164,177,188,0.5)] disabled:opacity-40 disabled:shadow-none transition-opacity'
   return (
     <nav aria-label="Pagine eventi" className="flex items-center gap-4 mt-12" style={font}>
       <button type="button" className={arrow} disabled={page === 0} onClick={() => onChange(page - 1)} aria-label="Pagina precedente">
@@ -123,7 +123,7 @@ function Pagination({ page, pages, onChange }: { page: number; pages: number; on
           type="button"
           onClick={() => onChange(i)}
           aria-current={i === page ? 'page' : undefined}
-          className={cn('text-[20px] px-1', i === page ? 'text-[#8EBEF7]' : 'text-[#013167] hover:text-[#8EBEF7]')}
+          className={cn('text-[20px] px-1', i === page ? 'text-[#8EBEF7]' : 'text-[#013167] hover:text-brand-light-blue')}
         >
           {i + 1}
         </button>
@@ -163,16 +163,16 @@ function EventsCalendar({ events }: { events: EventItem[] }) {
   const shiftMonth = (delta: number) => setMonth(new Date(year, m + delta, 1))
 
   return (
-    <div className="rounded-[10px] bg-[#E3EAEC]/60 shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_24px_rgba(164,177,188,0.5)] px-6 sm:px-9 py-8" style={font}>
+    <div className="rounded-[20px] bg-brand-ice/60 shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_24px_rgba(164,177,188,0.5)] px-6 sm:px-9 py-8" style={font}>
       <div className="flex items-center justify-between mb-6">
         <p className="text-sm font-semibold text-[#001933]">
           {MONTHS[m]} {year}
         </p>
         <div className="flex gap-1 text-[#001933]">
-          <button type="button" onClick={() => shiftMonth(-1)} aria-label="Mese precedente" className="p-0.5 hover:text-[#8EBEF7]">
+          <button type="button" onClick={() => shiftMonth(-1)} aria-label="Mese precedente" className="p-0.5 hover:text-brand-light-blue">
             <ChevronLeft className="size-4" />
           </button>
-          <button type="button" onClick={() => shiftMonth(1)} aria-label="Mese successivo" className="p-0.5 hover:text-[#8EBEF7]">
+          <button type="button" onClick={() => shiftMonth(1)} aria-label="Mese successivo" className="p-0.5 hover:text-brand-light-blue">
             <ChevronRight className="size-4" />
           </button>
         </div>
@@ -205,7 +205,7 @@ function EventsCalendar({ events }: { events: EventItem[] }) {
                   {day}
                 </button>
               ) : (
-                <span className="flex items-center justify-center size-8 text-[#5B6B7C]">{day}</span>
+                <span className="flex items-center justify-center size-8 text-brand-dark-navy/55">{day}</span>
               )}
             </span>
           )
@@ -213,7 +213,7 @@ function EventsCalendar({ events }: { events: EventItem[] }) {
       </div>
 
       {undatedEvents.length > 0 && (
-        <div className="mt-5 text-[11px] text-[#001933] leading-snug">
+        <div className="mt-5 text-xs text-[#001933] leading-snug">
           <p className="font-semibold">In {MONTHS[m].toLowerCase()}, data da definire:</p>
           <ul className="mt-1 space-y-1">
             {undatedEvents.map((e) => (
@@ -226,21 +226,21 @@ function EventsCalendar({ events }: { events: EventItem[] }) {
         </div>
       )}
 
-      <div className="mt-6 pt-6 border-t border-[#C9D4DA] min-h-[120px]">
+      <div className="mt-6 pt-6 border-t border-brand-light-blue/50 min-h-[120px]">
         {selectedEvents.length === 0 ? (
-          <p className="text-xs text-[#5B6B7C]">Seleziona un giorno evidenziato per vedere l’evento.</p>
+          <p className="text-xs text-brand-dark-navy/55">Seleziona un giorno evidenziato per vedere l’evento.</p>
         ) : (
           <ul className="space-y-6">
             {selectedEvents.map((event) => (
               <li key={event.id}>
-                <p className="text-[10px] text-[#001933]">
+                <p className="text-xs text-[#001933]">
                   {fullDate(parseDate(event.date))}
                   {event.time && ` | ${event.time}`}
                 </p>
                 <p className="mt-1 text-sm font-semibold text-[#001933]">{event.title}</p>
-                {event.location && <p className="mt-1 text-[11px] text-[#001933]">{event.location}</p>}
-                <p className="mt-4 text-[10px] text-[#001933]">info:</p>
-                <p className="mt-1 text-[11px] text-[#001933] leading-snug">{event.description}</p>
+                {event.location && <p className="mt-1 text-xs text-[#001933]">{event.location}</p>}
+                <p className="mt-4 text-xs text-[#001933]">info:</p>
+                <p className="mt-1 text-xs text-[#001933] leading-snug">{event.description}</p>
               </li>
             ))}
           </ul>
@@ -269,8 +269,8 @@ export function EventsPage() {
       aria-pressed={view === value}
       aria-label={label}
       className={cn(
-        'flex items-center justify-center size-10 rounded-[8px] border-2 border-[#013167] transition-colors',
-        view === value ? 'bg-[#013167] text-[#DEEAEE]' : 'bg-transparent text-[#013167] hover:bg-[#013167]/10',
+        'flex items-center justify-center size-10 rounded-[12px] border-2 border-brand-navy transition-colors',
+        view === value ? 'bg-brand-navy text-brand-grey-blue' : 'bg-transparent text-brand-navy hover:bg-brand-navy/10',
       )}
     >
       <Icon className="size-6" strokeWidth={1.5} />
@@ -295,7 +295,7 @@ export function EventsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] xl:grid-cols-[minmax(0,1fr)_320px] gap-12 lg:gap-14 xl:gap-20 items-start">
             <div>
               <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-4 mb-10">
-                <h1 className="text-[30px] sm:text-[38px] font-light text-[#013167] leading-tight" style={font}>
+                <h1 className="text-[34px] lg:text-[44px] font-light text-brand-navy leading-tight" style={font}>
                   Prossimi appuntamenti
                 </h1>
                 <div className="flex gap-3 shrink-0">

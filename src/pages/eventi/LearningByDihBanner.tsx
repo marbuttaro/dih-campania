@@ -40,7 +40,7 @@ export function LearningByDihBanner() {
           initial={{ opacity: 0, y: 40, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.9, ease: EASE }}
-          className="relative overflow-hidden rounded-[24px] bg-[#020f2a]"
+          className="relative overflow-hidden rounded-[20px] bg-brand-dark-navy"
         >
           <motion.div
             aria-hidden
@@ -60,7 +60,7 @@ export function LearningByDihBanner() {
             variants={card}
             initial="hidden"
             animate="visible"
-            className="relative rounded-[24px] border border-white/40 bg-white/[0.08] backdrop-blur-[6px] shadow-[0_10px_40px_rgba(0,0,0,0.25)] px-7 py-10 sm:px-[64px] sm:pt-[70px] sm:pb-[58px] grid grid-cols-1 md:grid-cols-[1fr_276px] gap-8 md:gap-[48px] items-center"
+            className="relative rounded-[20px] border border-white/40 bg-white/[0.08] backdrop-blur-[6px] shadow-[0_10px_40px_rgba(0,0,0,0.25)] px-7 py-10 sm:px-[64px] sm:pt-[70px] sm:pb-[58px] grid grid-cols-1 md:grid-cols-[1fr_276px] gap-8 md:gap-[48px] items-center"
           >
             <div>
               <h2 className="text-[40px] sm:text-[58px] leading-[1.03] tracking-[-0.01em]">
@@ -75,7 +75,7 @@ export function LearningByDihBanner() {
                 <Dialog.Trigger asChild>
                   <button
                     type="button"
-                    className="mt-8 sm:mt-[48px] inline-flex items-center rounded-[8px] border border-white/60 bg-white/10 px-[19px] py-[7px] text-[17px] sm:text-[20px] leading-[24px] font-semibold text-white backdrop-blur-md shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-brand-light-blue hover:text-brand-dark-navy hover:-translate-y-0.5 cursor-pointer"
+                    className="mt-8 sm:mt-[48px] inline-flex items-center rounded-[12px] border border-white/60 bg-white/10 px-[19px] py-[7px] text-[17px] sm:text-[20px] leading-[24px] font-semibold text-white backdrop-blur-md shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-brand-light-blue hover:text-brand-dark-navy hover:-translate-y-0.5 cursor-pointer"
                   >
                     Scopri il calendario completo
                   </button>
