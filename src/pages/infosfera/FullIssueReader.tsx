@@ -77,8 +77,8 @@ export default function FullIssueReader({ issue, access, onClose, onExpired }: {
   }
   const button = 'inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-lg border border-white/25 px-3 hover:bg-white/15 disabled:opacity-30'
   return <Dialog.Root open onOpenChange={value => { if (!value) onClose() }}><Dialog.Portal>
-    <Dialog.Overlay className="fixed inset-0 z-50 bg-[#020f2a]" />
-    <Dialog.Content aria-describedby={undefined} className="fixed inset-0 z-50 flex flex-col bg-[#020f2a] text-white focus:outline-none" onKeyDown={e => {
+    <Dialog.Overlay className="fixed inset-0 z-50 bg-brand-dark-navy" />
+    <Dialog.Content aria-describedby={undefined} className="fixed inset-0 z-50 flex flex-col bg-brand-dark-navy text-white focus:outline-none" onKeyDown={e => {
       if ((e.target as HTMLElement).closest('input,button,a')) return
       if (e.key === 'ArrowRight') navigate(page+1)
       if (e.key === 'ArrowLeft') navigate(page-1)
@@ -97,7 +97,7 @@ export default function FullIssueReader({ issue, access, onClose, onExpired }: {
         {busy && <p role="status" className="sticky top-0 z-10 mx-auto w-fit rounded-lg bg-brand-navy px-4 py-2">Caricamento pagina…</p>}
         {error && <div role="alert" className="p-6 text-center"><p>{error}</p><button className={`${button} mt-4`} onClick={() => void retry()}>Riprova</button></div>}
         <canvas ref={canvas} role="img" aria-label={`Pagina ${page} di ${doc?.numPages ?? access.pages}`} className={`mx-auto max-w-none bg-white ${error ? 'hidden' : ''}`} />
-        {showText && <section className="mx-auto mt-6 max-w-3xl rounded-xl bg-white p-6 text-base leading-relaxed text-slate-900"><h2 className="font-semibold mb-3">Testo della pagina {page}</h2><p>{text || 'Questa pagina contiene solo immagini.'}</p></section>}
+        {showText && <section className="mx-auto mt-6 max-w-3xl rounded-[20px] bg-white p-6 text-base leading-relaxed text-brand-dark-navy"><h2 className="font-semibold mb-3">Testo della pagina {page}</h2><p>{text || 'Questa pagina contiene solo immagini.'}</p></section>}
       </div>
       <footer className="flex flex-wrap items-center justify-center gap-2 p-3 text-sm">
         <button className={button} aria-label="Pagina precedente" disabled={page===1} onClick={() => navigate(page-1)}><ArrowLeft size={18}/></button>

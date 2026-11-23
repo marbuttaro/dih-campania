@@ -298,7 +298,7 @@ export function InnovaCoPage() {
           }}
         >
           <div className="container-page relative z-10 grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-8 lg:gap-16 items-center text-center lg:text-left reveal-element">
-            {/* Eccezione voluta alla scala: da computer il titolo resta a 44 px, più contenuto */}
+            {/* Hero corta (come Glossario e Bandi): titolo 44 e testo 18 da computer */}
             <h1 className="text-[36px] lg:text-[44px] leading-[1.2] tracking-tight">
               <span className="font-light text-white/90">Benvenuto in Innova.CO:</span>
               <br />
@@ -308,7 +308,7 @@ export function InnovaCoPage() {
                 Campania DIH
               </span>
             </h1>
-            <p className="text-base lg:text-xl text-white/75 leading-relaxed mt-3 lg:mt-6">
+            <p className="text-base lg:text-lg text-white/75 leading-relaxed mt-3 lg:mt-6">
               Il cuore pulsante di Campania DIH: uno spazio dinamico dove imprenditori,
               professionisti, startupper, ricercatori si incontrano per crescere insieme,
               condividere know-how e progettare soluzioni concrete per l'innovazione.
@@ -565,15 +565,16 @@ export function InnovaCoPage() {
           <div className="pt-16 sm:pt-20 pb-12 reveal-element">
             <div className="grid grid-cols-1 lg:grid-cols-[36fr_64fr] gap-6 lg:gap-8 items-stretch">
               <div
-                className="rounded-[20px] p-10 sm:p-12 flex flex-col justify-center text-white"
+                className="rounded-[20px] p-10 sm:p-12 lg:px-10 flex flex-col justify-center text-white"
                 style={{
                   background: 'linear-gradient(120deg, #001933 0%, #013167 45%, color-mix(in srgb, #013167 55%, #8ebef7) 100%)',
                 }}
               >
-                <h2 className="text-[34px] lg:text-[44px] font-light text-brand-pale-blue mb-6 leading-[1.1]">
-                  Un ecosistema
+                {/* Da computer: 3 righe fisse e interlinea più stretta, così "Un" non resta da solo */}
+                <h2 className="text-[34px] lg:text-[44px] font-light text-brand-pale-blue mb-6 leading-[1.1] lg:leading-[1.05]">
+                  <span className="lg:whitespace-nowrap">Un ecosistema</span>
                   <br />
-                  che cresce con te
+                  che cresce<br className="max-lg:hidden" /> con te
                 </h2>
                 <p className="text-base lg:text-xl text-white/85 leading-relaxed">
                   Ogni nuova azienda, ogni nuova competenza rende questa community più forte.

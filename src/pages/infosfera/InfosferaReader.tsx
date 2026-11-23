@@ -168,7 +168,7 @@ function LeadForm({ issue, onUnlocked }: { issue: InfosferaIssue; onUnlocked: (a
         type="submit"
         disabled={!canSubmit || sending}
         className={cn(
-          'mt-5 sm:mt-6 [@media(max-height:700px)]:mt-4 w-full inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-brand-navy to-[#0b4a86] px-6 py-3 text-sm font-semibold text-white shadow-[0_6px_16px_rgba(1,49,103,0.35)] transition-all',
+          'mt-5 sm:mt-6 [@media(max-height:700px)]:mt-4 w-full inline-flex items-center justify-center gap-2 rounded-lg bg-brand-navy hover:bg-brand-dark-navy px-6 py-3 text-sm font-semibold text-white shadow-[0_6px_16px_rgba(1,49,103,0.35)] transition-all',
           !canSubmit || sending ? 'opacity-40 cursor-not-allowed' : 'hover:-translate-y-0.5',
         )}
       >
@@ -309,12 +309,12 @@ export function InfosferaReader({
       ? `Pagine ${current[0] + 1}–${current[1] + 1} di ${pages.length}`
       : `Pagina ${current[0] + 1} di ${pages.length}`
 
-  if (full && access) return <Suspense fallback={<div role="status" className="fixed inset-0 z-50 grid place-items-center bg-[#020f2a] text-white">Caricamento rivista…</div>}><FullIssueReader issue={issue} access={access} onClose={()=>onOpenChange(false)} onExpired={()=>{setFull(false);setAccess(null);setIndex(gateIndex)}}/></Suspense>
+  if (full && access) return <Suspense fallback={<div role="status" className="fixed inset-0 z-50 grid place-items-center bg-brand-dark-navy text-white">Caricamento rivista…</div>}><FullIssueReader issue={issue} access={access} onClose={()=>onOpenChange(false)} onExpired={()=>{setFull(false);setAccess(null);setIndex(gateIndex)}}/></Suspense>
 
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-[#020f2a]/90 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-brand-dark-navy/90 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
         <Dialog.Content
           aria-describedby={undefined}
           className="fixed inset-0 z-50 flex flex-col text-white focus:outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
@@ -346,7 +346,7 @@ export function InfosferaReader({
               }}
               className="flex-1 min-w-0 h-full flex items-center justify-center">
               {atGate ? (
-                <div className="w-full max-w-[520px] max-h-full overflow-y-auto rounded-[24px] sm:rounded-[36px] bg-[#EDF1F3] px-5 py-6 sm:p-10 [@media(max-height:700px)]:py-4 text-brand-dark-navy shadow-[0_30px_60px_rgba(0,0,0,0.35)]">
+                <div className="w-full max-w-[520px] max-h-full overflow-y-auto rounded-[24px] sm:rounded-[36px] bg-brand-surface px-5 py-6 sm:p-10 [@media(max-height:700px)]:py-4 text-brand-dark-navy shadow-[0_30px_60px_rgba(0,0,0,0.35)]">
                   {checking ? <><Dialog.Title className="sr-only">Accesso Infosfera</Dialog.Title><p role="status">Verifica accesso…</p></> : access ? (
                     <DownloadPanel issue={issue} access={access} onRead={()=>setFull(true)} />
                   ) : (

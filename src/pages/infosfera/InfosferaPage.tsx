@@ -31,10 +31,10 @@ const GLASS_CARD =
 function SfogliaButton({ issue, variant = 'primary' }: { issue: InfosferaIssue; variant?: 'primary' | 'soft' }) {
   const [readerOpen, setReaderOpen] = useState(false)
   const className = cn(
-    'inline-flex items-center justify-center font-semibold rounded-lg no-underline transition-all duration-300 hover:-translate-y-0.5 cursor-pointer',
+    'inline-flex items-center justify-center font-semibold rounded-[12px] no-underline transition-all duration-300 hover:-translate-y-0.5 cursor-pointer',
     variant === 'primary'
-      ? 'bg-gradient-to-r from-brand-navy to-[#0b4a86] text-white text-sm px-10 py-3 shadow-[0_6px_16px_rgba(1,49,103,0.35)] hover:shadow-[0_10px_22px_rgba(1,49,103,0.4)]'
-      : 'bg-[#E3EAEC] text-brand-dark-navy text-sm px-6 py-2.5 shadow-[0_4px_10px_rgba(1,49,103,0.18)] hover:shadow-[0_6px_16px_rgba(1,49,103,0.25)]',
+      ? 'bg-brand-navy hover:bg-brand-dark-navy text-white text-base px-10 py-3 shadow-[0_6px_16px_rgba(1,49,103,0.35)] hover:shadow-[0_10px_22px_rgba(1,49,103,0.4)]'
+      : 'bg-brand-ice text-brand-dark-navy text-base px-6 py-2.5 shadow-[0_4px_10px_rgba(1,49,103,0.18)] hover:shadow-[0_6px_16px_rgba(1,49,103,0.25)]',
   )
 
   return (
@@ -51,7 +51,7 @@ function LatestIssueBox({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        'flex-col sm:flex-row sm:items-center justify-between gap-5 rounded-2xl px-6 py-5 max-w-[560px]',
+        'flex-col sm:flex-row sm:items-center justify-between gap-5 rounded-[20px] px-6 py-5 max-w-[560px]',
         GLASS_CARD,
         className,
       )}
@@ -90,7 +90,7 @@ function PastIssueCard({ issue }: { issue: InfosferaIssue }) {
         {issue.description && (
           <p
             className={cn(
-              'mt-3 text-[13px] text-brand-dark-navy/80 leading-relaxed sm:line-clamp-none',
+              'mt-3 text-sm text-brand-dark-navy/80 leading-relaxed sm:line-clamp-none',
               !expanded && 'line-clamp-2',
             )}
           >
@@ -223,17 +223,17 @@ export function InfosferaPage() {
 
       <main className="flex-grow relative pt-32 sm:pt-40 pb-24 overflow-hidden">
         {/* Hero */}
-        <section className="mx-auto w-full max-w-[1290px] px-8 lg:px-[30px] grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-16 items-center">
+        <section className="container-page grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-16 items-center">
           <div className="reveal-element lg:mb-24">
             <p className="text-base sm:text-lg font-light text-brand-navy/80">La rivista del Campania DIH</p>
-            <h1 className="mt-3 text-5xl sm:text-6xl lg:text-[4.25rem] font-normal text-brand-navy tracking-tight leading-none">
+            <h1 className="mt-3 text-[36px] lg:text-[52px] font-light text-brand-navy tracking-tight leading-none">
               Infosfera
             </h1>
-            <p className="mt-4 text-xl sm:text-2xl lg:text-[1.65rem] font-light text-brand-navy leading-snug">
+            <p className="mt-4 text-base lg:text-xl font-light text-brand-navy leading-snug">
               La Rivista dell'Innovazione Digitale
               <br className="hidden sm:block" /> e Strategica
             </p>
-            <p className="mt-8 text-sm sm:text-[15px] text-brand-dark-navy/80 leading-relaxed max-w-[560px]">
+            <p className="mt-8 text-sm sm:text-base text-brand-dark-navy/80 leading-relaxed max-w-[560px]">
               Infosfera è la rivista semestrale di approfondimento e divulgazione scientifica sui temi
               dell'innovazione, della tecnologia e della cultura digitale promossa dal{' '}
               <strong className="font-semibold text-brand-dark-navy">
@@ -242,7 +242,7 @@ export function InfosferaPage() {
               </strong>
             </p>
 
-            <p className="mt-4 max-w-[560px] text-sm text-brand-navy">Sfoglia liberamente ogni numero fino alla fine dell’editoriale. Per leggere tutte le pagine o scaricare il PDF, lascia nome ed email: l’accesso è gratuito.</p>
+            <p className="mt-4 max-w-[560px] text-sm sm:text-base text-brand-navy">Sfoglia liberamente ogni numero fino alla fine dell’editoriale. Per leggere tutte le pagine o scaricare il PDF, lascia nome ed email: l’accesso è gratuito.</p>
             <LatestIssueBox className="hidden lg:flex mt-10" />
           </div>
 
@@ -265,7 +265,7 @@ export function InfosferaPage() {
               </button>
               {coverOpen && <InfosferaReader issue={LATEST_ISSUE} open onOpenChange={setCoverOpen}/>}
               <LatestIssueBox className="flex lg:hidden mt-8" />
-              <dl className="mt-6 text-[15px] text-brand-navy font-light leading-relaxed">
+              <dl className="mt-6 text-sm sm:text-base text-brand-navy font-light leading-relaxed">
                 {EDITORIAL_TEAM.map((member) => (
                   <div key={member.role}>
                     <dt className="inline">{member.role}: </dt>
@@ -278,13 +278,13 @@ export function InfosferaPage() {
         </section>
 
         {/* Un ponte tra ricerca e impresa */}
-        <section className="mx-auto w-full max-w-[1290px] px-8 lg:px-[30px] mt-28 sm:mt-36 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 reveal-element">
-          <h2 className="text-4xl sm:text-5xl font-light text-brand-navy leading-[1.1] tracking-tight">
+        <section className="container-page mt-28 sm:mt-36 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 reveal-element">
+          <h2 className="text-[34px] lg:text-[44px] font-light text-brand-navy leading-[1.1] tracking-tight">
             Un ponte tra
             <br /> ricerca scientifica
             <br /> e impresa
           </h2>
-          <p className="text-base sm:text-lg text-brand-navy leading-relaxed lg:pt-3">
+          <p className="text-base lg:text-xl text-brand-navy leading-relaxed lg:pt-3">
             Nata per decodificare le complessità della rivoluzione tecnologica e agevolare la
             comprensione dei nuovi trend dell'innovazione, Infosfera rappresenta un ponte tra la
             ricerca scientifica avanzata e il tessuto imprenditoriale.
@@ -292,18 +292,18 @@ export function InfosferaPage() {
         </section>
 
         {/* La nostra mission */}
-        <section className="mx-auto w-full max-w-[1290px] px-8 lg:px-[30px] mt-24 sm:mt-28 reveal-element">
+        <section className="container-page mt-24 sm:mt-28 reveal-element">
           <div
             className={cn(
-              'grid grid-cols-1 lg:grid-cols-[0.7fr_1.5fr] gap-6 lg:gap-12 items-center rounded-2xl px-8 py-10 sm:px-16 sm:py-14',
+              'grid grid-cols-1 lg:grid-cols-[0.7fr_1.5fr] gap-6 lg:gap-12 items-center rounded-[20px] px-8 py-10 sm:px-16 sm:py-14',
               GLASS_CARD,
             )}
           >
-            <h2 className="text-4xl sm:text-5xl font-medium text-brand-navy leading-[1.05]">
+            <h2 className="text-[34px] lg:text-[44px] font-light text-brand-navy leading-[1.1]">
               La nostra
               <br className="hidden lg:block" /> mission
             </h2>
-            <p className="text-sm sm:text-[15px] text-brand-dark-navy/75 font-light leading-relaxed">
+            <p className="text-sm sm:text-base text-brand-dark-navy/75 font-light leading-relaxed">
               In un'epoca in cui i dati e le tecnologie evolvono a ritmo esponenziale, il vero potere
               risiede nella conoscenza consapevole. La finalità di Infosfera è offrire una bussola per
               orientarsi nella transizione digitale ed ecologica. Attraverso il contributo di
@@ -317,13 +317,14 @@ export function InfosferaPage() {
           </div>
         </section>
 
-        {/* Perché leggere Infosfera? — misure dal design a 1512px: card 292×344, gap 20 */}
-        <section className="mx-auto w-full max-w-[1290px] px-8 lg:px-[30px] mt-28 sm:mt-32">
+        {/* Perché leggere Infosfera? — misure dal design a 1512px: card 292×344, gap 20.
+            Da computer le card restano come nel design originale (scelta dell'utente), da telefono seguono la scala */}
+        <section className="container-page mt-28 sm:mt-32">
           <div className="reveal-element">
-            <h2 className="text-[38px] sm:text-[48px] font-light text-brand-navy leading-[1.15]">
+            <h2 className="text-[34px] lg:text-[44px] font-light text-brand-navy leading-[1.15]">
               Perché leggere Infosfera?
             </h2>
-            <p className="mt-[11px] text-[15px] sm:text-[17px] text-brand-navy/85 leading-[24px] max-w-[660px]">
+            <p className="mt-[11px] text-base lg:text-[17px] text-brand-navy/85 leading-relaxed lg:leading-[24px] max-w-[660px]">
               Uno strumento di lavoro, ispirazione e crescita per imprenditori, manager, professionisti
               e appassionati di cultura digitale. Su ogni numero troverai:
             </p>
@@ -333,17 +334,17 @@ export function InfosferaPage() {
               <div
                 key={reason.title}
                 className={cn(
-                  'shadow-neumorphic bg-brand-ice rounded-[10px] pl-[30px] pr-[28px] pt-[22px] pb-8 lg:min-h-[344px] reveal-element',
+                  'shadow-neumorphic bg-brand-ice rounded-[20px] lg:rounded-[10px] pl-[30px] pr-[28px] pt-[22px] pb-8 lg:min-h-[344px] reveal-element',
                   `reveal-delay-${(i + 1) * 100}`,
                 )}
               >
-                <p className="-ml-1.5 text-[72px] font-extralight text-[#6fa3dd] leading-none">
+                <p className="-ml-1.5 text-[72px] font-extralight text-brand-light-blue lg:text-[#6fa3dd] leading-none">
                   {String(i + 1).padStart(2, '0')}
                 </p>
                 <h3 className="mt-[21px] h-[52px] flex items-center text-[20.5px] font-semibold text-brand-navy leading-[26px]">
                   {reason.title}
                 </h3>
-                <p className="mt-[19px] text-[15.8px] text-brand-navy/85 leading-5">
+                <p className="mt-[19px] text-sm sm:text-base lg:text-[15.8px] text-brand-navy/85 leading-snug lg:leading-5">
                   {/* "|" = a capo come nel design, solo con le 4 card affiancate */}
                   {reason.text.split('|').map((part, j) => (
                     <span key={j}>
@@ -359,8 +360,8 @@ export function InfosferaPage() {
         </section>
 
         {/* Numeri precedenti */}
-        <section className="mx-auto w-full max-w-[1290px] px-8 lg:px-[30px] mt-28 sm:mt-32">
-          <h2 className="text-4xl sm:text-5xl font-light text-brand-navy tracking-tight reveal-element">
+        <section className="container-page mt-28 sm:mt-32">
+          <h2 className="text-[34px] lg:text-[44px] font-light text-brand-navy tracking-tight reveal-element">
             Numeri precedenti
           </h2>
           <PastIssuesSlider />

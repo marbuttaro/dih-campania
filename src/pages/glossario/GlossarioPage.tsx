@@ -20,11 +20,11 @@ const AVAILABLE_LETTERS = new Set(SORTED_TERMS.map((item) => letterOf(item.term)
 
 function TermRow({ item }: { item: GlossaryTerm }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] gap-2 md:gap-12 items-center border-b border-[#8EBEF7]/70 py-6 md:py-7">
+    <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] gap-2 md:gap-12 items-center border-b border-brand-light-blue/70 py-6 md:py-7">
       <dt className="text-[26px] sm:text-[32px] lg:text-[34px] font-light text-brand-navy leading-tight tracking-tight">
         {item.term}
       </dt>
-      <dd className="text-sm sm:text-[15px] text-brand-dark-navy/75 leading-relaxed">{item.definition}</dd>
+      <dd className="text-sm sm:text-base text-brand-dark-navy/75 leading-relaxed">{item.definition}</dd>
     </div>
   )
 }
@@ -59,7 +59,7 @@ function LetterDropdown({ letter, onChange }: { letter: string | null; onChange:
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls="glossario-lettere"
-        className="w-full flex items-center justify-between rounded-[12px] bg-white/5 border border-white/40 text-white px-4 py-2.5 text-sm focus:outline-none focus:border-[#8EBEF7] focus:ring-1 focus:ring-[#8EBEF7] cursor-pointer"
+        className="w-full flex items-center justify-between rounded-[12px] bg-white/5 border border-white/40 text-white px-4 py-2.5 text-sm focus:outline-none focus:border-brand-light-blue focus:ring-1 focus:ring-brand-light-blue cursor-pointer"
       >
         {letter ? `Lettera ${letter}` : 'Vedi tutto'}
         <ChevronDown className={cn('size-5 text-white/70 transition-transform', open && 'rotate-180')} />
@@ -67,7 +67,7 @@ function LetterDropdown({ letter, onChange }: { letter: string | null; onChange:
       {open && (
         <div
           id="glossario-lettere"
-          className="absolute left-0 right-0 top-full mt-2 z-30 rounded-[14px] bg-[#002a5a] border border-white/25 p-3 shadow-[0_20px_40px_rgba(0,25,51,0.4)]"
+          className="absolute left-0 right-0 top-full mt-2 z-30 rounded-[20px] bg-brand-navy border border-white/25 p-3 shadow-[0_20px_40px_rgba(0,25,51,0.4)]"
         >
           <div className="grid grid-cols-7 gap-1.5">
             {LETTERS.map((item) => {
@@ -84,7 +84,7 @@ function LetterDropdown({ letter, onChange }: { letter: string | null; onChange:
                   className={cn(
                     'h-10 rounded-md text-[17px] font-medium transition-colors',
                     active
-                      ? 'bg-[#8EBEF7] text-brand-dark-navy'
+                      ? 'bg-brand-light-blue text-brand-dark-navy'
                       : available
                         ? 'text-white bg-white/5 active:bg-white/15'
                         : 'text-white/25',
@@ -101,7 +101,7 @@ function LetterDropdown({ letter, onChange }: { letter: string | null; onChange:
             aria-pressed={!letter}
             className={cn(
               'w-full mt-2 rounded-md py-2 text-sm font-medium transition-colors',
-              !letter ? 'bg-[#8EBEF7] text-brand-dark-navy' : 'text-white bg-white/5',
+              !letter ? 'bg-brand-light-blue text-brand-dark-navy' : 'text-white bg-white/5',
             )}
           >
             Vedi tutto
@@ -144,15 +144,16 @@ export function GlossarioPage() {
           className="relative w-full pt-36 sm:pt-44 pb-32 sm:pb-36 rounded-b-[32px] sm:rounded-b-[40px] overflow-hidden"
           style={{
             background:
-              'radial-gradient(ellipse 70% 90% at 0% 60%, #3a82c4 0%, rgba(58,130,196,0) 70%), radial-gradient(ellipse 60% 70% at 100% 0%, #3f7fb6 0%, rgba(63,127,182,0) 70%), linear-gradient(180deg, #0b4a86 0%, #002d5c 100%)',
+              // Stessi bagliori di prima, ottenuti solo con i colori della palette (navy schiarito col celeste)
+              'radial-gradient(ellipse 70% 90% at 0% 60%, color-mix(in srgb, #013167 55%, #8ebef7) 0%, transparent 70%), radial-gradient(ellipse 60% 70% at 100% 0%, color-mix(in srgb, #013167 60%, #8ebef7) 0%, transparent 70%), linear-gradient(180deg, #013167 0%, #001933 100%)',
           }}
         >
-          <div className="container-page grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-6 lg:gap-16 items-center">
-            <h1 className="text-[32px] sm:text-[40px] lg:text-[44px] font-normal text-[#8EBEF7] leading-[1.15] tracking-tight">
-              Digital Hub: Guida Pratica
-              <br className="hidden xl:block" /> ai Termini dell'Innovazione
+          <div className="container-page grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-6 lg:gap-14 items-center">
+            {/* Hero corta (come Innova.co e Bandi): titolo 44 e testo 18 da computer */}
+            <h1 className="text-[36px] lg:text-[44px] font-light text-brand-light-blue leading-[1.15] tracking-tight text-balance">
+              Digital Hub:<br className="max-lg:hidden" /> Guida Pratica ai Termini<br className="max-lg:hidden" /> dell'Innovazione
             </h1>
-            <p className="text-sm sm:text-[15px] text-white/75 leading-relaxed lg:max-w-[400px] lg:justify-self-end">
+            <p className="text-base lg:text-lg text-white/75 leading-relaxed lg:max-w-[440px] lg:justify-self-end">
               Il mondo della digitalizzazione può sembrare un labirinto di termini complessi. Per
               questo abbiamo creato questa guida: uno spazio dove la tecnologia parla la tua lingua.
               Scopri il significato dei termini più importanti e inizia a sentirti a casa nel mondo
@@ -162,7 +163,7 @@ export function GlossarioPage() {
         </section>
 
         <div className="container-page relative z-20 -mt-20 sm:-mt-16">
-          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-6 lg:gap-12 items-end rounded-[20px] bg-[#002a5a] shadow-[0_20px_50px_rgba(0,25,51,0.25)] px-6 py-6 sm:px-10 sm:py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-6 lg:gap-12 items-end rounded-[20px] bg-brand-navy shadow-[0_20px_50px_rgba(0,25,51,0.25)] px-6 py-6 sm:px-10 sm:py-8">
             <label className="block">
               <span className="block text-white/85 text-[15px] mb-3">cerca per parola chiave:</span>
               <span className="relative block">
@@ -171,7 +172,7 @@ export function GlossarioPage() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Es. cloud, malware, BIM…"
-                  className="w-full rounded-[12px] bg-white/5 border border-white/40 text-white placeholder-white/35 pl-4 pr-11 py-2.5 text-sm focus:outline-none focus:border-[#8EBEF7] focus:ring-1 focus:ring-[#8EBEF7] [&::-webkit-search-cancel-button]:hidden"
+                  className="w-full rounded-[12px] bg-white/5 border border-white/40 text-white placeholder-white/35 pl-4 pr-11 py-2.5 text-sm focus:outline-none focus:border-brand-light-blue focus:ring-1 focus:ring-brand-light-blue [&::-webkit-search-cancel-button]:hidden"
                 />
                 {query ? (
                   <button
@@ -198,7 +199,7 @@ export function GlossarioPage() {
                   aria-pressed={!letter}
                   className={cn(
                     'text-[15px] cursor-pointer transition-colors',
-                    letter ? 'text-white/85 hover:text-[#8EBEF7] underline underline-offset-4' : 'text-white/85',
+                    letter ? 'text-white/85 hover:text-brand-light-blue underline underline-offset-4' : 'text-white/85',
                   )}
                 >
                   vedi tutti:
@@ -219,9 +220,9 @@ export function GlossarioPage() {
                       className={cn(
                         'min-w-[22px] xl:min-w-[20px] h-8 px-1 xl:px-0.5 rounded-md text-[17px] xl:text-[16px] font-medium transition-colors',
                         active
-                          ? 'bg-[#8EBEF7] text-brand-dark-navy'
+                          ? 'bg-brand-light-blue text-brand-dark-navy'
                           : available
-                            ? 'text-white hover:text-[#8EBEF7] cursor-pointer'
+                            ? 'text-white hover:text-brand-light-blue cursor-pointer'
                             : 'text-white/25 cursor-default',
                       )}
                     >
@@ -245,7 +246,7 @@ export function GlossarioPage() {
           )}
 
           {total === 0 ? (
-            <div className="border-y border-[#8EBEF7]/70 py-10 text-brand-dark-navy/75">
+            <div className="border-y border-brand-light-blue/70 py-10 text-brand-dark-navy/75">
               Nessun termine corrisponde alla ricerca.{' '}
               <button
                 type="button"
@@ -263,7 +264,7 @@ export function GlossarioPage() {
               <section key={key} aria-labelledby={`lettera-${key}`} className="mb-10 last:mb-0">
                 <h2
                   id={`lettera-${key}`}
-                  className="text-[13px] font-semibold tracking-[0.2em] text-[#4b7fb8] border-b border-[#8EBEF7]/70 pb-3"
+                  className="text-[13px] font-semibold tracking-[0.2em] text-brand-navy/70 border-b border-brand-light-blue/70 pb-3"
                 >
                   {key}
                 </h2>

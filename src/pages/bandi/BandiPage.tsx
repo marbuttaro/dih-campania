@@ -100,11 +100,12 @@ function Hero({ oggi }: { oggi: Date }) {
     <section className="relative overflow-hidden rounded-b-[30px] bg-[url('/assets/sfondo_form.png')] bg-cover bg-center text-white pt-36 sm:pt-44 pb-16 sm:pb-20">
       <div className="container-page grid grid-cols-1 lg:grid-cols-[1.25fr_1fr] gap-12 lg:gap-16 items-end">
         <div className="reveal-element">
-          <h1 className="text-4xl sm:text-5xl lg:text-[3.1rem] font-light text-brand-light-blue leading-[1.12] tracking-tight">
+          {/* Hero corta (come Glossario e Innova.co): titolo 44 e testo 18 da computer */}
+          <h1 className="text-[36px] lg:text-[44px] font-light text-brand-light-blue leading-[1.12] tracking-tight">
             Bandi e opportunità
             <br /> per innovare
           </h1>
-          <p className="mt-6 text-sm sm:text-base text-brand-light-blue/85 leading-relaxed max-w-[520px]">
+          <p className="mt-6 text-base lg:text-lg text-brand-light-blue/85 leading-relaxed max-w-[520px]">
             Selezioniamo i bandi di enti pubblici e privati per digitalizzazione, cybersecurity, innovazione,
             ricerca e sostenibilità. Li riassumiamo in modo chiaro e ti aiutiamo a capire se fanno per la tua
             realtà.
