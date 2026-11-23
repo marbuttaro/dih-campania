@@ -587,8 +587,10 @@ export const ARCHIVIO_BANDI: Bando[] = [
         "data": "2024-10-02"
       }
     ],
-    "link": "https://www.mimit.gov.it/it/incentivi/agevolazioni-per-gli-investimenti-delle-pmi-in-beni-strumentali-nuova-sabatini",
-    "requisiti": "PMI costituite in forma di società di capitali che deliberano un aumento di capitale in relazione al finanziamento."
+    "link": "https://sni.unioncamere.it/notizie/nuova-sabatini-capitalizzazione-mimit-al-dal-1deg-ottobre-2024",
+    "requisiti": "PMI costituite in forma di società di capitali che deliberano un aumento di capitale in relazione al finanziamento.",
+    "dotazioneEuro": 80000000,
+    "budget": "80.000.000 € di dotazione iniziale per la linea Capitalizzazione."
   },
   {
     "id": "wp-10761",
@@ -652,7 +654,7 @@ export const ARCHIVIO_BANDI: Bando[] = [
       "innovazione-ricerca"
     ],
     "destinatari": [
-      "solo-micro",
+      "micro-piccole",
       "startup"
     ],
     "abstract": [

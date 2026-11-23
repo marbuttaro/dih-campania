@@ -33,7 +33,6 @@ export const DESTINATARI = [
   { id: 'grandi', label: 'Grandi imprese' },
   { id: 'startup', label: 'Startup e PMI innovative' },
   { id: 'professionisti', label: 'Liberi professionisti' },
-  { id: 'solo-micro', label: 'Microimprese' },
   { id: 'midcap', label: 'Imprese a media capitalizzazione' },
   { id: 'imprese', label: 'Imprese (dimensione non specificata)' },
   { id: 'pubblici', label: 'Pubbliche amministrazioni ed enti pubblici' },
