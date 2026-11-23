@@ -4,6 +4,7 @@ import { supabase, requireSupabase } from '../lib/supabase'
 import { listArticles, listCategories, setTrashed, formatDate, PAGE_SIZE, type Article, type Category } from '../lib/articles'
 import { ArticleForm } from './ArticleForm'
 import { confirmAction } from './dialogs'
+import { BandiAdmin } from './BandiAdmin'
 import { InfosferaLeads } from './InfosferaLeads'
 
 const message = (e: unknown) => e instanceof Error ? e.message : 'Operazione non riuscita. Riprova.'
@@ -21,6 +22,7 @@ function Login() {
 }
 
 function Dashboard({ session }: { session: Session }) {
+  const bandi = new URLSearchParams(window.location.search).get('sezione') === 'bandi'
   const [allowed, setAllowed] = useState<boolean | null>(null)
   const [categories, setCategories] = useState<Category[]>([])
   const [articles, setArticles] = useState<Article[]>([])
@@ -44,7 +46,7 @@ function Dashboard({ session }: { session: Session }) {
     return () => { alive = false }
   }, [session.user.id])
   useEffect(() => {
-    if (!allowed) return
+    if (!allowed || bandi) return
     let alive = true
     const load = async () => {
       setBusy(true); setError('')
@@ -53,14 +55,18 @@ function Dashboard({ session }: { session: Session }) {
       finally { if (alive) setBusy(false) }
     }
     void load(); return () => { alive = false }
-  }, [allowed, page, query, status, category, trash, version])
+  }, [allowed, bandi, page, query, status, category, trash, version])
   const signOut = async () => { const { error } = await requireSupabase().auth.signOut(); if (error) setError(error.message) }
   return <div className="cms min-h-screen bg-[#f0f4f8]">
     <header className="bg-white border-b px-5 sm:px-10 py-5 flex flex-wrap items-center gap-5 justify-between"><a href="/" className="font-bold text-xl">Campania DIH <span className="font-normal text-sm">/ Redazione</span></a><div className="flex items-center gap-4"><span className="text-xs break-all">{session.user.email}</span><button className="secondary" onClick={signOut} disabled={editing !== undefined} title={editing !== undefined ? 'Chiudi prima l’articolo per uscire' : undefined}>Esci</button></div></header>
     <main className="max-w-[1440px] mx-auto px-5 sm:px-10 py-8">
       {allowed === null && <p role="status">Verifica accesso…</p>}
       {allowed === false && <p role="alert" className="error">Questo account non è abilitato alla redazione. Contatta l’amministratore.</p>}
-      {allowed && editing !== undefined ? <ArticleForm key={editing?.id || 'new'} article={editing} categories={categories} onClose={() => setEditing(undefined)} onSaved={article => { setEditing(undefined); setVersion(v => v + 1); setNotice(`Articolo “${article.title}” salvato.`) }} /> : allowed && <>
+      {allowed && editing === undefined && <nav aria-label="Sezioni redazione" className="mb-6 flex gap-3">
+        <a className={'button ' + (bandi ? 'secondary' : '')} href="/admin" aria-current={bandi ? undefined : 'page'}>Articoli</a>
+        <a className={'button ' + (bandi ? '' : 'secondary')} href="/admin?sezione=bandi" aria-current={bandi ? 'page' : undefined}>Bandi</a>
+      </nav>}
+      {allowed && bandi ? <BandiAdmin /> : allowed && editing !== undefined ? <ArticleForm key={editing?.id || 'new'} article={editing} categories={categories} onClose={() => setEditing(undefined)} onSaved={article => { setEditing(undefined); setVersion(v => v + 1); setNotice(`Articolo “${article.title}” salvato.`) }} /> : allowed && <>
         <InfosferaLeads />
         <div className="flex justify-between items-center gap-4 mb-6"><div><h1 className="text-3xl">Articoli</h1><p className="mt-2 text-sm">{count} risultati {trash && 'nel cestino'}</p></div><button onClick={() => { setNotice(''); setEditing(null) }}>+ Nuovo articolo</button></div>
         {notice && <p role="status" className="success mb-5">{notice}</p>}

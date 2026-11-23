@@ -1,13 +1,13 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { listBandi, type BandoRecord } from '@/lib/bandi'
+import { ConsulenzaDialog } from './ConsulenzaDialog'
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { ArrowLeft, ArrowRight, ArrowUpRight, Check, ChevronDown, Plus, RotateCcw, Search } from 'lucide-react'
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
 import { cn } from '@/lib/utils'
 import {
   AMBITI,
-  BANDI,
   BANDI_DEMO,
-  CATALOGO_AGGIORNATO_AL,
   DESTINATARI,
   DOMANDE,
   LIVELLI,
@@ -20,7 +20,6 @@ import {
 import {
   FILTRI_VUOTI,
   FASCE_BUDGET,
-  puoPresentareDomanda,
   type FasciaBudget,
   STATO_LABEL,
   filtraBandi,
@@ -33,15 +32,10 @@ import {
 } from './bandiUtils'
 
 const PER_PAGINA = 9
-const CONSULENZA_HREF = '/#contatti'
+const Consultazione = createContext<(bando: Bando | null, trigger: HTMLElement) => void>(() => {})
 
 // I bandi di esempio servono solo a vedere la struttura: in locale o con ?demo nell'URL
 const DEMO = import.meta.env.DEV || new URLSearchParams(window.location.search).has('demo')
-const CATALOGO: Bando[] = DEMO ? [...BANDI, ...BANDI_DEMO] : BANDI
-
-const ENTI = [...new Set(CATALOGO.map(b => b.ente))].sort((a, b) => a.localeCompare(b, 'it'))
-const TIPOLOGIE = [...new Set(CATALOGO.flatMap(b => b.tipologia ? [b.tipologia] : []))].sort((a, b) => a.localeCompare(b, 'it'))
-
 const STATI_FILTRO: { value: StatoFiltro; label: string }[] = [
   { value: 'tutti', label: 'Tutti' },
   { value: 'attivi', label: 'Aperti o in apertura' },
@@ -75,8 +69,8 @@ function filtriDaUrl(): Filtri {
   const livello = p.get('livello')
   return {
     testo: p.get('q') ?? '',
-    ente: ENTI.find(v => v === p.get('ente')) ?? '',
-    tipologia: TIPOLOGIE.find(v => v === p.get('tipologia')) ?? '',
+    ente: p.get('ente') ?? '',
+    tipologia: p.get('tipologia') ?? '',
     budget: FASCE_BUDGET.find(o => o.value === p.get('budget'))?.value ?? '',
     ambito: AMBITI.some((a) => a.id === ambito) ? (ambito as AmbitoId) : '',
     destinatario: DESTINATARI.some((d) => d.id === destinatario) ? (destinatario as DestinatarioId) : '',
@@ -108,8 +102,9 @@ function scrollTo(id: string) {
 /* Hero                                                                        */
 /* -------------------------------------------------------------------------- */
 
-function Hero({ oggi }: { oggi: Date }) {
-  const attivi = filtraBandi(CATALOGO, { ...FILTRI_VUOTI, stato: 'attivi' }, oggi).length
+function Hero({ oggi, catalogo, aggiornato }: { oggi: Date; catalogo: Bando[]; aggiornato: string }) {
+  const consulta = useContext(Consultazione)
+  const attivi = filtraBandi(catalogo, { ...FILTRI_VUOTI, stato: 'attivi' }, oggi).length
 
   return (
     <section className="relative overflow-hidden rounded-b-[30px] bg-[url('/assets/sfondo_form.png')] bg-cover bg-center text-white pt-36 sm:pt-44 pb-16 sm:pb-20">
@@ -126,12 +121,12 @@ function Hero({ oggi }: { oggi: Date }) {
             realtà.
           </p>
           <div className="mt-9 flex flex-wrap gap-4">
-            <a
-              href={CONSULENZA_HREF}
+            <button type="button"
+              onClick={e => consulta(null, e.currentTarget)}
               className="inline-flex items-center rounded-[8.6px] border border-white/40 bg-brand-dark-navy/50 backdrop-blur-md px-5 py-2.5 text-sm font-semibold text-white shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-brand-light-blue hover:text-brand-dark-navy hover:-translate-y-0.5 no-underline"
             >
               Richiedi una consulenza
-            </a>
+            </button>
             <a
               href="#catalogo"
               onClick={(e) => {
@@ -147,11 +142,11 @@ function Hero({ oggi }: { oggi: Date }) {
 
         <div className="reveal-element reveal-delay-200 lg:justify-self-end lg:max-w-[400px] border-l border-white/30 pl-6 py-2 text-white/90">
           <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-white">
-            Catalogo aggiornato al {formatData(CATALOGO_AGGIORNATO_AL)}
+            {aggiornato ? 'Catalogo aggiornato al ' + formatData(aggiornato) : 'Catalogo bandi'}
           </p>
           <p className="mt-3 text-sm">
             <strong className="font-semibold text-white">
-              {CATALOGO.length} schede
+              {catalogo.length} schede
             </strong>{' '}
             in catalogo · <strong className="font-semibold text-white">{attivi}</strong>{' '}
             {attivi === 1 ? 'aperto o in apertura' : 'aperti o in apertura'}
@@ -180,13 +175,14 @@ function filtriDaRisposte(r: Risposte): Filtri {
   }
 }
 
-function Orientamento({ oggi, onApplica }: { oggi: Date; onApplica: (f: Filtri) => void }) {
+function Orientamento({ oggi, catalogo, onApplica }: { oggi: Date; catalogo: Bando[]; onApplica: (f: Filtri) => void }) {
+  const consulta = useContext(Consultazione)
   const [step, setStep] = useState(0)
   const [risposte, setRisposte] = useState<Risposte>({})
   const inTransizione = useRef(false)
   const finito = step >= DOMANDE.length
   const domanda = DOMANDE[Math.min(step, DOMANDE.length - 1)]
-  const risultati = finito ? filtraBandi(CATALOGO, filtriDaRisposte(risposte), oggi).length : 0
+  const risultati = finito ? filtraBandi(catalogo, filtriDaRisposte(risposte), oggi).length : 0
 
   const rispondi = (value: string | undefined) => {
     if (inTransizione.current) return
@@ -344,12 +340,12 @@ function Orientamento({ oggi, onApplica }: { oggi: Date; onApplica: (f: Filtri) 
                     Vedi i bandi <ArrowRight className="size-4" />
                   </button>
                 ) : (
-                  <a
-                    href={CONSULENZA_HREF}
+                  <button type="button"
+                    onClick={e => consulta(null, e.currentTarget)}
                     className="inline-flex items-center gap-2 rounded-lg bg-brand-navy hover:bg-brand-dark-navy px-6 py-2.5 text-sm font-semibold text-white shadow-[0_6px_16px_rgba(1,49,103,0.35)] transition-all duration-300 hover:-translate-y-0.5 no-underline"
                   >
                     Chiedi una consulenza <ArrowRight className="size-4" />
-                  </a>
+                  </button>
                 )}
                 <button
                   type="button"
@@ -419,7 +415,8 @@ const BADGE: Record<Stato, string> = {
 }
 
 function BandoCard({ bando, oggi }: { bando: Bando; oggi: Date }) {
-  const [aperto, setAperto] = useState(false)
+  const consulta = useContext(Consultazione)
+  const [aperto, setAperto] = useState(() => new URLSearchParams(location.search).get('q') === bando.id)
   const stato = statoBando(bando, oggi)
   const chiuso = stato === 'chiuso'
   const scadenza = testoScadenza(bando, oggi)
@@ -496,13 +493,13 @@ function BandoCard({ bando, oggi }: { bando: Bando; oggi: Date }) {
           >
             Consulta la fonte <ArrowUpRight className="size-3.5" />
           </a>}
-          {(puoPresentareDomanda(stato) || stato === 'in-apertura') && (
-            <a
-              href={CONSULENZA_HREF}
+          {!BANDI_DEMO.some(d => d.id === bando.id) && (
+            <button type="button"
+              onClick={e => consulta(bando, e.currentTarget)}
               className="inline-flex items-center rounded-lg bg-brand-ice px-4 py-2 text-xs font-semibold text-brand-dark-navy shadow-[0_4px_10px_rgba(1,49,103,0.15)] transition-all duration-300 hover:-translate-y-0.5 no-underline"
             >
               Chiedi una consulenza
-            </a>
+            </button>
           )}
         </div>
         {bando.pubblicazioni && (
@@ -590,6 +587,7 @@ function Paginazione({ pagina, totale, onCambia }: { pagina: number; totale: num
 }
 
 function Catalogo({
+  catalogo,
   oggi,
   filtri,
   setFiltri,
@@ -597,13 +595,17 @@ function Catalogo({
   oggi: Date
   filtri: Filtri
   setFiltri: (f: Filtri) => void
+  catalogo: Bando[]
 }) {
+  const consulta = useContext(Consultazione)
+  const enti = useMemo(() => [...new Set(catalogo.map(b => b.ente))].sort((a,b) => a.localeCompare(b, 'it')), [catalogo])
+  const tipologie = useMemo(() => [...new Set(catalogo.flatMap(b => b.tipologia ? [b.tipologia] : []))].sort((a,b) => a.localeCompare(b, 'it')), [catalogo])
   // La pagina corrente vale solo per i filtri con cui è stata scelta: nuovi filtri = pagina 1
   const [scelta, setScelta] = useState({ filtri, pagina: 1 })
   const pagina = scelta.filtri === filtri ? scelta.pagina : 1
   const gridRef = useRef<HTMLDivElement>(null)
 
-  const risultati = useMemo(() => ordinaBandi(filtraBandi(CATALOGO, filtri, oggi), oggi), [filtri, oggi])
+  const risultati = useMemo(() => ordinaBandi(filtraBandi(catalogo, filtri, oggi), oggi), [catalogo, filtri, oggi])
   const totalePagine = Math.max(1, Math.ceil(risultati.length / PER_PAGINA))
   const visibili = risultati.slice((pagina - 1) * PER_PAGINA, pagina * PER_PAGINA)
   const filtriAttivi = JSON.stringify(filtri) !== JSON.stringify(FILTRI_VUOTI)
@@ -656,12 +658,12 @@ function Catalogo({
           <SelectFiltro
             id="filtro-tipologia" label="Tipologia" value={filtri.tipologia}
             onChange={(v) => aggiorna({ tipologia: v })}
-            opzioni={[{ value: '', label: 'Tutte le tipologie' }, ...TIPOLOGIE.map(value => ({ value, label: value }))]}
+            opzioni={[{ value: '', label: 'Tutte le tipologie' }, ...tipologie.map(value => ({ value, label: value }))]}
           />
           <SelectFiltro
             id="filtro-ente" label="Ente erogatore o promotore" value={filtri.ente}
             onChange={(v) => aggiorna({ ente: v })}
-            opzioni={[{ value: '', label: 'Tutti gli enti' }, ...ENTI.map(value => ({ value, label: value }))]}
+            opzioni={[{ value: '', label: 'Tutti gli enti' }, ...enti.map(value => ({ value, label: value }))]}
           />
           <SelectFiltro<FasciaBudget | ''>
             id="filtro-budget" label="Budget complessivo" value={filtri.budget}
@@ -736,12 +738,12 @@ function Catalogo({
               >
                 Azzera filtri
               </button>
-              <a
-                href={CONSULENZA_HREF}
+              <button type="button"
+                onClick={e => consulta(null, e.currentTarget)}
                 className="inline-flex items-center rounded-lg bg-brand-navy hover:bg-brand-dark-navy px-5 py-2.5 text-sm font-semibold text-white shadow-[0_6px_16px_rgba(1,49,103,0.35)] transition-all duration-300 hover:-translate-y-0.5 no-underline"
               >
                 Chiedi una consulenza
-              </a>
+              </button>
             </div>
           </div>
         )}
@@ -764,6 +766,7 @@ const SUPPORTO = [
 ]
 
 function ConsulenzaBanner() {
+  const consulta = useContext(Consultazione)
   return (
     <section data-no-glow className="mt-24 sm:mt-32 mb-20 sm:mb-28">
       <div className="container-page">
@@ -779,12 +782,12 @@ function ConsulenzaBanner() {
               I bandi sono scritti in linguaggio tecnico e cambiano spesso. I nostri consulenti ti aiutano a capire,
               prima di investire tempo nella domanda.
             </p>
-            <a
-              href={CONSULENZA_HREF}
+            <button type="button"
+              onClick={e => consulta(null, e.currentTarget)}
               className="mt-6 inline-flex rounded-md bg-brand-pale-blue px-5 py-2 text-[15px] font-semibold text-brand-navy transition-all duration-300 hover:bg-white hover:-translate-y-0.5 no-underline"
             >
               Contattaci
-            </a>
+            </button>
           </div>
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-7">
             {SUPPORTO.map((s) => (
@@ -805,7 +808,12 @@ function ConsulenzaBanner() {
 /* Pagina                                                                      */
 /* -------------------------------------------------------------------------- */
 
-export function BandiPage() {
+function CatalogoCaricato({ rows }: { rows: BandoRecord[] }) {
+  const bandi = useMemo(() => rows.map(r => ({ ...r.scheda, id: r.id })), [rows])
+  const catalogo = useMemo(() => DEMO ? [...bandi, ...BANDI_DEMO] : bandi, [bandi])
+  const ultimo = rows.reduce((max,r) => r.updated_at > max ? r.updated_at : max, '')
+  const aggiornato = ultimo ? new Date(ultimo).toLocaleDateString('sv-SE', { timeZone: 'Europe/Rome' }) : ''
+  const [consulenza, setConsulenza] = useState<{ bando: Bando | null; trigger: HTMLElement } | null>(null)
   const [oggi, setOggi] = useState(() => new Date())
   useEffect(() => {
     const timer = window.setInterval(() => setOggi(new Date()), 60_000)
@@ -831,19 +839,52 @@ export function BandiPage() {
   }, [])
 
   return (
-    <>
+    <Consultazione.Provider value={(bando, trigger) => setConsulenza({bando, trigger})}>
       <Navbar />
 
       <main className="flex-grow">
-        <Hero oggi={oggi} />
+        <Hero oggi={oggi} catalogo={catalogo} aggiornato={aggiornato} />
         <div className="pt-10 sm:pt-14">
-          <Orientamento oggi={oggi} onApplica={setFiltri} />
+          <Orientamento catalogo={catalogo} oggi={oggi} onApplica={setFiltri} />
         </div>
-        <Catalogo oggi={oggi} filtri={filtri} setFiltri={setFiltri} />
+        <Catalogo catalogo={catalogo} oggi={oggi} filtri={filtri} setFiltri={setFiltri} />
         <ConsulenzaBanner />
       </main>
 
       <Footer />
-    </>
+      {consulenza && <ConsulenzaDialog initial={consulenza.bando} trigger={consulenza.trigger} bandi={bandi} onClose={() => setConsulenza(null)} />}
+    </Consultazione.Provider>
   )
+}
+
+export function BandiPage() {
+  const [rows, setRows] = useState<BandoRecord[] | null>(null)
+  const [error, setError] = useState(false)
+  const [attempt, setAttempt] = useState(0)
+  useEffect(() => {
+    let active = true
+    let loading = false
+    const load = async () => {
+      if (loading || document.hidden) return
+      loading = true
+      try {
+        const data = await listBandi()
+        if (active) { setRows(data); setError(false) }
+      } catch { if (active) setError(true) }
+      finally { loading = false }
+    }
+    void load()
+    window.addEventListener('focus', load)
+    document.addEventListener('visibilitychange', load)
+    return () => {
+      active = false
+      window.removeEventListener('focus', load)
+      document.removeEventListener('visibilitychange', load)
+    }
+  }, [attempt])
+  if (rows) return <CatalogoCaricato rows={rows} />
+  return <><Navbar /><main className="container-page min-h-[60vh] pt-40">
+    {error ? <div role="alert">Il catalogo non è disponibile. <button className="underline" onClick={() => { setError(false); setAttempt(n => n+1) }}>Riprova</button></div>
+      : <p role="status">Caricamento del catalogo bandi…</p>}
+  </main><Footer /></>
 }

@@ -72,3 +72,10 @@ user access, editor CRUD, stale updates, historical slugs, exact dates, private 
 scheduled visibility, trash/restore and Storage permissions. It creates isolated
 fixtures with random UUIDs and removes only those fixtures in a final cleanup step.
 Its private `hosted-verification.json` must pass before production deployment.
+
+
+## Catalogo bandi e consulenze
+
+La migrazione `202611230001_bandi.sql` crea il catalogo e la tabella riservata delle richieste. Su un nuovo ambiente con catalogo vuoto, eseguire una sola volta `node --env-file=.env --import tsx scripts/seed-bandi.ts` per importare le 218 schede storiche. Le successive modifiche avvengono in `/admin?sezione=bandi`.
+
+Il modulo registra la richiesta prima di tentare la notifica. Al passaggio al dominio ufficiale, verificare il dominio mittente in Resend e impostare in Vercel Production `RESEND_API_KEY` (con permesso di invio), `BANDI_MAIL_FROM` (mittente verificato), `BANDI_MAIL_TO` (casella della redazione) e `BANDI_SITE_URL` (origine HTTPS del sito). Eseguire il deploy e inviare una richiesta di prova. Le nuove richieste avviano automaticamente la notifica. Per quelle già registrate usare **Richieste di consulenza → Invia notifica email** in dashboard. La data di invio indica l’accettazione di Resend. L’oggetto e il corpo riportano ID stabile e titolo della scheda, e il campo Reply-To contiene l’indirizzo del richiedente.

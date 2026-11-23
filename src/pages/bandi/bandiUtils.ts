@@ -180,7 +180,9 @@ function normalizza(s: string) {
 
 export function filtraBandi(bandi: Bando[], filtri: Filtri, oggi: Date) {
   const parole = normalizza(filtri.testo).split(/\s+/).filter(Boolean)
-  return bandi.filter((b) => {
+  const exactId = filtri.testo.trim()
+  const exact = exactId && bandi.find(b => b.id === exactId)
+  return (exact ? [exact] : bandi).filter((b) => {
     if (filtri.ente && filtri.ente !== b.ente) return false
     if (filtri.tipologia && filtri.tipologia !== b.tipologia) return false
     if (filtri.budget && filtri.budget !== fasciaBudget(b)) return false
@@ -189,7 +191,7 @@ export function filtraBandi(bandi: Bando[], filtri: Filtri, oggi: Date) {
     if (filtri.livello && b.livello !== filtri.livello) return false
     if (!corrispondeStato(statoBando(b, oggi), filtri.stato)) return false
     if (parole.length) {
-      const testo = normalizza([b.titolo, b.ente, b.livello, b.tipologia ?? '', b.requisiti ?? '', ...(b.pubblicazioni?.map(p => p.titolo) ?? []), ...b.abstract].join(' '))
+      const testo = normalizza([b.id, b.titolo, b.ente, b.livello, b.tipologia ?? '', b.requisiti ?? '', ...(b.pubblicazioni?.map(p => p.titolo) ?? []), ...b.abstract].join(' '))
       if (!parole.every((p) => testo.includes(p))) return false
     }
     return true
