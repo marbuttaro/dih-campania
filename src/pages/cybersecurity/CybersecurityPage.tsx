@@ -78,7 +78,7 @@ export function CybersecurityPage() {
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center mb-24">
             {/* Left Column: Text & Metrics */}
             <div className="flex-[1.1] text-left reveal-element">
-              <h1 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-light text-brand-dark-navy leading-[1.2] mb-6 tracking-tight">
+              <h1 className="text-[36px] lg:text-[52px] font-light text-brand-dark-navy leading-[1.2] mb-6 tracking-tight">
                 Rafforzare la sicurezza<br />
                 digitale e la resilienza<br />
                 dell'impresa
@@ -117,10 +117,10 @@ export function CybersecurityPage() {
 
             {/* Card 1: Conoscere i rischi */}
             <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1 reveal-element reveal-delay-100">
-              <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
+              <div className="size-14 rounded-[14px] bg-brand-dark-navy flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
                 <img src="/assets/rischi.svg" alt="Conoscere i rischi" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
               </div>
-              <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
+              <h3 className="text-2xl md:text-[30px] font-medium text-brand-navy mb-4 tracking-tight leading-tight">
                 Conoscere<br />i rischi
               </h3>
               <p className="text-sm text-brand-dark-navy/80 leading-relaxed font-normal">
@@ -130,10 +130,10 @@ export function CybersecurityPage() {
 
             {/* Card 2: Sicurezza e compliance */}
             <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1 reveal-element reveal-delay-200">
-              <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
+              <div className="size-14 rounded-[14px] bg-brand-dark-navy flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
                 <img src="/assets/sicurezza.svg" alt="Sicurezza e compliance" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
               </div>
-              <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
+              <h3 className="text-2xl md:text-[30px] font-medium text-brand-navy mb-4 tracking-tight leading-tight">
                 Sicurezza<br />e compliance
               </h3>
               <p className="text-sm text-brand-dark-navy/80 leading-relaxed font-normal">
@@ -143,10 +143,10 @@ export function CybersecurityPage() {
 
             {/* Card 3: Dalla consapevolezza all'azione */}
             <div className="h-full shadow-box flex flex-col items-start text-left transition-all duration-300 hover:-translate-y-1 reveal-element reveal-delay-300">
-              <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
+              <div className="size-14 rounded-[14px] bg-brand-dark-navy flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
                 <img src="/assets/azione.svg" alt="Dalla consapevolezza all'azione" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
               </div>
-              <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
+              <h3 className="text-2xl md:text-[30px] font-medium text-brand-navy mb-4 tracking-tight leading-tight">
                 Dalla consapevolezza<br />all'azione
               </h3>
               <p className="text-sm text-brand-dark-navy/80 leading-relaxed font-normal">
@@ -160,13 +160,13 @@ export function CybersecurityPage() {
         {/* 5. Custom Assessment Form Section (Full Width Background) */}
         <div id="contatti" className="w-full relative sm:bg-[url('/assets/sfondo_form.png')] sm:bg-cover sm:bg-center mt-20 lg:mt-28 pt-20 pb-0 sm:pb-20 reveal-element scroll-mt-28">
           <div className="container-page relative z-10">
-            <div className="-mx-8 sm:mx-auto sm:max-w-[920px] rounded-none sm:rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container bg-[url('/assets/sfondo_contatti_mobile.png')] bg-cover bg-center sm:bg-none">
+            <div className="-mx-8 sm:mx-auto sm:max-w-[920px] rounded-none sm:rounded-[20px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container bg-[url('/assets/sfondo_contatti_mobile.png')] bg-cover bg-center sm:bg-none">
               
               {/* Ambient inner glow */}
               <div className="absolute -top-40 -right-40 size-80 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
 
               <div className="relative z-10 text-center mb-8">
-                <h2 className="text-[48px] sm:text-[2.1rem] leading-[1.1] sm:leading-normal font-light mb-2 text-white tracking-tight">
+                <h2 className="text-[34px] leading-[1.1] sm:leading-normal font-light mb-2 text-white tracking-tight">
                   Richiedi il tuo Cyber Assessment
                 </h2>
                 <p className="text-sm sm:text-base text-brand-light-blue/80 font-normal">
@@ -245,7 +245,7 @@ export function CybersecurityPage() {
                   <div className="pt-2">
                     <button
                       type="submit"
-                      className="w-full bg-[#013167] text-white hover:bg-brand-light-blue hover:text-brand-dark-navy transition-all duration-300 font-semibold py-4 rounded-[12px] shadow-[0_4px_15px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 border border-white/10 cursor-pointer"
+                      className="w-full bg-brand-navy text-white hover:bg-brand-light-blue hover:text-brand-dark-navy transition-all duration-300 font-semibold py-4 rounded-[12px] shadow-[0_4px_15px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 border border-white/10 cursor-pointer"
                     >
                       Invia Richiesta
                     </button>

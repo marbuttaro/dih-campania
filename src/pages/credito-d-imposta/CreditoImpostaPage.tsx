@@ -52,7 +52,7 @@ function StepCircle({ index, attivo }: { index: number; attivo: boolean }) {
       <span
         className={cn(
           'text-2xl lg:text-[40px] font-extralight leading-none transition-colors duration-500',
-          attivo ? 'text-[#6fa3dd]' : 'text-brand-navy/20',
+          attivo ? 'text-[color-mix(in_srgb,#013167_55%,#8ebef7)]' : 'text-brand-navy/20',
         )}
       >
         {String(index + 1).padStart(2, '0')}
@@ -65,12 +65,12 @@ function StepCard({ index, className }: { index: number; className?: string }) {
   const step = STEPS[index]
   const last = index === STEPS.length - 1
   return (
-    <div className={cn('rounded-[10px] bg-brand-ice shadow-neumorphic px-5 py-6 lg:px-7 lg:py-7', className)}>
-      <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#6fa3dd]">
+    <div className={cn('rounded-[20px] bg-brand-ice shadow-neumorphic px-5 py-6 lg:px-7 lg:py-7', className)}>
+      <p className="text-xs font-semibold uppercase tracking-[0.1em] text-[color-mix(in_srgb,#013167_55%,#8ebef7)]">
         {last ? 'Traguardo' : `Step ${index + 1}`}
       </p>
       <h3 className="mt-2 text-[20.5px] font-semibold text-brand-navy leading-[26px]">{step.title}</h3>
-      <p className="mt-3 text-[15px] text-brand-navy/85 leading-relaxed">{step.text}</p>
+      <p className="mt-3 text-sm text-brand-navy/85 leading-relaxed">{step.text}</p>
     </div>
   )
 }
@@ -78,8 +78,8 @@ function StepCard({ index, className }: { index: number; className?: string }) {
 function PercorsoIntro() {
   return (
     <div className="max-w-[720px]">
-      <h2 className="text-[34px] sm:text-[48px] font-light text-brand-navy leading-[1.15]">Come funziona il servizio</h2>
-      <p className="mt-3 text-[15px] sm:text-[17px] text-brand-navy/85 leading-relaxed">
+      <h2 className="text-3xl md:text-[42px] font-light text-brand-navy leading-[1.15] tracking-tight">Come funziona il servizio</h2>
+      <p className="mt-3 text-sm sm:text-base text-brand-navy/85 leading-relaxed">
         Il percorso si articola in tre principali momenti.
       </p>
     </div>
@@ -128,14 +128,14 @@ function Percorso() {
 
         <ol className="relative mt-10 lg:mt-16 grid grid-cols-3 gap-4 lg:gap-8">
           {/* Linea che unisce i cerchi, stesso stile della timeline di Chi siamo:
-              binario azzurro tenue con bagliore, riempimento #8EBEF7 → #2F7BE0 che avanza con lo scroll */}
+              binario azzurro tenue con bagliore, riempimento celeste → blu intermedio della palette che avanza con lo scroll */}
           <span
             aria-hidden
             className="absolute left-[calc(100%/6)] right-[calc(100%/6)] top-[25px] lg:top-[38.5px] h-[6px] lg:h-[11px] rounded-full bg-[#8EBEF7]/40 shadow-[0_0_8px_rgba(142,190,247,0.45)]"
           >
             <motion.span
               style={{ scaleX: linea }}
-              className="block h-full w-full rounded-full origin-left bg-gradient-to-r from-[#8EBEF7] to-[#2F7BE0] shadow-[0_0_10px_rgba(142,190,247,0.7)]"
+              className="block h-full w-full rounded-full origin-left bg-gradient-to-r from-[#8EBEF7] to-[color-mix(in_srgb,#013167_55%,#8ebef7)] shadow-[0_0_10px_rgba(142,190,247,0.7)]"
             />
           </span>
 
@@ -244,7 +244,7 @@ export function CreditoImpostaPage() {
           {/* 1. Hero */}
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center mb-24">
             <div className="flex-[1.1] text-left reveal-element">
-              <h1 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-light text-brand-dark-navy leading-[1.2] mb-6 tracking-tight">
+              <h1 className="text-[36px] lg:text-[52px] font-light text-brand-dark-navy leading-[1.2] mb-6 tracking-tight">
                 Certificazione<br />
                 del credito d'imposta
               </h1>
@@ -272,10 +272,10 @@ export function CreditoImpostaPage() {
           {/* 2. Consorzio EDIH PRIDE */}
           <div className="shadow-box mb-12 flex flex-col md:flex-row gap-6 md:gap-12 items-start md:items-center reveal-element">
             <div className="md:basis-[38%] shrink-0">
-              <h2 className="text-3xl md:text-[42px] font-medium text-[#013167] leading-[1.15] mb-3 tracking-tight">
+              <h2 className="text-3xl md:text-[42px] font-medium text-brand-navy leading-[1.15] mb-3 tracking-tight">
                 Consorzio<br /> EDIH PRIDE
               </h2>
-              <p className="text-lg md:text-[22px] font-light text-[#013167] leading-tight">
+              <p className="text-lg md:text-[22px] font-light text-brand-navy leading-tight">
                 Certificatore abilitato dal Ministero delle Imprese e del Made in Italy
               </p>
             </div>
@@ -298,10 +298,10 @@ export function CreditoImpostaPage() {
                   `reveal-delay-${(i + 1) * 100}`,
                 )}
               >
-                <div className="size-14 rounded-[14px] bg-[#001933] flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
+                <div className="size-14 rounded-[14px] bg-brand-dark-navy flex items-center justify-center mb-6 shadow-[0_6px_15px_rgba(0,25,51,0.12)] overflow-hidden">
                   <img src={card.icon} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="block" />
                 </div>
-                <h3 className="text-2xl md:text-[30px] font-medium text-[#013167] mb-4 tracking-tight leading-tight">
+                <h3 className="text-2xl md:text-[30px] font-medium text-brand-navy mb-4 tracking-tight leading-tight">
                   {card.title[0]}
                   <br />
                   {card.title[1]}
@@ -322,13 +322,13 @@ export function CreditoImpostaPage() {
         {/* 5. Form richiesta (a tutta larghezza, come nelle altre pagine servizio) */}
         <div id="contatti" className="w-full relative sm:bg-[url('/assets/sfondo_form.png')] sm:bg-cover sm:bg-center mt-20 lg:mt-28 pt-20 pb-0 sm:pb-20 reveal-element scroll-mt-28">
           <div className="container-page relative z-10">
-            <div className="-mx-8 sm:mx-auto sm:max-w-[920px] rounded-none sm:rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container bg-[url('/assets/sfondo_contatti_mobile.png')] bg-cover bg-center sm:bg-none">
+            <div className="-mx-8 sm:mx-auto sm:max-w-[920px] rounded-none sm:rounded-[20px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container bg-[url('/assets/sfondo_contatti_mobile.png')] bg-cover bg-center sm:bg-none">
               
               {/* Ambient inner glow */}
               <div className="absolute -top-40 -right-40 size-80 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
 
               <div className="relative z-10 text-center mb-8">
-                <h2 className="text-[48px] sm:text-[2.1rem] leading-[1.1] sm:leading-normal font-light mb-2 text-white tracking-tight">
+                <h2 className="text-[34px] leading-[1.1] sm:leading-normal font-light mb-2 text-white tracking-tight">
                   Richiedi la certificazione
                 </h2>
                 <p className="text-sm sm:text-base text-brand-light-blue/80 font-normal">
@@ -407,7 +407,7 @@ export function CreditoImpostaPage() {
                   <div className="pt-2">
                     <button
                       type="submit"
-                      className="w-full bg-[#013167] text-white hover:bg-brand-light-blue hover:text-brand-dark-navy transition-all duration-300 font-semibold py-4 rounded-[12px] shadow-[0_4px_15px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 border border-white/10 cursor-pointer"
+                      className="w-full bg-brand-navy text-white hover:bg-brand-light-blue hover:text-brand-dark-navy transition-all duration-300 font-semibold py-4 rounded-[12px] shadow-[0_4px_15px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 border border-white/10 cursor-pointer"
                     >
                       Invia Richiesta
                     </button>

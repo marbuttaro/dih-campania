@@ -225,7 +225,7 @@ export function ServiziPage() {
           <div className="container-page relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center reveal-element">
               <div>
-                <h1 className="text-balance text-3xl sm:text-4xl lg:text-[2.25rem] font-light text-brand-navy leading-[1.25] tracking-tight mb-6">
+                <h1 className="text-balance text-[30px] sm:text-4xl lg:text-[40px] font-light text-brand-navy leading-[1.25] tracking-tight mb-6">
                   Un facilitatore di innovazione che connette il sistema produttivo con
                   l'ecosistema della ricerca, della tecnologia, dei finanziamenti e delle Istituzioni.
                 </h1>
@@ -234,7 +234,7 @@ export function ServiziPage() {
                   <strong>in tutte le fasi del percorso di innovazione e trasformazione digitale</strong>
                 </p>
               </div>
-              <div className="rounded-[24px] overflow-hidden shadow-neumorphic aspect-[4/3]">
+              <div className="rounded-[20px] overflow-hidden shadow-neumorphic aspect-[4/3]">
                 <img
                   src="/assets/foto_1.jpg"
                   alt="Trasformazione digitale"
@@ -248,7 +248,7 @@ export function ServiziPage() {
               {KPI_ITEMS.map((kpi) => (
                 <div
                   key={kpi.label}
-                  className="kpi-card flex items-center justify-between gap-5 xl:gap-4 rounded-[14px] bg-brand-ice/40 px-5 xl:px-4 py-3.5 shadow-[-5px_-5px_14px_rgba(255,255,255,1),8px_8px_24px_rgba(164,177,188,0.6)]"
+                  className="kpi-card flex items-center justify-between gap-5 xl:gap-4 rounded-[20px] bg-brand-ice/40 px-5 xl:px-4 py-3.5 shadow-[-5px_-5px_14px_rgba(255,255,255,1),8px_8px_24px_rgba(164,177,188,0.6)]"
                 >
                   <div className="kpi-label flex-1">
                     <p className="text-[15px] min-[360px]:text-base min-[400px]:text-[17px] xl:text-base font-semibold text-brand-navy leading-snug">{kpi.label}</p>
@@ -275,7 +275,7 @@ export function ServiziPage() {
 
         {/* 3. Il nostro percorso di innovazione digitale */}
         <div className="container-page relative z-10 py-20 sm:py-28">
-          <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-light text-brand-navy mb-10 sm:mb-14 tracking-tight reveal-element">
+          <h2 className="text-3xl md:text-[42px] font-light text-brand-navy mb-10 sm:mb-14 tracking-tight reveal-element">
             Il nostro percorso di
             <br />
             innovazione digitale
@@ -297,7 +297,7 @@ export function ServiziPage() {
 
               return (
                 <div className="shadow-box flex flex-col">
-                  <h3 className="text-3xl font-light text-brand-navy mb-6 tracking-tight">
+                  <h3 className="text-2xl md:text-[30px] font-medium text-brand-navy mb-6 tracking-tight leading-tight">
                     {step.title}
                   </h3>
 
@@ -343,7 +343,7 @@ export function ServiziPage() {
                       className="mt-2 self-end inline-flex items-center gap-2 text-brand-navy font-semibold text-sm"
                     >
                       {stepExpanded ? 'Mostra meno' : 'Leggi tutto'}
-                      <span className="flex items-center justify-center size-9 rounded-full bg-[#E3EAEC] shrink-0 shadow-[0_4px_15px_rgba(0,25,51,0.08)]">
+                      <span className="flex items-center justify-center size-9 rounded-full bg-brand-ice shrink-0 shadow-[0_4px_15px_rgba(0,25,51,0.08)]">
                         <img
                           src={stepExpanded ? '/assets/icon_minus.svg' : '/assets/icon_plus.svg'}
                           alt=""
@@ -361,10 +361,10 @@ export function ServiziPage() {
                 type="button"
                 onClick={() => setActiveStep((s) => Math.max(0, s - 1))}
                 disabled={activeStep === 0}
-                className={`font-semibold text-brand-navy px-7 py-3.5 rounded-2xl transition-all duration-300 ${
+                className={`font-semibold text-brand-navy px-7 py-3.5 rounded-[12px] transition-all duration-300 ${
                   activeStep === 0
-                    ? 'bg-[#E3EAEC]/40 shadow-[-3px_-3px_10px_rgba(255,255,255,0.5),4px_4px_12px_rgba(164,177,188,0.25)] opacity-40 cursor-not-allowed'
-                    : 'bg-[#E3EAEC] shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.55)] hover:-translate-y-0.5'
+                    ? 'bg-brand-ice/40 shadow-[-3px_-3px_10px_rgba(255,255,255,0.5),4px_4px_12px_rgba(164,177,188,0.25)] opacity-40 cursor-not-allowed'
+                    : 'bg-brand-ice shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.55)] hover:-translate-y-0.5'
                 }`}
               >
                 ← Indietro
@@ -375,10 +375,10 @@ export function ServiziPage() {
                   setActiveStep((s) => Math.min(JOURNEY_STEPS.length - 1, s + 1))
                 }
                 disabled={activeStep === JOURNEY_STEPS.length - 1}
-                className={`font-semibold text-brand-navy px-7 py-3.5 rounded-2xl transition-all duration-300 ${
+                className={`font-semibold text-brand-navy px-7 py-3.5 rounded-[12px] transition-all duration-300 ${
                   activeStep === JOURNEY_STEPS.length - 1
-                    ? 'bg-[#E3EAEC]/40 shadow-[-3px_-3px_10px_rgba(255,255,255,0.5),4px_4px_12px_rgba(164,177,188,0.25)] opacity-40 cursor-not-allowed'
-                    : 'bg-[#E3EAEC] shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.55)] hover:-translate-y-0.5'
+                    ? 'bg-brand-ice/40 shadow-[-3px_-3px_10px_rgba(255,255,255,0.5),4px_4px_12px_rgba(164,177,188,0.25)] opacity-40 cursor-not-allowed'
+                    : 'bg-brand-ice shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.55)] hover:-translate-y-0.5'
                 }`}
               >
                 Avanti →
@@ -420,7 +420,7 @@ export function ServiziPage() {
                         isActiveStep ? 'opacity-100' : 'opacity-0 pointer-events-none select-none'
                       }`}
                     >
-                      <h3 className="text-[28px] font-light text-brand-navy mb-6 tracking-tight">
+                      <h3 className="text-2xl md:text-[30px] font-medium text-brand-navy mb-6 tracking-tight leading-tight">
                         {s.title}
                       </h3>
 
@@ -462,10 +462,10 @@ export function ServiziPage() {
                   type="button"
                   onClick={() => setActiveStep((s) => Math.max(0, s - 1))}
                   disabled={activeStep === 0}
-                  className={`font-semibold text-brand-navy px-7 py-3.5 rounded-2xl transition-all duration-300 ${
+                  className={`font-semibold text-brand-navy px-7 py-3.5 rounded-[12px] transition-all duration-300 ${
                     activeStep === 0
-                      ? 'bg-[#E3EAEC]/40 shadow-[-3px_-3px_10px_rgba(255,255,255,0.5),4px_4px_12px_rgba(164,177,188,0.25)] opacity-40 cursor-not-allowed'
-                      : 'bg-[#E3EAEC] shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.55)] hover:-translate-y-0.5'
+                      ? 'bg-brand-ice/40 shadow-[-3px_-3px_10px_rgba(255,255,255,0.5),4px_4px_12px_rgba(164,177,188,0.25)] opacity-40 cursor-not-allowed'
+                      : 'bg-brand-ice shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.55)] hover:-translate-y-0.5'
                   }`}
                 >
                   ← Indietro
@@ -476,10 +476,10 @@ export function ServiziPage() {
                     setActiveStep((s) => Math.min(JOURNEY_STEPS.length - 1, s + 1))
                   }
                   disabled={activeStep === JOURNEY_STEPS.length - 1}
-                  className={`font-semibold text-brand-navy px-7 py-3.5 rounded-2xl transition-all duration-300 ${
+                  className={`font-semibold text-brand-navy px-7 py-3.5 rounded-[12px] transition-all duration-300 ${
                     activeStep === JOURNEY_STEPS.length - 1
-                      ? 'bg-[#E3EAEC]/40 shadow-[-3px_-3px_10px_rgba(255,255,255,0.5),4px_4px_12px_rgba(164,177,188,0.25)] opacity-40 cursor-not-allowed'
-                      : 'bg-[#E3EAEC] shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.55)] hover:-translate-y-0.5'
+                      ? 'bg-brand-ice/40 shadow-[-3px_-3px_10px_rgba(255,255,255,0.5),4px_4px_12px_rgba(164,177,188,0.25)] opacity-40 cursor-not-allowed'
+                      : 'bg-brand-ice shadow-[-6px_-6px_16px_rgba(255,255,255,0.9),8px_8px_20px_rgba(164,177,188,0.55)] hover:-translate-y-0.5'
                   }`}
                 >
                   Avanti →
@@ -493,11 +493,11 @@ export function ServiziPage() {
         <div
           className="w-full relative overflow-hidden reveal-element"
           style={{
-            background: 'linear-gradient(120deg, #001933 0%, #013167 55%, #2f6fb8 100%)',
+            background: 'linear-gradient(120deg, #001933 0%, #013167 55%, color-mix(in srgb, #013167 55%, #8ebef7) 100%)',
           }}
         >
           <div className="container-page relative z-10 py-20 sm:py-24">
-            <h2 className="text-3xl sm:text-4xl font-light text-brand-light-blue/90 mb-3 tracking-tight">
+            <h2 className="text-3xl md:text-[42px] font-light text-brand-light-blue/90 mb-3 tracking-tight">
               Il valore per le imprese
             </h2>
             <p className="text-sm sm:text-base text-white/70 mb-12 sm:mb-16">
@@ -508,7 +508,7 @@ export function ServiziPage() {
               {VALUE_ITEMS.map((item) => (
                 <div key={item.text} className="flex items-center gap-5">
                   <img src={item.icon} alt="" aria-hidden="true" className="size-14 sm:size-16 shrink-0" />
-                  <p className="text-base sm:text-lg text-white/90 leading-snug font-normal">
+                  <p className="text-sm sm:text-base text-white/90 leading-snug font-normal">
                     {item.text}
                   </p>
                 </div>
@@ -527,13 +527,13 @@ export function ServiziPage() {
         {/* 6. Pronto per iniziare */}
         <div id="contatti" className="w-full relative sm:bg-[url('/assets/sfondo_form.png')] sm:bg-cover sm:bg-center mt-20 lg:mt-28 pt-20 pb-0 sm:pb-20 reveal-element scroll-mt-28">
           <div className="container-page relative z-10">
-            <div className="-mx-8 sm:mx-auto sm:max-w-[920px] rounded-none sm:rounded-[30px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container bg-[url('/assets/sfondo_contatti_mobile.png')] bg-cover bg-center sm:bg-none">
+            <div className="-mx-8 sm:mx-auto sm:max-w-[920px] rounded-none sm:rounded-[20px] p-8 sm:p-12 text-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden backdrop-blur-[3px] glass-stroke-container bg-[url('/assets/sfondo_contatti_mobile.png')] bg-cover bg-center sm:bg-none">
 
               {/* Ambient inner glow */}
               <div className="absolute -top-40 -right-40 size-80 bg-brand-light-blue/10 rounded-full blur-[80px] pointer-events-none" />
 
               <div className="relative z-10 text-center mb-8">
-                <h2 className="text-[48px] sm:text-[2.1rem] leading-[1.1] sm:leading-normal font-light mb-2 text-white tracking-tight">
+                <h2 className="text-[34px] leading-[1.1] sm:leading-normal font-light mb-2 text-white tracking-tight">
                   Pronto per iniziare?
                 </h2>
                 <p className="text-sm sm:text-base text-brand-light-blue/80 font-normal">
@@ -612,7 +612,7 @@ export function ServiziPage() {
                   <div className="pt-2">
                     <button
                       type="submit"
-                      className="w-full bg-[#013167] text-white hover:bg-brand-light-blue hover:text-brand-dark-navy transition-all duration-300 font-semibold py-4 rounded-[12px] shadow-[0_4px_15px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 border border-white/10 cursor-pointer"
+                      className="w-full bg-brand-navy text-white hover:bg-brand-light-blue hover:text-brand-dark-navy transition-all duration-300 font-semibold py-4 rounded-[12px] shadow-[0_4px_15px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 border border-white/10 cursor-pointer"
                     >
                       Invia Richiesta
                     </button>
