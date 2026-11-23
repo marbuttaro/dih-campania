@@ -1,3 +1,5 @@
+import { ARCHIVIO_BANDI } from './archivioBandi'
+
 /**
  * Catalogo bandi del Campania DIH.
  *
@@ -11,7 +13,7 @@
  */
 
 /** Data di ultimo aggiornamento del catalogo, mostrata nella hero (AAAA-MM-GG) */
-export const CATALOGO_AGGIORNATO_AL = '2026-11-11'
+export const CATALOGO_AGGIORNATO_AL = '2026-11-23'
 
 /** Sotto questa soglia (in giorni) un bando aperto viene segnalato "In scadenza" */
 export const GIORNI_IN_SCADENZA = 30
@@ -31,10 +33,20 @@ export const DESTINATARI = [
   { id: 'grandi', label: 'Grandi imprese' },
   { id: 'startup', label: 'Startup e PMI innovative' },
   { id: 'professionisti', label: 'Liberi professionisti' },
+  { id: 'solo-micro', label: 'Microimprese' },
+  { id: 'midcap', label: 'Imprese a media capitalizzazione' },
+  { id: 'imprese', label: 'Imprese (dimensione non specificata)' },
+  { id: 'pubblici', label: 'Pubbliche amministrazioni ed enti pubblici' },
+  { id: 'ricerca', label: 'Università e organismi di ricerca' },
+  { id: 'terzo-settore', label: 'Enti senza scopo di lucro' },
+  { id: 'partenariati', label: 'Reti, consorzi e partenariati' },
+  { id: 'persone', label: 'Persone fisiche' },
+  { id: 'scuole', label: 'Istituti scolastici' },
+  { id: 'organizzazioni', label: 'Enti e organizzazioni' },
 ] as const
 
 /** Colonna "Tipologia" del foglio: livello territoriale del bando */
-export const LIVELLI = ['Regionale', 'Nazionale', 'Europeo'] as const
+export const LIVELLI = ['Regionale', 'Nazionale', 'Europeo', 'Internazionale'] as const
 
 export type AmbitoId = (typeof AMBITI)[number]['id']
 export type DestinatarioId = (typeof DESTINATARI)[number]['id']
@@ -49,13 +61,18 @@ export interface Bando {
   destinatari: DestinatarioId[]
   /** Un paragrafo per voce */
   abstract: string[]
+  tipologia?: string
+  requisiti?: string
+  /** Dotazione complessiva in euro. Massimali individuali e importi parziali restano nel testo. */
+  dotazioneEuro?: number
   budget?: string
+  pubblicazioni?: { wpId: number; titolo: string; slug: string; data: string }[]
   /**
    * scadenza  → domande entro una data (`scadenza` obbligatoria)
    * sportello → domande fino a esaurimento fondi (`chiusoManualmente` quando finiscono)
    * ricorrente → misure sempre attive, es. crediti d'imposta (`noteTermini` obbligatorie)
    */
-  modalita: 'scadenza' | 'sportello' | 'ricorrente'
+  modalita: 'scadenza' | 'sportello' | 'ricorrente' | 'informativa' | 'non-documentata' | 'sospesa'
   /** Apertura delle domande, ISO (AAAA-MM-GG oppure AAAA-MM-GGTHH:mm) */
   apertura?: string
   /** Chiusura delle domande, ISO (AAAA-MM-GG oppure AAAA-MM-GGTHH:mm) */
@@ -65,7 +82,7 @@ export interface Bando {
   chiusoManualmente?: boolean
   coinvolgimentoDih?: string
   /** Pagina ufficiale dell'ente erogatore */
-  link: string
+  link?: string
   /** Eventuale approfondimento pubblicato nelle news del sito */
   approfondimento?: string
 }
@@ -79,17 +96,38 @@ export const BANDI: Bando[] = [
     ambiti: ['digitalizzazione', 'sostenibilita'],
     destinatari: ['micro-piccole', 'medie'],
     abstract: [
-      'Le PMI della Campania hanno a disposizione una nuova opportunità per finanziare programmi di investimento finalizzati alla trasformazione tecnologica e digitale, alla crescita sostenibile e al rafforzamento della competitività.',
+      'Il bando finanziava investimenti delle PMI del Mezzogiorno nella trasformazione tecnologica e digitale e nella crescita sostenibile.',
       "Il Ministero delle Imprese e del Made in Italy ha stanziato complessivamente 448 milioni di euro per le PMI di Basilicata, Calabria, Campania, Molise, Puglia, Sicilia e Sardegna nell'ambito del nuovo bando Investimenti Sostenibili 4.0 – 2026.",
-      "Dal 10 settembre è possibile compilare le domande; l'invio è partito il 6 ottobre 2026.",
+      "La presentazione delle domande si è conclusa il 6 ottobre 2026.",
     ],
+    tipologia: 'Contributo e finanziamento',
+    dotazioneEuro: 448000000,
     budget: '448 milioni di euro',
-    modalita: 'sportello',
-    apertura: '2026-10-06',
-    noteTermini: 'I termini per la presentazione delle domande si sono aperti il 6 ottobre 2026',
-    link: 'https://www.mimit.gov.it/it/incentivi/investimenti-sostenibili-4-0-2026',
+    modalita: 'scadenza',
+    apertura: '2026-10-06T10:00',
+    scadenza: '2026-10-06T17:00',
+    noteTermini: 'Lo sportello è chiuso dal 7 ottobre 2026 per esaurimento delle risorse.',
+    link: 'https://www.invitalia.it/incentivi-e-strumenti/investimenti-sostenibili-40-bando-2026',
     approfondimento: '/news/investimenti-sostenibili-4-0',
   },
+  {
+    id: 'sviluppo-competenze-secondo-sportello-2026',
+    titolo: 'Sviluppo competenze specialistiche delle PMI – Secondo sportello 2026',
+    ente: 'Ministero delle Imprese e del Made in Italy',
+    livello: 'Nazionale',
+    tipologia: 'Formazione',
+    ambiti: ['competenze', 'digitalizzazione', 'sostenibilita'],
+    destinatari: ['micro-piccole', 'medie'],
+    abstract: ['La misura finanzia servizi di formazione per il personale delle PMI del Mezzogiorno. Possono presentare domanda le imprese che non hanno già richiesto le agevolazioni al primo sportello.'],
+    dotazioneEuro: 12449676,
+    budget: '12.449.676 €, incrementabili con le risorse residue del primo sportello.',
+    modalita: 'scadenza',
+    apertura: '2026-09-10T12:00',
+    scadenza: '2026-12-21T12:00',
+    link: 'https://www.invitalia.it/incentivi-e-strumenti/sviluppo-competenze-specialistiche-delle-pmi',
+    approfondimento: '/news/sviluppo-competenze-specialistiche',
+  },
+  ...ARCHIVIO_BANDI,
 ]
 
 /**
@@ -236,7 +274,7 @@ export const BANDI_DEMO: Bando[] = [
 /* Tre domande per orientarsi (testi provvisori)                              */
 /* -------------------------------------------------------------------------- */
 
-export type StatoFiltro = 'tutti' | 'aperti' | 'in-scadenza' | 'in-apertura' | 'attivi' | 'chiusi'
+export type StatoFiltro = 'tutti' | 'aperti' | 'in-scadenza' | 'in-apertura' | 'attivi' | 'chiusi' | 'informative' | 'incerti' | 'sospesi'
 
 export interface Domanda {
   id: 'ambito' | 'destinatario' | 'tempi'

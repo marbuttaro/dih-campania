@@ -19,6 +19,9 @@ import {
 } from './bandiData'
 import {
   FILTRI_VUOTI,
+  FASCE_BUDGET,
+  puoPresentareDomanda,
+  type FasciaBudget,
   STATO_LABEL,
   filtraBandi,
   formatData,
@@ -36,13 +39,19 @@ const CONSULENZA_HREF = '/#contatti'
 const DEMO = import.meta.env.DEV || new URLSearchParams(window.location.search).has('demo')
 const CATALOGO: Bando[] = DEMO ? [...BANDI, ...BANDI_DEMO] : BANDI
 
+const ENTI = [...new Set(CATALOGO.map(b => b.ente))].sort((a, b) => a.localeCompare(b, 'it'))
+const TIPOLOGIE = [...new Set(CATALOGO.flatMap(b => b.tipologia ? [b.tipologia] : []))].sort((a, b) => a.localeCompare(b, 'it'))
+
 const STATI_FILTRO: { value: StatoFiltro; label: string }[] = [
   { value: 'tutti', label: 'Tutti' },
   { value: 'attivi', label: 'Aperti o in apertura' },
   { value: 'aperti', label: 'Aperti' },
   { value: 'in-scadenza', label: 'In scadenza' },
   { value: 'in-apertura', label: 'In apertura' },
-  { value: 'chiusi', label: 'Chiusi' },
+  { value: 'chiusi', label: 'Scaduti o chiusi' },
+  { value: 'sospesi', label: 'Sospesi' },
+  { value: 'incerti', label: 'Stato da verificare' },
+  { value: 'informative', label: 'Pubblicazioni informative' },
 ]
 
 const GLASS_PANEL =
@@ -66,6 +75,9 @@ function filtriDaUrl(): Filtri {
   const livello = p.get('livello')
   return {
     testo: p.get('q') ?? '',
+    ente: ENTI.find(v => v === p.get('ente')) ?? '',
+    tipologia: TIPOLOGIE.find(v => v === p.get('tipologia')) ?? '',
+    budget: FASCE_BUDGET.find(o => o.value === p.get('budget'))?.value ?? '',
     ambito: AMBITI.some((a) => a.id === ambito) ? (ambito as AmbitoId) : '',
     destinatario: DESTINATARI.some((d) => d.id === destinatario) ? (destinatario as DestinatarioId) : '',
     stato: STATI_FILTRO.some((s) => s.value === stato) ? (stato as StatoFiltro) : 'tutti',
@@ -76,6 +88,9 @@ function filtriDaUrl(): Filtri {
 function scriviFiltriInUrl(f: Filtri) {
   const p = new URLSearchParams(window.location.search)
   const set = (k: string, v: string, vuoto = '') => (v && v !== vuoto ? p.set(k, v) : p.delete(k))
+  set('ente', f.ente)
+  set('tipologia', f.tipologia)
+  set('budget', f.budget)
   set('q', f.testo.trim())
   set('ambito', f.ambito)
   set('destinatari', f.destinatario)
@@ -94,7 +109,7 @@ function scrollTo(id: string) {
 /* -------------------------------------------------------------------------- */
 
 function Hero({ oggi }: { oggi: Date }) {
-  const attivi = CATALOGO.filter((b) => statoBando(b, oggi) !== 'chiuso').length
+  const attivi = filtraBandi(CATALOGO, { ...FILTRI_VUOTI, stato: 'attivi' }, oggi).length
 
   return (
     <section className="relative overflow-hidden rounded-b-[30px] bg-[url('/assets/sfondo_form.png')] bg-cover bg-center text-white pt-36 sm:pt-44 pb-16 sm:pb-20">
@@ -136,13 +151,13 @@ function Hero({ oggi }: { oggi: Date }) {
           </p>
           <p className="mt-3 text-sm">
             <strong className="font-semibold text-white">
-              {CATALOGO.length} {CATALOGO.length === 1 ? 'bando' : 'bandi'}
+              {CATALOGO.length} schede
             </strong>{' '}
             in catalogo · <strong className="font-semibold text-white">{attivi}</strong>{' '}
             {attivi === 1 ? 'aperto o in apertura' : 'aperti o in apertura'}
           </p>
           <p className="mt-2 text-sm leading-relaxed text-white/80">
-            Ogni bando riporta sintesi, requisiti, budget e link alla fonte ufficiale.
+            Le schede raccolgono bandi, aggiornamenti e pubblicazioni dell’archivio Campania DIH.
           </p>
         </div>
       </div>
@@ -397,6 +412,9 @@ const BADGE: Record<Stato, string> = {
   'in-scadenza': 'bg-brand-dark-navy text-white',
   aperto: 'bg-brand-pale-blue text-brand-navy',
   'in-apertura': 'border border-dashed border-brand-dark-navy/60 text-brand-dark-navy',
+  sospeso: 'bg-amber-100 text-amber-900',
+  informativo: 'bg-brand-ice text-brand-navy',
+  incerto: 'border border-brand-navy/30 text-brand-navy',
   chiuso: 'bg-brand-ice text-brand-dark-navy/50',
 }
 
@@ -408,11 +426,13 @@ function BandoCard({ bando, oggi }: { bando: Bando; oggi: Date }) {
   const dettagliId = `dettagli-${bando.id}`
 
   const voci: [string, string | undefined][] = [
-    ['Ente erogatore', bando.ente],
-    ['Livello', bando.livello],
+    [stato === 'informativo' ? 'Ente promotore' : 'Ente erogatore o promotore', bando.ente],
+    ['Livello territoriale', bando.livello],
+    ['Tipologia', bando.tipologia],
     ['Ambiti', bando.ambiti.map(ambitoLabel).join(', ')],
-    ['Destinatari', bando.destinatari.map(destinatarioLabel).join(', ')],
-    ['Budget', bando.budget],
+    ['Beneficiari / destinatari', bando.destinatari.map(destinatarioLabel).join(', ')],
+    ['Requisiti dei destinatari', bando.requisiti],
+    ['Budget', bando.budget ?? 'Non indicato nella fonte'],
     ['Termini', bando.noteTermini && bando.modalita !== 'ricorrente' ? bando.noteTermini : undefined],
     ['Il supporto del DIH', bando.coinvolgimentoDih],
   ]
@@ -468,15 +488,15 @@ function BandoCard({ bando, oggi }: { bando: Bando; oggi: Date }) {
             ))}
         </dl>
         <div className="mt-5 flex flex-wrap gap-2.5">
-          <a
+          {bando.link && <a
             href={bando.link}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 rounded-lg bg-brand-navy hover:bg-brand-dark-navy px-4 py-2 text-xs font-semibold text-white shadow-[0_4px_12px_rgba(1,49,103,0.3)] transition-all duration-300 hover:-translate-y-0.5 no-underline"
           >
-            Vai al sito dell'ente <ArrowUpRight className="size-3.5" />
-          </a>
-          {!chiuso && (
+            Consulta la fonte <ArrowUpRight className="size-3.5" />
+          </a>}
+          {(puoPresentareDomanda(stato) || stato === 'in-apertura') && (
             <a
               href={CONSULENZA_HREF}
               className="inline-flex items-center rounded-lg bg-brand-ice px-4 py-2 text-xs font-semibold text-brand-dark-navy shadow-[0_4px_10px_rgba(1,49,103,0.15)] transition-all duration-300 hover:-translate-y-0.5 no-underline"
@@ -485,6 +505,19 @@ function BandoCard({ bando, oggi }: { bando: Bando; oggi: Date }) {
             </a>
           )}
         </div>
+        {bando.pubblicazioni && (
+          <div className="mt-4 border-t border-brand-navy/10 pt-3">
+            <p className="text-xs font-semibold text-brand-navy">Dall’archivio Campania DIH</p>
+            <ul className="mt-1.5 space-y-2">
+              {bando.pubblicazioni.map(p => (
+                <li key={p.wpId} className="text-xs">
+                  <time dateTime={p.data} className="block text-brand-dark-navy/70">{formatData(p.data)}</time>
+                  <a href={'/news/' + encodeURIComponent(p.slug)} className="text-brand-navy underline underline-offset-2">{p.titolo}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
         {bando.approfondimento && (
           <a
             href={bando.approfondimento}
@@ -621,6 +654,21 @@ function Catalogo({
 
         <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           <SelectFiltro
+            id="filtro-tipologia" label="Tipologia" value={filtri.tipologia}
+            onChange={(v) => aggiorna({ tipologia: v })}
+            opzioni={[{ value: '', label: 'Tutte le tipologie' }, ...TIPOLOGIE.map(value => ({ value, label: value }))]}
+          />
+          <SelectFiltro
+            id="filtro-ente" label="Ente erogatore o promotore" value={filtri.ente}
+            onChange={(v) => aggiorna({ ente: v })}
+            opzioni={[{ value: '', label: 'Tutti gli enti' }, ...ENTI.map(value => ({ value, label: value }))]}
+          />
+          <SelectFiltro<FasciaBudget | ''>
+            id="filtro-budget" label="Budget complessivo" value={filtri.budget}
+            onChange={(v) => aggiorna({ budget: v })}
+            opzioni={[{ value: '', label: 'Tutti gli importi' }, ...FASCE_BUDGET]}
+          />
+          <SelectFiltro
             id="filtro-ambito"
             label="Ambito"
             value={filtri.ambito}
@@ -629,7 +677,7 @@ function Catalogo({
           />
           <SelectFiltro
             id="filtro-destinatari"
-            label="Destinatari"
+            label="Beneficiari"
             value={filtri.destinatario}
             onChange={(v) => aggiorna({ destinatario: v })}
             opzioni={[{ value: '', label: 'Tutti' }, ...DESTINATARI.map((d) => ({ value: d.id, label: d.label }))]}
@@ -643,7 +691,7 @@ function Catalogo({
           />
           <SelectFiltro
             id="filtro-livello"
-            label="Livello"
+            label="Livello territoriale"
             value={filtri.livello}
             onChange={(v) => aggiorna({ livello: v })}
             opzioni={[{ value: '', label: 'Tutti' }, ...LIVELLI.map((l) => ({ value: l, label: l }))]}
@@ -654,8 +702,8 @@ function Catalogo({
       <div ref={gridRef} className="mt-12 sm:px-[38px] scroll-mt-28">
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3" aria-live="polite">
           <p className="text-sm text-brand-navy">
-            {risultati.length === 1 ? '1 bando' : `${risultati.length} bandi`}
-            {filtriAttivi ? ' corrispondono ai filtri' : ' in catalogo'}
+            {risultati.length === 1 ? '1 scheda' : `${risultati.length} schede`}
+            {filtriAttivi ? ' per i filtri selezionati' : ' in catalogo'}
           </p>
           {filtriAttivi && (
             <button
@@ -758,7 +806,11 @@ function ConsulenzaBanner() {
 /* -------------------------------------------------------------------------- */
 
 export function BandiPage() {
-  const oggi = useMemo(() => new Date(), [])
+  const [oggi, setOggi] = useState(() => new Date())
+  useEffect(() => {
+    const timer = window.setInterval(() => setOggi(new Date()), 60_000)
+    return () => window.clearInterval(timer)
+  }, [])
   const [filtri, setFiltri] = useState<Filtri>(filtriDaUrl)
 
   useEffect(() => scriviFiltriInUrl(filtri), [filtri])
